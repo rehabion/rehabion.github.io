@@ -855,11 +855,11 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:3rem 5%
       <p>Whether you're a hospital, therapist, researcher, or investor — we want to hear from you. REHABION takes on a limited number of custom projects each quarter.</p>
 
       <div class="contact-items" role="list">
-        <a href="mailto:hello@rehabion.com.pk" class="contact-item" role="listitem">
+        <a href="mailto:muhammadrmzn84@gmail.com" class="contact-item" role="listitem">
           <div class="contact-item-icon">✉</div>
-          hello@rehabion.com.pk
+          muhammadrmzn84@gmail.com
         </a>
-        <a href="https://wa.me/923000000000?text=Hi%20REHABION%2C%20I%20found%20your%20website%20and%20would%20like%20to%20connect." target="_blank" rel="noopener noreferrer" class="contact-item" role="listitem">
+        <a href="https://wa.me/923498228037?text=Hi%20REHABION%2C%20I%20found%20your%20website%20and%20would%20like%20to%20connect." target="_blank" rel="noopener noreferrer" class="contact-item" role="listitem">
           <div class="contact-item-icon">💬</div>
           WhatsApp us directly
         </a>
@@ -918,17 +918,17 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:3rem 5%
     <p class="section-sub">Follow our journey building Pakistan's first rehabilitation technology company. Get updates on new projects, research publications, and clinical breakthroughs.</p>
 
     <div class="connect-cards">
-      <a href="https://wa.me/923000000000?text=Hi%20REHABION%2C%20I%20would%20like%20to%20connect." target="_blank" rel="noopener noreferrer" class="connect-card">
+      <a href="https://wa.me/923498228037?text=Hi%20REHABION%2C%20I%20would%20like%20to%20connect." target="_blank" rel="noopener noreferrer" class="connect-card">
         <div class="connect-card-icon">💬</div>
         <span class="connect-card-label">WhatsApp</span>
         <span class="connect-card-sub">Message us directly for quick queries and collaboration</span>
         <span class="connect-card-tag">Most responsive</span>
       </a>
 
-      <a href="mailto:hello@rehabion.com.pk" class="connect-card">
+      <a href="mailto:muhammadrmzn84@gmail.com" class="connect-card">
         <div class="connect-card-icon">✉️</div>
         <span class="connect-card-label">Email</span>
-        <span class="connect-card-sub">hello@rehabion.com.pk — for formal proposals and partnerships</span>
+        <span class="connect-card-sub">muhammadrmzn84@gmail.com — for formal proposals and partnerships</span>
         <span class="connect-card-tag">48hr reply</span>
       </a>
 
@@ -1146,7 +1146,7 @@ document.getElementById('newsletter-form').addEventListener('submit',function(e)
   const btn=document.getElementById('nl-btn');
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){status.textContent='⚠ Please enter a valid email.';return;}
   btn.disabled=true; btn.textContent='Subscribing…';
-  fetch('https://formspree.io/f/YOUR_NEWSLETTER_FORM_ID',{
+  fetch('https://formspree.io/f/mzdlbqel',{
     method:'POST',
     headers:{'Content-Type':'application/json','Accept':'application/json'},
     body:JSON.stringify({email,source:'newsletter'})
@@ -1154,7 +1154,7 @@ document.getElementById('newsletter-form').addEventListener('submit',function(e)
   .then(r=>r.json())
   .then(data=>{
     if(data.ok){status.textContent='✅ Subscribed! Watch your inbox.';btn.textContent='Subscribed ✓';btn.style.background='var(--green)';}
-    else{status.textContent='⚠ Error — email us: hello@rehabion.com.pk';btn.disabled=false;btn.textContent='Subscribe →';}
+    else{status.textContent='⚠ Error — email us: muhammadrmzn84@gmail.com';btn.disabled=false;btn.textContent='Subscribe →';}
   })
   .catch(()=>{status.textContent='⚠ Network error — try again.';btn.disabled=false;btn.textContent='Subscribe →';});
 });
@@ -1180,7 +1180,7 @@ document.getElementById('contact-form').addEventListener('submit',function(e){
 
   btn.disabled=true; btn.textContent='Sending…';
 
-  const FORMSPREE_ID='YOUR_FORM_ID';
+  const FORMSPREE_ID='mzdlbqel';
   fetch('https://formspree.io/f/'+FORMSPREE_ID,{
     method:'POST',
     headers:{'Content-Type':'application/json','Accept':'application/json'},
@@ -1194,12 +1194,12 @@ document.getElementById('contact-form').addEventListener('submit',function(e){
       this.reset();
       setTimeout(()=>{btn.disabled=false;btn.textContent='Send Message →';btn.style.background='';status.textContent='🔒 Encrypted · We reply within 48 hours · No data sold';},60000);
     } else {
-      status.textContent='⚠ Could not send. Email: hello@rehabion.com.pk';
+      status.textContent='⚠ Could not send. Email: muhammadrmzn84@gmail.com';
       btn.disabled=false; btn.textContent='Send Message →';
     }
   })
   .catch(()=>{
-    status.textContent='⚠ Network error. Email: hello@rehabion.com.pk';
+    status.textContent='⚠ Network error. Email: muhammadrmzn84@gmail.com';
     btn.disabled=false; btn.textContent='Send Message →';
   });
 });
