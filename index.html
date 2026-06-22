@@ -4,13 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>REHABION — AI-Powered Rehabilitation Technology | Pakistan</title>
-<meta name="description" content="REHABION builds game-based rehabilitation systems, AI physiotherapy tools, and biomedical engineering solutions for Pakistan and the world.">
+<meta name="description" content="Pakistan's first game-based rehabilitation platform. AI physiotherapy tools, biomedical wearables, and clinical dashboards built by biomedical engineers.">
 <meta name="keywords" content="rehabilitation technology, AI physiotherapy, game-based rehab, biomedical engineering, Pakistan, Dr Faisal Amin, Muhammad Ramzan">
 <meta name="author" content="REHABION">
 <meta name="robots" content="index, follow">
-<!-- Open Graph — controls how the link looks on LinkedIn, WhatsApp, Facebook -->
 <meta property="og:title" content="REHABION — AI-Powered Rehabilitation Technology | Pakistan">
-<meta property="og:description" content="Pakistan's first game-based rehabilitation platform. AI physiotherapy tools, biomedical wearables, and clinical dashboards built by biomedical engineers in Rawalpindi.">
+<meta property="og:description" content="Pakistan's first game-based rehabilitation platform. AI physiotherapy tools, biomedical wearables, and clinical dashboards built by biomedical engineers.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://rehabion.github.io">
 <meta property="og:image" content="https://rehabion.github.io/images/og-cover.png">
@@ -19,7 +18,6 @@
 <meta property="og:image:alt" content="REHABION — AI-Powered Rehabilitation Technology from Pakistan">
 <meta property="og:site_name" content="REHABION">
 <meta property="og:locale" content="en_PK">
-<!-- Twitter / X card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="REHABION — AI Rehabilitation Technology | Pakistan">
 <meta name="twitter:description" content="Pakistan's first game-based rehab platform. AI physio tools, biomedical wearables, clinical dashboards.">
@@ -29,34 +27,34 @@
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-/* ============================================================
-   REHABION — Clinical Monitor Design System v2
-   Palette: Deep navy · Electric blue · Clinical white
-   Signature: Live scrolling ECG hero panel
-   Font: Plus Jakarta Sans + Space Mono
-============================================================ */
 :root {
-  --void:   #030911;
-  --deep:   #060F20;
-  --panel:  #0B1B33;
-  --raised: #0F2244;
-  --border: #18355A;
-  --border2:#244870;
+  --void:   #020810;
+  --deep:   #050E1E;
+  --panel:  #091828;
+  --raised: #0D2138;
+  --border: #163252;
+  --border2:#1E3F66;
 
-  --blue:      #4F8EF7;
-  --blue-dim:  #2563EB;
-  --blue-bright:#7AABFF;
-  --blue-glow: rgba(79,142,247,0.12);
-  --blue-glow2:rgba(79,142,247,0.22);
+  --blue:       #4F8EF7;
+  --blue-dim:   #2563EB;
+  --blue-bright:#82B4FF;
+  --blue-glow:  rgba(79,142,247,0.10);
+  --blue-glow2: rgba(79,142,247,0.20);
+  --blue-glow3: rgba(79,142,247,0.35);
 
   --cyan:      #22D3EE;
+  --cyan-dim:  #0EA5E9;
   --cyan-glow: rgba(34,211,238,0.12);
 
+  --purple:    #A78BFA;
+  --purple-glow: rgba(167,139,250,0.12);
+
   --white:  #EEF5FF;
-  --muted:  #627E9E;
-  --dim:    #1E3655;
+  --off:    #C8D8F0;
+  --muted:  #5A7A9E;
+  --dim:    #162B45;
 
   --green:  #10B981;
   --amber:  #F59E0B;
@@ -64,438 +62,627 @@
 
   --font-head: 'Plus Jakarta Sans', sans-serif;
   --font-mono: 'Space Mono', monospace;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:16px}
-body{background:var(--void);color:var(--white);font-family:var(--font-head);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-::-webkit-scrollbar{width:4px}
+body{background:var(--void);color:var(--white);font-family:var(--font-head);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-track{background:var(--deep)}
 ::-webkit-scrollbar-thumb{background:var(--blue);border-radius:2px}
-::selection{background:var(--blue-glow2);color:var(--blue)}
+::selection{background:rgba(79,142,247,.25);color:var(--blue-bright)}
 :focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
 
-/* Grid background */
+/* ── GRID BG ── */
 .grid-bg{
   position:fixed;inset:0;z-index:0;pointer-events:none;
   background-image:
-    linear-gradient(rgba(24,53,90,0.18) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(24,53,90,0.18) 1px,transparent 1px);
-  background-size:44px 44px;
-  mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,black 30%,transparent 100%);
+    linear-gradient(rgba(22,50,82,0.20) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(22,50,82,0.20) 1px,transparent 1px);
+  background-size:48px 48px;
+  mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,black 20%,transparent 100%);
 }
+
+/* ── AMBIENT ORBS ── */
+.orb{position:absolute;border-radius:50%;pointer-events:none;z-index:0}
+.orb-hero-l{width:600px;height:600px;top:-100px;left:-200px;
+  background:radial-gradient(circle,rgba(79,142,247,.07) 0%,transparent 70%)}
+.orb-hero-r{width:700px;height:700px;top:-150px;right:-250px;
+  background:radial-gradient(circle,rgba(34,211,238,.05) 0%,transparent 70%)}
+.orb-mid{width:800px;height:400px;
+  background:radial-gradient(ellipse,rgba(79,142,247,.05) 0%,transparent 70%);
+  left:50%;transform:translateX(-50%)}
+.orb-team{width:900px;height:500px;top:0;left:50%;transform:translateX(-50%);
+  background:radial-gradient(ellipse,rgba(167,139,250,.04) 0%,transparent 65%)}
 
 /* ── NAV ── */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:0 5%;height:68px;
+  padding:0 5%;height:66px;
   display:flex;align-items:center;justify-content:space-between;
-  background:rgba(3,9,17,0.93);backdrop-filter:blur(24px);
+  background:rgba(2,8,16,.92);backdrop-filter:blur(28px) saturate(160%);
   border-bottom:1px solid var(--border);transition:border-color .3s,box-shadow .3s;
 }
-nav.scrolled{border-bottom-color:var(--blue);box-shadow:0 1px 24px rgba(79,142,247,0.1)}
+nav.scrolled{border-bottom-color:rgba(79,142,247,.4);box-shadow:0 2px 40px rgba(79,142,247,.08)}
 
-.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
-
+.nav-logo{display:flex;align-items:center;gap:11px;text-decoration:none;flex-shrink:0}
 .logo-mark{
-  width:38px;height:38px;border:1.5px solid var(--blue);border-radius:10px;
-  background:var(--panel);display:flex;align-items:center;justify-content:center;
-  position:relative;overflow:hidden;
+  width:36px;height:36px;border:1.5px solid rgba(79,142,247,.6);border-radius:9px;
+  background:linear-gradient(135deg,var(--panel),var(--raised));
+  display:flex;align-items:center;justify-content:center;position:relative;
+  box-shadow:0 0 12px rgba(79,142,247,.15),inset 0 1px 0 rgba(255,255,255,.05);
 }
-.logo-mark svg{width:26px;height:14px;position:relative;z-index:1}
-
-.logo-text{font-size:19px;font-weight:800;letter-spacing:.06em;color:var(--white)}
+.logo-mark svg{width:24px;height:13px}
+.logo-text{font-size:18px;font-weight:800;letter-spacing:.07em;color:var(--white)}
 .logo-text span{color:var(--blue)}
-
-.nav-live{
-  display:flex;align-items:center;gap:5px;
-  font-family:var(--font-mono);font-size:8px;color:var(--green);
-  letter-spacing:.12em;border:1px solid rgba(16,185,129,.4);
-  padding:2px 7px;border-radius:3px;background:rgba(16,185,129,.08);
+.nav-chip{
+  font-family:var(--font-mono);font-size:8px;color:var(--green);letter-spacing:.14em;
+  border:1px solid rgba(16,185,129,.35);padding:2px 6px;border-radius:3px;
+  background:rgba(16,185,129,.07);display:flex;align-items:center;gap:4px;
 }
-.live-dot{width:5px;height:5px;background:var(--green);border-radius:50%;animation:blink 1.4s ease-in-out infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+.live-dot{width:5px;height:5px;background:var(--green);border-radius:50%;animation:blink 1.5s ease-in-out infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 4px var(--green)}50%{opacity:.2;box-shadow:none}}
 
-.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+.nav-links{display:flex;align-items:center;gap:1.75rem;list-style:none}
 .nav-links a{
-  color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;
-  letter-spacing:.02em;transition:color .2s;position:relative;
+  color:var(--muted);text-decoration:none;font-size:13.5px;font-weight:500;
+  letter-spacing:.01em;transition:color .2s;position:relative;white-space:nowrap;
 }
-.nav-links a::after{
-  content:'';position:absolute;bottom:-4px;left:0;
-  width:0;height:1.5px;background:var(--blue);transition:width .2s;
-}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--blue);transition:width .25s}
 .nav-links a:hover{color:var(--blue)}
 .nav-links a:hover::after{width:100%}
-
 .nav-cta{
-  background:var(--blue)!important;color:var(--void)!important;
-  padding:8px 20px;border-radius:7px;font-size:13px!important;
-  font-weight:700!important;letter-spacing:.02em!important;transition:all .2s!important;
+  background:linear-gradient(135deg,var(--blue),var(--blue-dim))!important;
+  color:#fff!important;padding:8px 18px;border-radius:7px;font-size:13px!important;
+  font-weight:700!important;box-shadow:0 4px 16px rgba(79,142,247,.25)!important;
+  transition:all .2s!important;border:none!important;
 }
-.nav-cta:hover{background:var(--cyan)!important;transform:translateY(-1px)!important}
+.nav-cta:hover{transform:translateY(-1px)!important;box-shadow:0 6px 24px rgba(79,142,247,.4)!important}
 .nav-cta::after{display:none!important}
 
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
-.hamburger span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;transition:all .3s}
-
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--white);border-radius:2px;transition:all .3s}
 .mobile-nav{
-  display:none;position:fixed;top:68px;left:0;right:0;z-index:99;
-  background:rgba(6,15,32,.98);backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);padding:1.5rem 5%;
-  flex-direction:column;gap:0;
+  display:none;position:fixed;top:66px;left:0;right:0;z-index:99;
+  background:rgba(5,14,30,.97);backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);padding:1.25rem 5%;flex-direction:column;
 }
 .mobile-nav.open{display:flex}
-.mobile-nav a{
-  color:var(--muted);text-decoration:none;font-size:15px;font-weight:500;
-  padding:.75rem 0;border-bottom:1px solid var(--border);transition:color .2s;
-}
+.mobile-nav a{color:var(--muted);text-decoration:none;font-size:15px;font-weight:500;padding:.7rem 0;border-bottom:1px solid var(--border);transition:color .2s}
 .mobile-nav a:hover{color:var(--blue)}
 
 /* ── HERO ── */
 .hero{
   position:relative;z-index:1;min-height:100vh;
   display:grid;grid-template-columns:1fr 1fr;
-  align-items:center;padding:110px 5% 80px;gap:4rem;overflow:hidden;
+  align-items:center;padding:118px 5% 80px;gap:5rem;overflow:hidden;
 }
 
 .hero-eyebrow{
-  font-family:var(--font-mono);font-size:10px;color:var(--blue);
-  letter-spacing:.22em;text-transform:uppercase;margin-bottom:1.5rem;
+  font-family:var(--font-mono);font-size:9.5px;color:var(--blue);
+  letter-spacing:.24em;text-transform:uppercase;margin-bottom:1.5rem;
   display:flex;align-items:center;gap:10px;
 }
-.hero-eyebrow::before{content:'';display:inline-block;width:22px;height:1px;background:var(--blue)}
+.hero-eyebrow::before{content:'';display:inline-block;width:20px;height:1px;background:var(--blue);box-shadow:0 0 6px var(--blue)}
 
-.hero h1{font-size:clamp(36px,4.2vw,66px);font-weight:800;line-height:1.05;letter-spacing:-.03em;margin-bottom:1.5rem}
-.hero h1 .accent{color:var(--blue)}
-.hero h1 .light{color:var(--muted);font-weight:300}
+.hero h1{
+  font-size:clamp(38px,4.8vw,72px);font-weight:800;line-height:1.04;
+  letter-spacing:-.035em;margin-bottom:1.5rem;
+}
+.hero h1 .line-muted{color:var(--muted);font-weight:300;font-style:italic}
+.gradient-text{
+  background:linear-gradient(120deg,var(--blue-bright) 0%,var(--cyan) 50%,var(--purple) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
 
-.hero-sub{font-size:17px;color:var(--muted);line-height:1.78;max-width:470px;margin-bottom:2.5rem}
-.hero-sub strong{color:var(--white);font-weight:600}
+.hero-sub{
+  font-size:16.5px;color:var(--muted);line-height:1.82;max-width:460px;margin-bottom:2.5rem;
+}
+.hero-sub strong{color:var(--off);font-weight:600}
 
-.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem}
+.hero-actions{display:flex;gap:.875rem;flex-wrap:wrap;margin-bottom:2.75rem}
 
 .btn-primary{
-  background:var(--blue);color:var(--void);border:none;
-  padding:13px 26px;border-radius:8px;font-family:var(--font-head);
-  font-size:15px;font-weight:700;cursor:pointer;text-decoration:none;
-  display:inline-flex;align-items:center;gap:8px;transition:all .2s;letter-spacing:.01em;
+  background:linear-gradient(135deg,var(--blue),var(--blue-dim));
+  color:#fff;border:none;padding:13px 24px;border-radius:var(--radius-sm);
+  font-family:var(--font-head);font-size:14.5px;font-weight:700;cursor:pointer;
+  text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+  transition:all .22s;letter-spacing:.01em;
+  box-shadow:0 4px 20px rgba(79,142,247,.28),inset 0 1px 0 rgba(255,255,255,.12);
 }
-.btn-primary:hover{background:var(--cyan);transform:translateY(-2px);box-shadow:0 8px 28px rgba(79,142,247,.28)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(79,142,247,.42),inset 0 1px 0 rgba(255,255,255,.15)}
+.btn-primary:active{transform:translateY(0)}
 
 .btn-outline{
-  background:transparent;color:var(--white);border:1.5px solid var(--border2);
-  padding:13px 26px;border-radius:8px;font-family:var(--font-head);
-  font-size:15px;font-weight:500;cursor:pointer;text-decoration:none;
-  display:inline-flex;align-items:center;gap:8px;transition:all .2s;
+  background:transparent;color:var(--off);
+  border:1.5px solid var(--border2);padding:13px 24px;border-radius:var(--radius-sm);
+  font-family:var(--font-head);font-size:14.5px;font-weight:500;cursor:pointer;
+  text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .22s;
 }
-.btn-outline:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px)}
+.btn-outline:hover{border-color:var(--blue);color:var(--blue-bright);transform:translateY(-2px);background:var(--blue-glow)}
 
 /* Vitals strip */
 .vitals-strip{
   display:grid;grid-template-columns:repeat(4,1fr);
-  background:var(--panel);border:1px solid var(--border);border-radius:10px;overflow:hidden;
+  background:var(--panel);border:1px solid var(--border);
+  border-radius:var(--radius-md);overflow:hidden;
+  box-shadow:0 4px 24px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.04);
 }
-.vital{padding:.9rem 1rem;border-right:1px solid var(--border)}
+.vital{padding:.85rem 1rem;border-right:1px solid var(--border);position:relative}
 .vital:last-child{border-right:none}
-.vital-label{font-family:var(--font-mono);font-size:8px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:4px}
-.vital-value{font-family:var(--font-mono);font-size:20px;font-weight:700;color:var(--blue);line-height:1}
-.vital-unit{font-size:11px;color:var(--muted);font-weight:400}
+.vital-label{font-family:var(--font-mono);font-size:8px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:5px}
+.vital-value{font-family:var(--font-mono);font-size:22px;font-weight:700;color:var(--blue-bright);line-height:1;transition:color .3s}
+.vital-unit{font-size:11px;color:var(--muted);font-weight:400;margin-left:1px}
 
-/* ECG Monitor panel */
+/* ECG Monitor */
 .hero-monitor{
-  position:relative;background:var(--panel);border:1px solid var(--border);
-  border-radius:16px;overflow:hidden;aspect-ratio:16/11;
-  display:flex;flex-direction:column;
-  box-shadow:0 0 60px rgba(79,142,247,.08),0 0 120px rgba(34,211,238,.04);
+  position:relative;background:var(--panel);
+  border:1px solid var(--border);border-radius:var(--radius-lg);
+  overflow:hidden;aspect-ratio:16/11;display:flex;flex-direction:column;
+  box-shadow:
+    0 0 0 1px rgba(79,142,247,.1),
+    0 20px 60px rgba(0,0,0,.5),
+    0 0 80px rgba(79,142,247,.08),
+    0 0 160px rgba(34,211,238,.04);
 }
 .monitor-header{
-  padding:.65rem 1.25rem;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;background:var(--raised);
+  padding:.6rem 1.1rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(180deg,var(--raised),var(--panel));
 }
-.monitor-title{font-family:var(--font-mono);font-size:9px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
-.monitor-status{display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:9px;color:var(--green);letter-spacing:.1em}
-.monitor-body{
-  flex:1;position:relative;background:#020910;
+.monitor-title{font-family:var(--font-mono);font-size:8.5px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+.monitor-badges{display:flex;gap:.5rem;align-items:center}
+.monitor-badge{font-family:var(--font-mono);font-size:8px;letter-spacing:.1em;padding:2px 5px;border-radius:2px}
+.badge-rec{color:var(--green);background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);display:flex;align-items:center;gap:3px}
+.badge-ch{color:var(--muted);background:rgba(255,255,255,.04);border:1px solid var(--border)}
+.monitor-body{flex:1;position:relative;background:#010810;overflow:hidden}
+.monitor-grid{
+  position:absolute;inset:0;
   background-image:
-    linear-gradient(rgba(24,53,90,.22) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(24,53,90,.22) 1px,transparent 1px),
-    linear-gradient(rgba(24,53,90,.08) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(24,53,90,.08) 1px,transparent 1px);
-  background-size:50px 50px,50px 50px,10px 10px,10px 10px;
+    linear-gradient(rgba(22,50,82,.28) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(22,50,82,.28) 1px,transparent 1px),
+    linear-gradient(rgba(22,50,82,.1) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(22,50,82,.1) 1px,transparent 1px);
+  background-size:52px 52px,52px 52px,13px 13px,13px 13px;
 }
 #ecg-canvas{position:absolute;inset:0;width:100%;height:100%}
-.monitor-footer{
-  padding:.55rem 1.25rem;border-top:1px solid var(--border);
-  display:flex;justify-content:space-between;align-items:center;background:var(--raised);
+.monitor-sidebar{
+  position:absolute;right:0;top:0;bottom:0;width:68px;
+  background:linear-gradient(180deg,rgba(1,8,16,.9),rgba(1,8,16,.7));
+  border-left:1px solid rgba(22,50,82,.5);
+  display:flex;flex-direction:column;justify-content:space-around;padding:.5rem .4rem;
 }
-.monitor-readout{font-family:var(--font-mono);font-size:9px;color:var(--muted);letter-spacing:.06em}
-.bpm-display{font-family:var(--font-mono);font-size:20px;font-weight:700;color:var(--cyan);letter-spacing:.04em}
+.monitor-readout{text-align:center}
+.readout-val{font-family:var(--font-mono);font-size:10px;font-weight:700;color:var(--cyan);display:block;line-height:1.2}
+.readout-lbl{font-family:var(--font-mono);font-size:7px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;display:block}
+.monitor-footer{
+  padding:.5rem 1.1rem;border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+  background:linear-gradient(0deg,var(--raised),var(--panel));
+}
+.monitor-readout-bar{font-family:var(--font-mono);font-size:8px;color:var(--muted);letter-spacing:.06em}
+.bpm-display{font-family:var(--font-mono);font-size:22px;font-weight:700;color:var(--cyan);letter-spacing:.04em;line-height:1;text-shadow:0 0 16px rgba(34,211,238,.6)}
 
 /* ── SECTIONS ── */
-section{position:relative;z-index:1;padding:100px 5%}
+section{position:relative;z-index:1;padding:96px 5%}
 
 .section-eyebrow{
-  font-family:var(--font-mono);font-size:10px;color:var(--blue);
-  letter-spacing:.2em;text-transform:uppercase;margin-bottom:.75rem;
+  font-family:var(--font-mono);font-size:9.5px;color:var(--blue);
+  letter-spacing:.22em;text-transform:uppercase;margin-bottom:.65rem;
   display:flex;align-items:center;gap:8px;
 }
-.section-eyebrow::before{content:'';display:inline-block;width:18px;height:1px;background:var(--blue)}
-
-.section-title{font-size:clamp(26px,3.5vw,42px);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:.75rem}
+.section-eyebrow::before{content:'';display:inline-block;width:16px;height:1px;background:var(--blue);box-shadow:0 0 6px var(--blue)}
+.section-title{font-size:clamp(26px,3.6vw,46px);font-weight:800;letter-spacing:-.035em;line-height:1.08;margin-bottom:.7rem}
 .section-title span{color:var(--blue)}
-.section-sub{font-size:16px;color:var(--muted);max-width:540px;line-height:1.78;margin-bottom:3rem}
+.section-sub{font-size:16px;color:var(--muted);max-width:520px;line-height:1.82;margin-bottom:3rem}
 
 /* Trust bar */
 .trust-bar{
-  position:relative;z-index:1;background:var(--panel);
+  position:relative;z-index:1;
+  background:linear-gradient(180deg,var(--panel),var(--deep));
   border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-  padding:1rem 5%;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:2rem;
+  padding:.9rem 5%;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:1.75rem;
 }
-.trust-item{display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:10px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
-.trust-dot{width:5px;height:5px;background:var(--blue);border-radius:50%;box-shadow:0 0 6px var(--blue);flex-shrink:0}
+.trust-item{display:flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.trust-dot{width:4px;height:4px;background:var(--blue);border-radius:50%;box-shadow:0 0 6px var(--blue);flex-shrink:0}
+
+/* ── MARKET OPPORTUNITY ── */
+#market{background:var(--deep);overflow:hidden}
+.market-inner{max-width:1100px;margin:0 auto}
+.market-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.market-left .section-sub{max-width:100%}
+
+.market-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;margin-top:2rem}
+.mstat{background:var(--panel);padding:1.5rem;position:relative;overflow:hidden}
+.mstat::before{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--blue),transparent);opacity:.7}
+.mstat-val{font-family:var(--font-mono);font-size:32px;font-weight:700;color:var(--blue-bright);line-height:1;display:block;margin-bottom:4px}
+.mstat-label{font-size:13px;color:var(--muted);line-height:1.5}
+.mstat-src{font-family:var(--font-mono);font-size:8px;color:var(--dim);letter-spacing:.06em;margin-top:4px;display:block}
+
+.problem-list{display:flex;flex-direction:column;gap:.875rem;margin-top:2rem}
+.problem-item{display:flex;gap:1rem;align-items:flex-start;padding:1rem 1.25rem;background:var(--panel);border:1px solid var(--border);border-radius:var(--radius-sm)}
+.problem-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.problem-text{font-size:14px;color:var(--muted);line-height:1.65}
+.problem-text strong{color:var(--white);display:block;margin-bottom:2px;font-size:14px}
+
+.opportunity-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,rgba(79,142,247,.1),rgba(34,211,238,.06));
+  border:1px solid rgba(79,142,247,.25);border-radius:100px;
+  padding:6px 14px 6px 8px;font-family:var(--font-mono);font-size:9px;
+  color:var(--blue);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.25rem;
+}
+.opp-dot{width:6px;height:6px;background:var(--blue);border-radius:50%;box-shadow:0 0 8px var(--blue)}
 
 /* ── SERVICES ── */
-#services{background:var(--deep)}
-
+#services{background:var(--void)}
 .services-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
   gap:1px;background:var(--border);border:1px solid var(--border);
-  border-radius:14px;overflow:hidden;
+  border-radius:var(--radius-lg);overflow:hidden;
 }
-.service-card{background:var(--deep);padding:2rem;transition:background .25s;cursor:default;position:relative}
+.service-card{
+  background:var(--void);padding:2rem;transition:background .25s;cursor:default;position:relative;overflow:hidden;
+}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--blue),transparent);opacity:0;transition:opacity .3s}
 .service-card:hover{background:var(--panel)}
-.service-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,var(--blue),transparent);
-  opacity:0;transition:opacity .25s;
-}
 .service-card:hover::before{opacity:1}
-
 .service-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.25rem}
-
 .service-icon{
-  width:46px;height:46px;border:1px solid var(--border2);border-radius:10px;
-  display:flex;align-items:center;justify-content:center;font-size:22px;
-  background:var(--panel);transition:border-color .25s,box-shadow .25s;
+  width:44px;height:44px;border:1px solid var(--border2);border-radius:var(--radius-sm);
+  display:flex;align-items:center;justify-content:center;font-size:20px;
+  background:linear-gradient(135deg,var(--panel),var(--raised));
+  transition:border-color .25s,box-shadow .25s;
 }
-.service-card:hover .service-icon{border-color:var(--blue);box-shadow:0 0 14px var(--blue-glow2)}
-
-.badge{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:3px;display:flex;align-items:center;gap:4px}
-.badge-live{color:var(--green);background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.28)}
-.badge-dev {color:var(--amber);background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.28)}
-.badge-proto{color:var(--blue); background:rgba(79,142,247,.08); border:1px solid rgba(79,142,247,.28)}
-.badge-open{color:var(--cyan); background:rgba(34,211,238,.08); border:1px solid rgba(34,211,238,.28)}
-
-.service-card h3{font-size:17px;font-weight:700;margin-bottom:.5rem;letter-spacing:-.02em}
-.service-card p{font-size:14px;color:var(--muted);line-height:1.72}
+.service-card:hover .service-icon{border-color:var(--blue);box-shadow:0 0 16px var(--blue-glow2)}
+.badge{font-family:var(--font-mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;padding:3px 7px;border-radius:3px;display:flex;align-items:center;gap:4px;white-space:nowrap}
+.badge-live{color:var(--green);background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.25)}
+.badge-dev{color:var(--amber);background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25)}
+.badge-proto{color:var(--blue);background:rgba(79,142,247,.07);border:1px solid rgba(79,142,247,.25)}
+.badge-open{color:var(--cyan);background:rgba(34,211,238,.07);border:1px solid rgba(34,211,238,.25)}
+.service-card h3{font-size:16.5px;font-weight:700;margin-bottom:.45rem;letter-spacing:-.02em}
+.service-card p{font-size:13.5px;color:var(--muted);line-height:1.75}
 
 /* ── PROJECTS ── */
-#projects{background:var(--void)}
-
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
-
+#projects{background:var(--deep)}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.25rem}
 .project-card{
-  background:var(--panel);border:1px solid var(--border);border-radius:14px;
-  overflow:hidden;transition:transform .25s,border-color .25s,box-shadow .25s;
+  background:var(--panel);border:1px solid var(--border);border-radius:var(--radius-lg);
+  overflow:hidden;transition:transform .25s,border-color .28s,box-shadow .28s;
 }
-.project-card:hover{transform:translateY(-4px);border-color:var(--blue);box-shadow:0 16px 48px var(--blue-glow)}
+.project-card:hover{transform:translateY(-5px);border-color:rgba(79,142,247,.5);box-shadow:0 20px 60px rgba(0,0,0,.4),0 0 40px rgba(79,142,247,.08)}
 
+/* SVG-based project thumbnails — no emoji */
 .project-thumb{
-  height:172px;background:var(--raised);display:flex;align-items:center;
-  justify-content:center;font-size:52px;position:relative;overflow:hidden;
+  height:180px;position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
 }
-.project-thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,var(--panel) 100%)}
+.pt-001{background:linear-gradient(135deg,#050F20 0%,#0B1E3A 60%,#0D2440 100%)}
+.pt-002{background:linear-gradient(135deg,#050C1A 0%,#081620 60%,#0A1C2E 100%)}
+.pt-003{background:linear-gradient(135deg,#060A14 0%,#0C1220 60%,#101828 100%)}
 
-.project-num{position:absolute;top:12px;left:14px;font-family:var(--font-mono);font-size:10px;color:var(--muted);letter-spacing:.1em;z-index:1}
+.pt-mockup{width:100%;height:100%;padding:18px;display:flex;flex-direction:column;gap:8px;position:relative;z-index:1}
+.pt-bar{height:5px;border-radius:3px;background:var(--border)}
+.pt-bar.active{background:linear-gradient(90deg,var(--blue),var(--cyan));animation:scan .8s ease-in-out infinite alternate}
+@keyframes scan{0%{opacity:.6}100%{opacity:1}}
+.pt-row{display:flex;gap:6px;align-items:center}
+.pt-circle{border-radius:50%;border:1.5px solid var(--blue);flex-shrink:0}
+.pt-line{height:2px;border-radius:2px;background:var(--border);flex:1}
+.pt-line.hl{background:linear-gradient(90deg,var(--blue-glow2),var(--blue));opacity:.8}
+.pt-skeleton{display:grid;gap:5px;padding:0 4px}
+.pt-block{border-radius:3px;background:var(--border)}
+.pt-block.blue{background:rgba(79,142,247,.25)}
+.pt-block.cyan{background:rgba(34,211,238,.2)}
+.pt-ecg{width:100%;height:50px;overflow:visible}
+.pt-num{
+  position:absolute;top:12px;left:14px;
+  font-family:var(--font-mono);font-size:9px;color:var(--muted);letter-spacing:.1em;
+}
+.pt-badge{
+  position:absolute;top:12px;right:14px;
+  font-family:var(--font-mono);font-size:8px;font-weight:700;letter-spacing:.08em;
+  padding:2px 7px;border-radius:3px;
+}
+.pt-badge-live{color:var(--green);background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3)}
+.pt-badge-soon{color:var(--amber);background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3)}
+.pt-scan-line{
+  position:absolute;top:0;bottom:0;width:1.5px;
+  background:linear-gradient(180deg,transparent,var(--blue),transparent);
+  opacity:.7;animation:pt-scan 2.5s ease-in-out infinite;
+}
+@keyframes pt-scan{0%{left:10%;opacity:.4}50%{opacity:.9}100%{left:85%;opacity:.4}}
 
 .project-body{padding:1.5rem}
 .project-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:.75rem}
-.project-tag{font-family:var(--font-mono);font-size:9px;color:var(--blue);letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--blue-glow2);padding:3px 7px;border-radius:3px;background:var(--blue-glow)}
-.project-card h3{font-size:18px;font-weight:700;margin-bottom:.5rem;letter-spacing:-.02em}
-.project-card p{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:1.25rem}
+.project-tag{font-family:var(--font-mono);font-size:8.5px;color:var(--blue);letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--blue-glow2);padding:2px 7px;border-radius:3px;background:var(--blue-glow)}
+.project-card h3{font-size:17px;font-weight:700;margin-bottom:.4rem;letter-spacing:-.02em}
+.project-card p{font-size:13.5px;color:var(--muted);line-height:1.68;margin-bottom:1.25rem}
 .project-link{font-size:13px;color:var(--blue);text-decoration:none;font-weight:600;letter-spacing:.04em;display:inline-flex;align-items:center;gap:6px;transition:gap .2s,color .2s}
 .project-link:hover{gap:10px;color:var(--cyan)}
 
-/* ── TEAM ── */
-#team{background:var(--deep)}
+/* ── MILESTONES ── */
+#milestones{background:var(--void);overflow:hidden}
+.milestones-inner{max-width:760px;margin:0 auto;text-align:center}
+.milestones-inner .section-eyebrow{justify-content:center}
+.milestones-inner .section-title{text-align:center}
+.milestones-inner .section-sub{text-align:center;margin:0 auto 3rem}
 
-.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.timeline{position:relative;padding-left:0}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,var(--border),var(--border2),var(--border),transparent);transform:translateX(-50%)}
+
+.timeline-item{
+  display:grid;grid-template-columns:1fr 40px 1fr;
+  gap:0 1.5rem;align-items:start;margin-bottom:2rem;
+}
+.tl-left{text-align:right;padding-top:4px}
+.tl-right{padding-top:4px}
+.tl-center{display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;z-index:1}
+.tl-dot{
+  width:14px;height:14px;border-radius:50%;border:2px solid var(--blue);
+  background:var(--void);box-shadow:0 0 0 3px rgba(79,142,247,.15),0 0 14px rgba(79,142,247,.3);
+  flex-shrink:0;transition:all .3s;
+}
+.timeline-item.done .tl-dot{background:var(--blue);box-shadow:0 0 0 4px rgba(79,142,247,.2),0 0 20px rgba(79,142,247,.5)}
+.timeline-item.upcoming .tl-dot{border-color:var(--border2);background:transparent;box-shadow:none}
+.tl-line-seg{width:1px;flex:1;background:var(--border);min-height:20px}
+.tl-date{font-family:var(--font-mono);font-size:9px;color:var(--blue);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;display:block}
+.tl-title{font-size:15px;font-weight:700;letter-spacing:-.01em;margin-bottom:3px}
+.tl-desc{font-size:12.5px;color:var(--muted);line-height:1.6}
+.timeline-item.upcoming .tl-title{color:var(--muted)}
+.tl-tag{display:inline-block;font-family:var(--font-mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;padding:2px 6px;border-radius:3px;margin-top:4px}
+.tl-tag-done{color:var(--green);background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25)}
+.tl-tag-up{color:var(--amber);background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25)}
+
+/* ── TEAM ── */
+#team{background:var(--deep);overflow:hidden}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.25rem}
 
 .team-card{
-  background:var(--panel);border:1px solid var(--border);border-radius:14px;
+  background:var(--panel);border:1px solid var(--border);border-radius:var(--radius-lg);
   padding:2rem;position:relative;overflow:hidden;
-  transition:border-color .25s,transform .25s;
+  transition:border-color .28s,transform .28s,box-shadow .28s;
 }
-.team-card:hover{border-color:var(--border2);transform:translateY(-3px)}
-.team-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--blue),transparent);opacity:0;transition:opacity .25s}
+.team-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--blue),transparent);opacity:0;transition:opacity .3s}
+.team-card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,.3)}
 .team-card:hover::after{opacity:1}
+.team-card.featured{border-color:rgba(79,142,247,.4);box-shadow:0 0 0 1px rgba(79,142,247,.08),0 8px 40px rgba(79,142,247,.08)}
+.team-card.featured::after{opacity:.8}
 
-.team-card.featured{border-color:var(--blue);box-shadow:0 0 32px var(--blue-glow)}
-.team-card.featured::after{opacity:1}
-
-.team-badge{position:absolute;top:14px;right:14px;font-family:var(--font-mono);font-size:9px;color:var(--blue);letter-spacing:.12em;border:1px solid var(--blue);padding:2px 7px;border-radius:3px;background:var(--blue-glow)}
+.team-badge-pill{
+  position:absolute;top:16px;right:16px;
+  font-family:var(--font-mono);font-size:8px;color:var(--blue);letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid rgba(79,142,247,.35);padding:3px 8px;border-radius:100px;
+  background:rgba(79,142,247,.07);
+}
 
 .team-avatar{
-  width:68px;height:68px;border-radius:12px;background:var(--raised);
+  width:92px;height:92px;border-radius:var(--radius-md);
+  background:linear-gradient(135deg,var(--raised),var(--panel));
   border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;
-  font-size:20px;margin-bottom:1.25rem;font-weight:800;color:var(--blue);
+  font-size:24px;margin-bottom:1.25rem;font-weight:800;color:var(--blue-bright);
   font-family:var(--font-mono);letter-spacing:.04em;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);position:relative;overflow:hidden;
 }
-.team-card.featured .team-avatar{border-color:var(--blue);box-shadow:0 0 20px var(--blue-glow2)}
-
-.team-card h3{font-size:18px;font-weight:700;margin-bottom:3px;letter-spacing:-.02em}
-.team-role{font-family:var(--font-mono);font-size:10px;color:var(--blue);letter-spacing:.08em;margin-bottom:4px;display:block}
-.team-dept{font-family:var(--font-mono);font-size:10px;color:var(--cyan);letter-spacing:.06em;margin-bottom:.75rem;display:block;opacity:.7}
-.team-card p{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:1.25rem}
+.team-avatar::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 30% 30%,rgba(79,142,247,.12),transparent 70%);
+}
+.team-card.featured .team-avatar{
+  border-color:rgba(79,142,247,.5);
+  box-shadow:0 0 24px rgba(79,142,247,.2),inset 0 1px 0 rgba(255,255,255,.08);
+}
+.team-card h3{font-size:18px;font-weight:800;margin-bottom:2px;letter-spacing:-.025em}
+.team-role{font-family:var(--font-mono);font-size:9.5px;color:var(--blue);letter-spacing:.08em;margin-bottom:3px;display:block;text-transform:uppercase}
+.team-dept{font-size:12px;color:var(--cyan);margin-bottom:.85rem;display:flex;align-items:center;gap:5px;opacity:.8}
+.team-dept::before{content:'';width:14px;height:1px;background:var(--cyan);opacity:.5}
+.team-card p{font-size:13.5px;color:var(--muted);line-height:1.7;margin-bottom:1.25rem}
 .team-skills{display:flex;flex-wrap:wrap;gap:5px}
-.skill-tag{font-family:var(--font-mono);font-size:9px;color:var(--muted);border:1px solid var(--border2);padding:3px 7px;border-radius:3px;letter-spacing:.06em;text-transform:uppercase}
+.skill-tag{font-family:var(--font-mono);font-size:8.5px;color:var(--muted);border:1px solid var(--border2);padding:3px 7px;border-radius:3px;letter-spacing:.06em;text-transform:uppercase}
 
-/* ── SPONSOR ── */
-#sponsor{background:var(--void);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.sponsor-inner{max-width:860px;margin:0 auto;text-align:center}
-.sponsor-inner .section-eyebrow{justify-content:center}
-.sponsor-inner .section-title{text-align:center}
-.sponsor-inner .section-sub{text-align:center;margin:0 auto 3rem}
+/* ── INVESTORS ── */
+#investors{background:var(--void);overflow:hidden}
+.investors-inner{max-width:900px;margin:0 auto}
+.investors-hero{
+  background:linear-gradient(135deg,var(--panel) 0%,var(--raised) 100%);
+  border:1px solid var(--border);border-radius:var(--radius-lg);padding:3rem;
+  position:relative;overflow:hidden;margin-bottom:2rem;
+}
+.investors-hero::before{
+  content:'';position:absolute;top:-60px;right:-80px;width:300px;height:300px;
+  background:radial-gradient(circle,rgba(79,142,247,.1),transparent 70%);
+  pointer-events:none;
+}
+.investors-hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;flex-wrap:wrap;margin-bottom:2rem}
+.stage-badge{
+  font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid rgba(245,158,11,.35);padding:5px 12px;border-radius:100px;
+  background:rgba(245,158,11,.07);display:inline-flex;align-items:center;gap:6px;flex-shrink:0;
+}
+.investors-hero h3{font-size:26px;font-weight:800;letter-spacing:-.03em;margin-bottom:.5rem}
+.investors-hero p{font-size:15px;color:var(--muted);line-height:1.75;max-width:580px}
+.raise-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden}
+.raise-item{background:var(--panel);padding:1.25rem;text-align:center}
+.raise-val{font-family:var(--font-mono);font-size:20px;font-weight:700;color:var(--blue-bright);display:block;line-height:1;margin-bottom:4px}
+.raise-lbl{font-size:12px;color:var(--muted)}
 
-.sponsor-tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:2.5rem}
-
-.sponsor-tier{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:1.75rem;text-align:left;transition:border-color .2s,transform .2s}
-.sponsor-tier:hover{border-color:var(--border2);transform:translateY(-2px)}
-.sponsor-tier.highlighted{border-color:var(--blue);box-shadow:0 0 24px var(--blue-glow)}
-
-.tier-name{font-family:var(--font-mono);font-size:10px;color:var(--blue);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.5rem;display:block}
-.tier-price{font-size:26px;font-weight:800;margin-bottom:.5rem;font-family:var(--font-mono);letter-spacing:-.02em}
-.tier-price span{font-size:13px;color:var(--muted);font-weight:400}
-.tier-list{list-style:none;margin-top:1rem}
-.tier-list li{font-size:13px;color:var(--muted);padding:4px 0 4px 16px;position:relative}
-.tier-list li::before{content:'↗';position:absolute;left:0;color:var(--blue);font-size:10px}
+.inv-perks{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.875rem}
+.inv-perk{
+  background:var(--panel);border:1px solid var(--border);border-radius:var(--radius-md);
+  padding:1.25rem;display:flex;gap:.875rem;align-items:flex-start;
+  transition:border-color .2s;
+}
+.inv-perk:hover{border-color:var(--border2)}
+.inv-perk-icon{font-size:22px;flex-shrink:0;margin-top:1px}
+.inv-perk h4{font-size:14px;font-weight:700;margin-bottom:3px;letter-spacing:-.01em}
+.inv-perk p{font-size:12.5px;color:var(--muted);line-height:1.6}
 
 /* ── RESOURCES ── */
 #resources{background:var(--deep)}
-.resources-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
-
-.resource-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:1.75rem;display:flex;flex-direction:column;gap:.75rem;transition:border-color .2s,transform .2s}
+.resources-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem}
+.resource-card{
+  background:var(--panel);border:1px solid var(--border);border-radius:var(--radius-md);
+  padding:1.75rem;display:flex;flex-direction:column;gap:.75rem;
+  transition:border-color .22s,transform .22s;
+}
 .resource-card:hover{border-color:var(--border2);transform:translateY(-2px)}
-.resource-icon{font-size:28px}
-.resource-card h4{font-size:15px;font-weight:700;letter-spacing:-.01em}
-.resource-card p{font-size:13px;color:var(--muted);line-height:1.65;flex:1}
-.resource-price{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
-.price-tag{font-family:var(--font-mono);font-size:17px;font-weight:700;color:var(--blue)}
+.resource-icon{font-size:26px}
+.resource-card h4{font-size:15px;font-weight:700;letter-spacing:-.015em}
+.resource-card p{font-size:13px;color:var(--muted);line-height:1.68;flex:1}
+.resource-price{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:.75rem;border-top:1px solid var(--border)}
+.price-tag{font-family:var(--font-mono);font-size:18px;font-weight:700;color:var(--blue-bright)}
 .price-tag.free{color:var(--green)}
-.resource-btn{font-family:var(--font-head);font-size:12px;font-weight:700;padding:7px 14px;border-radius:6px;border:1.5px solid var(--blue);background:transparent;color:var(--blue);cursor:pointer;text-decoration:none;transition:all .2s}
+.resource-btn{
+  font-family:var(--font-head);font-size:12px;font-weight:700;padding:7px 14px;
+  border-radius:6px;border:1.5px solid var(--blue);background:transparent;
+  color:var(--blue);cursor:pointer;text-decoration:none;transition:all .2s;
+}
 .resource-btn:hover{background:var(--blue);color:var(--void)}
 
 /* ── CONTACT ── */
 #contact{background:var(--void)}
-.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:start}
-.contact-info h3{font-size:22px;font-weight:700;margin-bottom:1rem;letter-spacing:-.02em}
-.contact-info p{font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:2.5rem}
-
+.contact-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:5rem;align-items:start}
+.contact-info p{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:2.5rem}
 .contact-items{display:flex;flex-direction:column;gap:.75rem}
-.contact-item{display:flex;align-items:center;gap:12px;padding:.875rem 1rem;background:var(--panel);border:1px solid var(--border);border-radius:10px;color:var(--muted);text-decoration:none;font-size:14px;transition:border-color .2s,color .2s}
-.contact-item:hover{border-color:var(--blue);color:var(--blue)}
-.contact-item-icon{width:34px;height:34px;border:1px solid var(--border2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;background:var(--raised)}
-
-.contact-form{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:2.25rem}
-.form-group{margin-bottom:1.25rem}
-.form-group label{display:block;font-size:11px;font-family:var(--font-mono);color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
-.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--raised);border:1px solid var(--border2);border-radius:7px;padding:11px 14px;color:var(--white);font-family:var(--font-head);font-size:14px;transition:border-color .2s,box-shadow .2s;outline:none}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-glow)}
-.form-group select option{background:var(--raised);color:var(--white)}
-.form-group textarea{min-height:110px;resize:vertical;line-height:1.6}
-.hp-field{display:none!important;visibility:hidden!important}
-.form-submit{width:100%;background:var(--blue);color:var(--void);border:none;padding:14px;border-radius:8px;font-family:var(--font-head);font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.02em}
-.form-submit:hover{background:var(--cyan);transform:translateY(-1px)}
-.form-notice{font-size:11px;color:var(--muted);text-align:center;margin-top:.75rem;font-family:var(--font-mono);letter-spacing:.04em}
-
-
-/* ── CONNECT SECTION ── */
-#connect{background:var(--deep);border-top:1px solid var(--border)}
-.connect-inner{max-width:800px;margin:0 auto;text-align:center}
-.connect-inner .section-eyebrow{justify-content:center}
-.connect-inner .section-title{text-align:center}
-.connect-inner .section-sub{text-align:center;margin:0 auto 2.5rem}
-
-.connect-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:3rem}
-
-.connect-card{
-  background:var(--panel);border:1px solid var(--border);border-radius:12px;
-  padding:1.75rem 1.5rem;text-align:center;text-decoration:none;
-  transition:border-color .2s,transform .2s,box-shadow .2s;display:flex;
-  flex-direction:column;align-items:center;gap:.75rem;
+.contact-item{
+  display:flex;align-items:center;gap:12px;padding:.875rem 1rem;
+  background:var(--panel);border:1px solid var(--border);border-radius:var(--radius-sm);
+  color:var(--muted);text-decoration:none;font-size:13.5px;transition:border-color .2s,color .2s;
 }
-.connect-card:hover{border-color:var(--blue);transform:translateY(-3px);box-shadow:0 12px 32px var(--blue-glow)}
-.connect-card-icon{font-size:32px;line-height:1}
-.connect-card-label{font-size:14px;font-weight:700;color:var(--white);letter-spacing:-.01em}
-.connect-card-sub{font-size:12px;color:var(--muted);line-height:1.5}
-.connect-card-tag{font-family:var(--font-mono);font-size:9px;color:var(--blue);letter-spacing:.1em;border:1px solid var(--blue-glow2);padding:2px 7px;border-radius:3px;background:var(--blue-glow);text-transform:uppercase}
+.contact-item:hover{border-color:rgba(79,142,247,.4);color:var(--blue-bright)}
+.contact-item-icon{
+  width:34px;height:34px;border:1px solid var(--border2);border-radius:7px;
+  display:flex;align-items:center;justify-content:center;font-size:15px;
+  flex-shrink:0;background:var(--raised);
+}
+.contact-form{
+  background:var(--panel);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:2.25rem;box-shadow:0 8px 40px rgba(0,0,0,.3);
+}
+.form-group{margin-bottom:1.2rem}
+.form-group label{display:block;font-size:10.5px;font-family:var(--font-mono);color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.form-group input,.form-group select,.form-group textarea{
+  width:100%;background:var(--raised);border:1px solid var(--border2);
+  border-radius:7px;padding:11px 14px;color:var(--white);font-family:var(--font-head);
+  font-size:14px;transition:border-color .2s,box-shadow .2s;outline:none;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  border-color:var(--blue);box-shadow:0 0 0 3px rgba(79,142,247,.12);
+}
+.form-group select option{background:var(--raised);color:var(--white)}
+.form-group textarea{min-height:108px;resize:vertical;line-height:1.65}
+.hp-field{display:none!important;visibility:hidden!important}
+.form-submit{
+  width:100%;background:linear-gradient(135deg,var(--blue),var(--blue-dim));
+  color:#fff;border:none;padding:14px;border-radius:8px;font-family:var(--font-head);
+  font-size:15px;font-weight:700;cursor:pointer;transition:all .22s;letter-spacing:.02em;
+  box-shadow:0 4px 16px rgba(79,142,247,.25);
+}
+.form-submit:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(79,142,247,.4)}
+.form-notice{font-size:10.5px;color:var(--muted);text-align:center;margin-top:.75rem;font-family:var(--font-mono);letter-spacing:.04em}
 
-/* Newsletter strip */
+/* ── CONNECT ── */
+#connect{background:var(--deep);border-top:1px solid var(--border)}
+.connect-inner{max-width:820px;margin:0 auto;text-align:center}
+.connect-inner .section-eyebrow{justify-content:center}
+.connect-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:3rem}
+.connect-card{
+  background:var(--panel);border:1px solid var(--border);border-radius:var(--radius-md);
+  padding:1.75rem 1.25rem;text-align:center;text-decoration:none;
+  display:flex;flex-direction:column;align-items:center;gap:.65rem;
+  transition:border-color .22s,transform .22s,box-shadow .22s;
+}
+.connect-card:hover{border-color:rgba(79,142,247,.4);transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.3),0 0 24px rgba(79,142,247,.06)}
+.connect-card-icon{font-size:30px;line-height:1}
+.connect-card-label{font-size:14px;font-weight:700;color:var(--white)}
+.connect-card-sub{font-size:11.5px;color:var(--muted);line-height:1.55}
+.connect-card-tag{font-family:var(--font-mono);font-size:8.5px;color:var(--blue);letter-spacing:.1em;border:1px solid var(--blue-glow2);padding:2px 7px;border-radius:3px;background:var(--blue-glow);text-transform:uppercase}
+
 .newsletter-strip{
-  background:var(--panel);border:1px solid var(--border);border-radius:14px;
+  background:linear-gradient(135deg,var(--panel),var(--raised));
+  border:1px solid var(--border);border-radius:var(--radius-lg);
   padding:2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;
   gap:2rem;flex-wrap:wrap;
 }
-.newsletter-strip h3{font-size:18px;font-weight:700;letter-spacing:-.02em;margin-bottom:4px}
-.newsletter-strip p{font-size:14px;color:var(--muted);line-height:1.5}
-.newsletter-form{display:flex;gap:.75rem;flex-wrap:wrap;flex-shrink:0}
+.newsletter-strip h3{font-size:17px;font-weight:700;letter-spacing:-.02em;margin-bottom:4px}
+.newsletter-strip p{font-size:13.5px;color:var(--muted);line-height:1.55}
+.newsletter-form{display:flex;flex-direction:column;gap:.5rem;flex-shrink:0}
+.nl-row{display:flex;gap:.75rem}
 .newsletter-input{
   background:var(--raised);border:1px solid var(--border2);border-radius:7px;
   padding:11px 16px;color:var(--white);font-family:var(--font-head);font-size:14px;
-  outline:none;transition:border-color .2s;width:240px;
+  outline:none;transition:border-color .2s;width:220px;
 }
-.newsletter-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-glow)}
+.newsletter-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(79,142,247,.12)}
 .newsletter-input::placeholder{color:var(--muted)}
 .newsletter-btn{
-  background:var(--blue);color:var(--void);border:none;padding:11px 20px;
-  border-radius:7px;font-family:var(--font-head);font-size:14px;font-weight:700;
+  background:linear-gradient(135deg,var(--blue),var(--blue-dim));
+  color:#fff;border:none;padding:11px 18px;border-radius:7px;
+  font-family:var(--font-head);font-size:13.5px;font-weight:700;
   cursor:pointer;white-space:nowrap;transition:all .2s;
+  box-shadow:0 4px 14px rgba(79,142,247,.2);
 }
-.newsletter-btn:hover{background:var(--cyan);transform:translateY(-1px)}
-.newsletter-notice{font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-top:.5rem;letter-spacing:.04em}
+.newsletter-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(79,142,247,.35)}
+.newsletter-notice{font-family:var(--font-mono);font-size:9.5px;color:var(--muted);letter-spacing:.04em}
 
 /* ── FOOTER ── */
 footer{background:var(--deep);border-top:1px solid var(--border);padding:3rem 5% 2rem;position:relative;z-index:1}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
-.footer-brand p{font-size:14px;color:var(--muted);line-height:1.7;margin-top:1rem;max-width:260px}
-.footer-col h4{font-size:11px;font-family:var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.footer-brand p{font-size:13.5px;color:var(--muted);line-height:1.75;margin-top:.875rem;max-width:250px}
+.footer-col h4{font-size:10px;font-family:var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.875rem}
 .footer-col ul{list-style:none}
-.footer-col li{margin-bottom:.5rem}
-.footer-col a{color:var(--muted);text-decoration:none;font-size:14px;transition:color .2s}
+.footer-col li{margin-bottom:.45rem}
+.footer-col a{color:var(--muted);text-decoration:none;font-size:13.5px;transition:color .2s}
 .footer-col a:hover{color:var(--blue)}
 .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:2rem;border-top:1px solid var(--border);flex-wrap:wrap;gap:1rem}
-.footer-bottom p{font-size:12px;color:var(--muted);font-family:var(--font-mono);letter-spacing:.04em}
+.footer-bottom p{font-size:11.5px;color:var(--muted);font-family:var(--font-mono);letter-spacing:.04em}
 .footer-legal{display:flex;gap:1.5rem}
-.footer-legal a{font-size:12px;color:var(--muted);text-decoration:none;font-family:var(--font-mono);transition:color .2s}
+.footer-legal a{font-size:11.5px;color:var(--muted);text-decoration:none;font-family:var(--font-mono);transition:color .2s}
 .footer-legal a:hover{color:var(--blue)}
 
 /* ── ANIMATIONS ── */
-.fade-up{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
 .fade-up.visible{opacity:1;transform:translateY(0)}
-.fade-up:nth-child(2){transition-delay:.08s}
-.fade-up:nth-child(3){transition-delay:.16s}
-.fade-up:nth-child(4){transition-delay:.24s}
+.fade-up:nth-child(2){transition-delay:.09s}
+.fade-up:nth-child(3){transition-delay:.18s}
+.fade-up:nth-child(4){transition-delay:.27s}
 
 /* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .market-grid{grid-template-columns:1fr;gap:3rem}
+  .timeline::before{left:20px;transform:none}
+  .timeline-item{grid-template-columns:20px 1fr;column-gap:.75rem}
+  .tl-left{display:none}
+  .tl-center{flex-direction:row;align-items:center;gap:.5rem}
+  .tl-line-seg{display:none}
+}
 @media(max-width:960px){
-  .hero{grid-template-columns:1fr;padding-top:110px;gap:2.5rem}
+  .hero{grid-template-columns:1fr;padding-top:110px;gap:3rem}
   .hero-monitor{display:none}
   .nav-links{display:none}
   .hamburger{display:flex}
-  .contact-grid{grid-template-columns:1fr;gap:2.5rem}
+  .contact-grid{grid-template-columns:1fr;gap:3rem}
   .footer-grid{grid-template-columns:1fr 1fr;gap:2rem}
   .vitals-strip{grid-template-columns:repeat(2,1fr)}
   .vital:nth-child(2){border-right:none}
   .vital:nth-child(3){border-top:1px solid var(--border)}
   .vital:nth-child(4){border-top:1px solid var(--border)}
+  .investors-hero-top{flex-direction:column}
+  .raise-grid{grid-template-columns:1fr}
 }
-@media(max-width:600px){
-  section{padding:70px 5%}
-  .hero{padding:100px 5% 60px}
-  .footer-grid{grid-template-columns:1fr;gap:1.5rem}
+@media(max-width:640px){
+  section{padding:72px 5%}
+  .hero{padding:100px 5% 64px}
+  .footer-grid{grid-template-columns:1fr;gap:1.75rem}
   .footer-bottom{flex-direction:column;align-items:flex-start}
   .trust-bar{gap:1rem;justify-content:flex-start}
+  .newsletter-strip{flex-direction:column;align-items:flex-start}
+  .investors-hero{padding:2rem}
+  .raise-grid{grid-template-columns:repeat(3,1fr)}
+  .timeline-item{grid-template-columns:20px 1fr}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
@@ -507,25 +694,22 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:3rem 5%
 
 <div class="grid-bg" aria-hidden="true"></div>
 
-<!-- ══════════════ NAVIGATION ══════════════ -->
+<!-- NAV -->
 <nav id="main-nav" role="navigation" aria-label="Main navigation">
   <a href="#" class="nav-logo" aria-label="REHABION Home">
     <div class="logo-mark" aria-hidden="true">
-      <svg viewBox="0 0 26 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <polyline points="0,7 4,7 6,2 8,12 10.5,1 13,12 15,5 17,7 22,7 24,4 26,7" stroke="#4F8EF7" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+      <svg viewBox="0 0 24 13" fill="none"><polyline points="0,6.5 3.5,6.5 5.5,1.5 7.5,11.5 9.5,0.5 12,11.5 14,4.5 16,6.5 20,6.5 22,3.5 24,6.5" stroke="#4F8EF7" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
     <span class="logo-text">REHAB<span>ION</span></span>
-    <div class="nav-live"><span class="live-dot"></span>ACTIVE</div>
+    <div class="nav-chip"><span class="live-dot"></span>ACTIVE</div>
   </a>
 
   <ul class="nav-links" role="list">
+    <li><a href="#market">Opportunity</a></li>
     <li><a href="#services">Solutions</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#team">Team</a></li>
-    <li><a href="#resources">Resources</a></li>
-    <li><a href="#sponsor">Partner</a></li>
-    <li><a href="#connect">Connect</a></li>
+    <li><a href="#investors">Investors</a></li>
     <li><a href="#contact" class="nav-cta">Work with us</a></li>
   </ul>
 
@@ -535,67 +719,88 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:3rem 5%
 </nav>
 
 <nav class="mobile-nav" id="mobile-menu" aria-label="Mobile navigation">
+  <a href="#market" onclick="closeMobileNav()">Opportunity</a>
   <a href="#services" onclick="closeMobileNav()">Solutions</a>
   <a href="#projects" onclick="closeMobileNav()">Projects</a>
   <a href="#team" onclick="closeMobileNav()">Team</a>
-  <a href="#resources" onclick="closeMobileNav()">Resources</a>
-  <a href="#sponsor" onclick="closeMobileNav()">Partner with us</a>
-  <a href="#connect" onclick="closeMobileNav()">Connect</a>
+  <a href="#milestones" onclick="closeMobileNav()">Milestones</a>
+  <a href="#investors" onclick="closeMobileNav()">Investors</a>
   <a href="#contact" onclick="closeMobileNav()">Contact</a>
 </nav>
 
-<!-- ══════════════ HERO ══════════════ -->
+<!-- HERO -->
 <header class="hero" role="banner">
-  <div class="hero-content">
-    <p class="hero-eyebrow">Pakistan's Rehabilitation Technology Pioneer</p>
+  <div class="orb orb-hero-l" aria-hidden="true"></div>
+  <div class="orb orb-hero-r" aria-hidden="true"></div>
+
+  <div class="hero-content" style="position:relative;z-index:1">
+    <p class="hero-eyebrow">Pakistan's #1 Rehabilitation Technology Company</p>
 
     <h1>
-      Rebuilding Lives<br>
-      <span class="accent">Through Intelligent</span><br>
-      <span class="light">Rehabilitation</span>
+      Where <span class="gradient-text">Clinical Science</span><br>
+      Meets Intelligent<br>
+      <span class="line-muted">Rehabilitation</span>
     </h1>
 
     <p class="hero-sub">
-      REHABION engineers <strong>game-based therapy systems</strong>, AI clinical tools, and biomedical wearables — delivering world-class rehabilitation from <strong>Rawalpindi to the world.</strong>
+      REHABION engineers <strong>game-based therapy systems</strong>, AI clinical tools, and biomedical wearables — built by biomedical engineers, validated by clinicians, from <strong>Islamabad to the world.</strong>
     </p>
 
     <div class="hero-actions">
       <a href="https://calendly.com/rehabion/demo" target="_blank" rel="noopener noreferrer" class="btn-primary">Book a Free Demo →</a>
-      <a href="#contact" class="btn-outline">Work with Us →</a>
+      <a href="#investors" class="btn-outline">Investor Deck →</a>
     </div>
 
     <div class="vitals-strip" role="list" aria-label="Company statistics">
       <div class="vital" role="listitem">
         <span class="vital-label">Market by 2033</span>
-        <span class="vital-value">$8.1<span class="vital-unit">B</span></span>
+        <span class="vital-value"><span class="counter" data-target="8.1" data-suffix="B" data-prefix="$">$0B</span></span>
       </div>
       <div class="vital" role="listitem">
         <span class="vital-label">PK Competitors</span>
-        <span class="vital-value">0</span>
+        <span class="vital-value"><span class="counter" data-target="0" data-integer="1">0</span></span>
       </div>
       <div class="vital" role="listitem">
         <span class="vital-label">Global CAGR</span>
-        <span class="vital-value">13.4<span class="vital-unit">%</span></span>
+        <span class="vital-value"><span class="counter" data-target="13.4" data-suffix="%" >0%</span></span>
       </div>
       <div class="vital" role="listitem">
         <span class="vital-label">South Asia Rank</span>
-        <span class="vital-value">1<span class="vital-unit">st</span></span>
+        <span class="vital-value"><span class="counter" data-target="1" data-suffix="st" data-integer="1">0</span></span>
       </div>
     </div>
   </div>
 
-  <!-- Live ECG Monitor Panel -->
+  <!-- ECG Monitor -->
   <div class="hero-monitor" aria-hidden="true">
     <div class="monitor-header">
       <span class="monitor-title">REHABION · BioSignal Monitor v1.0</span>
-      <div class="monitor-status"><span class="live-dot"></span>RECORDING</div>
+      <div class="monitor-badges">
+        <span class="monitor-badge badge-rec"><span class="live-dot"></span>REC</span>
+        <span class="monitor-badge badge-ch">CH1: ECG-II</span>
+      </div>
     </div>
     <div class="monitor-body">
+      <div class="monitor-grid"></div>
       <canvas id="ecg-canvas"></canvas>
+      <div class="monitor-sidebar">
+        <div class="monitor-readout">
+          <span class="readout-val" id="bpm-display">72</span>
+          <span class="readout-lbl">BPM</span>
+        </div>
+        <div class="monitor-readout">
+          <span class="readout-val" style="color:var(--green)" id="spo2-display">98</span>
+          <span class="readout-lbl">SpO₂%</span>
+        </div>
+        <div class="monitor-readout">
+          <span class="readout-val" style="color:var(--purple)" id="hrv-display">42</span>
+          <span class="readout-lbl">HRV ms</span>
+        </div>
+      </div>
     </div>
     <div class="monitor-footer">
-      <span class="monitor-readout">CH1: ECG-II &nbsp;·&nbsp; 25mm/s &nbsp;·&nbsp; 10mm/mV</span>
-      <span class="bpm-display" id="bpm-display">72 BPM</span>
+      <span class="monitor-readout-bar">25mm/s &nbsp;·&nbsp; 10mm/mV &nbsp;·&nbsp; Filter: 0.5–40Hz</span>
+      <span style="font-family:var(--font-mono);font-size:9px;color:var(--muted)">REHABION BioSense</span>
     </div>
   </div>
 </header>
@@ -609,10 +814,76 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:3rem 5%
   <div class="trust-item"><div class="trust-dot"></div>ISO 27001 Aligned</div>
 </div>
 
-<!-- ══════════════ SERVICES ══════════════ -->
+<!-- MARKET OPPORTUNITY -->
+<section id="market" aria-labelledby="market-title">
+  <div class="orb orb-mid" style="top:0" aria-hidden="true"></div>
+  <div class="market-inner">
+    <div class="market-grid">
+      <div class="market-left fade-up">
+        <div class="opportunity-badge"><span class="opp-dot"></span>Investment Opportunity</div>
+        <p class="section-eyebrow">The problem</p>
+        <h2 class="section-title" id="market-title">220 Million People.<br><span>Zero Solutions.</span></h2>
+        <p class="section-sub" style="max-width:100%">Pakistan has one of the world's largest unmet rehabilitation needs. With only 0.5 physiotherapists per 10,000 people against a recommended 5, and no domestic rehabilitation technology companies, the gap is enormous — and entirely unaddressed.</p>
+
+        <div class="problem-list">
+          <div class="problem-item fade-up">
+            <div class="problem-icon">🏥</div>
+            <div class="problem-text">
+              <strong>Access collapse</strong>
+              Less than 8% of Pakistanis who need rehabilitation ever receive it. Geography, cost, and capacity are all barriers.
+            </div>
+          </div>
+          <div class="problem-item fade-up">
+            <div class="problem-icon">📉</div>
+            <div class="problem-text">
+              <strong>Zero digital rehabilitation infrastructure</strong>
+              No Pakistani company builds game-based rehab, AI clinical tools, or biomedical wearables. The market is completely open.
+            </div>
+          </div>
+          <div class="problem-item fade-up">
+            <div class="problem-icon">💡</div>
+            <div class="problem-text">
+              <strong>REHABION fills the gap</strong>
+              We build what Pakistan's clinicians actually need — at pricing they can afford, in languages they speak, validated for their patient populations.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="market-right fade-up">
+        <p class="section-eyebrow">Market size</p>
+        <h3 class="section-title" style="font-size:clamp(22px,2.8vw,34px)">A <span>$8.1 Billion</span> Market with No Local Competitor</h3>
+        <div class="market-stats">
+          <div class="mstat">
+            <span class="mstat-val counter" data-target="8.1" data-prefix="$" data-suffix="B">$0B</span>
+            <span class="mstat-label">Global rehab tech market by 2033</span>
+            <span class="mstat-src">SOURCE: Grand View Research 2024</span>
+          </div>
+          <div class="mstat">
+            <span class="mstat-val counter" data-target="13.4" data-suffix="%">0%</span>
+            <span class="mstat-label">Compound annual growth rate</span>
+            <span class="mstat-src">SOURCE: Allied Market Research 2024</span>
+          </div>
+          <div class="mstat">
+            <span class="mstat-val">220M</span>
+            <span class="mstat-label">Pakistan's addressable population</span>
+            <span class="mstat-src">SOURCE: World Bank 2024</span>
+          </div>
+          <div class="mstat">
+            <span class="mstat-val">0.5</span>
+            <span class="mstat-label">Physiotherapists per 10,000 Pakistanis</span>
+            <span class="mstat-src">SOURCE: WHO Pakistan 2023</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
 <section id="services" aria-labelledby="services-title">
   <p class="section-eyebrow">What we build</p>
-  <h2 class="section-title" id="services-title">Rehabilitation Solutions<br><span>On Demand</span></h2>
+  <h2 class="section-title" id="services-title">Rehabilitation Solutions <span>On Demand</span></h2>
   <p class="section-sub">From a custom game therapy system to a full clinical AI stack — engineered for therapists, hospitals, and researchers across Pakistan and beyond.</p>
 
   <div class="services-grid" role="list">
@@ -630,15 +901,15 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:3rem 5%
         <span class="badge badge-dev">In Development</span>
       </div>
       <h3>AI Physiotherapy Tools</h3>
-      <p>RehabLLM-powered clinical assistants, automated SOAP notes, AI exercise prescription, and patient chatbots in Urdu and English for the Pakistani healthcare context.</p>
+      <p>RehabLLM-powered clinical assistants, automated SOAP notes, AI exercise prescription, and patient chatbots in Urdu and English for the Pakistani clinical context.</p>
     </div>
     <div class="service-card fade-up" role="listitem">
       <div class="service-header">
         <div class="service-icon">🔬</div>
         <span class="badge badge-proto">Prototype</span>
       </div>
-      <h3>Biomedical Engineering</h3>
-      <p>Custom EMG, IMU, and wearable sensor prototypes under our BioSense platform. Clinical-grade data quality at Pakistan-accessible pricing.</p>
+      <h3>BioSense Wearables</h3>
+      <p>Custom EMG, IMU, and wearable sensor prototypes under our BioSense platform. Clinical-grade data quality at Pakistan-accessible cost — no import dependency.</p>
     </div>
     <div class="service-card fade-up" role="listitem">
       <div class="service-header">
@@ -667,15 +938,39 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:3rem 5%
   </div>
 </section>
 
-<!-- ══════════════ PROJECTS ══════════════ -->
+<!-- PROJECTS -->
 <section id="projects" aria-labelledby="projects-title">
   <p class="section-eyebrow">Our work</p>
-  <h2 class="section-title" id="projects-title">Recent <span>Projects</span></h2>
+  <h2 class="section-title" id="projects-title">Active <span>Projects</span></h2>
   <p class="section-sub">Built by the REHABION biomedical engineering team. Real clinical problems, real engineering solutions.</p>
 
   <div class="projects-grid">
+    <!-- RBN-001 -->
     <article class="project-card fade-up">
-      <div class="project-thumb">🎮<span class="project-num">RBN-001</span></div>
+      <div class="project-thumb pt-001">
+        <span class="pt-num">RBN-001</span>
+        <span class="pt-badge pt-badge-live">LIVE</span>
+        <div class="pt-mockup">
+          <div class="pt-bar active" style="width:70%"></div>
+          <div class="pt-row">
+            <div class="pt-circle" style="width:28px;height:28px;border-color:var(--blue)"></div>
+            <div class="pt-line hl" style="width:40%"></div>
+            <div class="pt-line" style="width:30%"></div>
+          </div>
+          <div class="pt-bar" style="width:45%"></div>
+          <div class="pt-row">
+            <div class="pt-line" style="width:20%"></div>
+            <div class="pt-circle" style="width:18px;height:18px;border-color:var(--cyan);border-width:1px"></div>
+            <div class="pt-line hl" style="width:55%"></div>
+          </div>
+          <div class="pt-bar active" style="width:85%;animation-delay:.4s"></div>
+          <div class="pt-row">
+            <div class="pt-line" style="width:60%"></div>
+            <div class="pt-circle" style="width:22px;height:22px;border-color:var(--purple);border-width:1px"></div>
+          </div>
+        </div>
+        <div class="pt-scan-line"></div>
+      </div>
       <div class="project-body">
         <div class="project-tags">
           <span class="project-tag">Unity</span>
@@ -683,13 +978,40 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:3rem 5%
           <span class="project-tag">Motion Capture</span>
         </div>
         <h3>Upper Limb Stroke Game</h3>
-        <p>Therapeutic fishing game for stroke survivors mapping shoulder abduction and elbow extension to gameplay. Tracks range of motion in real time with clinical-grade accuracy.</p>
+        <p>Therapeutic game for stroke survivors mapping shoulder abduction and elbow extension to gameplay mechanics. Tracks range of motion in real time with clinical-grade accuracy.</p>
         <a href="https://calendly.com/rehabion/demo" target="_blank" rel="noopener noreferrer" class="project-link">Book a demo →</a>
       </div>
     </article>
 
+    <!-- RBN-002 -->
     <article class="project-card fade-up">
-      <div class="project-thumb">📱<span class="project-num">RBN-002</span></div>
+      <div class="project-thumb pt-002">
+        <span class="pt-num">RBN-002</span>
+        <span class="pt-badge pt-badge-live">LIVE</span>
+        <div class="pt-mockup">
+          <div class="pt-bar active" style="width:100%;background:linear-gradient(90deg,var(--cyan-dim),var(--cyan))"></div>
+          <div class="pt-skeleton" style="margin-top:4px">
+            <div class="pt-row" style="gap:4px">
+              <div class="pt-block" style="width:12px;height:40px;border-radius:3px"></div>
+              <div class="pt-block blue" style="width:12px;height:52px;border-radius:3px"></div>
+              <div class="pt-block" style="width:12px;height:32px;border-radius:3px"></div>
+              <div class="pt-block cyan" style="width:12px;height:48px;border-radius:3px"></div>
+              <div class="pt-block" style="width:12px;height:28px;border-radius:3px"></div>
+              <div class="pt-block blue" style="width:12px;height:44px;border-radius:3px"></div>
+              <div class="pt-block" style="width:12px;height:36px;border-radius:3px"></div>
+              <div class="pt-block cyan" style="width:12px;height:50px;border-radius:3px"></div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <div class="pt-block" style="height:10px;flex:1;border-radius:2px"></div>
+            <div class="pt-block blue" style="height:10px;width:30%;border-radius:2px"></div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:4px">
+            <div class="pt-block cyan" style="height:8px;width:40%;border-radius:2px"></div>
+            <div class="pt-block" style="height:8px;flex:1;border-radius:2px"></div>
+          </div>
+        </div>
+      </div>
       <div class="project-body">
         <div class="project-tags">
           <span class="project-tag">Computer Vision</span>
@@ -702,38 +1024,136 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:3rem 5%
       </div>
     </article>
 
+    <!-- RBN-003 -->
     <article class="project-card fade-up">
-      <div class="project-thumb" style="font-size:36px;flex-direction:column;gap:6px">
-        ⚡<span class="project-num">RBN-003</span>
-        <span style="font-family:var(--font-mono);font-size:9px;background:var(--amber);color:#000;padding:3px 8px;border-radius:3px;font-weight:700;letter-spacing:.06em;z-index:1;position:relative">COMING SOON</span>
+      <div class="project-thumb pt-003">
+        <span class="pt-num">RBN-003</span>
+        <span class="pt-badge pt-badge-soon">IN PROGRESS</span>
+        <div class="pt-mockup" style="opacity:.5">
+          <div style="display:flex;flex-direction:column;gap:6px;width:100%">
+            <div class="pt-block" style="height:14px;width:60%;border-radius:3px"></div>
+            <div class="pt-block" style="height:8px;width:90%;border-radius:2px"></div>
+            <div class="pt-block" style="height:8px;width:75%;border-radius:2px"></div>
+            <svg class="pt-ecg" viewBox="0 0 200 50"><polyline points="0,25 20,25 28,8 36,42 44,4 54,42 60,20 68,25 100,25 108,12 116,25 200,25" stroke="#4F8EF7" stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".7"/></svg>
+          </div>
+        </div>
       </div>
       <div class="project-body">
         <div class="project-tags">
           <span class="project-tag">Biomedical</span>
           <span class="project-tag">In Progress</span>
         </div>
-        <h3>More Projects Coming</h3>
-        <p>Contact us to collaborate, request a demo, or submit your own clinical challenge. We build what clinicians and patients actually need.</p>
-        <a href="#contact" class="project-link">Get in touch →</a>
+        <h3>More Projects in Pipeline</h3>
+        <p>New clinical challenges, new engineering solutions. Contact us to discuss a collaboration, request a custom build, or propose a research partnership.</p>
+        <a href="#contact" class="project-link">Collaborate with us →</a>
       </div>
     </article>
   </div>
 </section>
 
-<!-- ══════════════ TEAM ══════════════ -->
+<!-- MILESTONES -->
+<section id="milestones" aria-labelledby="milestones-title">
+  <div class="milestones-inner">
+    <p class="section-eyebrow">Traction</p>
+    <h2 class="section-title" id="milestones-title">Our <span>Journey</span></h2>
+    <p class="section-sub" style="text-align:center;margin:0 auto 3rem">From research idea to functional prototype — each milestone is a proof of execution.</p>
+
+    <div class="timeline" role="list">
+      <div class="timeline-item done fade-up" role="listitem">
+        <div class="tl-left">
+          <span class="tl-date">Q1 2025</span>
+          <div class="tl-title">Company Founded</div>
+          <div class="tl-desc">REHABION established as Pakistan's first dedicated rehabilitation technology initiative.</div>
+          <span class="tl-tag tl-tag-done">Completed</span>
+        </div>
+        <div class="tl-center"><div class="tl-dot"></div><div class="tl-line-seg"></div></div>
+        <div class="tl-right"></div>
+      </div>
+
+      <div class="timeline-item done fade-up" role="listitem">
+        <div class="tl-left"></div>
+        <div class="tl-center"><div class="tl-dot"></div><div class="tl-line-seg"></div></div>
+        <div class="tl-right">
+          <span class="tl-date">Q2 2025</span>
+          <div class="tl-title">Research Programme</div>
+          <div class="tl-desc">Formal research collaboration established with Dr. Faisal Amin as Technical Supervisor.</div>
+          <span class="tl-tag tl-tag-done">Completed</span>
+        </div>
+      </div>
+
+      <div class="timeline-item done fade-up" role="listitem">
+        <div class="tl-left">
+          <span class="tl-date">Q2 2025</span>
+          <div class="tl-title">First Prototype</div>
+          <div class="tl-desc">RBN-001 Upper Limb Stroke Game prototype built and validated. RBN-002 Gait Analyser in active testing.</div>
+          <span class="tl-tag tl-tag-done">Completed</span>
+        </div>
+        <div class="tl-center"><div class="tl-dot"></div><div class="tl-line-seg"></div></div>
+        <div class="tl-right"></div>
+      </div>
+
+      <div class="timeline-item done fade-up" role="listitem">
+        <div class="tl-left"></div>
+        <div class="tl-center"><div class="tl-dot"></div><div class="tl-line-seg"></div></div>
+        <div class="tl-right">
+          <span class="tl-date">Q2 2025</span>
+          <div class="tl-title">Platform Launch</div>
+          <div class="tl-desc">rehabion.github.io launched. Formspree contact, WhatsApp, Calendly demo booking all live.</div>
+          <span class="tl-tag tl-tag-done">Completed</span>
+        </div>
+      </div>
+
+      <div class="timeline-item upcoming fade-up" role="listitem">
+        <div class="tl-left">
+          <span class="tl-date">Q3 2025</span>
+          <div class="tl-title">Clinical Trial — Phase 1</div>
+          <div class="tl-desc">IRB-approved pilot study with 20 stroke patients using RBN-001 at partner facility in Islamabad.</div>
+          <span class="tl-tag tl-tag-up">Upcoming</span>
+        </div>
+        <div class="tl-center"><div class="tl-dot"></div><div class="tl-line-seg"></div></div>
+        <div class="tl-right"></div>
+      </div>
+
+      <div class="timeline-item upcoming fade-up" role="listitem">
+        <div class="tl-left"></div>
+        <div class="tl-center"><div class="tl-dot"></div><div class="tl-line-seg"></div></div>
+        <div class="tl-right">
+          <span class="tl-date">Q4 2025</span>
+          <div class="tl-title">RehabLLM Beta</div>
+          <div class="tl-desc">AI physiotherapy assistant enters closed beta with select clinics. Urdu + English interface.</div>
+          <span class="tl-tag tl-tag-up">Upcoming</span>
+        </div>
+      </div>
+
+      <div class="timeline-item upcoming fade-up" role="listitem">
+        <div class="tl-left">
+          <span class="tl-date">2026</span>
+          <div class="tl-title">Pre-Seed Funding Round</div>
+          <div class="tl-desc">Target raise to fund clinical validation, BioSense hardware production, and first hospital contracts.</div>
+          <span class="tl-tag tl-tag-up">Target</span>
+        </div>
+        <div class="tl-center"><div class="tl-dot"></div></div>
+        <div class="tl-right"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
 <section id="team" aria-labelledby="team-title">
+  <div class="orb orb-team" aria-hidden="true"></div>
   <p class="section-eyebrow">The people</p>
   <h2 class="section-title" id="team-title">Built by <span>Biomedical Engineers</span></h2>
   <p class="section-sub">A multidisciplinary team of biomedical engineers and AI researchers — building Pakistan's first rehabilitation technology company.</p>
 
   <div class="team-grid">
     <div class="team-card featured fade-up">
-      <span class="team-badge">TECHNICAL LEAD</span>
+      <span class="team-badge-pill">Technical Lead</span>
       <div class="team-avatar">FA</div>
       <h3>Dr. Faisal Amin</h3>
       <span class="team-role">Technical Supervisor · Chief Science Officer</span>
       <span class="team-dept">Biomedical Engineer</span>
-      <p>Leading researcher in rehabilitation engineering and biomedical sciences. Drives the scientific integrity, clinical validation, and technical direction of every REHABION system. Supervisor of the REHABION research programme.</p>
+      <p>Leading researcher in rehabilitation engineering and biomedical sciences. Drives the scientific integrity, clinical validation, and technical direction of every REHABION system.</p>
       <div class="team-skills">
         <span class="skill-tag">Neurorehabilitation</span>
         <span class="skill-tag">Biomedical Eng.</span>
@@ -748,7 +1168,7 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:3rem 5%
       <h3>Muhammad Ramzan</h3>
       <span class="team-role">Founder · Lead Engineer</span>
       <span class="team-dept">Biomedical Engineer</span>
-      <p>Biomedical engineer and AI developer building Pakistan's first game-based rehabilitation platform and the RehabLLM. Passionate about making world-class recovery technology accessible from Rawalpindi to the world.</p>
+      <p>Biomedical engineer and AI developer building Pakistan's first game-based rehabilitation platform and the RehabLLM. Driven to make world-class recovery technology accessible from Islamabad to the world.</p>
       <div class="team-skills">
         <span class="skill-tag">Game Dev</span>
         <span class="skill-tag">AI / LLM</span>
@@ -761,19 +1181,88 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:3rem 5%
     <div class="team-card fade-up" style="border-style:dashed;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:1rem">
       <div class="team-avatar" style="border-style:dashed;border-color:var(--border2);color:var(--muted)">+</div>
       <div>
-        <h3>Join the Team</h3>
-        <p style="font-size:14px;color:var(--muted);margin-top:4px;line-height:1.65">We're looking for physiotherapists, biomedical engineers, and AI researchers who want to build something that genuinely matters for Pakistan's healthcare.</p>
+        <h3 style="margin-bottom:4px">Join the Team</h3>
+        <p style="font-size:13.5px;color:var(--muted);line-height:1.68">We're looking for physiotherapists, biomedical engineers, and AI researchers ready to build something that matters for Pakistan's healthcare.</p>
       </div>
       <a href="#contact" class="btn-outline" style="font-size:13px;padding:10px 18px">Apply now →</a>
     </div>
   </div>
 </section>
 
-<!-- ══════════════ RESOURCES ══════════════ -->
+<!-- INVESTORS -->
+<section id="investors" aria-labelledby="investors-title">
+  <div class="investors-inner">
+    <p class="section-eyebrow">Investment</p>
+    <h2 class="section-title" id="investors-title">Invest in <span>Pakistan's Healthcare Future</span></h2>
+    <p class="section-sub" style="max-width:700px">REHABION is seeking its first institutional investors to accelerate clinical validation, scale hardware production, and establish Pakistan's first hospital-connected rehabilitation technology network.</p>
+
+    <div class="investors-hero fade-up">
+      <div class="investors-hero-top">
+        <div>
+          <span class="stage-badge">⚡ Pre-Seed Stage</span>
+          <h3 style="margin-top:1rem">First-Mover Advantage in a $8.1B Market</h3>
+          <p>No other company in Pakistan, and almost none in South Asia, is building clinical rehabilitation technology at this depth. REHABION is a category-creator, not a market follower.</p>
+        </div>
+        <div class="raise-grid" style="min-width:260px">
+          <div class="raise-item">
+            <span class="raise-val">$0</span>
+            <span class="raise-lbl">Competitors (Pakistan)</span>
+          </div>
+          <div class="raise-item">
+            <span class="raise-val">220M</span>
+            <span class="raise-lbl">Addressable market</span>
+          </div>
+          <div class="raise-item">
+            <span class="raise-val">2026</span>
+            <span class="raise-lbl">Target raise year</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="inv-perks">
+      <div class="inv-perk fade-up">
+        <div class="inv-perk-icon">🏆</div>
+        <div>
+          <h4>Category Creator</h4>
+          <p>First clinical rehab tech company in Pakistan — no competition for the foreseeable future in a 220M-person market.</p>
+        </div>
+      </div>
+      <div class="inv-perk fade-up">
+        <div class="inv-perk-icon">🔬</div>
+        <div>
+          <h4>Clinical Validation</h4>
+          <p>Supervised by Dr. Faisal Amin, IRB-approved research pipeline, peer-reviewed publication track.</p>
+        </div>
+      </div>
+      <div class="inv-perk fade-up">
+        <div class="inv-perk-icon">📈</div>
+        <div>
+          <h4>13.4% CAGR</h4>
+          <p>The global rehabilitation technology market grows at 13.4% annually and reaches $8.1B by 2033.</p>
+        </div>
+      </div>
+      <div class="inv-perk fade-up">
+        <div class="inv-perk-icon">🤝</div>
+        <div>
+          <h4>Hospital-Ready</h4>
+          <p>DRAP compliance pathway in progress. Products designed for direct hospital and clinic integration.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:2.5rem">
+      <a href="https://calendly.com/rehabion/demo" target="_blank" rel="noopener noreferrer" class="btn-primary" style="margin-right:.875rem">Schedule Investor Call →</a>
+      <a href="mailto:muhammadrmzn84@gmail.com?subject=Investment Inquiry — REHABION" class="btn-outline">Request Deck via Email →</a>
+    </div>
+  </div>
+</section>
+
+<!-- RESOURCES -->
 <section id="resources" aria-labelledby="resources-title">
   <p class="section-eyebrow">Knowledge store</p>
   <h2 class="section-title" id="resources-title">Rehab <span>Resources</span></h2>
-  <p class="section-sub">Clinical guides, research protocols, and developer tools — created by our biomedical engineering team and priced for accessibility.</p>
+  <p class="section-sub">Clinical guides, research protocols, and developer tools — created by our biomedical engineering team.</p>
 
   <div class="resources-grid">
     <div class="resource-card fade-up">
@@ -791,7 +1280,7 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:3rem 5%
     <div class="resource-card fade-up">
       <div class="resource-icon">🤖</div>
       <h4>RehabLLM Prompt Library</h4>
-      <p>100+ tested prompts for AI in physiotherapy practice — exercise prescription, SOAP notes, patient education, and outcome prediction workflows.</p>
+      <p>100+ tested prompts for AI in physiotherapy — exercise prescription, SOAP notes, patient education, and outcome prediction workflows.</p>
       <div class="resource-price"><span class="price-tag">$19</span><a href="https://rehabion.gumroad.com/l/rehabllm-prompts" target="_blank" rel="noopener noreferrer" class="resource-btn">Buy on Gumroad</a></div>
     </div>
     <div class="resource-card fade-up">
@@ -803,73 +1292,25 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:3rem 5%
   </div>
 </section>
 
-<!-- ══════════════ SPONSOR ══════════════ -->
-<section id="sponsor" aria-labelledby="sponsor-title">
-  <div class="sponsor-inner">
-    <p class="section-eyebrow">Partner with us</p>
-    <h2 class="section-title" id="sponsor-title">Sponsor <span>REHABION</span></h2>
-    <p class="section-sub">Put your rehab equipment, prosthetics, or health tech brand in front of therapists, researchers, and hospital decision-makers across Pakistan and South Asia.</p>
-
-    <div class="sponsor-tiers" role="list">
-      <div class="sponsor-tier fade-up" role="listitem">
-        <span class="tier-name">Bronze</span>
-        <div class="tier-price">$99 <span>/ month</span></div>
-        <ul class="tier-list">
-          <li>Logo on website footer</li>
-          <li>Mention in newsletter</li>
-          <li>Social media post</li>
-        </ul>
-      </div>
-      <div class="sponsor-tier highlighted fade-up" role="listitem">
-        <span class="tier-name">Silver</span>
-        <div class="tier-price">$299 <span>/ month</span></div>
-        <ul class="tier-list">
-          <li>Logo on all pages</li>
-          <li>Dedicated sponsor post</li>
-          <li>Banner in resources</li>
-          <li>Product review article</li>
-        </ul>
-      </div>
-      <div class="sponsor-tier fade-up" role="listitem">
-        <span class="tier-name">Gold</span>
-        <div class="tier-price">$599 <span>/ month</span></div>
-        <ul class="tier-list">
-          <li>All Silver benefits</li>
-          <li>Product in our demos</li>
-          <li>Co-branded research</li>
-          <li>Conference mentions</li>
-          <li>Hospital partner intros</li>
-        </ul>
-      </div>
-    </div>
-    <a href="#contact" class="btn-primary">Become a Sponsor →</a>
-  </div>
-</section>
-
-<!-- ══════════════ CONTACT ══════════════ -->
+<!-- CONTACT -->
 <section id="contact" aria-labelledby="contact-title">
   <div class="contact-grid">
     <div class="contact-info">
       <p class="section-eyebrow">Get in touch</p>
-      <h2 class="section-title" id="contact-title">Let's Build<br><span>Together</span></h2>
-      <p>Whether you're a hospital, therapist, researcher, or investor — we want to hear from you. REHABION takes on a limited number of custom projects each quarter.</p>
-
+      <h2 class="section-title" id="contact-title">Let's Build <span>Together</span></h2>
+      <p>Whether you're a hospital, physiotherapist, researcher, or investor — we want to hear from you. REHABION takes on a limited number of custom projects each quarter.</p>
       <div class="contact-items" role="list">
         <a href="mailto:muhammadrmzn84@gmail.com" class="contact-item" role="listitem">
-          <div class="contact-item-icon">✉</div>
-          muhammadrmzn84@gmail.com
+          <div class="contact-item-icon">✉</div>muhammadrmzn84@gmail.com
         </a>
         <a href="https://wa.me/923498228037?text=Hi%20REHABION%2C%20I%20found%20your%20website%20and%20would%20like%20to%20connect." target="_blank" rel="noopener noreferrer" class="contact-item" role="listitem">
-          <div class="contact-item-icon">💬</div>
-          WhatsApp us directly
+          <div class="contact-item-icon">💬</div>WhatsApp — +92 349 822 8037
         </a>
         <div class="contact-item" role="listitem">
-          <div class="contact-item-icon">📍</div>
-          Islamabad / Rawalpindi, Pakistan
+          <div class="contact-item-icon">📍</div>Islamabad / Rawalpindi, Pakistan
         </div>
         <div class="contact-item" role="listitem">
-          <div class="contact-item-icon">⏱</div>
-          We reply within 48 hours
+          <div class="contact-item-icon">⏱</div>We reply within 48 hours
         </div>
       </div>
     </div>
@@ -891,10 +1332,10 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:3rem 5%
         <label for="inquiry-type">I am a</label>
         <select id="inquiry-type" name="inquiry_type" required>
           <option value="" disabled selected>Select your role</option>
+          <option value="investor">Investor</option>
           <option value="hospital">Hospital / Clinic</option>
           <option value="therapist">Physiotherapist</option>
           <option value="researcher">Researcher / Academic</option>
-          <option value="investor">Investor</option>
           <option value="sponsor">Potential Sponsor</option>
           <option value="patient">Patient / Family</option>
           <option value="other">Other</option>
@@ -902,7 +1343,7 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:3rem 5%
       </div>
       <div class="form-group">
         <label for="message">Message</label>
-        <textarea id="message" name="message" placeholder="Tell us about your project, question, or how you'd like to collaborate..." required minlength="20" maxlength="2000"></textarea>
+        <textarea id="message" name="message" placeholder="Tell us about your project, investment interest, or how you'd like to collaborate..." required minlength="20" maxlength="2000"></textarea>
       </div>
       <button type="submit" class="form-submit" id="form-submit-btn">Send Message →</button>
       <p class="form-notice" id="form-status" role="status" aria-live="polite">🔒 Encrypted · We reply within 48 hours · No data sold</p>
@@ -910,93 +1351,85 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:3rem 5%
   </div>
 </section>
 
-<!-- ══════════════ CONNECT ══════════════ -->
-<section id="connect" aria-labelledby="connect-title">
+<!-- CONNECT -->
+<section id="connect" aria-labelledby="connect-title" style="background:var(--deep);border-top:1px solid var(--border)">
   <div class="connect-inner">
     <p class="section-eyebrow">Stay connected</p>
     <h2 class="section-title" id="connect-title">Connect with <span>REHABION</span></h2>
-    <p class="section-sub">Follow our journey building Pakistan's first rehabilitation technology company. Get updates on new projects, research publications, and clinical breakthroughs.</p>
+    <p class="section-sub" style="text-align:center;margin:0 auto 2.5rem">Follow our journey building Pakistan's first rehabilitation technology company.</p>
 
     <div class="connect-cards">
       <a href="https://wa.me/923498228037?text=Hi%20REHABION%2C%20I%20would%20like%20to%20connect." target="_blank" rel="noopener noreferrer" class="connect-card">
         <div class="connect-card-icon">💬</div>
         <span class="connect-card-label">WhatsApp</span>
-        <span class="connect-card-sub">Message us directly for quick queries and collaboration</span>
+        <span class="connect-card-sub">Message directly for quick queries</span>
         <span class="connect-card-tag">Most responsive</span>
       </a>
-
       <a href="mailto:muhammadrmzn84@gmail.com" class="connect-card">
         <div class="connect-card-icon">✉️</div>
         <span class="connect-card-label">Email</span>
-        <span class="connect-card-sub">muhammadrmzn84@gmail.com — for formal proposals and partnerships</span>
+        <span class="connect-card-sub">For formal proposals and partnerships</span>
         <span class="connect-card-tag">48hr reply</span>
       </a>
-
       <a href="https://calendly.com/rehabion/demo" target="_blank" rel="noopener noreferrer" class="connect-card">
         <div class="connect-card-icon">📅</div>
         <span class="connect-card-label">Book a Call</span>
-        <span class="connect-card-sub">Schedule a free 15-minute demo or discovery call instantly</span>
+        <span class="connect-card-sub">15-minute demo or investor call</span>
         <span class="connect-card-tag">Free · 15 min</span>
       </a>
-
       <a href="#contact" class="connect-card">
         <div class="connect-card-icon">🤝</div>
-        <span class="connect-card-label">Partner with Us</span>
-        <span class="connect-card-sub">Hospitals, researchers, and investors — fill out our contact form</span>
+        <span class="connect-card-label">Partner</span>
+        <span class="connect-card-sub">Hospitals, investors, researchers</span>
         <span class="connect-card-tag">B2B enquiries</span>
       </a>
     </div>
 
-    <!-- Newsletter -->
     <div class="newsletter-strip">
       <div>
         <h3>Get our research updates</h3>
-        <p>New clinical findings, project launches, and rehab tech insights — straight to your inbox. No spam.</p>
+        <p>New clinical findings, project launches, and rehab tech insights — no spam.</p>
       </div>
-      <div>
-        <form class="newsletter-form" id="newsletter-form" novalidate>
-          <div style="display:flex;flex-direction:column;gap:.5rem">
-            <div style="display:flex;gap:.75rem">
-              <input type="email" class="newsletter-input" id="nl-email" placeholder="your@email.com" required maxlength="254" autocomplete="email">
-              <button type="submit" class="newsletter-btn" id="nl-btn">Subscribe →</button>
-            </div>
-            <p class="newsletter-notice" id="nl-status">🔒 No spam. Unsubscribe any time.</p>
-          </div>
-        </form>
-      </div>
+      <form class="newsletter-form" id="newsletter-form" novalidate>
+        <div class="nl-row">
+          <input type="email" class="newsletter-input" id="nl-email" placeholder="your@email.com" required maxlength="254" autocomplete="email">
+          <button type="submit" class="newsletter-btn" id="nl-btn">Subscribe →</button>
+        </div>
+        <p class="newsletter-notice" id="nl-status">🔒 No spam. Unsubscribe any time.</p>
+      </form>
     </div>
   </div>
 </section>
 
-<!-- ══════════════ FOOTER ══════════════ -->
+<!-- FOOTER -->
 <footer role="contentinfo">
   <div class="footer-grid">
     <div class="footer-brand">
       <a href="#" class="nav-logo" style="text-decoration:none" aria-label="REHABION Home">
         <div class="logo-mark" aria-hidden="true">
-          <svg viewBox="0 0 26 14" fill="none"><polyline points="0,7 4,7 6,2 8,12 10.5,1 13,12 15,5 17,7 22,7 24,4 26,7" stroke="#4F8EF7" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg viewBox="0 0 24 13" fill="none"><polyline points="0,6.5 3.5,6.5 5.5,1.5 7.5,11.5 9.5,0.5 12,11.5 14,4.5 16,6.5 20,6.5 22,3.5 24,6.5" stroke="#4F8EF7" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <span class="logo-text">REHAB<span>ION</span></span>
       </a>
-      <p>Pakistan's first AI-powered rehabilitation technology company. Biomedical engineering solutions for game-based therapy, clinical AI, and biosensor wearables.</p>
+      <p>Pakistan's first AI-powered rehabilitation technology company — game-based therapy, clinical AI, and biosensor wearables, built by biomedical engineers.</p>
     </div>
     <div class="footer-col">
       <h4>Solutions</h4>
       <ul>
         <li><a href="#services">Game-Based Rehab</a></li>
         <li><a href="#services">AI Physio Tools</a></li>
-        <li><a href="#services">Biomedical Eng.</a></li>
+        <li><a href="#services">BioSense Wearables</a></li>
         <li><a href="#services">Hospital Systems</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>Company</h4>
       <ul>
-        <li><a href="#projects">Projects</a></li>
+        <li><a href="#market">Opportunity</a></li>
+        <li><a href="#milestones">Milestones</a></li>
         <li><a href="#team">Team</a></li>
+        <li><a href="#investors">Investors</a></li>
         <li><a href="#resources">Resources</a></li>
-        <li><a href="#sponsor">Partner</a></li>
-        <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -1019,189 +1452,174 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:3rem 5%
   </div>
 </footer>
 
-<!-- ══════════════ SCRIPTS ══════════════ -->
 <script>
-// ── Live ECG Animation ──
+/* ── ECG Canvas ── */
 (function(){
-  const canvas = document.getElementById('ecg-canvas');
-  if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let W, H, animId, offset = 0;
-  const SPEED = 1.8;
-  const COLOR = '#22D3EE';
+  const canvas=document.getElementById('ecg-canvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let W,H,animId,offset=0;
+  const SPEED=1.6,COLOR='#22D3EE';
 
   function resize(){
-    W = canvas.width  = canvas.parentElement.offsetWidth;
-    H = canvas.height = canvas.parentElement.offsetHeight;
+    W=canvas.width=canvas.parentElement.offsetWidth;
+    H=canvas.height=canvas.parentElement.offsetHeight;
   }
 
   function ecgY(t){
-    const p = 130;
-    const n = ((t % p) + p) % p / p;
-    if(n < .06) return 0;
-    if(n < .17){ const x=(n-.06)/.11; return Math.sin(x*Math.PI)*.13; }
-    if(n < .27) return 0;
-    if(n < .30){ const x=(n-.27)/.03; return -Math.sin(x*Math.PI)*.09; }
-    if(n < .38){ const x=(n-.30)/.08; return Math.sin(x*Math.PI); }
-    if(n < .44){ const x=(n-.38)/.06; return -Math.sin(x*Math.PI)*.18; }
-    if(n < .51) return 0;
-    if(n < .74){ const x=(n-.51)/.23; return Math.sin(x*Math.PI)*.27; }
+    const p=130,n=((t%p)+p)%p/p;
+    if(n<.06)return 0;
+    if(n<.17){const x=(n-.06)/.11;return Math.sin(x*Math.PI)*.14;}
+    if(n<.27)return 0;
+    if(n<.30){const x=(n-.27)/.03;return -Math.sin(x*Math.PI)*.1;}
+    if(n<.38){const x=(n-.30)/.08;return Math.sin(x*Math.PI);}
+    if(n<.44){const x=(n-.38)/.06;return -Math.sin(x*Math.PI)*.2;}
+    if(n<.51)return 0;
+    if(n<.74){const x=(n-.51)/.23;return Math.sin(x*Math.PI)*.3;}
     return 0;
   }
 
   function draw(){
     ctx.clearRect(0,0,W,H);
-    const mid = H/2, amp = H*.38;
-    const scanX = offset % W;
-    const clearW = 28;
+    const sideW=68,mid=H/2,amp=H*.4,pw=W-sideW,scanX=offset%pw;
+    const clearW=30;
 
-    // Ghost trace
+    /* ghost */
     ctx.beginPath();
-    for(let x=0;x<W;x++){
-      const y = mid - ecgY(x) * amp;
-      x===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
-    }
-    ctx.strokeStyle='rgba(34,211,238,.07)';
-    ctx.lineWidth=1;
-    ctx.stroke();
+    for(let x=0;x<pw;x++){const y=mid-ecgY(x)*amp;x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}
+    ctx.strokeStyle='rgba(34,211,238,.06)';ctx.lineWidth=1;ctx.stroke();
 
-    // Erase ahead of scan
-    ctx.fillStyle='#020910';
-    if(scanX+clearW < W){
-      ctx.fillRect(scanX,0,clearW,H);
-    } else {
-      ctx.fillRect(scanX,0,W-scanX,H);
-      ctx.fillRect(0,0,clearW-(W-scanX),H);
-    }
+    /* erase */
+    ctx.fillStyle='#010810';
+    if(scanX+clearW<pw){ctx.fillRect(scanX,0,clearW,H);}
+    else{ctx.fillRect(scanX,0,pw-scanX,H);ctx.fillRect(0,0,clearW-(pw-scanX),H);}
 
-    // Active ECG line
+    /* active line with glow */
     ctx.save();
-    ctx.shadowColor=COLOR; ctx.shadowBlur=10;
-    ctx.beginPath();
-    let started=false;
-    for(let x=0;x<W;x++){
-      const ahead=((x-scanX)+W)%W;
-      if(ahead<clearW) continue;
-      const ex=((x-scanX)+W)%W;
-      const y=mid-ecgY(ex)*amp;
-      if(!started){ctx.moveTo(x,y);started=true;}
-      else ctx.lineTo(x,y);
+    ctx.shadowColor=COLOR;ctx.shadowBlur=22;
+    ctx.beginPath();let started=false;
+    for(let x=0;x<pw;x++){
+      const ahead=((x-scanX)+pw)%pw;
+      if(ahead<clearW)continue;
+      const y=mid-ecgY(((x-scanX)+pw)%pw)*amp;
+      if(!started){ctx.moveTo(x,y);started=true;}else ctx.lineTo(x,y);
     }
-    ctx.strokeStyle=COLOR; ctx.lineWidth=1.8; ctx.stroke();
+    ctx.strokeStyle=COLOR;ctx.lineWidth=2;ctx.stroke();
     ctx.restore();
 
-    // Head dot
-    const headY = mid - ecgY(0)*amp;
-    ctx.save();
-    ctx.shadowColor=COLOR; ctx.shadowBlur=16;
-    ctx.beginPath(); ctx.arc(scanX,headY,3.5,0,Math.PI*2);
-    ctx.fillStyle='#fff'; ctx.fill();
-    ctx.restore();
+    /* head dot */
+    const hy=mid-ecgY(0)*amp;
+    ctx.save();ctx.shadowColor=COLOR;ctx.shadowBlur=28;
+    ctx.beginPath();ctx.arc(scanX,hy,4,0,Math.PI*2);
+    ctx.fillStyle='#fff';ctx.fill();ctx.restore();
 
     offset+=SPEED;
     animId=requestAnimationFrame(draw);
   }
 
-  // Fluctuating BPM display
+  /* Sidebar readouts */
   const bpmEl=document.getElementById('bpm-display');
+  const spo2El=document.getElementById('spo2-display');
+  const hrvEl=document.getElementById('hrv-display');
   setInterval(()=>{
-    const bpm=68+Math.floor(Math.random()*12);
-    if(bpmEl) bpmEl.textContent=bpm+' BPM';
-  },2200);
+    if(bpmEl)bpmEl.textContent=68+Math.floor(Math.random()*14);
+    if(spo2El)spo2El.textContent=96+Math.floor(Math.random()*4);
+    if(hrvEl)hrvEl.textContent=38+Math.floor(Math.random()*18);
+  },2400);
 
   if(!window.matchMedia('(prefers-reduced-motion:reduce)').matches){
-    resize(); draw();
+    resize();draw();
     window.addEventListener('resize',()=>{cancelAnimationFrame(animId);resize();offset=0;});
   }
 })();
 
-// ── Nav scroll ──
+/* ── Nav scroll ── */
 window.addEventListener('scroll',()=>{
   document.getElementById('main-nav').classList.toggle('scrolled',window.scrollY>60);
 },{passive:true});
 
-// ── Mobile nav ──
+/* ── Mobile nav ── */
 const hamburger=document.getElementById('hamburger');
 const mobileMenu=document.getElementById('mobile-menu');
 hamburger.addEventListener('click',()=>{
-  const isOpen=mobileMenu.classList.toggle('open');
-  hamburger.setAttribute('aria-expanded',isOpen);
+  const open=mobileMenu.classList.toggle('open');
+  hamburger.setAttribute('aria-expanded',open);
 });
-function closeMobileNav(){
-  mobileMenu.classList.remove('open');
-  hamburger.setAttribute('aria-expanded','false');
-}
+function closeMobileNav(){mobileMenu.classList.remove('open');hamburger.setAttribute('aria-expanded','false');}
 
-// ── Scroll fade-in ──
-const observer=new IntersectionObserver((entries)=>{
+/* ── Scroll fade-up ── */
+const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});
-},{threshold:0.1});
+},{threshold:0.08});
 document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
 
-// ── Newsletter form ──
+/* ── Animated counters ── */
+function animateCounter(el){
+  const target=parseFloat(el.dataset.target);
+  const prefix=el.dataset.prefix||'';
+  const suffix=el.dataset.suffix||'';
+  const isInt=el.dataset.integer==='1';
+  const duration=1600;
+  const start=performance.now();
+  function step(now){
+    const p=Math.min((now-start)/duration,1);
+    const ease=1-Math.pow(1-p,3);
+    const val=target*ease;
+    el.textContent=prefix+(isInt?Math.round(val):(Math.round(val*10)/10))+suffix;
+    if(p<1)requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+const counterObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){animateCounter(e.target);counterObs.unobserve(e.target);}
+  });
+},{threshold:0.5});
+document.querySelectorAll('.counter').forEach(el=>counterObs.observe(el));
+
+/* ── Newsletter ── */
 document.getElementById('newsletter-form').addEventListener('submit',function(e){
   e.preventDefault();
   const email=document.getElementById('nl-email').value.trim();
   const status=document.getElementById('nl-status');
   const btn=document.getElementById('nl-btn');
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){status.textContent='⚠ Please enter a valid email.';return;}
-  btn.disabled=true; btn.textContent='Subscribing…';
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){status.textContent='⚠ Enter a valid email.';return;}
+  btn.disabled=true;btn.textContent='Subscribing…';
   fetch('https://formspree.io/f/mzdlbqel',{
-    method:'POST',
-    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
     body:JSON.stringify({email,source:'newsletter'})
-  })
-  .then(r=>r.json())
-  .then(data=>{
-    if(data.ok){status.textContent='✅ Subscribed! Watch your inbox.';btn.textContent='Subscribed ✓';btn.style.background='var(--green)';}
-    else{status.textContent='⚠ Error — email us: muhammadrmzn84@gmail.com';btn.disabled=false;btn.textContent='Subscribe →';}
-  })
-  .catch(()=>{status.textContent='⚠ Network error — try again.';btn.disabled=false;btn.textContent='Subscribe →';});
+  }).then(r=>r.json()).then(d=>{
+    if(d.ok){status.textContent='✅ Subscribed! Watch your inbox.';btn.textContent='Subscribed ✓';btn.style.background='var(--green)';}
+    else{status.textContent='⚠ Error — email: muhammadrmzn84@gmail.com';btn.disabled=false;btn.textContent='Subscribe →';}
+  }).catch(()=>{status.textContent='⚠ Network error.';btn.disabled=false;btn.textContent='Subscribe →';});
 });
 
-// ── Contact form ──
+/* ── Contact form ── */
 document.getElementById('contact-form').addEventListener('submit',function(e){
   e.preventDefault();
-  if(this.querySelector('[name="website"]').value) return;
-
+  if(this.querySelector('[name="website"]').value)return;
   const name=this.name.value.trim();
   const email=this.email.value.trim();
   const type=this.inquiry_type.value;
   const message=this.message.value.trim();
   const status=document.getElementById('form-status');
   const btn=document.getElementById('form-submit-btn');
-
   if(!name||name.length<2){status.textContent='⚠ Please enter your name.';return;}
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){status.textContent='⚠ Please enter a valid email.';return;}
   if(!type){status.textContent='⚠ Please select your role.';return;}
-  if(message.length<20){status.textContent='⚠ Message too short — tell us a bit more.';return;}
-
+  if(message.length<20){status.textContent='⚠ Message too short — please add more detail.';return;}
   const safe=s=>s.replace(/[<>"'&]/g,c=>({'<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#x27;','&':'&amp;'}[c]));
-
-  btn.disabled=true; btn.textContent='Sending…';
-
-  const FORMSPREE_ID='mzdlbqel';
-  fetch('https://formspree.io/f/'+FORMSPREE_ID,{
-    method:'POST',
-    headers:{'Content-Type':'application/json','Accept':'application/json'},
+  btn.disabled=true;btn.textContent='Sending…';
+  fetch('https://formspree.io/f/mzdlbqel',{
+    method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
     body:JSON.stringify({name:safe(name),email:safe(email),inquiry_type:type,message:safe(message)})
-  })
-  .then(r=>r.json())
-  .then(data=>{
-    if(data.ok){
+  }).then(r=>r.json()).then(d=>{
+    if(d.ok){
       status.textContent="✅ Message received! We'll reply within 48 hours.";
-      btn.textContent='Sent ✓'; btn.style.background='var(--green)';
-      this.reset();
+      btn.textContent='Sent ✓';btn.style.background='var(--green)';this.reset();
       setTimeout(()=>{btn.disabled=false;btn.textContent='Send Message →';btn.style.background='';status.textContent='🔒 Encrypted · We reply within 48 hours · No data sold';},60000);
-    } else {
-      status.textContent='⚠ Could not send. Email: muhammadrmzn84@gmail.com';
-      btn.disabled=false; btn.textContent='Send Message →';
-    }
-  })
-  .catch(()=>{
-    status.textContent='⚠ Network error. Email: muhammadrmzn84@gmail.com';
-    btn.disabled=false; btn.textContent='Send Message →';
-  });
+    }else{status.textContent='⚠ Error — email: muhammadrmzn84@gmail.com';btn.disabled=false;btn.textContent='Send Message →';}
+  }).catch(()=>{status.textContent='⚠ Network error. Email: muhammadrmzn84@gmail.com';btn.disabled=false;btn.textContent='Send Message →';});
 });
 </script>
 </body>
