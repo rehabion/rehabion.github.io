@@ -3,1237 +3,470 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-<!-- SEO -->
-<title>REHABION — AI-Powered Rehabilitation Technology</title>
+<title>REHABION — AI-Powered Rehabilitation Technology | Pakistan</title>
 <meta name="description" content="REHABION builds game-based rehabilitation systems, AI physiotherapy tools, and biomedical engineering solutions for Pakistan and the world.">
-<meta name="keywords" content="rehabilitation technology, AI physiotherapy, game-based rehab, biomedical engineering, Pakistan, stroke rehab, RehabLLM">
+<meta name="keywords" content="rehabilitation technology, AI physiotherapy, game-based rehab, biomedical engineering, Pakistan, Dr Faisal Amin, Muhammad Ramzan">
 <meta name="author" content="REHABION">
 <meta name="robots" content="index, follow">
-
-<!-- Open Graph -->
 <meta property="og:title" content="REHABION — AI-Powered Rehabilitation Technology">
-<meta property="og:description" content="Transforming recovery through intelligent game-based rehabilitation, AI, and biomedical engineering.">
+<meta property="og:description" content="Transforming recovery through intelligent game-based rehabilitation, AI, and biomedical engineering from Pakistan.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://03747372829292.github.io">
-<meta property="og:image" content="https://03747372829292.github.io/images/og-cover.png">
-
-<!-- Twitter Card -->
+<meta property="og:url" content="https://rehabion.github.io">
+<meta property="og:image" content="https://rehabion.github.io/images/og-cover.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="REHABION">
+<meta name="twitter:title" content="REHABION — AI Rehabilitation Technology">
 <meta name="twitter:description" content="AI-Powered Rehabilitation Technology from Pakistan to the World">
-
-<!-- Security Headers via meta (real headers set server-side) -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formspree.io;">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
-
-<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-
-<!-- Google AdSense (activate after approval) -->
-<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
-
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-/* =============================================
-   REHABION — Design System
-   Palette: Deep space + electric teal + signal white
-   Signature: Animated neural grid background
-   Type: Space Grotesk (display) + Space Mono (data/labels)
-============================================= */
-
+/* ============================================================
+   REHABION — Clinical Monitor Design System v2
+   Palette: Deep navy · Electric blue · Clinical white
+   Signature: Live scrolling ECG hero panel
+   Font: Plus Jakarta Sans + Space Mono
+============================================================ */
 :root {
-  --black:    #080C10;
-  --deep:     #0D1117;
-  --surface:  #141B24;
-  --raised:   #1C2636;
-  --border:   #243040;
-  --teal:     #00D4B8;
-  --teal-dim: #00A896;
-  --teal-glow:#00D4B840;
-  --white:    #F0F4F8;
-  --muted:    #7A8FA6;
-  --danger:   #FF4757;
-  --amber:    #FFA502;
-  --font-head: 'Space Grotesk', sans-serif;
+  --void:   #030911;
+  --deep:   #060F20;
+  --panel:  #0B1B33;
+  --raised: #0F2244;
+  --border: #18355A;
+  --border2:#244870;
+
+  --blue:      #4F8EF7;
+  --blue-dim:  #2563EB;
+  --blue-bright:#7AABFF;
+  --blue-glow: rgba(79,142,247,0.12);
+  --blue-glow2:rgba(79,142,247,0.22);
+
+  --cyan:      #22D3EE;
+  --cyan-glow: rgba(34,211,238,0.12);
+
+  --white:  #EEF5FF;
+  --muted:  #627E9E;
+  --dim:    #1E3655;
+
+  --green:  #10B981;
+  --amber:  #F59E0B;
+  --red:    #F43F5E;
+
+  --font-head: 'Plus Jakarta Sans', sans-serif;
   --font-mono: 'Space Mono', monospace;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-html { scroll-behavior: smooth; font-size: 16px; }
-
-body {
-  background: var(--black);
-  color: var(--white);
-  font-family: var(--font-head);
-  line-height: 1.6;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* ── Scrollbar ── */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--deep); }
-::-webkit-scrollbar-thumb { background: var(--teal-dim); border-radius: 2px; }
-
-/* ── Selection ── */
-::selection { background: var(--teal-glow); color: var(--teal); }
-
-/* ── Focus visible ── */
-:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
-
-/* =============================================
-   NEURAL GRID CANVAS — signature element
-============================================= */
-#neural-canvas {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.35;
-}
-
-/* =============================================
-   NAVIGATION
-============================================= */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  padding: 0 5%;
-  height: 68px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: rgba(8, 12, 16, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-  transition: all 0.3s;
-}
-
-nav.scrolled { border-bottom-color: var(--teal-dim); }
-
-.nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
-
-.logo-icon {
-  width: 36px; height: 36px;
-  border: 1.5px solid var(--teal);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.logo-icon::before {
-  content: '';
-  position: absolute;
-  width: 18px; height: 18px;
-  border: 1.5px solid var(--teal);
-  border-radius: 50%;
-  animation: pulse-ring 2s ease-in-out infinite;
-}
-
-.logo-icon::after {
-  content: '';
-  width: 6px; height: 6px;
-  background: var(--teal);
-  border-radius: 50%;
-  position: relative;
-  z-index: 1;
-  box-shadow: 0 0 8px var(--teal);
-}
-
-@keyframes pulse-ring {
-  0%, 100% { transform: scale(0.6); opacity: 1; }
-  50% { transform: scale(1.1); opacity: 0.3; }
-}
-
-.logo-text {
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--white);
-}
-
-.logo-text span { color: var(--teal); }
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  list-style: none;
-}
-
-.nav-links a {
-  color: var(--muted);
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  transition: color 0.2s;
-  position: relative;
-}
-
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px; left: 0;
-  width: 0; height: 1px;
-  background: var(--teal);
-  transition: width 0.2s;
-}
-
-.nav-links a:hover { color: var(--teal); }
-.nav-links a:hover::after { width: 100%; }
-
-.nav-cta {
-  background: transparent;
-  border: 1.5px solid var(--teal);
-  color: var(--teal) !important;
-  padding: 8px 18px;
-  border-radius: 6px;
-  font-size: 13px !important;
-  font-weight: 600 !important;
-  transition: all 0.2s !important;
-}
-
-.nav-cta:hover {
-  background: var(--teal) !important;
-  color: var(--black) !important;
-}
-
-.nav-cta::after { display: none !important; }
-
-.hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 4px;
-}
-
-.hamburger span {
-  display: block;
-  width: 22px; height: 2px;
-  background: var(--white);
-  border-radius: 2px;
-  transition: all 0.3s;
-}
-
-/* Mobile nav */
-.mobile-nav {
-  display: none;
-  position: fixed;
-  top: 68px; left: 0; right: 0;
-  background: rgba(13, 17, 23, 0.98);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-  padding: 1.5rem 5%;
-  z-index: 99;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.mobile-nav.open { display: flex; }
-
-.mobile-nav a {
-  color: var(--muted);
-  text-decoration: none;
-  font-size: 15px;
-  font-weight: 500;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--border);
-  transition: color 0.2s;
-}
-
-.mobile-nav a:hover { color: var(--teal); }
-
-/* =============================================
-   HERO
-============================================= */
-.hero {
-  position: relative;
-  z-index: 1;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  padding: 120px 5% 80px;
-}
-
-.hero-content {
-  max-width: 720px;
-}
-
-.hero-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--teal);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.hero-eyebrow::before {
-  content: '';
-  display: inline-block;
-  width: 28px; height: 1px;
-  background: var(--teal);
-}
-
-.hero h1 {
-  font-size: clamp(42px, 6vw, 78px);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  margin-bottom: 1.5rem;
-}
-
-.hero h1 .line-teal { color: var(--teal); }
-
-.hero h1 .line-dim {
-  color: var(--muted);
-  font-weight: 300;
-}
-
-.hero-sub {
-  font-size: 18px;
-  color: var(--muted);
-  line-height: 1.7;
-  max-width: 520px;
-  margin-bottom: 2.5rem;
-}
-
-.hero-sub strong {
-  color: var(--white);
-  font-weight: 500;
-}
-
-.hero-actions {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-bottom: 3.5rem;
-}
-
-.btn-primary {
-  background: var(--teal);
-  color: var(--black);
-  border: none;
-  padding: 14px 28px;
-  border-radius: 8px;
-  font-family: var(--font-head);
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.2s;
-  letter-spacing: 0.01em;
-}
-
-.btn-primary:hover {
-  background: var(--teal-dim);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px var(--teal-glow);
-}
-
-.btn-outline {
-  background: transparent;
-  color: var(--white);
-  border: 1.5px solid var(--border);
-  padding: 14px 28px;
-  border-radius: 8px;
-  font-family: var(--font-head);
-  font-size: 15px;
-  font-weight: 500;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.2s;
-}
-
-.btn-outline:hover {
-  border-color: var(--teal);
-  color: var(--teal);
-  transform: translateY(-2px);
-}
-
-.hero-stats {
-  display: flex;
-  gap: 2.5rem;
-  flex-wrap: wrap;
-}
-
-.hero-stat {
-  display: flex;
-  flex-direction: column;
-}
-
-.stat-num {
-  font-family: var(--font-mono);
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--teal);
-  line-height: 1;
-}
-
-.stat-label {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 4px;
-  letter-spacing: 0.04em;
-}
-
-.hero-visual {
-  position: absolute;
-  right: 5%;
-  top: 50%;
-  transform: translateY(-50%);
-  width: min(420px, 40vw);
-  display: none;
-}
-
-/* =============================================
-   SECTION GLOBALS
-============================================= */
-section {
-  position: relative;
-  z-index: 1;
-  padding: 100px 5%;
-}
-
-.section-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--teal);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.section-eyebrow::before {
-  content: '';
-  display: inline-block;
-  width: 20px; height: 1px;
-  background: var(--teal);
-}
-
-.section-title {
-  font-size: clamp(28px, 4vw, 44px);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  margin-bottom: 1rem;
-}
-
-.section-title span { color: var(--teal); }
-
-.section-sub {
-  font-size: 16px;
-  color: var(--muted);
-  max-width: 560px;
-  line-height: 1.7;
-  margin-bottom: 3rem;
-}
-
-.divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border), transparent);
-  margin: 0;
-}
-
-/* =============================================
-   WHAT WE BUILD — SERVICES
-============================================= */
-#services { background: var(--deep); }
-
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5px;
-  background: var(--border);
-  border: 1.5px solid var(--border);
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.service-card {
-  background: var(--deep);
-  padding: 2rem;
-  transition: background 0.25s;
-  cursor: default;
-}
-
-.service-card:hover { background: var(--surface); }
-
-.service-icon {
-  width: 44px; height: 44px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.25rem;
-  font-size: 20px;
-  transition: border-color 0.25s, box-shadow 0.25s;
-}
-
-.service-card:hover .service-icon {
-  border-color: var(--teal);
-  box-shadow: 0 0 12px var(--teal-glow);
-}
-
-.service-card h3 {
-  font-size: 17px;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  letter-spacing: -0.01em;
-}
-
-.service-card p {
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.65;
-  margin-bottom: 1rem;
-}
-
-.service-tag {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--teal);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  border: 1px solid var(--teal-glow);
-  padding: 3px 8px;
-  border-radius: 4px;
-  display: inline-block;
-}
-
-/* =============================================
-   AD UNIT SLOTS
-============================================= */
-.ad-banner {
-  background: var(--surface);
-  border: 1px dashed var(--border);
-  border-radius: 8px;
-  padding: 1.5rem;
-  text-align: center;
-  margin: 3rem 0;
-  min-height: 90px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.ad-banner .ad-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--border);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-/* Replace ad-banner content with real AdSense code once approved:
-   <ins class="adsbygoogle" style="display:block" ...></ins>  */
-
-/* =============================================
-   PROJECTS SECTION
-============================================= */
-#projects { background: var(--black); }
-
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1.5rem;
-}
-
-.project-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  overflow: hidden;
-  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
-}
-
-.project-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--teal);
-  box-shadow: 0 12px 40px rgba(0, 212, 184, 0.1);
-}
-
-.project-thumb {
-  height: 180px;
-  background: var(--raised);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 48px;
-  position: relative;
-  overflow: hidden;
-}
-
-.project-thumb::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 50%, var(--surface) 100%);
-}
-
-.project-body { padding: 1.5rem; }
-
-.project-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 0.75rem;
-}
-
-.project-tag {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--muted);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  border: 1px solid var(--border);
-  padding: 3px 7px;
-  border-radius: 4px;
-}
-
-.project-card h3 {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  letter-spacing: -0.01em;
-}
-
-.project-card p {
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.6;
-  margin-bottom: 1.25rem;
-}
-
-.project-link {
-  font-size: 13px;
-  color: var(--teal);
-  text-decoration: none;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: gap 0.2s;
-}
-
-.project-link:hover { gap: 10px; }
-
-.coming-soon-badge {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  background: var(--amber);
-  color: var(--black);
-  padding: 3px 8px;
-  border-radius: 4px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-}
-
-/* =============================================
-   TEAM / SUPERVISOR
-============================================= */
-#team { background: var(--deep); }
-
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
-}
-
-.team-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 2rem;
-  transition: border-color 0.25s;
-  position: relative;
-  overflow: hidden;
-}
-
-.team-card.featured {
-  border-color: var(--teal);
-  box-shadow: 0 0 30px rgba(0, 212, 184, 0.08);
-}
-
-.team-card.featured::before {
-  content: 'TECHNICAL LEAD';
-  position: absolute;
-  top: 16px; right: 16px;
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: var(--teal);
-  letter-spacing: 0.14em;
-  border: 1px solid var(--teal);
-  padding: 3px 8px;
-  border-radius: 4px;
-}
-
-.team-card:hover { border-color: var(--teal-dim); }
-
-.team-avatar {
-  width: 64px; height: 64px;
-  border-radius: 50%;
-  background: var(--raised);
-  border: 2px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  margin-bottom: 1.25rem;
-  font-weight: 700;
-  color: var(--teal);
-  font-family: var(--font-mono);
-}
-
-.team-card.featured .team-avatar {
-  border-color: var(--teal);
-  box-shadow: 0 0 16px var(--teal-glow);
-}
-
-.team-card h3 {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 3px;
-}
-
-.team-role {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--teal);
-  letter-spacing: 0.08em;
-  margin-bottom: 0.75rem;
-  display: block;
-}
-
-.team-card p {
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.6;
-  margin-bottom: 1rem;
-}
-
-.team-skills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.skill-tag {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--muted);
-  border: 1px solid var(--border);
-  padding: 3px 7px;
-  border-radius: 4px;
-  letter-spacing: 0.06em;
-}
-
-/* =============================================
-   SPONSORSHIP SECTION
-============================================= */
-#sponsor {
-  background: var(--black);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
-.sponsor-inner {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.sponsor-inner .section-eyebrow { justify-content: center; }
-.sponsor-inner .section-title { text-align: center; }
-.sponsor-inner .section-sub {
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.sponsor-tiers {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-bottom: 2.5rem;
-}
-
-.sponsor-tier {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.5rem;
-  text-align: left;
-  transition: border-color 0.2s;
-}
-
-.sponsor-tier:hover { border-color: var(--teal-dim); }
-
-.tier-name {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--teal);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
-  display: block;
-}
-
-.tier-price {
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  font-family: var(--font-mono);
-}
-
-.tier-price span {
-  font-size: 13px;
-  color: var(--muted);
-  font-weight: 400;
-}
-
-.tier-list {
-  list-style: none;
-  margin-top: 0.75rem;
-}
-
-.tier-list li {
-  font-size: 13px;
-  color: var(--muted);
-  padding: 3px 0;
-  padding-left: 16px;
-  position: relative;
-}
-
-.tier-list li::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
-  color: var(--teal);
-  font-size: 11px;
-}
-
-/* =============================================
-   RESOURCES / DOWNLOADS (revenue)
-============================================= */
-#resources { background: var(--deep); }
-
-.resources-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1rem;
-}
-
-.resource-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  transition: border-color 0.2s, transform 0.2s;
-}
-
-.resource-card:hover {
-  border-color: var(--teal-dim);
-  transform: translateY(-2px);
-}
-
-.resource-icon {
-  font-size: 28px;
-}
-
-.resource-card h4 {
-  font-size: 15px;
-  font-weight: 600;
-}
-
-.resource-card p {
-  font-size: 13px;
-  color: var(--muted);
-  line-height: 1.6;
-  flex: 1;
-}
-
-.resource-price {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: auto;
-}
-
-.price-tag {
-  font-family: var(--font-mono);
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--teal);
-}
-
-.price-tag.free { color: var(--amber); }
-
-.resource-btn {
-  font-family: var(--font-head);
-  font-size: 12px;
-  font-weight: 600;
-  padding: 7px 14px;
-  border-radius: 6px;
-  border: 1.5px solid var(--teal);
-  background: transparent;
-  color: var(--teal);
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.2s;
-}
-
-.resource-btn:hover {
-  background: var(--teal);
-  color: var(--black);
-}
-
-/* =============================================
-   CONTACT
-============================================= */
-#contact { background: var(--black); }
-
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: start;
-}
-
-.contact-info h3 {
-  font-size: 22px;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  letter-spacing: -0.01em;
-}
-
-.contact-info p {
-  font-size: 15px;
-  color: var(--muted);
-  line-height: 1.7;
-  margin-bottom: 2rem;
-}
-
-.contact-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.contact-link {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: var(--muted);
-  text-decoration: none;
-  font-size: 14px;
-  transition: color 0.2s;
-}
-
-.contact-link:hover { color: var(--teal); }
-
-.contact-link-icon {
-  width: 36px; height: 36px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  transition: border-color 0.2s;
-}
-
-.contact-link:hover .contact-link-icon { border-color: var(--teal); }
-
-.contact-form {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 2rem;
-}
-
-.form-group {
-  margin-bottom: 1.25rem;
-}
-
-.form-group label {
-  display: block;
-  font-size: 12px;
-  font-family: var(--font-mono);
-  color: var(--muted);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 6px;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-  width: 100%;
-  background: var(--raised);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 11px 14px;
-  color: var(--white);
-  font-family: var(--font-head);
-  font-size: 14px;
-  transition: border-color 0.2s;
-  outline: none;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  border-color: var(--teal);
-  box-shadow: 0 0 0 3px var(--teal-glow);
-}
-
-.form-group select option { background: var(--raised); color: var(--white); }
-
-.form-group textarea {
-  min-height: 110px;
-  resize: vertical;
-  line-height: 1.6;
-}
-
-/* Honeypot anti-spam */
-.hp-field { display: none !important; visibility: hidden !important; }
-
-.form-submit {
-  width: 100%;
-  background: var(--teal);
-  color: var(--black);
-  border: none;
-  padding: 14px;
-  border-radius: 8px;
-  font-family: var(--font-head);
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  letter-spacing: 0.02em;
-}
-
-.form-submit:hover {
-  background: var(--teal-dim);
-  transform: translateY(-1px);
-}
-
-.form-notice {
-  font-size: 11px;
-  color: var(--muted);
-  text-align: center;
-  margin-top: 0.75rem;
-  font-family: var(--font-mono);
-}
-
-/* =============================================
-   SECURITY BADGE SECTION
-============================================= */
-.security-bar {
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 1rem 5%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 2rem;
-  position: relative;
-  z-index: 1;
-}
-
-.sec-item {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--muted);
-  letter-spacing: 0.06em;
-}
-
-.sec-dot {
-  width: 6px; height: 6px;
-  background: var(--teal);
-  border-radius: 50%;
-  box-shadow: 0 0 6px var(--teal);
-  flex-shrink: 0;
-}
-
-/* =============================================
-   FOOTER
-============================================= */
-footer {
-  background: var(--deep);
-  border-top: 1px solid var(--border);
-  padding: 3rem 5% 2rem;
-  position: relative;
-  z-index: 1;
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 3rem;
-  margin-bottom: 3rem;
-}
-
-.footer-brand p {
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.7;
-  margin-top: 1rem;
-  max-width: 260px;
-}
-
-.footer-col h4 {
-  font-size: 12px;
-  font-family: var(--font-mono);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 1rem;
-}
-
-.footer-col ul { list-style: none; }
-
-.footer-col li { margin-bottom: 0.5rem; }
-
-.footer-col a {
-  color: var(--muted);
-  text-decoration: none;
-  font-size: 14px;
-  transition: color 0.2s;
-}
-
-.footer-col a:hover { color: var(--teal); }
-
-.footer-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border);
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.footer-bottom p {
-  font-size: 12px;
-  color: var(--muted);
-  font-family: var(--font-mono);
-}
-
-.footer-legal {
-  display: flex;
-  gap: 1.5rem;
-}
-
-.footer-legal a {
-  font-size: 12px;
-  color: var(--muted);
-  text-decoration: none;
-  font-family: var(--font-mono);
-  transition: color 0.2s;
-}
-
-.footer-legal a:hover { color: var(--teal); }
-
-/* =============================================
-   ANIMATIONS
-============================================= */
-.fade-up {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.fade-up.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.fade-up:nth-child(2) { transition-delay: 0.1s; }
-.fade-up:nth-child(3) { transition-delay: 0.2s; }
-.fade-up:nth-child(4) { transition-delay: 0.3s; }
-
-/* =============================================
-   RESPONSIVE
-============================================= */
-@media (max-width: 900px) {
-  .nav-links { display: none; }
-  .hamburger { display: flex; }
-  .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
-}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--void);color:var(--white);font-family:var(--font-head);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--deep)}
+::-webkit-scrollbar-thumb{background:var(--blue);border-radius:2px}
+::selection{background:var(--blue-glow2);color:var(--blue)}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
+
+/* Grid background */
+.grid-bg{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(24,53,90,0.18) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(24,53,90,0.18) 1px,transparent 1px);
+  background-size:44px 44px;
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,black 30%,transparent 100%);
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:0 5%;height:68px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(3,9,17,0.93);backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);transition:border-color .3s,box-shadow .3s;
+}
+nav.scrolled{border-bottom-color:var(--blue);box-shadow:0 1px 24px rgba(79,142,247,0.1)}
+
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+
+.logo-mark{
+  width:38px;height:38px;border:1.5px solid var(--blue);border-radius:10px;
+  background:var(--panel);display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.logo-mark svg{width:26px;height:14px;position:relative;z-index:1}
+
+.logo-text{font-size:19px;font-weight:800;letter-spacing:.06em;color:var(--white)}
+.logo-text span{color:var(--blue)}
+
+.nav-live{
+  display:flex;align-items:center;gap:5px;
+  font-family:var(--font-mono);font-size:8px;color:var(--green);
+  letter-spacing:.12em;border:1px solid rgba(16,185,129,.4);
+  padding:2px 7px;border-radius:3px;background:rgba(16,185,129,.08);
+}
+.live-dot{width:5px;height:5px;background:var(--green);border-radius:50%;animation:blink 1.4s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+.nav-links a{
+  color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;
+  letter-spacing:.02em;transition:color .2s;position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;
+  width:0;height:1.5px;background:var(--blue);transition:width .2s;
+}
+.nav-links a:hover{color:var(--blue)}
+.nav-links a:hover::after{width:100%}
+
+.nav-cta{
+  background:var(--blue)!important;color:var(--void)!important;
+  padding:8px 20px;border-radius:7px;font-size:13px!important;
+  font-weight:700!important;letter-spacing:.02em!important;transition:all .2s!important;
+}
+.nav-cta:hover{background:var(--cyan)!important;transform:translateY(-1px)!important}
+.nav-cta::after{display:none!important}
+
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;transition:all .3s}
+
+.mobile-nav{
+  display:none;position:fixed;top:68px;left:0;right:0;z-index:99;
+  background:rgba(6,15,32,.98);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);padding:1.5rem 5%;
+  flex-direction:column;gap:0;
+}
+.mobile-nav.open{display:flex}
+.mobile-nav a{
+  color:var(--muted);text-decoration:none;font-size:15px;font-weight:500;
+  padding:.75rem 0;border-bottom:1px solid var(--border);transition:color .2s;
+}
+.mobile-nav a:hover{color:var(--blue)}
+
+/* ── HERO ── */
+.hero{
+  position:relative;z-index:1;min-height:100vh;
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;padding:110px 5% 80px;gap:4rem;overflow:hidden;
+}
+
+.hero-eyebrow{
+  font-family:var(--font-mono);font-size:10px;color:var(--blue);
+  letter-spacing:.22em;text-transform:uppercase;margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:10px;
+}
+.hero-eyebrow::before{content:'';display:inline-block;width:22px;height:1px;background:var(--blue)}
+
+.hero h1{font-size:clamp(36px,4.2vw,66px);font-weight:800;line-height:1.05;letter-spacing:-.03em;margin-bottom:1.5rem}
+.hero h1 .accent{color:var(--blue)}
+.hero h1 .light{color:var(--muted);font-weight:300}
+
+.hero-sub{font-size:17px;color:var(--muted);line-height:1.78;max-width:470px;margin-bottom:2.5rem}
+.hero-sub strong{color:var(--white);font-weight:600}
+
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem}
+
+.btn-primary{
+  background:var(--blue);color:var(--void);border:none;
+  padding:13px 26px;border-radius:8px;font-family:var(--font-head);
+  font-size:15px;font-weight:700;cursor:pointer;text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;transition:all .2s;letter-spacing:.01em;
+}
+.btn-primary:hover{background:var(--cyan);transform:translateY(-2px);box-shadow:0 8px 28px rgba(79,142,247,.28)}
+
+.btn-outline{
+  background:transparent;color:var(--white);border:1.5px solid var(--border2);
+  padding:13px 26px;border-radius:8px;font-family:var(--font-head);
+  font-size:15px;font-weight:500;cursor:pointer;text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;transition:all .2s;
+}
+.btn-outline:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px)}
+
+/* Vitals strip */
+.vitals-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  background:var(--panel);border:1px solid var(--border);border-radius:10px;overflow:hidden;
+}
+.vital{padding:.9rem 1rem;border-right:1px solid var(--border)}
+.vital:last-child{border-right:none}
+.vital-label{font-family:var(--font-mono);font-size:8px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:4px}
+.vital-value{font-family:var(--font-mono);font-size:20px;font-weight:700;color:var(--blue);line-height:1}
+.vital-unit{font-size:11px;color:var(--muted);font-weight:400}
+
+/* ECG Monitor panel */
+.hero-monitor{
+  position:relative;background:var(--panel);border:1px solid var(--border);
+  border-radius:16px;overflow:hidden;aspect-ratio:16/11;
+  display:flex;flex-direction:column;
+  box-shadow:0 0 60px rgba(79,142,247,.08),0 0 120px rgba(34,211,238,.04);
+}
+.monitor-header{
+  padding:.65rem 1.25rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;background:var(--raised);
+}
+.monitor-title{font-family:var(--font-mono);font-size:9px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+.monitor-status{display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:9px;color:var(--green);letter-spacing:.1em}
+.monitor-body{
+  flex:1;position:relative;background:#020910;
+  background-image:
+    linear-gradient(rgba(24,53,90,.22) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(24,53,90,.22) 1px,transparent 1px),
+    linear-gradient(rgba(24,53,90,.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(24,53,90,.08) 1px,transparent 1px);
+  background-size:50px 50px,50px 50px,10px 10px,10px 10px;
+}
+#ecg-canvas{position:absolute;inset:0;width:100%;height:100%}
+.monitor-footer{
+  padding:.55rem 1.25rem;border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;background:var(--raised);
+}
+.monitor-readout{font-family:var(--font-mono);font-size:9px;color:var(--muted);letter-spacing:.06em}
+.bpm-display{font-family:var(--font-mono);font-size:20px;font-weight:700;color:var(--cyan);letter-spacing:.04em}
+
+/* ── SECTIONS ── */
+section{position:relative;z-index:1;padding:100px 5%}
 
-@media (max-width: 600px) {
-  section { padding: 70px 5%; }
-  .hero { padding: 100px 5% 60px; }
-  .hero-stats { gap: 1.5rem; }
-  .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-  .footer-bottom { flex-direction: column; align-items: flex-start; }
-  .security-bar { gap: 1rem; justify-content: flex-start; }
-}
+.section-eyebrow{
+  font-family:var(--font-mono);font-size:10px;color:var(--blue);
+  letter-spacing:.2em;text-transform:uppercase;margin-bottom:.75rem;
+  display:flex;align-items:center;gap:8px;
+}
+.section-eyebrow::before{content:'';display:inline-block;width:18px;height:1px;background:var(--blue)}
+
+.section-title{font-size:clamp(26px,3.5vw,42px);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:.75rem}
+.section-title span{color:var(--blue)}
+.section-sub{font-size:16px;color:var(--muted);max-width:540px;line-height:1.78;margin-bottom:3rem}
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-  #neural-canvas { display: none; }
+/* Trust bar */
+.trust-bar{
+  position:relative;z-index:1;background:var(--panel);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:1rem 5%;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:2rem;
+}
+.trust-item{display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:10px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.trust-dot{width:5px;height:5px;background:var(--blue);border-radius:50%;box-shadow:0 0 6px var(--blue);flex-shrink:0}
+
+/* ── SERVICES ── */
+#services{background:var(--deep)}
+
+.services-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
+  gap:1px;background:var(--border);border:1px solid var(--border);
+  border-radius:14px;overflow:hidden;
+}
+.service-card{background:var(--deep);padding:2rem;transition:background .25s;cursor:default;position:relative}
+.service-card:hover{background:var(--panel)}
+.service-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--blue),transparent);
+  opacity:0;transition:opacity .25s;
+}
+.service-card:hover::before{opacity:1}
+
+.service-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.25rem}
+
+.service-icon{
+  width:46px;height:46px;border:1px solid var(--border2);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;font-size:22px;
+  background:var(--panel);transition:border-color .25s,box-shadow .25s;
+}
+.service-card:hover .service-icon{border-color:var(--blue);box-shadow:0 0 14px var(--blue-glow2)}
+
+.badge{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:3px;display:flex;align-items:center;gap:4px}
+.badge-live{color:var(--green);background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.28)}
+.badge-dev {color:var(--amber);background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.28)}
+.badge-proto{color:var(--blue); background:rgba(79,142,247,.08); border:1px solid rgba(79,142,247,.28)}
+.badge-open{color:var(--cyan); background:rgba(34,211,238,.08); border:1px solid rgba(34,211,238,.28)}
+
+.service-card h3{font-size:17px;font-weight:700;margin-bottom:.5rem;letter-spacing:-.02em}
+.service-card p{font-size:14px;color:var(--muted);line-height:1.72}
+
+/* ── PROJECTS ── */
+#projects{background:var(--void)}
+
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
+
+.project-card{
+  background:var(--panel);border:1px solid var(--border);border-radius:14px;
+  overflow:hidden;transition:transform .25s,border-color .25s,box-shadow .25s;
+}
+.project-card:hover{transform:translateY(-4px);border-color:var(--blue);box-shadow:0 16px 48px var(--blue-glow)}
+
+.project-thumb{
+  height:172px;background:var(--raised);display:flex;align-items:center;
+  justify-content:center;font-size:52px;position:relative;overflow:hidden;
+}
+.project-thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,var(--panel) 100%)}
+
+.project-num{position:absolute;top:12px;left:14px;font-family:var(--font-mono);font-size:10px;color:var(--muted);letter-spacing:.1em;z-index:1}
+
+.project-body{padding:1.5rem}
+.project-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:.75rem}
+.project-tag{font-family:var(--font-mono);font-size:9px;color:var(--blue);letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--blue-glow2);padding:3px 7px;border-radius:3px;background:var(--blue-glow)}
+.project-card h3{font-size:18px;font-weight:700;margin-bottom:.5rem;letter-spacing:-.02em}
+.project-card p{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:1.25rem}
+.project-link{font-size:13px;color:var(--blue);text-decoration:none;font-weight:600;letter-spacing:.04em;display:inline-flex;align-items:center;gap:6px;transition:gap .2s,color .2s}
+.project-link:hover{gap:10px;color:var(--cyan)}
+
+/* ── TEAM ── */
+#team{background:var(--deep)}
+
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+
+.team-card{
+  background:var(--panel);border:1px solid var(--border);border-radius:14px;
+  padding:2rem;position:relative;overflow:hidden;
+  transition:border-color .25s,transform .25s;
+}
+.team-card:hover{border-color:var(--border2);transform:translateY(-3px)}
+.team-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--blue),transparent);opacity:0;transition:opacity .25s}
+.team-card:hover::after{opacity:1}
+
+.team-card.featured{border-color:var(--blue);box-shadow:0 0 32px var(--blue-glow)}
+.team-card.featured::after{opacity:1}
+
+.team-badge{position:absolute;top:14px;right:14px;font-family:var(--font-mono);font-size:9px;color:var(--blue);letter-spacing:.12em;border:1px solid var(--blue);padding:2px 7px;border-radius:3px;background:var(--blue-glow)}
+
+.team-avatar{
+  width:68px;height:68px;border-radius:12px;background:var(--raised);
+  border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;
+  font-size:20px;margin-bottom:1.25rem;font-weight:800;color:var(--blue);
+  font-family:var(--font-mono);letter-spacing:.04em;
+}
+.team-card.featured .team-avatar{border-color:var(--blue);box-shadow:0 0 20px var(--blue-glow2)}
+
+.team-card h3{font-size:18px;font-weight:700;margin-bottom:3px;letter-spacing:-.02em}
+.team-role{font-family:var(--font-mono);font-size:10px;color:var(--blue);letter-spacing:.08em;margin-bottom:4px;display:block}
+.team-dept{font-family:var(--font-mono);font-size:10px;color:var(--cyan);letter-spacing:.06em;margin-bottom:.75rem;display:block;opacity:.7}
+.team-card p{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:1.25rem}
+.team-skills{display:flex;flex-wrap:wrap;gap:5px}
+.skill-tag{font-family:var(--font-mono);font-size:9px;color:var(--muted);border:1px solid var(--border2);padding:3px 7px;border-radius:3px;letter-spacing:.06em;text-transform:uppercase}
+
+/* ── SPONSOR ── */
+#sponsor{background:var(--void);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.sponsor-inner{max-width:860px;margin:0 auto;text-align:center}
+.sponsor-inner .section-eyebrow{justify-content:center}
+.sponsor-inner .section-title{text-align:center}
+.sponsor-inner .section-sub{text-align:center;margin:0 auto 3rem}
+
+.sponsor-tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:2.5rem}
+
+.sponsor-tier{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:1.75rem;text-align:left;transition:border-color .2s,transform .2s}
+.sponsor-tier:hover{border-color:var(--border2);transform:translateY(-2px)}
+.sponsor-tier.highlighted{border-color:var(--blue);box-shadow:0 0 24px var(--blue-glow)}
+
+.tier-name{font-family:var(--font-mono);font-size:10px;color:var(--blue);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.5rem;display:block}
+.tier-price{font-size:26px;font-weight:800;margin-bottom:.5rem;font-family:var(--font-mono);letter-spacing:-.02em}
+.tier-price span{font-size:13px;color:var(--muted);font-weight:400}
+.tier-list{list-style:none;margin-top:1rem}
+.tier-list li{font-size:13px;color:var(--muted);padding:4px 0 4px 16px;position:relative}
+.tier-list li::before{content:'↗';position:absolute;left:0;color:var(--blue);font-size:10px}
+
+/* ── RESOURCES ── */
+#resources{background:var(--deep)}
+.resources-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+
+.resource-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:1.75rem;display:flex;flex-direction:column;gap:.75rem;transition:border-color .2s,transform .2s}
+.resource-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.resource-icon{font-size:28px}
+.resource-card h4{font-size:15px;font-weight:700;letter-spacing:-.01em}
+.resource-card p{font-size:13px;color:var(--muted);line-height:1.65;flex:1}
+.resource-price{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
+.price-tag{font-family:var(--font-mono);font-size:17px;font-weight:700;color:var(--blue)}
+.price-tag.free{color:var(--green)}
+.resource-btn{font-family:var(--font-head);font-size:12px;font-weight:700;padding:7px 14px;border-radius:6px;border:1.5px solid var(--blue);background:transparent;color:var(--blue);cursor:pointer;text-decoration:none;transition:all .2s}
+.resource-btn:hover{background:var(--blue);color:var(--void)}
+
+/* ── CONTACT ── */
+#contact{background:var(--void)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:start}
+.contact-info h3{font-size:22px;font-weight:700;margin-bottom:1rem;letter-spacing:-.02em}
+.contact-info p{font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:2.5rem}
+
+.contact-items{display:flex;flex-direction:column;gap:.75rem}
+.contact-item{display:flex;align-items:center;gap:12px;padding:.875rem 1rem;background:var(--panel);border:1px solid var(--border);border-radius:10px;color:var(--muted);text-decoration:none;font-size:14px;transition:border-color .2s,color .2s}
+.contact-item:hover{border-color:var(--blue);color:var(--blue)}
+.contact-item-icon{width:34px;height:34px;border:1px solid var(--border2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;background:var(--raised)}
+
+.contact-form{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:2.25rem}
+.form-group{margin-bottom:1.25rem}
+.form-group label{display:block;font-size:11px;font-family:var(--font-mono);color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--raised);border:1px solid var(--border2);border-radius:7px;padding:11px 14px;color:var(--white);font-family:var(--font-head);font-size:14px;transition:border-color .2s,box-shadow .2s;outline:none}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-glow)}
+.form-group select option{background:var(--raised);color:var(--white)}
+.form-group textarea{min-height:110px;resize:vertical;line-height:1.6}
+.hp-field{display:none!important;visibility:hidden!important}
+.form-submit{width:100%;background:var(--blue);color:var(--void);border:none;padding:14px;border-radius:8px;font-family:var(--font-head);font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.02em}
+.form-submit:hover{background:var(--cyan);transform:translateY(-1px)}
+.form-notice{font-size:11px;color:var(--muted);text-align:center;margin-top:.75rem;font-family:var(--font-mono);letter-spacing:.04em}
+
+/* Ad slot */
+.ad-slot{background:var(--panel);border:1px dashed var(--border2);border-radius:8px;padding:1.25rem;text-align:center;margin:2.5rem 0;min-height:88px;display:flex;align-items:center;justify-content:center;position:relative;z-index:1}
+.ad-slot span{font-family:var(--font-mono);font-size:10px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase}
+
+/* ── FOOTER ── */
+footer{background:var(--deep);border-top:1px solid var(--border);padding:3rem 5% 2rem;position:relative;z-index:1}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.footer-brand p{font-size:14px;color:var(--muted);line-height:1.7;margin-top:1rem;max-width:260px}
+.footer-col h4{font-size:11px;font-family:var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:.5rem}
+.footer-col a{color:var(--muted);text-decoration:none;font-size:14px;transition:color .2s}
+.footer-col a:hover{color:var(--blue)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:2rem;border-top:1px solid var(--border);flex-wrap:wrap;gap:1rem}
+.footer-bottom p{font-size:12px;color:var(--muted);font-family:var(--font-mono);letter-spacing:.04em}
+.footer-legal{display:flex;gap:1.5rem}
+.footer-legal a{font-size:12px;color:var(--muted);text-decoration:none;font-family:var(--font-mono);transition:color .2s}
+.footer-legal a:hover{color:var(--blue)}
+
+/* ── ANIMATIONS ── */
+.fade-up{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.fade-up:nth-child(2){transition-delay:.08s}
+.fade-up:nth-child(3){transition-delay:.16s}
+.fade-up:nth-child(4){transition-delay:.24s}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .hero{grid-template-columns:1fr;padding-top:110px;gap:2.5rem}
+  .hero-monitor{display:none}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .contact-grid{grid-template-columns:1fr;gap:2.5rem}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:2rem}
+  .vitals-strip{grid-template-columns:repeat(2,1fr)}
+  .vital:nth-child(2){border-right:none}
+  .vital:nth-child(3){border-top:1px solid var(--border)}
+  .vital:nth-child(4){border-top:1px solid var(--border)}
+}
+@media(max-width:600px){
+  section{padding:70px 5%}
+  .hero{padding:100px 5% 60px}
+  .footer-grid{grid-template-columns:1fr;gap:1.5rem}
+  .footer-bottom{flex-direction:column;align-items:flex-start}
+  .trust-bar{gap:1rem;justify-content:flex-start}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  #ecg-canvas{display:none}
 }
 </style>
 </head>
 <body>
 
-<!-- Neural grid background canvas -->
-<canvas id="neural-canvas" aria-hidden="true"></canvas>
+<div class="grid-bg" aria-hidden="true"></div>
 
-<!-- ══════════════════ NAVIGATION ══════════════════ -->
+<!-- ══════════════ NAVIGATION ══════════════ -->
 <nav id="main-nav" role="navigation" aria-label="Main navigation">
   <a href="#" class="nav-logo" aria-label="REHABION Home">
-    <div class="logo-icon" aria-hidden="true"></div>
+    <div class="logo-mark" aria-hidden="true">
+      <svg viewBox="0 0 26 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polyline points="0,7 4,7 6,2 8,12 10.5,1 13,12 15,5 17,7 22,7 24,4 26,7" stroke="#4F8EF7" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
     <span class="logo-text">REHAB<span>ION</span></span>
+    <div class="nav-live"><span class="live-dot"></span>ACTIVE</div>
   </a>
 
   <ul class="nav-links" role="list">
@@ -1259,134 +492,142 @@ footer {
   <a href="#contact" onclick="closeMobileNav()">Contact</a>
 </nav>
 
-<!-- ══════════════════ HERO ══════════════════ -->
+<!-- ══════════════ HERO ══════════════ -->
 <header class="hero" role="banner">
   <div class="hero-content">
-    <p class="hero-eyebrow" aria-label="Company tagline">Pakistan's Rehabilitation Technology Pioneer</p>
+    <p class="hero-eyebrow">Pakistan's Rehabilitation Technology Pioneer</p>
 
     <h1>
       Rebuilding Lives<br>
-      <span class="line-teal">Through Intelligent</span><br>
-      <span class="line-dim">Rehabilitation</span>
+      <span class="accent">Through Intelligent</span><br>
+      <span class="light">Rehabilitation</span>
     </h1>
 
     <p class="hero-sub">
-      REHABION builds <strong>game-based rehab systems</strong>, AI physiotherapy tools, and biomedical engineering solutions — making world-class recovery accessible from <strong>Rawalpindi to the world.</strong>
+      REHABION engineers <strong>game-based therapy systems</strong>, AI clinical tools, and biomedical wearables — delivering world-class rehabilitation from <strong>Rawalpindi to the world.</strong>
     </p>
 
     <div class="hero-actions">
-      <a href="#services" class="btn-primary">
-        Explore Solutions ↓
-      </a>
-      <a href="#contact" class="btn-outline">
-        Work with Us →
-      </a>
+      <a href="#services" class="btn-primary">Explore Solutions ↓</a>
+      <a href="#contact" class="btn-outline">Work with Us →</a>
     </div>
 
-    <div class="hero-stats" role="list" aria-label="Company statistics">
-      <div class="hero-stat" role="listitem">
-        <span class="stat-num" id="stat-market">$8.1B</span>
-        <span class="stat-label">Market by 2033</span>
+    <div class="vitals-strip" role="list" aria-label="Company statistics">
+      <div class="vital" role="listitem">
+        <span class="vital-label">Market by 2033</span>
+        <span class="vital-value">$8.1<span class="vital-unit">B</span></span>
       </div>
-      <div class="hero-stat" role="listitem">
-        <span class="stat-num">0</span>
-        <span class="stat-label">Competitors in Pakistan</span>
+      <div class="vital" role="listitem">
+        <span class="vital-label">PK Competitors</span>
+        <span class="vital-value">0</span>
       </div>
-      <div class="hero-stat" role="listitem">
-        <span class="stat-num">13.4%</span>
-        <span class="stat-label">Global CAGR</span>
+      <div class="vital" role="listitem">
+        <span class="vital-label">Global CAGR</span>
+        <span class="vital-value">13.4<span class="vital-unit">%</span></span>
       </div>
-      <div class="hero-stat" role="listitem">
-        <span class="stat-num">1st</span>
-        <span class="stat-label">Rehab LLM in South Asia</span>
+      <div class="vital" role="listitem">
+        <span class="vital-label">South Asia Rank</span>
+        <span class="vital-value">1<span class="vital-unit">st</span></span>
       </div>
+    </div>
+  </div>
+
+  <!-- Live ECG Monitor Panel -->
+  <div class="hero-monitor" aria-hidden="true">
+    <div class="monitor-header">
+      <span class="monitor-title">REHABION · BioSignal Monitor v1.0</span>
+      <div class="monitor-status"><span class="live-dot"></span>RECORDING</div>
+    </div>
+    <div class="monitor-body">
+      <canvas id="ecg-canvas"></canvas>
+    </div>
+    <div class="monitor-footer">
+      <span class="monitor-readout">CH1: ECG-II &nbsp;·&nbsp; 25mm/s &nbsp;·&nbsp; 10mm/mV</span>
+      <span class="bpm-display" id="bpm-display">72 BPM</span>
     </div>
   </div>
 </header>
 
-<div class="divider"></div>
-
-<!-- Security trust bar -->
-<div class="security-bar" role="complementary" aria-label="Security features">
-  <div class="sec-item"><div class="sec-dot" aria-hidden="true"></div>HTTPS Encrypted</div>
-  <div class="sec-item"><div class="sec-dot" aria-hidden="true"></div>GDPR Compliant</div>
-  <div class="sec-item"><div class="sec-dot" aria-hidden="true"></div>No Patient Data Stored</div>
-  <div class="sec-item"><div class="sec-dot" aria-hidden="true"></div>IRB-Approved Research</div>
-  <div class="sec-item"><div class="sec-dot" aria-hidden="true"></div>ISO 27001 Aligned</div>
+<!-- Trust bar -->
+<div class="trust-bar" role="complementary">
+  <div class="trust-item"><div class="trust-dot"></div>HTTPS Encrypted</div>
+  <div class="trust-item"><div class="trust-dot"></div>GDPR Compliant</div>
+  <div class="trust-item"><div class="trust-dot"></div>No Patient Data Stored</div>
+  <div class="trust-item"><div class="trust-dot"></div>IRB-Approved Research</div>
+  <div class="trust-item"><div class="trust-dot"></div>ISO 27001 Aligned</div>
 </div>
 
-<div class="divider"></div>
-
-<!-- ══════════════════ SERVICES ══════════════════ -->
+<!-- ══════════════ SERVICES ══════════════ -->
 <section id="services" aria-labelledby="services-title">
   <p class="section-eyebrow">What we build</p>
   <h2 class="section-title" id="services-title">Rehabilitation Solutions<br><span>On Demand</span></h2>
-  <p class="section-sub">From a custom game therapy system to a full clinical AI stack — we build what your patients and therapists actually need.</p>
+  <p class="section-sub">From a custom game therapy system to a full clinical AI stack — engineered for therapists, hospitals, and researchers across Pakistan and beyond.</p>
 
   <div class="services-grid" role="list">
     <div class="service-card fade-up" role="listitem">
-      <div class="service-icon" aria-hidden="true">🎮</div>
+      <div class="service-header">
+        <div class="service-icon">🎮</div>
+        <span class="badge badge-live"><span class="live-dot"></span>Live</span>
+      </div>
       <h3>Game-Based Rehab Systems</h3>
-      <p>Custom therapeutic games where every mechanic maps to a clinical exercise. Stroke, ortho, neuro, paediatric — built to your clinical protocol.</p>
-      <span class="service-tag">Available Now</span>
+      <p>Custom therapeutic games where every mechanic maps to a clinical exercise. Stroke, ortho, neuro, paediatric — built to your protocol with real-time biomechanical tracking.</p>
     </div>
     <div class="service-card fade-up" role="listitem">
-      <div class="service-icon" aria-hidden="true">🤖</div>
+      <div class="service-header">
+        <div class="service-icon">🤖</div>
+        <span class="badge badge-dev">In Development</span>
+      </div>
       <h3>AI Physiotherapy Tools</h3>
-      <p>RehabLLM-powered clinical assistants, automated progress notes, AI exercise prescription, and patient-facing chatbots in Urdu and English.</p>
-      <span class="service-tag">In Development</span>
+      <p>RehabLLM-powered clinical assistants, automated SOAP notes, AI exercise prescription, and patient chatbots in Urdu and English for the Pakistani healthcare context.</p>
     </div>
     <div class="service-card fade-up" role="listitem">
-      <div class="service-icon" aria-hidden="true">🔬</div>
+      <div class="service-header">
+        <div class="service-icon">🔬</div>
+        <span class="badge badge-proto">Prototype</span>
+      </div>
       <h3>Biomedical Engineering</h3>
-      <p>Custom EMG, IMU, and wearable sensor prototypes. Low-cost hardware designed to work with our software platform and standard clinical equipment.</p>
-      <span class="service-tag">Prototype Stage</span>
+      <p>Custom EMG, IMU, and wearable sensor prototypes under our BioSense platform. Clinical-grade data quality at Pakistan-accessible pricing.</p>
     </div>
     <div class="service-card fade-up" role="listitem">
-      <div class="service-icon" aria-hidden="true">📊</div>
-      <h3>Therapist Dashboard</h3>
-      <p>Real-time biomechanics analytics, ROM tracking, recovery prediction, and session management. Replace paper notes with clinical intelligence.</p>
-      <span class="service-tag">Available Now</span>
+      <div class="service-header">
+        <div class="service-icon">📊</div>
+        <span class="badge badge-live"><span class="live-dot"></span>Live</span>
+      </div>
+      <h3>TherapistOS Dashboard</h3>
+      <p>Real-time ROM tracking, biomechanics analytics, recovery prediction, and session management. Replace paper notes with clinical-grade intelligence.</p>
     </div>
     <div class="service-card fade-up" role="listitem">
-      <div class="service-icon" aria-hidden="true">🏥</div>
+      <div class="service-header">
+        <div class="service-icon">🏥</div>
+        <span class="badge badge-live"><span class="live-dot"></span>Live</span>
+      </div>
       <h3>Hospital Integration</h3>
-      <p>Plug into existing EHR systems, PIMS networks, or standalone clinic setups. We handle DRAP compliance and clinical validation for Pakistani facilities.</p>
-      <span class="service-tag">Available Now</span>
+      <p>Plug into existing EHR systems, PIMS networks, or standalone clinic setups. Full DRAP compliance pathway and clinical validation for Pakistani healthcare facilities.</p>
     </div>
     <div class="service-card fade-up" role="listitem">
-      <div class="service-icon" aria-hidden="true">🎓</div>
+      <div class="service-header">
+        <div class="service-icon">🎓</div>
+        <span class="badge badge-open">Open</span>
+      </div>
       <h3>Research Collaboration</h3>
-      <p>Partner with us on IRB-approved rehab studies. We provide data infrastructure, game-based measurement tools, and co-authorship on publications.</p>
-      <span class="service-tag">Open Now</span>
+      <p>IRB-approved rehabilitation studies, game-based measurement tools, and co-authorship on peer-reviewed publications with the REHABION biomedical engineering team.</p>
     </div>
   </div>
 </section>
 
-<!-- AdSense slot 1 — Leaderboard after services -->
-<div style="padding: 0 5%; position: relative; z-index: 1;">
-  <div class="ad-banner" aria-label="Advertisement">
-    <span class="ad-label">Advertisement</span>
-    <!-- Replace with AdSense code:
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXX" data-ad-slot="YYYYY" data-ad-format="auto" data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    -->
-    <span style="color: var(--border); font-size: 13px;">AdSense leaderboard — activate after account approval</span>
-  </div>
+<div style="padding:0 5%;position:relative;z-index:1">
+  <div class="ad-slot"><span>Advertisement · AdSense slot — activate after account approval</span></div>
 </div>
 
-<div class="divider"></div>
-
-<!-- ══════════════════ PROJECTS ══════════════════ -->
+<!-- ══════════════ PROJECTS ══════════════ -->
 <section id="projects" aria-labelledby="projects-title">
   <p class="section-eyebrow">Our work</p>
   <h2 class="section-title" id="projects-title">Recent <span>Projects</span></h2>
-  <p class="section-sub">Built from scratch by the REHABION team. Real clinical problems, real engineering solutions. More added as they complete.</p>
+  <p class="section-sub">Built by the REHABION biomedical engineering team. Real clinical problems, real engineering solutions.</p>
 
   <div class="projects-grid">
-    <!-- Project cards — you will fill these with your real projects -->
     <article class="project-card fade-up">
-      <div class="project-thumb">🎮</div>
+      <div class="project-thumb">🎮<span class="project-num">RBN-001</span></div>
       <div class="project-body">
         <div class="project-tags">
           <span class="project-tag">Unity</span>
@@ -1394,13 +635,13 @@ footer {
           <span class="project-tag">Motion Capture</span>
         </div>
         <h3>Upper Limb Stroke Game</h3>
-        <p>Therapeutic fishing game for stroke survivors. Maps shoulder abduction and elbow extension to in-game movement. Tracks ROM in real time.</p>
+        <p>Therapeutic fishing game for stroke survivors mapping shoulder abduction and elbow extension to gameplay. Tracks range of motion in real time with clinical-grade accuracy.</p>
         <a href="#contact" class="project-link">Request demo →</a>
       </div>
     </article>
 
     <article class="project-card fade-up">
-      <div class="project-thumb">📱</div>
+      <div class="project-thumb">📱<span class="project-num">RBN-002</span></div>
       <div class="project-body">
         <div class="project-tags">
           <span class="project-tag">Computer Vision</span>
@@ -1408,145 +649,122 @@ footer {
           <span class="project-tag">Smartphone</span>
         </div>
         <h3>CV-Based Gait Analyser</h3>
-        <p>Smartphone camera gait analysis for post-surgical knee patients. No wearable required. Provides step symmetry, cadence, and posture scores.</p>
+        <p>Smartphone camera gait analysis for post-surgical knee patients. No wearable required. Provides step symmetry, cadence, and posture scores with validated clinical output.</p>
         <a href="#contact" class="project-link">Learn more →</a>
       </div>
     </article>
 
     <article class="project-card fade-up">
-      <div class="project-thumb" style="font-size: 36px; flex-direction: column; gap: 4px;">
-        🔜
-        <span class="coming-soon-badge">Coming Soon</span>
+      <div class="project-thumb" style="font-size:36px;flex-direction:column;gap:6px">
+        ⚡<span class="project-num">RBN-003</span>
+        <span style="font-family:var(--font-mono);font-size:9px;background:var(--amber);color:#000;padding:3px 8px;border-radius:3px;font-weight:700;letter-spacing:.06em;z-index:1;position:relative">COMING SOON</span>
       </div>
       <div class="project-body">
         <div class="project-tags">
-          <span class="project-tag">Your Projects</span>
-          <span class="project-tag">Send List</span>
+          <span class="project-tag">Biomedical</span>
+          <span class="project-tag">In Progress</span>
         </div>
-        <h3>Your Projects Go Here</h3>
-        <p>Send us your full project list and we'll add every one with proper descriptions, screenshots, and demo links.</p>
-        <a href="#contact" class="project-link">Submit your project →</a>
+        <h3>More Projects Coming</h3>
+        <p>Contact us to collaborate, request a demo, or submit your own clinical challenge. We build what clinicians and patients actually need.</p>
+        <a href="#contact" class="project-link">Get in touch →</a>
       </div>
     </article>
   </div>
 </section>
 
-<div class="divider"></div>
-
-<!-- ══════════════════ TEAM ══════════════════ -->
+<!-- ══════════════ TEAM ══════════════ -->
 <section id="team" aria-labelledby="team-title">
   <p class="section-eyebrow">The people</p>
-  <h2 class="section-title" id="team-title">Built by <span>Experts</span></h2>
-  <p class="section-sub">A multidisciplinary team of biomedical engineers, physiotherapists, and AI researchers with one mission: world-class rehab technology from Pakistan.</p>
+  <h2 class="section-title" id="team-title">Built by <span>Biomedical Engineers</span></h2>
+  <p class="section-sub">A multidisciplinary team of biomedical engineers and AI researchers — building Pakistan's first rehabilitation technology company.</p>
 
   <div class="team-grid">
-    <!-- Supervisor — featured card -->
     <div class="team-card featured fade-up">
-      <div class="team-avatar">SV</div>
-      <h3>Prof. [Supervisor Name]</h3>
-      <span class="team-role">Technical Supervisor &amp; Chief Science Officer</span>
-      <p>Leading researcher in rehabilitation engineering with [X] years of clinical and academic expertise. Drives the scientific integrity and technical direction of every REHABION system.</p>
+      <span class="team-badge">TECHNICAL LEAD</span>
+      <div class="team-avatar">FA</div>
+      <h3>Dr. Faisal Amin</h3>
+      <span class="team-role">Technical Supervisor · Chief Science Officer</span>
+      <span class="team-dept">Biomedical Engineer</span>
+      <p>Leading researcher in rehabilitation engineering and biomedical sciences. Drives the scientific integrity, clinical validation, and technical direction of every REHABION system. Supervisor of the REHABION research programme.</p>
       <div class="team-skills">
         <span class="skill-tag">Neurorehabilitation</span>
         <span class="skill-tag">Biomedical Eng.</span>
         <span class="skill-tag">Clinical Research</span>
-        <span class="skill-tag">AI/ML</span>
+        <span class="skill-tag">Signal Processing</span>
+        <span class="skill-tag">AI / ML</span>
       </div>
     </div>
 
-    <!-- Founder -->
     <div class="team-card fade-up">
-      <div class="team-avatar">F</div>
-      <h3>[Your Name]</h3>
-      <span class="team-role">Founder &amp; Lead Engineer</span>
-      <p>Biomedical engineer and AI developer. Building Pakistan's first game-based rehabilitation platform and the RehabLLM. Driven by the belief that world-class rehab must reach every patient.</p>
+      <div class="team-avatar">MR</div>
+      <h3>Muhammad Ramzan</h3>
+      <span class="team-role">Founder · Lead Engineer</span>
+      <span class="team-dept">Biomedical Engineer</span>
+      <p>Biomedical engineer and AI developer building Pakistan's first game-based rehabilitation platform and the RehabLLM. Passionate about making world-class recovery technology accessible from Rawalpindi to the world.</p>
       <div class="team-skills">
         <span class="skill-tag">Game Dev</span>
         <span class="skill-tag">AI / LLM</span>
+        <span class="skill-tag">Biomedical Eng.</span>
         <span class="skill-tag">Hardware</span>
         <span class="skill-tag">Full-Stack</span>
       </div>
     </div>
 
-    <!-- Join card -->
-    <div class="team-card fade-up" style="border-style: dashed; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 1rem;">
-      <div class="team-avatar" style="border-style: dashed;">+</div>
+    <div class="team-card fade-up" style="border-style:dashed;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:1rem">
+      <div class="team-avatar" style="border-style:dashed;border-color:var(--border2);color:var(--muted)">+</div>
       <div>
-        <h3>Join the team</h3>
-        <p style="font-size: 14px; color: var(--muted); margin-top: 4px; line-height: 1.6;">We're looking for physiotherapists, biomedical engineers, and AI researchers who want to build something that matters.</p>
+        <h3>Join the Team</h3>
+        <p style="font-size:14px;color:var(--muted);margin-top:4px;line-height:1.65">We're looking for physiotherapists, biomedical engineers, and AI researchers who want to build something that genuinely matters for Pakistan's healthcare.</p>
       </div>
-      <a href="#contact" class="btn-outline" style="font-size: 13px; padding: 10px 18px;">Apply now →</a>
+      <a href="#contact" class="btn-outline" style="font-size:13px;padding:10px 18px">Apply now →</a>
     </div>
   </div>
 </section>
 
-<!-- AdSense slot 2 — Rectangle mid-page -->
-<div style="padding: 0 5%; position: relative; z-index: 1;">
-  <div class="ad-banner" aria-label="Advertisement">
-    <span class="ad-label">Advertisement</span>
-    <span style="color: var(--border); font-size: 13px;">AdSense rectangle — activate after account approval</span>
-  </div>
+<div style="padding:0 5%;position:relative;z-index:1">
+  <div class="ad-slot"><span>Advertisement · AdSense rectangle — activate after account approval</span></div>
 </div>
 
-<div class="divider"></div>
-
-<!-- ══════════════════ RESOURCES / DOWNLOADS ══════════════════ -->
+<!-- ══════════════ RESOURCES ══════════════ -->
 <section id="resources" aria-labelledby="resources-title">
   <p class="section-eyebrow">Knowledge store</p>
   <h2 class="section-title" id="resources-title">Rehab <span>Resources</span></h2>
-  <p class="section-sub">Clinical guides, exercise templates, research papers, and developer tools — created by our team and priced to be accessible.</p>
+  <p class="section-sub">Clinical guides, research protocols, and developer tools — created by our biomedical engineering team and priced for accessibility.</p>
 
   <div class="resources-grid">
     <div class="resource-card fade-up">
-      <div class="resource-icon" aria-hidden="true">📋</div>
+      <div class="resource-icon">📋</div>
       <h4>Stroke Rehab Exercise Protocol</h4>
-      <p>Evidence-based 12-week upper limb protocol for post-stroke patients. PDF with session plans, ROM targets, and outcome measurement sheets.</p>
-      <div class="resource-price">
-        <span class="price-tag free">FREE</span>
-        <a href="#contact" class="resource-btn">Download</a>
-      </div>
+      <p>Evidence-based 12-week upper limb protocol for post-stroke patients. Session plans, ROM targets, and validated outcome measurement sheets.</p>
+      <div class="resource-price"><span class="price-tag free">FREE</span><a href="#contact" class="resource-btn">Download</a></div>
     </div>
-
     <div class="resource-card fade-up">
-      <div class="resource-icon" aria-hidden="true">🎮</div>
+      <div class="resource-icon">🎮</div>
       <h4>Game-Based Rehab Design Guide</h4>
-      <p>How to design therapeutic games that map clinical exercises to game mechanics. For developers and physiotherapists working together.</p>
-      <div class="resource-price">
-        <span class="price-tag">$9</span>
-        <a href="#contact" class="resource-btn">Buy</a>
-      </div>
+      <p>How to design therapeutic games that map clinical exercises to game mechanics — for developers and physiotherapists building rehab technology together.</p>
+      <div class="resource-price"><span class="price-tag">$9</span><a href="#contact" class="resource-btn">Buy</a></div>
     </div>
-
     <div class="resource-card fade-up">
-      <div class="resource-icon" aria-hidden="true">🤖</div>
+      <div class="resource-icon">🤖</div>
       <h4>RehabLLM Prompt Library</h4>
-      <p>100+ tested prompts for using AI in physiotherapy practice — exercise prescription, progress notes, patient education, and outcome prediction.</p>
-      <div class="resource-price">
-        <span class="price-tag">$19</span>
-        <a href="#contact" class="resource-btn">Buy</a>
-      </div>
+      <p>100+ tested prompts for AI in physiotherapy practice — exercise prescription, SOAP notes, patient education, and outcome prediction workflows.</p>
+      <div class="resource-price"><span class="price-tag">$19</span><a href="#contact" class="resource-btn">Buy</a></div>
     </div>
-
     <div class="resource-card fade-up">
-      <div class="resource-icon" aria-hidden="true">📊</div>
+      <div class="resource-icon">📊</div>
       <h4>Pakistan Rehab Market Report</h4>
-      <p>First-ever analysis of Pakistan's rehabilitation technology landscape, gap analysis, and 5-year opportunity map. For investors and researchers.</p>
-      <div class="resource-price">
-        <span class="price-tag">$29</span>
-        <a href="#contact" class="resource-btn">Buy</a>
-      </div>
+      <p>First-ever analysis of Pakistan's rehabilitation technology landscape, competitive gap analysis, and 5-year opportunity map for investors and researchers.</p>
+      <div class="resource-price"><span class="price-tag">$29</span><a href="#contact" class="resource-btn">Buy</a></div>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
-
-<!-- ══════════════════ SPONSORSHIP ══════════════════ -->
+<!-- ══════════════ SPONSOR ══════════════ -->
 <section id="sponsor" aria-labelledby="sponsor-title">
   <div class="sponsor-inner">
     <p class="section-eyebrow">Partner with us</p>
     <h2 class="section-title" id="sponsor-title">Sponsor <span>REHABION</span></h2>
-    <p class="section-sub">Put your rehab equipment, prosthetics, or health tech brand in front of therapists, patients, researchers, and hospital decision-makers across Pakistan and South Asia.</p>
+    <p class="section-sub">Put your rehab equipment, prosthetics, or health tech brand in front of therapists, researchers, and hospital decision-makers across Pakistan and South Asia.</p>
 
     <div class="sponsor-tiers" role="list">
       <div class="sponsor-tier fade-up" role="listitem">
@@ -1558,8 +776,7 @@ footer {
           <li>Social media post</li>
         </ul>
       </div>
-
-      <div class="sponsor-tier fade-up" style="border-color: var(--teal);" role="listitem">
+      <div class="sponsor-tier highlighted fade-up" role="listitem">
         <span class="tier-name">Silver</span>
         <div class="tier-price">$299 <span>/ month</span></div>
         <ul class="tier-list">
@@ -1569,7 +786,6 @@ footer {
           <li>Product review article</li>
         </ul>
       </div>
-
       <div class="sponsor-tier fade-up" role="listitem">
         <span class="tier-name">Gold</span>
         <div class="tier-price">$599 <span>/ month</span></div>
@@ -1578,63 +794,51 @@ footer {
           <li>Product in our demos</li>
           <li>Co-branded research</li>
           <li>Conference mentions</li>
-          <li>Intro to hospital partners</li>
+          <li>Hospital partner intros</li>
         </ul>
       </div>
     </div>
-
     <a href="#contact" class="btn-primary">Become a Sponsor →</a>
   </div>
 </section>
 
-<div class="divider"></div>
-
-<!-- ══════════════════ CONTACT ══════════════════ -->
+<!-- ══════════════ CONTACT ══════════════ -->
 <section id="contact" aria-labelledby="contact-title">
   <div class="contact-grid">
     <div class="contact-info">
       <p class="section-eyebrow">Get in touch</p>
       <h2 class="section-title" id="contact-title">Let's Build<br><span>Together</span></h2>
-      <p>Whether you're a hospital, therapist, researcher, or investor — we want to hear from you. We take on a limited number of custom projects each quarter.</p>
+      <p>Whether you're a hospital, therapist, researcher, or investor — we want to hear from you. REHABION takes on a limited number of custom projects each quarter.</p>
 
-      <div class="contact-links" role="list">
-        <a href="mailto:hello@rehabion.com.pk" class="contact-link" role="listitem">
-          <div class="contact-link-icon" aria-hidden="true">✉️</div>
+      <div class="contact-items" role="list">
+        <a href="mailto:hello@rehabion.com.pk" class="contact-item" role="listitem">
+          <div class="contact-item-icon">✉</div>
           hello@rehabion.com.pk
         </a>
-        <a href="https://linkedin.com/company/rehabion" class="contact-link" target="_blank" rel="noopener noreferrer" role="listitem">
-          <div class="contact-link-icon" aria-hidden="true">in</div>
-          linkedin.com/company/rehabion
-        </a>
-        <a href="https://github.com/rehabion" class="contact-link" target="_blank" rel="noopener noreferrer" role="listitem">
-          <div class="contact-link-icon" aria-hidden="true">⌨</div>
-          github.com/rehabion
-        </a>
-        <div class="contact-link" role="listitem">
-          <div class="contact-link-icon" aria-hidden="true">📍</div>
+        <div class="contact-item" role="listitem">
+          <div class="contact-item-icon">📍</div>
           Rawalpindi, Punjab, Pakistan
+        </div>
+        <div class="contact-item" role="listitem">
+          <div class="contact-item-icon">⏱</div>
+          We reply within 48 hours
         </div>
       </div>
     </div>
 
-    <!-- Contact form with anti-spam -->
     <form class="contact-form" id="contact-form" novalidate aria-label="Contact form">
-      <!-- Honeypot field — bots fill this, humans don't see it -->
       <div class="hp-field" aria-hidden="true">
         <label for="website">Website</label>
         <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
       </div>
-
       <div class="form-group">
         <label for="name">Your name</label>
         <input type="text" id="name" name="name" placeholder="Dr. Sarah Ahmed" required autocomplete="name" maxlength="100">
       </div>
-
       <div class="form-group">
         <label for="email">Email address</label>
         <input type="email" id="email" name="email" placeholder="you@hospital.pk" required autocomplete="email" maxlength="254">
       </div>
-
       <div class="form-group">
         <label for="inquiry-type">I am a</label>
         <select id="inquiry-type" name="inquiry_type" required>
@@ -1648,34 +852,28 @@ footer {
           <option value="other">Other</option>
         </select>
       </div>
-
       <div class="form-group">
         <label for="message">Message</label>
-        <textarea id="message" name="message" placeholder="Tell us about your project, question, or how you'd like to work together..." required minlength="20" maxlength="2000"></textarea>
+        <textarea id="message" name="message" placeholder="Tell us about your project, question, or how you'd like to collaborate..." required minlength="20" maxlength="2000"></textarea>
       </div>
-
-      <button type="submit" class="form-submit" id="form-submit-btn">
-        Send Message →
-      </button>
-
-      <p class="form-notice" id="form-status" role="status" aria-live="polite">
-        🔒 Your data is encrypted and never sold. We reply within 48 hours.
-      </p>
+      <button type="submit" class="form-submit" id="form-submit-btn">Send Message →</button>
+      <p class="form-notice" id="form-status" role="status" aria-live="polite">🔒 Encrypted · We reply within 48 hours · No data sold</p>
     </form>
   </div>
 </section>
 
-<!-- ══════════════════ FOOTER ══════════════════ -->
+<!-- ══════════════ FOOTER ══════════════ -->
 <footer role="contentinfo">
   <div class="footer-grid">
     <div class="footer-brand">
-      <a href="#" class="nav-logo" style="text-decoration: none;" aria-label="REHABION Home">
-        <div class="logo-icon" aria-hidden="true"></div>
+      <a href="#" class="nav-logo" style="text-decoration:none" aria-label="REHABION Home">
+        <div class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 26 14" fill="none"><polyline points="0,7 4,7 6,2 8,12 10.5,1 13,12 15,5 17,7 22,7 24,4 26,7" stroke="#4F8EF7" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
         <span class="logo-text">REHAB<span>ION</span></span>
       </a>
-      <p>Pakistan's first AI-powered rehabilitation technology company. Building game-based rehab, biomedical engineering solutions, and the world's first rehab-specific LLM.</p>
+      <p>Pakistan's first AI-powered rehabilitation technology company. Biomedical engineering solutions for game-based therapy, clinical AI, and biosensor wearables.</p>
     </div>
-
     <div class="footer-col">
       <h4>Solutions</h4>
       <ul>
@@ -1685,7 +883,6 @@ footer {
         <li><a href="#services">Hospital Systems</a></li>
       </ul>
     </div>
-
     <div class="footer-col">
       <h4>Company</h4>
       <ul>
@@ -1696,7 +893,6 @@ footer {
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
-
     <div class="footer-col">
       <h4>Legal</h4>
       <ul>
@@ -1707,9 +903,8 @@ footer {
       </ul>
     </div>
   </div>
-
   <div class="footer-bottom">
-    <p>© 2025 REHABION. All rights reserved. Built in Rawalpindi, Pakistan 🇵🇰</p>
+    <p>© 2025 REHABION. All rights reserved. Engineered in Rawalpindi, Pakistan 🇵🇰</p>
     <div class="footer-legal">
       <a href="privacy.html">Privacy</a>
       <a href="terms.html">Terms</a>
@@ -1718,173 +913,169 @@ footer {
   </div>
 </footer>
 
-<!-- ══════════════════ SCRIPTS ══════════════════ -->
+<!-- ══════════════ SCRIPTS ══════════════ -->
 <script>
-// ── Neural grid canvas animation ──
-(function() {
-  const canvas = document.getElementById('neural-canvas');
+// ── Live ECG Animation ──
+(function(){
+  const canvas = document.getElementById('ecg-canvas');
+  if(!canvas) return;
   const ctx = canvas.getContext('2d');
-  let nodes = [], W, H, animId;
-  const NODE_COUNT = 55;
-  const MAX_DIST = 140;
-  const TEAL = '#00D4B8';
+  let W, H, animId, offset = 0;
+  const SPEED = 1.8;
+  const COLOR = '#22D3EE';
 
-  function resize() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
+  function resize(){
+    W = canvas.width  = canvas.parentElement.offsetWidth;
+    H = canvas.height = canvas.parentElement.offsetHeight;
   }
 
-  function initNodes() {
-    nodes = Array.from({length: NODE_COUNT}, () => ({
-      x: Math.random() * W,
-      y: Math.random() * H,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
-      r: Math.random() * 2 + 1
-    }));
+  function ecgY(t){
+    const p = 130;
+    const n = ((t % p) + p) % p / p;
+    if(n < .06) return 0;
+    if(n < .17){ const x=(n-.06)/.11; return Math.sin(x*Math.PI)*.13; }
+    if(n < .27) return 0;
+    if(n < .30){ const x=(n-.27)/.03; return -Math.sin(x*Math.PI)*.09; }
+    if(n < .38){ const x=(n-.30)/.08; return Math.sin(x*Math.PI); }
+    if(n < .44){ const x=(n-.38)/.06; return -Math.sin(x*Math.PI)*.18; }
+    if(n < .51) return 0;
+    if(n < .74){ const x=(n-.51)/.23; return Math.sin(x*Math.PI)*.27; }
+    return 0;
   }
 
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-    // Move nodes
-    nodes.forEach(n => {
-      n.x += n.vx; n.y += n.vy;
-      if (n.x < 0 || n.x > W) n.vx *= -1;
-      if (n.y < 0 || n.y > H) n.vy *= -1;
-    });
-    // Draw edges
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const dx = nodes[i].x - nodes[j].x;
-        const dy = nodes[i].y - nodes[j].y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist < MAX_DIST) {
-          ctx.beginPath();
-          ctx.moveTo(nodes[i].x, nodes[i].y);
-          ctx.lineTo(nodes[j].x, nodes[j].y);
-          ctx.strokeStyle = TEAL;
-          ctx.globalAlpha = (1 - dist / MAX_DIST) * 0.5;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
-      }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const mid = H/2, amp = H*.38;
+    const scanX = offset % W;
+    const clearW = 28;
+
+    // Ghost trace
+    ctx.beginPath();
+    for(let x=0;x<W;x++){
+      const y = mid - ecgY(x) * amp;
+      x===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
     }
-    // Draw nodes
-    ctx.globalAlpha = 1;
-    nodes.forEach(n => {
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-      ctx.fillStyle = TEAL;
-      ctx.globalAlpha = 0.7;
-      ctx.fill();
-    });
-    ctx.globalAlpha = 1;
-    animId = requestAnimationFrame(draw);
+    ctx.strokeStyle='rgba(34,211,238,.07)';
+    ctx.lineWidth=1;
+    ctx.stroke();
+
+    // Erase ahead of scan
+    ctx.fillStyle='#020910';
+    if(scanX+clearW < W){
+      ctx.fillRect(scanX,0,clearW,H);
+    } else {
+      ctx.fillRect(scanX,0,W-scanX,H);
+      ctx.fillRect(0,0,clearW-(W-scanX),H);
+    }
+
+    // Active ECG line
+    ctx.save();
+    ctx.shadowColor=COLOR; ctx.shadowBlur=10;
+    ctx.beginPath();
+    let started=false;
+    for(let x=0;x<W;x++){
+      const ahead=((x-scanX)+W)%W;
+      if(ahead<clearW) continue;
+      const ex=((x-scanX)+W)%W;
+      const y=mid-ecgY(ex)*amp;
+      if(!started){ctx.moveTo(x,y);started=true;}
+      else ctx.lineTo(x,y);
+    }
+    ctx.strokeStyle=COLOR; ctx.lineWidth=1.8; ctx.stroke();
+    ctx.restore();
+
+    // Head dot
+    const headY = mid - ecgY(0)*amp;
+    ctx.save();
+    ctx.shadowColor=COLOR; ctx.shadowBlur=16;
+    ctx.beginPath(); ctx.arc(scanX,headY,3.5,0,Math.PI*2);
+    ctx.fillStyle='#fff'; ctx.fill();
+    ctx.restore();
+
+    offset+=SPEED;
+    animId=requestAnimationFrame(draw);
   }
 
-  // Respect reduced motion
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    resize();
-    initNodes();
-    draw();
-    window.addEventListener('resize', () => { cancelAnimationFrame(animId); resize(); initNodes(); draw(); });
+  // Fluctuating BPM display
+  const bpmEl=document.getElementById('bpm-display');
+  setInterval(()=>{
+    const bpm=68+Math.floor(Math.random()*12);
+    if(bpmEl) bpmEl.textContent=bpm+' BPM';
+  },2200);
+
+  if(!window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+    resize(); draw();
+    window.addEventListener('resize',()=>{cancelAnimationFrame(animId);resize();offset=0;});
   }
 })();
 
-// ── Nav scroll effect ──
-window.addEventListener('scroll', () => {
-  document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 60);
-}, { passive: true });
+// ── Nav scroll ──
+window.addEventListener('scroll',()=>{
+  document.getElementById('main-nav').classList.toggle('scrolled',window.scrollY>60);
+},{passive:true});
 
 // ── Mobile nav ──
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobile-menu');
-
-hamburger.addEventListener('click', () => {
-  const isOpen = mobileMenu.classList.toggle('open');
-  hamburger.setAttribute('aria-expanded', isOpen);
+const hamburger=document.getElementById('hamburger');
+const mobileMenu=document.getElementById('mobile-menu');
+hamburger.addEventListener('click',()=>{
+  const isOpen=mobileMenu.classList.toggle('open');
+  hamburger.setAttribute('aria-expanded',isOpen);
 });
-
-function closeMobileNav() {
+function closeMobileNav(){
   mobileMenu.classList.remove('open');
-  hamburger.setAttribute('aria-expanded', 'false');
+  hamburger.setAttribute('aria-expanded','false');
 }
 
 // ── Scroll fade-in ──
-const fadeEls = document.querySelectorAll('.fade-up');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-}, { threshold: 0.12 });
-fadeEls.forEach(el => observer.observe(el));
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});
+},{threshold:0.1});
+document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
 
-// ── Contact form — client-side validation + anti-spam ──
-document.getElementById('contact-form').addEventListener('submit', function(e) {
+// ── Contact form ──
+document.getElementById('contact-form').addEventListener('submit',function(e){
   e.preventDefault();
+  if(this.querySelector('[name="website"]').value) return;
 
-  // Honeypot check
-  const hp = this.querySelector('[name="website"]').value;
-  if (hp) return; // silently reject bot
+  const name=this.name.value.trim();
+  const email=this.email.value.trim();
+  const type=this.inquiry_type.value;
+  const message=this.message.value.trim();
+  const status=document.getElementById('form-status');
+  const btn=document.getElementById('form-submit-btn');
 
-  const name    = this.name.value.trim();
-  const email   = this.email.value.trim();
-  const type    = this.inquiry_type.value;
-  const message = this.message.value.trim();
-  const status  = document.getElementById('form-status');
-  const btn     = document.getElementById('form-submit-btn');
+  if(!name||name.length<2){status.textContent='⚠ Please enter your name.';return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){status.textContent='⚠ Please enter a valid email.';return;}
+  if(!type){status.textContent='⚠ Please select your role.';return;}
+  if(message.length<20){status.textContent='⚠ Message too short — tell us a bit more.';return;}
 
-  // Basic validation
-  if (!name || name.length < 2)       { status.textContent = '⚠ Please enter your name.'; return; }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { status.textContent = '⚠ Please enter a valid email.'; return; }
-  if (!type)                           { status.textContent = '⚠ Please select your role.'; return; }
-  if (message.length < 20)            { status.textContent = '⚠ Message too short. Tell us a bit more.'; return; }
+  const safe=s=>s.replace(/[<>"'&]/g,c=>({'<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#x27;','&':'&amp;'}[c]));
 
-  // Sanitise (XSS prevention — display only, server must also sanitise)
-  const safe = s => s.replace(/[<>"'&]/g, c => ({'<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#x27;','&':'&amp;'}[c]));
+  btn.disabled=true; btn.textContent='Sending…';
 
-  btn.disabled = true;
-  btn.textContent = 'Sending…';
-
-  // Formspree — sign up free at formspree.io, create a form, paste your form ID below
-  const FORMSPREE_ID = 'YOUR_FORM_ID'; // ← replace with your Formspree form ID
-
-  fetch('https://formspree.io/f/' + FORMSPREE_ID, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify({
-      name: safe(name),
-      email: safe(email),
-      inquiry_type: type,
-      message: safe(message)
-    })
+  const FORMSPREE_ID='YOUR_FORM_ID';
+  fetch('https://formspree.io/f/'+FORMSPREE_ID,{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({name:safe(name),email:safe(email),inquiry_type:type,message:safe(message)})
   })
-  .then(res => res.json())
-  .then(data => {
-    if (data.ok) {
-      status.textContent = '✅ Message received! We\'ll reply within 48 hours.';
-      btn.textContent = 'Sent ✓';
-      btn.style.background = 'var(--teal-dim)';
+  .then(r=>r.json())
+  .then(data=>{
+    if(data.ok){
+      status.textContent="✅ Message received! We'll reply within 48 hours.";
+      btn.textContent='Sent ✓'; btn.style.background='var(--green)';
       this.reset();
-      setTimeout(() => {
-        btn.disabled = false;
-        btn.textContent = 'Send Message →';
-        btn.style.background = '';
-        status.textContent = '🔒 Your data is encrypted and never sold. We reply within 48 hours.';
-      }, 60000);
+      setTimeout(()=>{btn.disabled=false;btn.textContent='Send Message →';btn.style.background='';status.textContent='🔒 Encrypted · We reply within 48 hours · No data sold';},60000);
     } else {
-      status.textContent = '⚠ Could not send. Please email us directly at hello@rehabion.com.pk';
-      btn.disabled = false;
-      btn.textContent = 'Send Message →';
+      status.textContent='⚠ Could not send. Email: hello@rehabion.com.pk';
+      btn.disabled=false; btn.textContent='Send Message →';
     }
   })
-  .catch(() => {
-    status.textContent = '⚠ Network error. Please email us at hello@rehabion.com.pk';
-    btn.disabled = false;
-    btn.textContent = 'Send Message →';
+  .catch(()=>{
+    status.textContent='⚠ Network error. Email: hello@rehabion.com.pk';
+    btn.disabled=false; btn.textContent='Send Message →';
   });
 });
-
-// ── Rate limit: disable form re-submit for 60s after success ──
-// (real rate limiting must happen server-side)
 </script>
 </body>
 </html>
