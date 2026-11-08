@@ -1,10 +1,11 @@
 /* REHABION AI — Cloudflare Worker
-   Keeps the Gemini API key secret (GitHub Pages is public) and gives Noor
+   Keeps the Gemini API key secret (GitHub Pages is public) and gives Danisa
    live Google Search grounding so she can answer about almost anything.
 
    Secrets / vars (set in Cloudflare dashboard → Worker → Settings → Variables):
      GEMINI_API_KEY   (secret, required)  — from https://aistudio.google.com/apikey
-     GEMINI_MODEL     (optional)          — defaults to gemini-2.5-flash
+     GEMINI_MODEL     (optional)          — defaults to gemini-3-flash-preview
+     GEMINI_SEARCH    (optional)          — 'off' to skip Google Search grounding
      ALLOWED_ORIGINS  (optional)          — comma list, defaults to the live site
 */
 
@@ -28,7 +29,7 @@ Contact: WhatsApp +92 349 8228037 · email muhammadrmzn84@gmail.com · free 15-m
 `.trim();
 
 function systemPrompt(lang, voice) {
-  return `You are Noor, the warm, down-to-earth assistant on REHABION's website. You talk like a kind, knowledgeable friend — never robotic, never salesy.
+  return `You are Danisa (دانیسا), the warm, down-to-earth assistant on REHABION's website. You talk like a kind, knowledgeable friend — never robotic, never salesy.
 You can help with ANY topic (science, health, tech, study, business, daily life, Pakistan, the world). Use Google Search whenever facts may be recent or you are unsure, and never invent facts, numbers or links.
 When people ask about REHABION, use these facts:
 ${ABOUT_REHABION}
@@ -76,20 +77,31 @@ export default {
       .map(m => ({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.content.slice(0, MAX_CHARS) }] }));
     if (!messages.length || messages[messages.length - 1].role !== 'user') return json({ error: 'No question' }, 400, headers);
 
-    const model = env.GEMINI_MODEL || 'gemini-2.5-flash';
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': env.GEMINI_API_KEY },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: systemPrompt(lang, voice) }] },
-        contents: messages,
-        tools: [{ google_search: {} }],
-        generationConfig: { temperature: 0.7, maxOutputTokens: voice ? 300 : 1200 }
-      })
+    /* Try the best model first; fall back if Google retires or rate-limits one.
+       Google Search grounding needs billing on the Google account — if it's not
+       allowed (429), the same model answers from its own knowledge instead. */
+    const models = [env.GEMINI_MODEL, 'gemini-3-flash-preview', 'gemini-3.1-flash-lite', 'gemini-flash-latest'].filter(Boolean);
+    const payload = tools => JSON.stringify({
+      systemInstruction: { parts: [{ text: systemPrompt(lang, voice) }] },
+      contents: messages,
+      ...(tools ? { tools: [{ google_search: {} }] } : {}),
+      generationConfig: { temperature: 0.7, maxOutputTokens: voice ? 2048 : 4096 }
     });
+    let res, detail = '';
+    outer: for (const model of models) {
+      for (const search of env.GEMINI_SEARCH === 'off' ? [false] : [true, false]) {
+        res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'x-goog-api-key': env.GEMINI_API_KEY },
+          body: payload(search)
+        });
+        if (res.ok) break outer;
+        detail = await res.text();
+        if (res.status !== 429 && res.status !== 404 && res.status !== 503) break outer;
+      }
+    }
 
     if (!res.ok) {
-      const detail = await res.text();
       return json({ error: 'AI service error', status: res.status, detail: detail.slice(0, 300) }, 502, headers);
     }
     const data = await res.json();

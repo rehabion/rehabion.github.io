@@ -1,6 +1,6 @@
-# Noor's AI brain (Gemini + Google Search)
+# Danisa's AI brain (Gemini + Google Search)
 
-The website works without this: Noor answers questions about REHABION from built-in notes.
+The website works without this: Danisa answers questions about REHABION from built-in notes.
 Connecting this worker lets her answer **anything**, in English and Urdu, using Google Gemini with live Google Search.
 
 The API key must stay secret, so it lives in a free Cloudflare Worker, not in the public website.
@@ -12,7 +12,7 @@ The API key must stay secret, so it lives in a free Cloudflare Worker, not in th
 3. Click **Edit code**, delete everything, paste in the contents of [`worker.js`](worker.js), and click **Deploy**.
 4. In the worker, open **Settings → Variables and Secrets → Add**:
    - Type **Secret**, name `GEMINI_API_KEY`, value = your key.
-   - Optional: `GEMINI_MODEL` (default `gemini-2.5-flash`).
+   - Optional: `GEMINI_MODEL` (default `gemini-3-flash-preview`).
 5. Copy the worker URL, e.g. `https://rehabion-ai.yourname.workers.dev`.
 6. In `assistant.js` on the website, set:
    ```js
@@ -20,7 +20,10 @@ The API key must stay secret, so it lives in a free Cloudflare Worker, not in th
    ```
    Then commit and push.
 
+## Google Search
+Live Google Search answers need billing enabled on your Google AI Studio project. Without it, Danisa answers from Gemini's own knowledge, and the worker switches automatically.
+
 ## Voice notes
 - Voice chat uses the browser's built-in speech engine: Chrome, Edge or Safari, and it needs microphone permission.
 - Urdu speech recognition (`ur-PK`) works in Chrome and Edge.
-- The quality of the Urdu *speaking* voice depends on the device. Microsoft Edge has natural Urdu voices (Uzma, Asad). If no Urdu voice is installed, Noor still shows her reply as text.
+- The quality of the Urdu *speaking* voice depends on the device. Microsoft Edge has natural Urdu voices (Uzma, Asad). If no Urdu voice is installed, Danisa still shows her reply as text.

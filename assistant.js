@@ -1,18 +1,18 @@
-/* ── Noor · REHABION's bilingual (English / اردو) chat + voice assistant ──
+/* ── Danisa (دانیسا) · REHABION's bilingual (English / اردو) chat + voice assistant ──
    Brain: the Cloudflare Worker in /ai-worker (Gemini + Google Search).
-   Until AI_ENDPOINT is set, Noor answers REHABION questions from the
+   Until AI_ENDPOINT is set, Danisa answers REHABION questions from the
    built-in notes below and points visitors to a human for anything else. */
 (function(){
   const AI_ENDPOINT = window.REHABION_AI_ENDPOINT || ''; // e.g. 'https://rehabion-ai.<you>.workers.dev'
 
   const T = {
     en:{
-      name:'Noor', role:'REHABION assistant · here to help',
-      launch:'Ask Noor', launchHint:'chat or talk',
-      hello:"Hi, I'm **Noor** 👋 Ask me anything — about REHABION, rehab and recovery, or any topic at all. You can type, or tap the phone icon to talk with me.",
+      name:'Danisa', role:'REHABION assistant · here to help',
+      launch:'Ask Danisa', launchHint:'chat or talk',
+      hello:"Hi, I'm **Danisa** 👋 Ask me anything — about REHABION, rehab and recovery, or any topic at all. You can type, or tap the phone icon to talk with me.",
       placeholder:'Type your question…', send:'Send',
       chips:['What does REHABION do?','Stroke recovery tips','Book a free demo','How can I invest?'],
-      foot:'Noor can make mistakes. Not medical advice — for emergencies call 1122.',
+      foot:'Danisa can make mistakes. Not medical advice — for emergencies call 1122.',
       listening:'Listening…', thinking:'Thinking…', speaking:'Speaking…', paused:'Paused',
       tapHint:'Speak naturally — tap the circle to interrupt me.',
       end:'End call', mute:'Pause', unmute:'Resume', listen:'Listen',
@@ -23,12 +23,12 @@
       sources:'Sources', recog:'en-US', voiceLang:'en'
     },
     ur:{
-      name:'نور', role:'ریہابیون اسسٹنٹ · آپ کی خدمت میں',
-      launch:'نور سے پوچھیں', launchHint:'لکھیں یا بات کریں',
-      hello:'السلام علیکم، میں **نور** ہوں 👋 مجھ سے کچھ بھی پوچھیں — ریہابیون، فزیوتھراپی اور صحت یابی، یا کوئی بھی موضوع۔ آپ لکھ سکتے ہیں یا فون کے نشان پر کلک کر کے مجھ سے بات کر سکتے ہیں۔',
+      name:'دانیسا', role:'ریہابیون اسسٹنٹ · آپ کی خدمت میں',
+      launch:'دانیسا سے پوچھیں', launchHint:'لکھیں یا بات کریں',
+      hello:'السلام علیکم، میں **دانیسا** ہوں 👋 مجھ سے کچھ بھی پوچھیں — ریہابیون، فزیوتھراپی اور صحت یابی، یا کوئی بھی موضوع۔ آپ لکھ سکتے ہیں یا فون کے نشان پر کلک کر کے مجھ سے بات کر سکتے ہیں۔',
       placeholder:'اپنا سوال لکھیں…', send:'بھیجیں',
       chips:['ریہابیون کیا کرتا ہے؟','فالج کے بعد ورزشیں','مفت ڈیمو بک کریں','سرمایہ کاری کیسے کریں؟'],
-      foot:'نور سے غلطی ہو سکتی ہے۔ یہ طبی مشورہ نہیں — ایمرجنسی میں 1122 پر کال کریں۔',
+      foot:'دانیسا سے غلطی ہو سکتی ہے۔ یہ طبی مشورہ نہیں — ایمرجنسی میں 1122 پر کال کریں۔',
       listening:'سن رہی ہوں…', thinking:'سوچ رہی ہوں…', speaking:'بول رہی ہوں…', paused:'رکا ہوا',
       tapHint:'آرام سے بولیں — مجھے روکنے کے لیے دائرے پر ٹیپ کریں۔',
       end:'کال ختم', mute:'روکیں', unmute:'جاری رکھیں', listen:'سنیں',
@@ -102,8 +102,8 @@
   };
   const root = document.createElement('div');
   root.innerHTML = `
-    <button class="noor-launch" type="button" aria-label="Open Noor assistant"><span class="noor-face" aria-hidden="true"></span><span><span data-t="launch"></span><small data-t="launchHint"></small></span></button>
-    <div class="noor-panel" role="dialog" aria-modal="false" aria-label="Noor assistant">
+    <button class="noor-launch" type="button" aria-label="Open Danisa assistant"><span class="noor-face" aria-hidden="true"></span><span><span data-t="launch"></span><small data-t="launchHint"></small></span></button>
+    <div class="noor-panel" role="dialog" aria-modal="false" aria-label="Danisa assistant">
       <div class="noor-head">
         <span class="noor-face" aria-hidden="true"></span>
         <div class="noor-title"><strong data-t="name"></strong><span data-t="role"></span></div>
@@ -120,7 +120,7 @@
       </form>
       <div class="noor-foot" data-t="foot"></div>
     </div>
-    <div class="noor-voice" role="dialog" aria-label="Voice call with Noor" data-state="idle">
+    <div class="noor-voice" role="dialog" aria-label="Voice call with Danisa" data-state="idle">
       <div class="noor-orb" role="button" tabindex="0" aria-label="Interrupt"><span></span><span></span><span></span></div>
       <div class="noor-voice-status"></div>
       <div class="noor-voice-text"></div>
@@ -287,7 +287,7 @@
     call={on:true,paused:false,rec:null};
     muteBtn.textContent=T[lang].mute;
     voice.classList.add('open');
-    const greet=lang==='ur'?'جی، میں سن رہی ہوں۔ بتائیں میں کیا مدد کروں؟':"Hi, I'm Noor. I'm listening — what can I help with?";
+    const greet=lang==='ur'?'جی، میں سن رہی ہوں۔ بتائیں میں کیا مدد کروں؟':"Hi, I'm Danisa. I'm listening — what can I help with?";
     setState('speaking',esc(greet));
     speak(greet,()=>listen());
   }
@@ -324,5 +324,5 @@
   document.querySelectorAll('[data-noor]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();el.dataset.noor==='voice'?startCall():openPanel();}));
 
   applyLang();renderAll();
-  window.Noor={open:openPanel,call:startCall};
+  window.Danisa=window.Noor={open:openPanel,call:startCall};
 })();
