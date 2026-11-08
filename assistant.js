@@ -1,83 +1,64 @@
-/* ── Danisa (دانیسا) · REHABION's multilingual chat + live voice assistant ──
-   Text chat  → worker "/"      (Gemini, with Google Search when available)
-   Voice call → worker "/live"  (one-use token) → Gemini Live over WebSocket:
-                real-time, native Urdu/English/… speech, barge-in, no browser voices.
-   Listen 🔊  → worker "/tts"   (Gemini TTS — real Urdu voice, not Hindi)
+/* ── Danisa · REHABION's voice-first assistant ──
+   Voice call → worker "/live" (one-use token) → Gemini Live over WebSocket:
+                real-time speech, follows whatever language you speak (even
+                mid-sentence), barge-in. No language menu, no on-screen transcript.
+   Text chat  → worker "/"      (same auto-language behaviour)
+   Listen 🔊  → worker "/tts"   (Gemini TTS — real Urdu voice, not a browser voice)
    Memory: name + recent conversation are kept in this browser only, so Danisa
    picks up where you left off — in chat and in voice. */
 (function(){
   const AI_ENDPOINT = window.REHABION_AI_ENDPOINT || 'https://rehabion-ai.rehabion.workers.dev';
   const LIVE_WS = 'wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1alpha.GenerativeService.BidiGenerateContentConstrained';
 
-  /* language: label in its own script, direction, font family, speech-recognition code, greeting */
-  const LANGS = {
-    en:{label:'English',dir:'ltr',recog:'en-US',hi:"Hi, I'm Danisa 👋"},
-    ur:{label:'اردو',dir:'rtl',font:'urdu',recog:'ur-PK',hi:'السلام علیکم، میں دانیسا ہوں 👋'},
-    pa:{label:'پنجابی',dir:'rtl',font:'urdu',recog:'pa-PK',hi:'ست سری اکال تے سلام، میں دانیسا آں 👋'},
-    ps:{label:'پښتو',dir:'rtl',font:'naskh',recog:'ps-AF',hi:'السلام علیکم، زه دانیسا یم 👋'},
-    sd:{label:'سنڌي',dir:'rtl',font:'naskh',recog:'sd-IN',hi:'السلام عليڪم، مان دانيسا آهيان 👋'},
-    ar:{label:'العربية',dir:'rtl',font:'naskh',recog:'ar-SA',hi:'السلام عليكم، أنا دانيسا 👋'},
-    fa:{label:'فارسی',dir:'rtl',font:'naskh',recog:'fa-IR',hi:'سلام، من دانیسا هستم 👋'},
-    hi:{label:'हिन्दी',dir:'ltr',recog:'hi-IN',hi:'नमस्ते, मैं दानिसा हूँ 👋'},
-    bn:{label:'বাংলা',dir:'ltr',recog:'bn-BD',hi:'নমস্কার, আমি দানিসা 👋'},
-    tr:{label:'Türkçe',dir:'ltr',recog:'tr-TR',hi:'Merhaba, ben Danisa 👋'},
-    zh:{label:'中文',dir:'ltr',recog:'zh-CN',hi:'你好，我是 Danisa 👋'},
-    ja:{label:'日本語',dir:'ltr',recog:'ja-JP',hi:'こんにちは、ダニサです 👋'},
-    fr:{label:'Français',dir:'ltr',recog:'fr-FR',hi:'Bonjour, je suis Danisa 👋'},
-    es:{label:'Español',dir:'ltr',recog:'es-ES',hi:'Hola, soy Danisa 👋'},
-    de:{label:'Deutsch',dir:'ltr',recog:'de-DE',hi:'Hallo, ich bin Danisa 👋'}
-  };
-
+  /* interface words only — Danisa herself answers in whatever language you use */
   const T = {
     en:{
-      role:'REHABION assistant · always here', launch:'Ask Danisa', launchHint:'chat or talk',
-      intro:"Ask me anything — REHABION, rehab and recovery, or any topic at all. Tap the phone to talk to me.",
+      role:'REHABION assistant · always here', launch:'Talk to Danisa', launchHint:'voice or chat',
+      hello:"Hi, I'm **Danisa** 👋\nAsk me anything — in any language you like. Tap the phone to just talk.",
       askName:'First — what should I call you?', namePh:'Your name', nameGo:'Start', skip:'skip',
-      nice:n=>`Lovely to meet you, **${n}**! What's on your mind?`, welcomeBack:n=>`Welcome back, **${n}** 😊 Shall we carry on?`,
+      nice:n=>`Lovely to meet you, **${n}**! What's on your mind?`, welcomeBack:n=>`Welcome back, **${n}** 😊`,
       placeholder:'Type your message…', chips:['What does REHABION do?','Stroke recovery tips','Book a free demo','How can I invest?'],
       foot:'Danisa can make mistakes. Not medical advice — emergencies: 1122.', forget:'Forget me',
-      connecting:'Connecting…', listening:'Listening…', speaking:'Speaking…', paused:'Paused',
-      tapHint:'Just talk — interrupt me any time.', end:'End call', mute:'Mute', unmute:'Unmute', listen:'Listen',
+      connecting:'Connecting…', listening:'Listening', speaking:'Speaking', paused:'Muted',
+      end:'End', mute:'Mute', unmute:'Unmute', listen:'Listen',
       micDenied:'I need microphone permission to hear you. Please allow it in your browser and try again.',
       noMic:'Your browser can’t use a microphone here. Please try Chrome, Edge, Firefox or Safari.',
-      voiceErr:"I couldn't start the voice call just now. Please try again, or chat with me by typing.",
-      offline:"I'm having trouble reaching my brain right now. Please try again, or message the team on [WhatsApp](https://wa.me/923498228037).",
-      you:'You'
+      voiceErr:"The call dropped. Please try again in a moment.",
+      offline:"I'm having trouble connecting right now. Please try again, or message the team on [WhatsApp](https://wa.me/923498228037)."
     },
     ur:{
-      role:'ریہابیون اسسٹنٹ · ہمیشہ حاضر', launch:'دانیسا سے پوچھیں', launchHint:'لکھیں یا بات کریں',
-      intro:'مجھ سے کچھ بھی پوچھیں — ریہابیون، فزیوتھراپی، صحت یابی یا کوئی بھی موضوع۔ بات کرنے کے لیے فون پر ٹیپ کریں۔',
+      role:'ریہابیون اسسٹنٹ · ہمیشہ حاضر', launch:'دانیسا سے بات کریں', launchHint:'آواز یا چیٹ',
+      hello:'السلام علیکم، میں **دانیسا** ہوں 👋\nجس زبان میں چاہیں بات کریں۔ بولنے کے لیے فون پر ٹیپ کریں۔',
       askName:'پہلے یہ بتائیں — آپ کا نام کیا ہے؟', namePh:'آپ کا نام', nameGo:'شروع کریں', skip:'رہنے دیں',
-      nice:n=>`آپ سے مل کر بہت خوشی ہوئی، **${n}**! بتائیں میں کیا مدد کروں؟`, welcomeBack:n=>`خوش آمدید، **${n}** 😊 وہیں سے بات آگے بڑھائیں؟`,
+      nice:n=>`آپ سے مل کر بہت خوشی ہوئی، **${n}**! بتائیں میں کیا مدد کروں؟`, welcomeBack:n=>`خوش آمدید، **${n}** 😊`,
       placeholder:'اپنا پیغام لکھیں…', chips:['ریہابیون کیا کرتا ہے؟','فالج کے بعد ورزشیں','مفت ڈیمو بک کریں','سرمایہ کاری کیسے کریں؟'],
       foot:'دانیسا سے غلطی ہو سکتی ہے۔ یہ طبی مشورہ نہیں — ایمرجنسی میں 1122۔', forget:'مجھے بھول جائیں',
-      connecting:'جڑ رہی ہوں…', listening:'سن رہی ہوں…', speaking:'بول رہی ہوں…', paused:'خاموش',
-      tapHint:'بس بولیں — آپ کسی بھی وقت مجھے ٹوک سکتے ہیں۔', end:'کال ختم', mute:'خاموش', unmute:'آواز کھولیں', listen:'سنیں',
+      connecting:'جڑ رہی ہوں…', listening:'سن رہی ہوں', speaking:'بول رہی ہوں', paused:'خاموش',
+      end:'ختم', mute:'خاموش', unmute:'آواز کھولیں', listen:'سنیں',
       micDenied:'آپ کی آواز سننے کے لیے مائیکروفون کی اجازت چاہیے۔ براؤزر میں اجازت دے کر دوبارہ کوشش کریں۔',
       noMic:'یہ براؤزر مائیکروفون استعمال نہیں کر سکتا۔ Chrome، Edge، Firefox یا Safari آزمائیں۔',
-      voiceErr:'ابھی وائس کال شروع نہیں ہو سکی۔ دوبارہ کوشش کریں یا لکھ کر بات کریں۔',
-      offline:'ابھی رابطے میں مسئلہ ہے۔ دوبارہ کوشش کریں یا ٹیم کو [واٹس ایپ](https://wa.me/923498228037) کریں۔',
-      you:'آپ'
+      voiceErr:'کال کٹ گئی۔ تھوڑی دیر بعد دوبارہ کوشش کریں۔',
+      offline:'ابھی رابطے میں مسئلہ ہے۔ دوبارہ کوشش کریں یا ٹیم کو [واٹس ایپ](https://wa.me/923498228037) کریں۔'
     }
   };
-  const t = () => T[lang] || T[LANGS[lang].dir==='rtl' && LANGS[lang].font==='urdu' ? 'ur' : 'en'];
+  const t = T[(navigator.language||'').toLowerCase().startsWith('ur') ? 'ur' : 'en'];
 
   /* ── memory (this browser only) ── */
   const KEY='danisa-memory';
-  let mem={name:'',lang:'',turns:[]};
+  let mem={name:'',turns:[]};
   try{ mem=Object.assign(mem,JSON.parse(localStorage.getItem(KEY)||'{}')); }catch(e){}
   if(!Array.isArray(mem.turns))mem.turns=[];
   const save=()=>{ mem.turns=mem.turns.slice(-40); try{localStorage.setItem(KEY,JSON.stringify(mem));}catch(e){} };
-  let lang = LANGS[mem.lang] ? mem.lang : ((navigator.language||'').startsWith('ur') ? 'ur' : 'en');
-  const memorySummary = () => mem.turns.slice(-14).map(m=>(m.role==='user'?'User':'Danisa')+': '+m.content.replace(/\s+/g,' ').slice(0,220)).join('\n').slice(-1500);
+  const knownName=()=>(mem.name||'').trim();
+  const memorySummary=()=>mem.turns.slice(-14).map(m=>(m.role==='user'?'User':'Danisa')+': '+m.content.replace(/\s+/g,' ').slice(0,220)).join('\n').slice(-1500);
 
   /* ── tiny, safe markdown ── */
-  const esc = s => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   function md(text){
-    const inline = s => esc(s)
-      .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-    const out=[]; let list=null;
+    const inline=s=>esc(s)
+      .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+      .replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+    const out=[];let list=null;
     text.split('\n').forEach(line=>{
       const m=line.match(/^\s*(?:[-*•]|\d+\.)\s+(.*)/);
       if(m){(list=list||[]).push('<li>'+inline(m[1])+'</li>');return;}
@@ -87,7 +68,8 @@
     if(list)out.push('<ul>'+list.join('')+'</ul>');
     return out.join('');
   }
-  const plain = s => s.replace(/\[([^\]]+)\]\([^)]+\)/g,'$1').replace(/https?:\/\/\S+/g,'').replace(/[*_#>`]/g,'').replace(/[\u{1F300}-\u{1FAFF}☀-➿]/gu,'').trim();
+  const plain=s=>s.replace(/\[([^\]]+)\]\([^)]+\)/g,'$1').replace(/https?:\/\/\S+/g,'').replace(/[*_#>`]/g,'').replace(/[\u{1F300}-\u{1FAFF}☀-➿]/gu,'').trim();
+  const arabicScript=s=>/[؀-ۿ]/.test(s);
 
   /* ── DOM ── */
   const I={
@@ -102,82 +84,73 @@
     <div class="noor-panel" role="dialog" aria-modal="false" aria-label="Danisa assistant">
       <div class="noor-head">
         <span class="noor-face" aria-hidden="true"></span>
-        <div class="noor-title"><strong>Danisa · دانیسا</strong><span data-t="role"></span></div>
-        <label class="sr" for="noor-lang">Language</label>
-        <select class="noor-langsel" id="noor-lang"></select>
+        <div class="noor-title"><strong>Danisa</strong><span data-t="role"></span></div>
         <button class="noor-icon-btn noor-call" type="button" aria-label="Voice call">${I.phone}</button>
         <button class="noor-icon-btn noor-close" type="button" aria-label="Close">${I.close}</button>
       </div>
       <div class="noor-msgs" aria-live="polite"></div>
       <div class="noor-chips"></div>
       <form class="noor-input">
-        <button class="noor-icon-btn noor-mic" type="button" aria-label="Dictate">${I.mic}</button>
-        <textarea rows="1" maxlength="2000" aria-label="Message"></textarea>
+        <button class="noor-icon-btn noor-mic" type="button" aria-label="Talk instead">${I.mic}</button>
+        <textarea rows="1" maxlength="2000" dir="auto" aria-label="Message"></textarea>
         <button class="noor-send" type="submit" aria-label="Send">${I.send}</button>
       </form>
       <div class="noor-foot"><span data-t="foot"></span> · <button type="button" class="noor-forget" data-t="forget"></button></div>
     </div>
     <div class="noor-voice" role="dialog" aria-label="Voice call with Danisa" data-state="idle">
       <div class="noor-orb" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="noor-voice-name">Danisa</div>
       <div class="noor-voice-status"></div>
-      <div class="noor-voice-text"></div>
+      <div class="noor-voice-time" aria-hidden="true">00:00</div>
+      <div class="noor-voice-text" role="status"></div>
       <div class="noor-voice-actions"><button type="button" class="noor-mute"></button><button type="button" class="noor-end" data-t="end"></button></div>
     </div>`;
   document.body.appendChild(root);
   const $=s=>root.querySelector(s);
   const launch=$('.noor-launch'),panel=$('.noor-panel'),msgs=$('.noor-msgs'),chips=$('.noor-chips'),form=$('.noor-input'),
-        ta=$('textarea'),sendBtn=$('.noor-send'),micBtn=$('.noor-mic'),sel=$('.noor-langsel'),
-        voice=$('.noor-voice'),vStatus=$('.noor-voice-status'),vText=$('.noor-voice-text'),muteBtn=$('.noor-mute'),orb=$('.noor-orb');
-  Object.entries(LANGS).forEach(([k,v])=>{const o=document.createElement('option');o.value=k;o.textContent=v.label;sel.appendChild(o);});
+        ta=$('textarea'),sendBtn=$('.noor-send'),voice=$('.noor-voice'),vStatus=$('.noor-voice-status'),
+        vTime=$('.noor-voice-time'),vText=$('.noor-voice-text'),muteBtn=$('.noor-mute'),orb=$('.noor-orb');
 
-  function applyLang(){
-    const L=LANGS[lang],s=t();
-    root.querySelectorAll('[data-t]').forEach(el=>{el.textContent=s[el.dataset.t];});
-    sel.value=lang;
-    [panel,voice].forEach(el=>{el.dataset.dir=L.dir;el.dataset.font=L.font||'';});
-    ta.placeholder=s.placeholder; ta.dir=L.dir;
-    chips.innerHTML='';
-    s.chips.forEach(c=>{const b=document.createElement('button');b.type='button';b.textContent=c;b.onclick=()=>send(c);chips.appendChild(b);});
-    chips.style.display=(mem.turns.length||!mem.name)?'none':'flex';
-  }
+  root.querySelectorAll('[data-t]').forEach(el=>{el.textContent=t[el.dataset.t];});
+  ta.placeholder=t.placeholder;
+  t.chips.forEach(c=>{const b=document.createElement('button');b.type='button';b.textContent=c;b.dir='auto';b.onclick=()=>send(c);chips.appendChild(b);});
+  const showChips=()=>{chips.style.display=(mem.turns.some(m=>!m.voice)||!mem.name)?'none':'flex';};
 
-  function bubble(role,html){
+  function bubble(role,html,raw){
     const div=document.createElement('div');
-    div.className='noor-msg '+(role==='user'?'user':'bot');
-    div.innerHTML=html;msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;return div;
+    div.className='noor-msg '+(role==='user'?'user':'bot')+(arabicScript(raw||'')?' nas':'');
+    div.dir='auto';div.innerHTML=html;msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;return div;
   }
-  function addMsg(role,text,sources,isVoice){
-    const div=bubble(role,role==='user'?esc(text).replace(/\n/g,'<br>'):md(text));
-    if(isVoice)div.classList.add('from-voice');
+  function addMsg(role,text,sources){
+    const div=bubble(role,role==='user'?esc(text).replace(/\n/g,'<br>'):md(text),text);
     if(sources&&sources.length){
       const s=document.createElement('div');s.className='noor-src';
       sources.forEach(x=>{const a=document.createElement('a');a.href=x.uri;a.target='_blank';a.rel='noopener noreferrer';a.textContent=x.title;s.appendChild(a);});
       div.appendChild(s);
     }
     if(role!=='user'){
-      const b=document.createElement('button');b.type='button';b.className='noor-speak';b.textContent='🔊 '+t().listen;
+      const b=document.createElement('button');b.type='button';b.className='noor-speak';b.textContent='🔊 '+t.listen;
       b.onclick=()=>speak(text,b);div.appendChild(b);
     }
     return div;
   }
   function askNameBubble(){
-    const s=t(),d=bubble('bot','<p>'+esc(s.askName)+'</p>');
+    const d=bubble('bot','<p>'+esc(t.askName)+'</p>',t.askName);
     const f=document.createElement('form');f.className='noor-name';
-    f.innerHTML=`<input maxlength="40" autocomplete="given-name" placeholder="${esc(s.namePh)}" aria-label="${esc(s.namePh)}"><button type="submit">${esc(s.nameGo)}</button><button type="button" class="skip">${esc(s.skip)}</button>`;
+    f.innerHTML=`<input maxlength="40" dir="auto" autocomplete="given-name" placeholder="${esc(t.namePh)}" aria-label="${esc(t.namePh)}"><button type="submit">${esc(t.nameGo)}</button><button type="button" class="skip">${esc(t.skip)}</button>`;
     d.appendChild(f);
-    const inp=f.querySelector('input');setTimeout(()=>inp.focus(),80);
-    f.onsubmit=e=>{e.preventDefault();const n=inp.value.trim().replace(/[<>]/g,'').slice(0,40);if(!n)return;setName(n);d.remove();bubble('bot',md(t().nice(n)));applyLang();};
-    f.querySelector('.skip').onclick=()=>{mem.name=' ';save();d.remove();applyLang();ta.focus();};
+    const inp=f.querySelector('input');
+    f.onsubmit=e=>{e.preventDefault();const n=inp.value.trim().replace(/[<>]/g,'').slice(0,40);if(!n)return;mem.name=n;save();d.remove();bubble('bot',md(t.nice(n)),n);showChips();};
+    f.querySelector('.skip').onclick=()=>{mem.name=' ';save();d.remove();showChips();ta.focus();};
   }
-  function setName(n){mem.name=n;save();}
-  const knownName=()=>mem.name.trim();
-
+  let greeted=false;
   function renderAll(){
     msgs.innerHTML='';
-    bubble('bot',md('**'+LANGS[lang].hi+'**\n'+t().intro));
-    mem.turns.forEach(m=>addMsg(m.role,m.content,m.sources,m.voice));
+    bubble('bot',md(t.hello),t.hello);
+    mem.turns.filter(m=>!m.voice).forEach(m=>addMsg(m.role,m.content,m.sources));
     if(!mem.name)askNameBubble();
-    else if(mem.turns.length&&knownName()&&!renderAll.greeted){renderAll.greeted=true;bubble('bot',md(t().welcomeBack(knownName())));}
+    else if(mem.turns.length&&knownName()&&!greeted){greeted=true;bubble('bot',md(t.welcomeBack(knownName())));}
+    showChips();
   }
 
   /* ── text chat ── */
@@ -196,56 +169,41 @@
     mem.turns.push({role:'user',content:text});save();
     const typing=bubble('bot','<i></i><i></i><i></i>');typing.classList.add('noor-typing');
     let d;
-    try{d=await api('/',{lang,name:knownName(),messages:mem.turns.map(m=>({role:m.role,content:m.content}))});}
-    catch(e){d={reply:t().offline};}
+    try{d=await api('/',{lang:'auto',name:knownName(),messages:mem.turns.map(m=>({role:m.role,content:m.content}))});}
+    catch(e){d={reply:t.offline};}
     typing.remove();
     mem.turns.push({role:'assistant',content:d.reply,sources:d.sources});save();
     addMsg('assistant',d.reply,d.sources);
     busy=false;sendBtn.disabled=false;
   }
 
-  /* ── 🔊 listen: Gemini TTS (real Urdu voice), browser voice only as a last resort ── */
+  /* ── 🔊 listen: Gemini TTS, so Urdu sounds like Urdu ── */
   let player=null;
   async function speak(text,btn){
     if(player){player.pause();player=null;}
-    btn&&(btn.disabled=true);
+    btn.disabled=true;
     try{
       const d=await api('/tts',{text:plain(text).slice(0,1500)});
       player=new Audio('data:'+(d.mime||'audio/wav')+';base64,'+d.audio);await player.play();
-    }catch(e){
-      const want=LANGS[lang].recog.slice(0,2);
-      const v=window.speechSynthesis&&speechSynthesis.getVoices().find(x=>x.lang.toLowerCase().startsWith(want));
-      if(v){const u=new SpeechSynthesisUtterance(plain(text));u.voice=v;u.lang=v.lang;speechSynthesis.cancel();speechSynthesis.speak(u);}
-    }finally{btn&&(btn.disabled=false);}
+    }catch(e){}finally{btn.disabled=false;}
   }
-
-  /* ── dictation into the text box (browser speech recognition) ── */
-  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  let dictating=null;
-  micBtn.onclick=()=>{
-    if(!SR){startCall();return;}               /* no dictation? a live call does the same job */
-    if(dictating){dictating.stop();return;}
-    const r=new SR();r.lang=LANGS[lang].recog;r.interimResults=true;dictating=r;micBtn.classList.add('rec');
-    const base=ta.value?ta.value+' ':'';
-    r.onresult=e=>{ta.value=base+Array.from(e.results).map(x=>x[0].transcript).join('');};
-    r.onerror=e=>{if(e.error==='not-allowed')bubble('bot',esc(t().micDenied));};
-    r.onend=()=>{micBtn.classList.remove('rec');dictating=null;ta.focus();};
-    r.start();
-  };
 
   /* ── live voice call (Gemini Live) ── */
   const call={on:false,muted:false,ws:null,inCtx:null,outCtx:null,stream:null,node:null,src:null,
-              sources:new Set(),playEnd:0,handle:null,userLine:'',botLine:'',raf:0,level:0};
+              sources:new Set(),playEnd:0,handle:null,userLine:'',botLine:'',raf:0,level:0,t0:0,clock:0};
   const b64=buf=>{let s='';const u=new Uint8Array(buf);for(let i=0;i<u.length;i+=0x8000)s+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000));return btoa(s);};
-
-  function setState(s){voice.dataset.state=s;vStatus.textContent=t()[s]||'';}
-  function showLines(){
-    vText.innerHTML=(call.userLine?'<em>'+esc(t().you)+': '+esc(call.userLine)+'</em>':'')+(call.botLine?esc(call.botLine):'<em>'+esc(t().tapHint)+'</em>');
+  function setState(s){voice.dataset.state=s;vStatus.textContent=t[s]||'';}
+  function tick(){
+    if(!call.t0)return;
+    const s=Math.floor((Date.now()-call.t0)/1000);
+    vTime.textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
   }
+  /* transcripts are kept quietly as memory — never shown on screen */
   function commitTurn(){
-    if(call.userLine.trim()){mem.turns.push({role:'user',content:call.userLine.trim(),voice:true});addMsg('user',call.userLine.trim(),null,true);}
-    if(call.botLine.trim()){mem.turns.push({role:'assistant',content:call.botLine.trim(),voice:true});addMsg('assistant',call.botLine.trim(),null,true);}
-    if(call.userLine.trim()||call.botLine.trim())save();
+    const u=call.userLine.trim(),b=call.botLine.trim();
+    if(u)mem.turns.push({role:'user',content:u,voice:true});
+    if(b)mem.turns.push({role:'assistant',content:b,voice:true});
+    if(u||b)save();
     call.userLine='';call.botLine='';
   }
   function playPCM(b64data){
@@ -260,14 +218,13 @@
   function stopPlayback(){call.sources.forEach(s=>{try{s.stop();}catch(e){}});call.sources.clear();call.playEnd=0;}
   function animateOrb(){
     if(!call.on)return;
-    const speakingNow=voice.dataset.state==='speaking';
-    const lvl=speakingNow?0.35+Math.random()*0.25:Math.min(1,call.level*3);
+    const lvl=voice.dataset.state==='speaking'?0.35+Math.random()*0.25:Math.min(1,call.level*3);
     orb.style.setProperty('--lvl',lvl.toFixed(3));
     call.raf=requestAnimationFrame(animateOrb);
   }
 
   async function openSocket(){
-    const d=await api('/live',{lang,name:knownName(),memory:memorySummary()});
+    const d=await api('/live',{lang:'auto',name:knownName(),memory:memorySummary()});
     const ws=new WebSocket(LIVE_WS+'?access_token='+encodeURIComponent(d.token));call.ws=ws;
     ws.onopen=()=>ws.send(JSON.stringify({setup:{
       model:'models/'+d.model,
@@ -283,15 +240,17 @@
       const m=JSON.parse(typeof e.data==='string'?e.data:await e.data.text());
       if(m.setupComplete){
         setState('listening');
-        if(!call.started){call.started=true;
-          ws.send(JSON.stringify({realtimeInput:{text:knownName()?`(The call just started. Greet ${knownName()} warmly by name, in ${LANGS[lang].label}, and continue naturally.)`:`(The call just started. Greet me in ${LANGS[lang].label} and ask my name.)`}}));}
+        if(!call.started){call.started=true;call.t0=Date.now();
+          ws.send(JSON.stringify({realtimeInput:{text:knownName()
+            ?`(The call just started. Greet ${knownName()} warmly by name and carry on naturally.)`
+            :'(The call just started. Greet me with Assalam o Alaikum, introduce yourself as Danisa and ask my name.)'}}));}
         return;
       }
       if(m.sessionResumptionUpdate&&m.sessionResumptionUpdate.newHandle)call.handle=m.sessionResumptionUpdate.newHandle;
       if(m.goAway){reconnect();return;}
       if(m.toolCall){
         const responses=(m.toolCall.functionCalls||[]).map(fc=>{
-          if(fc.name==='remember_name'&&fc.args&&fc.args.name){setName(String(fc.args.name).slice(0,40));applyLang();}
+          if(fc.name==='remember_name'&&fc.args&&fc.args.name){mem.name=String(fc.args.name).slice(0,40);save();}
           return {id:fc.id,name:fc.name,response:{result:'saved'}};
         });
         ws.send(JSON.stringify({toolResponse:{functionResponses:responses}}));
@@ -299,32 +258,32 @@
       }
       const sc=m.serverContent;if(!sc)return;
       if(sc.interrupted){stopPlayback();setState('listening');}
-      if(sc.inputTranscription&&sc.inputTranscription.text){call.userLine+=sc.inputTranscription.text;showLines();}
-      if(sc.outputTranscription&&sc.outputTranscription.text){call.botLine+=sc.outputTranscription.text;showLines();}
+      if(sc.inputTranscription&&sc.inputTranscription.text)call.userLine+=sc.inputTranscription.text;
+      if(sc.outputTranscription&&sc.outputTranscription.text)call.botLine+=sc.outputTranscription.text;
       (sc.modelTurn&&sc.modelTurn.parts||[]).forEach(p=>{if(p.inlineData&&p.inlineData.data)playPCM(p.inlineData.data);});
       if(sc.turnComplete)commitTurn();
     };
-    ws.onclose=ev=>{if(call.on&&call.ws===ws&&!call.reconnecting){if(ev.code===1000||ev.code===1005)endCall();else{vText.textContent=t().voiceErr;setTimeout(endCall,2500);}}};
+    ws.onclose=ev=>{if(call.on&&call.ws===ws&&!call.reconnecting){if(ev.code===1000||ev.code===1005)endCall();else{vText.textContent=t.voiceErr;setTimeout(endCall,2500);}}};
   }
   async function reconnect(){
     if(call.reconnecting)return;call.reconnecting=true;
     const old=call.ws;try{old&&old.close();}catch(e){}
-    try{await openSocket();}catch(e){vText.textContent=t().voiceErr;}
+    try{await openSocket();}catch(e){vText.textContent=t.voiceErr;}
     call.reconnecting=false;
   }
 
   async function startCall(){
     if(call.on)return;
-    if(!navigator.mediaDevices||!window.AudioWorkletNode){openPanel();bubble('bot',esc(t().noMic));return;}
-    Object.assign(call,{on:true,muted:false,started:false,handle:null,userLine:'',botLine:'',level:0});
+    if(!navigator.mediaDevices||!window.AudioWorkletNode){openPanel();bubble('bot',esc(t.noMic));return;}
+    Object.assign(call,{on:true,muted:false,started:false,handle:null,userLine:'',botLine:'',level:0,t0:0});
     /* audio contexts must be created inside the click */
     call.outCtx=new (window.AudioContext||window.webkitAudioContext)({sampleRate:24000});
     call.inCtx=new (window.AudioContext||window.webkitAudioContext)();
-    muteBtn.textContent=t().mute;voice.classList.add('open');setState('connecting');vText.innerHTML='';
-    animateOrb();
+    muteBtn.textContent=t.mute;voice.classList.add('open');setState('connecting');vText.textContent='';vTime.textContent='00:00';
+    call.clock=setInterval(tick,500);animateOrb();
     try{
       call.stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true,channelCount:1}});
-    }catch(e){vText.textContent=t().micDenied;setTimeout(endCall,3500);return;}
+    }catch(e){vText.textContent=t.micDenied;setTimeout(endCall,3500);return;}
     try{
       await call.inCtx.audioWorklet.addModule('mic-worklet.js');
       call.src=call.inCtx.createMediaStreamSource(call.stream);
@@ -336,19 +295,20 @@
       };
       call.src.connect(call.node);
       await openSocket();
-    }catch(e){vText.textContent=t().voiceErr;setTimeout(endCall,3000);}
+    }catch(e){vText.textContent=t.voiceErr;setTimeout(endCall,3000);}
   }
   function endCall(){
     if(!call.on)return;
-    call.on=false;cancelAnimationFrame(call.raf);
+    call.on=false;cancelAnimationFrame(call.raf);clearInterval(call.clock);
     commitTurn();stopPlayback();
     try{call.ws&&call.ws.close();}catch(e){}
     try{call.stream&&call.stream.getTracks().forEach(tr=>tr.stop());}catch(e){}
     try{call.inCtx&&call.inCtx.close();call.outCtx&&call.outCtx.close();}catch(e){}
     call.ws=call.stream=call.node=call.src=null;
     voice.classList.remove('open');setState('idle');
+    if(panel.classList.contains('open'))renderAll();   /* a name learned on the call shows up in chat */
   }
-  muteBtn.onclick=()=>{call.muted=!call.muted;muteBtn.textContent=call.muted?t().unmute:t().mute;if(voice.dataset.state!=='speaking')setState(call.muted?'paused':'listening');};
+  muteBtn.onclick=()=>{call.muted=!call.muted;muteBtn.textContent=call.muted?t.unmute:t.mute;if(voice.dataset.state!=='speaking')setState(call.muted?'paused':'listening');};
   $('.noor-end').onclick=endCall;
 
   /* ── wiring ── */
@@ -357,14 +317,14 @@
   launch.onclick=openPanel;
   $('.noor-close').onclick=closePanel;
   $('.noor-call').onclick=startCall;
-  sel.onchange=()=>{lang=sel.value;mem.lang=lang;save();applyLang();renderAll();};
-  $('.noor-forget').onclick=()=>{mem={name:'',lang,turns:[]};save();renderAll.greeted=false;applyLang();renderAll();};
+  $('.noor-mic').onclick=startCall;
+  $('.noor-forget').onclick=()=>{mem={name:'',turns:[]};save();greeted=false;renderAll();};
   form.onsubmit=e=>{e.preventDefault();send(ta.value);};
   ta.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send(ta.value);}});
-  ta.addEventListener('input',()=>{ta.style.height='auto';ta.style.height=Math.min(ta.scrollHeight,120)+'px';});
+  ta.addEventListener('input',()=>{ta.style.height='auto';ta.style.height=Math.min(ta.scrollHeight,120)+'px';ta.classList.toggle('nas',arabicScript(ta.value));});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(voice.classList.contains('open'))endCall();else if(panel.classList.contains('open'))closePanel();}});
   document.querySelectorAll('[data-noor]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();el.dataset.noor==='voice'?startCall():openPanel();}));
 
-  applyLang();renderAll();
+  renderAll();
   window.Danisa=window.Noor={open:openPanel,call:startCall,end:endCall};
 })();

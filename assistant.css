@@ -28,7 +28,6 @@
 .noor-title{flex:1;min-width:0}
 .noor-title strong{display:block;font-family:'Fraunces',Georgia,serif;font-size:18px;font-weight:600;white-space:nowrap}
 .noor-title span{display:block;font-size:11.5px;color:#6E6357;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.noor-langsel{max-width:96px;background:#FFFCF6;border:1.5px solid #1E1B18;border-radius:999px;padding:5px 8px;font:inherit;font-size:12.5px;color:#1E1B18;cursor:pointer}
 .noor-icon-btn{background:none;border:1.5px solid transparent;color:#1E1B18;width:36px;height:36px;border-radius:50%;cursor:pointer;display:grid;place-items:center;flex-shrink:0}
 .noor-icon-btn:hover{border-color:#1E1B18}
 .noor-call{background:#2E5946;color:#FFFCF6}
@@ -42,7 +41,6 @@
 .noor-msg a{color:#9E3F22;font-weight:600}
 .noor-msg.user a{color:#FFFCF6}
 .noor-msg ul{margin:.3rem 0 .3rem 1.1rem}
-.noor-panel[data-dir="rtl"] .noor-msg ul{margin:.3rem 1.1rem .3rem 0}
 .noor-msg p+p{margin-top:.5rem}
 .noor-src{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .noor-src a{font-size:11px;border:1px solid #CDBFA7;border-radius:999px;padding:2px 8px;text-decoration:none;color:#6E6357;font-weight:400;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -74,14 +72,9 @@
 .noor-foot{font-size:11px;color:#6E6357;text-align:center;padding:0 12px 9px}
 .noor-forget{background:none;border:none;color:#6E6357;text-decoration:underline;font:inherit;cursor:pointer}
 
-/* right-to-left scripts */
-.noor-panel[data-dir="rtl"] .noor-msgs,.noor-panel[data-dir="rtl"] .noor-chips,.noor-panel[data-dir="rtl"] .noor-name{direction:rtl}
-.noor-panel[data-dir="rtl"] .noor-msg.bot{align-self:flex-end;border-radius:18px 4px 18px 18px}
-.noor-panel[data-dir="rtl"] .noor-msg.user{align-self:flex-start;border-radius:4px 18px 18px 18px}
-.noor-panel[data-font="urdu"] .noor-msg,.noor-panel[data-font="urdu"] textarea,.noor-panel[data-font="urdu"] .noor-chips button,.noor-panel[data-font="urdu"] .noor-name,
-.noor-voice[data-font="urdu"] .noor-voice-text,.noor-voice[data-font="urdu"] .noor-voice-status{font-family:'Noto Nastaliq Urdu',serif;line-height:2.15}
-.noor-panel[data-font="naskh"] .noor-msg,.noor-panel[data-font="naskh"] textarea,.noor-voice[data-font="naskh"] .noor-voice-text{font-family:'Noto Naskh Arabic',serif;line-height:1.9}
-.noor-voice[data-dir="rtl"] .noor-voice-text{direction:rtl}
+/* Urdu / Arabic-script messages: Nastaliq, direction follows the text itself (dir="auto") */
+.noor-msg.nas,.noor-input textarea.nas,.noor-name input:dir(rtl){font-family:'Noto Nastaliq Urdu','Noto Naskh Arabic',serif;line-height:2.15}
+.noor-msg[dir="auto"]:dir(rtl) ul{margin:.3rem 1.1rem .3rem 0}
 
 /* ── live voice call ── */
 .noor-voice{position:fixed;inset:0;z-index:220;display:none;flex-direction:column;align-items:center;justify-content:center;gap:26px;padding:24px;
@@ -97,9 +90,10 @@
 .noor-orb span:nth-child(3){background:#2E5946;opacity:.45;inset:14%;animation-duration:8s,26s}
 @keyframes noor-spin{to{transform:rotate(360deg)}}
 .noor-voice[data-state="connecting"] .noor-orb span{animation-duration:2s,4s;opacity:.4}
-.noor-voice-status{font-family:'Caveat',cursive;font-size:32px;color:#C2522F;min-height:1.2em}
-.noor-voice-text{max-width:600px;text-align:center;color:#2E2924;font-size:18px;line-height:1.7;min-height:3.4em}
-.noor-voice-text em{color:#6E6357;font-style:normal;display:block;font-size:15px;margin-bottom:8px}
+.noor-voice-name{font-family:'Fraunces',Georgia,serif;font-size:40px;font-weight:500;letter-spacing:-.02em;line-height:1;margin-top:6px}
+.noor-voice-status{font-family:'Caveat',cursive;font-size:30px;color:#C2522F;min-height:1.2em;margin-top:-14px}
+.noor-voice-time{font-variant-numeric:tabular-nums;color:#6E6357;font-size:15px;letter-spacing:.06em;margin-top:-18px}
+.noor-voice-text{max-width:460px;text-align:center;color:#9E3F22;font-size:15px;min-height:1.6em}
 .noor-voice-actions{display:flex;gap:14px}
 .noor-voice-actions button{border-radius:999px;padding:12px 24px;font:inherit;font-weight:700;cursor:pointer;border:1.5px solid #1E1B18;box-shadow:3px 4px 0 #1E1B18}
 .noor-end{background:#B8402A;color:#FFFCF6}

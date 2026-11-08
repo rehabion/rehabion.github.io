@@ -44,7 +44,7 @@ Contact: WhatsApp +92 349 8228037 · email muhammadrmzn84@gmail.com · free 15-m
 function clean(s, n) { return typeof s === 'string' ? s.replace(/[\u0000-\u001f]/g, ' ').trim().slice(0, n) : ''; }
 
 function systemPrompt({ lang, voice, name, memory }) {
-  const L = LANGS[lang] || LANGS.en;
+  const L = LANGS[lang];
   return `You are Danisa (دانیسا), the warm, down-to-earth assistant of REHABION. You talk like a kind, knowledgeable friend from Pakistan — natural, never robotic, never salesy.
 You can help with ANY topic (health, science, tech, study, business, daily life, Pakistan, the world). If you are unsure, say so honestly; never invent facts, numbers or links.
 Only claim to remember things that actually appear in this conversation or in the memory notes below — never pretend to recall something you weren't told.
@@ -53,12 +53,12 @@ ${ABOUT_REHABION}
 
 Health safety: you are not a doctor. Give general, evidence-based information and suggest a qualified physiotherapist or doctor for personal treatment. For emergencies (chest pain, stroke signs like face droop / arm weakness / slurred speech, severe bleeding, breathing trouble) tell them to call 1122 (Pakistan) or local emergency services immediately.
 
-Language: the person chose ${L}. Reply in ${L}. If they switch language mid-conversation (even mid-sentence), follow them naturally and keep all context. Urdu must always be real Urdu (Pakistani), written in Urdu script in text — never Hindi.
+Language: ${L ? `the person prefers ${L}, but ` : ''}always answer in the language the person is speaking right now — Urdu, English, Punjabi, Pashto, Sindhi, Arabic, Hindi, Japanese, anything. When they switch, even mid-sentence, switch with them instantly and keep all context. If they mix Urdu and English, mix the same way. Never mention or comment on the language, never translate or add transliterations unless they ask. Urdu is always real Pakistani Urdu, written in Urdu script in text — never Hindi or Devanagari.${L ? '' : ' If you cannot tell yet, use the warm Urdu–English mix Pakistanis speak.'}
 ${name ? `The person's name is ${name}. Use it naturally now and then (not every sentence).` : ''}
 ${memory ? `What you remember from earlier with this person (keep continuity, don't repeat yourself):\n${memory}` : ''}
 ${voice
     ? `This is a live VOICE call. Speak in short, natural sentences (1–3 at a time), like a phone call. No lists, no URLs, no emojis, no markdown.
-${name ? '' : 'Start by greeting them warmly with "Assalam o Alaikum" (or the right greeting for their language), introduce yourself as Danisa, and ask their name. As soon as they tell you, call the remember_name tool, then use their name.'}`
+${name ? '' : 'Start by greeting them warmly with "Assalam o Alaikum", introduce yourself as Danisa, and ask their name. As soon as they tell you, call the remember_name tool, then use their name.'}`
     : 'Keep answers concise and scannable; short paragraphs or bullet points, **bold** for key points when helpful.'}`;
 }
 
@@ -75,7 +75,7 @@ function cors(origin, env) {
 const json = (body, status, headers) => new Response(JSON.stringify(body), { status, headers: { ...headers, 'Content-Type': 'application/json' } });
 
 async function chat(body, env, headers) {
-  const lang = LANGS[body.lang] ? body.lang : 'en';
+  const lang = LANGS[body.lang] ? body.lang : 'auto';
   const messages = (Array.isArray(body.messages) ? body.messages : [])
     .filter(m => m && typeof m.content === 'string' && m.content.trim())
     .slice(-MAX_TURNS)
@@ -115,7 +115,7 @@ async function chat(body, env, headers) {
 }
 
 async function live(body, env, headers) {
-  const lang = LANGS[body.lang] ? body.lang : 'en';
+  const lang = LANGS[body.lang] ? body.lang : 'auto';
   const now = Date.now();
   const res = await fetch(`${API}/v1alpha/auth_tokens`, {
     method: 'POST',
