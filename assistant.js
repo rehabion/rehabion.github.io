@@ -3,7 +3,7 @@
    Until AI_ENDPOINT is set, Danisa answers REHABION questions from the
    built-in notes below and points visitors to a human for anything else. */
 (function(){
-  const AI_ENDPOINT = window.REHABION_AI_ENDPOINT || ''; // e.g. 'https://rehabion-ai.<you>.workers.dev'
+  const AI_ENDPOINT = window.REHABION_AI_ENDPOINT || 'https://rehabion-ai.rehabion.workers.dev';
 
   const T = {
     en:{
