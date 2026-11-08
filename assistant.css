@@ -1,103 +1,113 @@
-/* ── Noor · REHABION assistant ── */
+/* ── Danisa · REHABION assistant (paper theme) ── */
 .noor-launch{
   position:fixed;right:22px;bottom:22px;z-index:200;display:flex;align-items:center;gap:10px;
-  background:var(--raised);color:var(--white);border:1px solid var(--border2);
-  padding:8px 18px 8px 8px;border-radius:999px;cursor:pointer;font-family:var(--font-head);
-  font-size:14px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.35);transition:transform .2s,box-shadow .2s;
+  background:#FFFCF6;color:#1E1B18;border:1.5px solid #1E1B18;
+  padding:7px 18px 7px 7px;border-radius:999px;cursor:pointer;font-family:'Instrument Sans',system-ui,sans-serif;
+  font-size:14.5px;font-weight:600;box-shadow:4px 5px 0 #1E1B18;transition:transform .2s,box-shadow .2s;
 }
-.noor-launch:hover{transform:translateY(-2px) rotate(-1deg);box-shadow:0 14px 36px rgba(0,0,0,.45)}
+.noor-launch:hover{transform:translate(-2px,-2px) rotate(-1deg);box-shadow:6px 7px 0 #1E1B18}
 .noor-launch .noor-face{width:38px;height:38px}
-.noor-launch small{display:block;font-family:var(--font-hand);font-size:16px;font-weight:500;color:var(--cyan);line-height:1}
+.noor-launch small{display:block;font-family:'Caveat',cursive;font-size:17px;font-weight:600;color:#C2522F;line-height:1}
 .noor-face{
   border-radius:46% 54% 52% 48%/55% 45% 55% 45%;flex-shrink:0;
-  background:radial-gradient(circle at 35% 35%,#F4A98F,#E07A5F 55%,#C4583D);
+  background:radial-gradient(circle at 35% 35%,#F2CDB8,#C2522F 70%);
   animation:noor-morph 7s ease-in-out infinite;position:relative;
 }
-.noor-face::after{content:'';position:absolute;inset:28% 26% 34%;border-bottom:2px solid rgba(255,255,255,.85);border-radius:0 0 50% 50%}
+.noor-face::after{content:'';position:absolute;inset:30% 27% 34%;border-bottom:2px solid #FFFCF6;border-radius:0 0 50% 50%}
 @keyframes noor-morph{0%,100%{border-radius:46% 54% 52% 48%/55% 45% 55% 45%}33%{border-radius:58% 42% 45% 55%/45% 58% 42% 55%}66%{border-radius:42% 58% 60% 40%/52% 40% 60% 48%}}
 
 .noor-panel{
-  position:fixed;right:22px;bottom:22px;z-index:210;width:min(400px,calc(100vw - 32px));height:min(620px,calc(100vh - 44px));
-  display:none;flex-direction:column;overflow:hidden;
-  background:#1E1813;border:1px solid var(--border2);border-radius:22px 22px 22px 8px;
-  box-shadow:0 24px 70px rgba(0,0,0,.55);
+  position:fixed;right:22px;bottom:22px;z-index:210;width:min(410px,calc(100vw - 32px));height:min(640px,calc(100vh - 44px));
+  display:none;flex-direction:column;overflow:hidden;color:#1E1B18;font-family:'Instrument Sans',system-ui,sans-serif;
+  background:#FFFCF6;border:1.5px solid #1E1B18;border-radius:24px 24px 24px 8px;box-shadow:6px 8px 0 #1E1B18;
 }
-.noor-panel.open{display:flex;animation:noor-in .28s ease-out}
-@keyframes noor-in{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
-.noor-head{display:flex;align-items:center;gap:10px;padding:14px 14px 12px;border-bottom:1px dashed var(--border2)}
-.noor-head .noor-face{width:34px;height:34px}
+.noor-panel.open{display:flex;animation:noor-in .3s cubic-bezier(.22,.8,.24,1)}
+@keyframes noor-in{from{opacity:0;transform:translateY(16px) rotate(1deg)}to{opacity:1;transform:none}}
+.noor-head{display:flex;align-items:center;gap:8px;padding:14px 12px 12px 14px;border-bottom:1.5px dashed #D9CDB8;background:#F5EFE4}
+.noor-head .noor-face{width:36px;height:36px}
 .noor-title{flex:1;min-width:0}
-.noor-title strong{display:block;font-family:var(--font-serif);font-size:17px;font-weight:600}
-.noor-title span{display:block;font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.noor-lang{display:flex;border:1px solid var(--border2);border-radius:999px;overflow:hidden}
-.noor-lang button{background:none;border:none;color:var(--muted);padding:5px 10px;font-size:12px;cursor:pointer;font-family:var(--font-head)}
-.noor-lang button[aria-pressed="true"]{background:var(--blue);color:#1B1612;font-weight:700}
-.noor-lang button.ur{font-family:var(--font-urdu);font-size:12px;line-height:1.2}
-.noor-icon-btn{background:none;border:1px solid transparent;color:var(--off);width:34px;height:34px;border-radius:50%;cursor:pointer;display:grid;place-items:center;flex-shrink:0}
-.noor-icon-btn:hover{border-color:var(--border2);color:var(--white)}
+.noor-title strong{display:block;font-family:'Fraunces',Georgia,serif;font-size:18px;font-weight:600;white-space:nowrap}
+.noor-title span{display:block;font-size:11.5px;color:#6E6357;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.noor-langsel{max-width:96px;background:#FFFCF6;border:1.5px solid #1E1B18;border-radius:999px;padding:5px 8px;font:inherit;font-size:12.5px;color:#1E1B18;cursor:pointer}
+.noor-icon-btn{background:none;border:1.5px solid transparent;color:#1E1B18;width:36px;height:36px;border-radius:50%;cursor:pointer;display:grid;place-items:center;flex-shrink:0}
+.noor-icon-btn:hover{border-color:#1E1B18}
+.noor-call{background:#2E5946;color:#FFFCF6}
+.noor-call:hover{background:#203F32}
 
 .noor-msgs{flex:1;overflow-y:auto;padding:16px 14px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
-.noor-msg{max-width:86%;padding:10px 14px;font-size:14.5px;line-height:1.6;word-wrap:break-word}
-.noor-msg.bot{align-self:flex-start;background:var(--raised);border:1px solid var(--border);border-radius:4px 18px 18px 18px;color:var(--off)}
-.noor-msg.user{align-self:flex-end;background:var(--blue);color:#1B1612;border-radius:18px 4px 18px 18px;font-weight:500}
-.noor-msg a{color:var(--cyan)}
-.noor-msg.user a{color:#1B1612}
+.noor-msg{max-width:88%;padding:10px 14px;font-size:15px;line-height:1.6;word-wrap:break-word}
+.noor-msg.bot{align-self:flex-start;background:#F5EFE4;border-radius:4px 18px 18px 18px;color:#2E2924}
+.noor-msg.user{align-self:flex-end;background:#C2522F;color:#FFFCF6;border-radius:18px 4px 18px 18px}
+.noor-msg.from-voice::before{content:'🎙 ';opacity:.7;font-size:12px}
+.noor-msg a{color:#9E3F22;font-weight:600}
+.noor-msg.user a{color:#FFFCF6}
 .noor-msg ul{margin:.3rem 0 .3rem 1.1rem}
+.noor-panel[data-dir="rtl"] .noor-msg ul{margin:.3rem 1.1rem .3rem 0}
 .noor-msg p+p{margin-top:.5rem}
-.noor-msg .noor-src{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.noor-msg .noor-src a{font-size:11px;border:1px solid var(--border2);border-radius:999px;padding:2px 8px;text-decoration:none;color:var(--muted);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.noor-msg .noor-speak{background:none;border:none;color:var(--muted);cursor:pointer;font-size:11px;margin-top:6px;padding:0}
-.noor-msg .noor-speak:hover{color:var(--cyan)}
+.noor-src{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.noor-src a{font-size:11px;border:1px solid #CDBFA7;border-radius:999px;padding:2px 8px;text-decoration:none;color:#6E6357;font-weight:400;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.noor-speak{background:none;border:none;color:#6E6357;cursor:pointer;font:inherit;font-size:12px;margin-top:6px;padding:0}
+.noor-speak:hover{color:#C2522F}.noor-speak:disabled{opacity:.5}
 .noor-typing{display:flex;gap:5px;padding:14px 16px}
-.noor-typing i{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:noor-dot 1.2s ease-in-out infinite}
+.noor-typing i{width:7px;height:7px;border-radius:50%;background:#A3978A;animation:noor-dot 1.2s ease-in-out infinite}
 .noor-typing i:nth-child(2){animation-delay:.15s}.noor-typing i:nth-child(3){animation-delay:.3s}
 @keyframes noor-dot{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-5px);opacity:1}}
 
+.noor-name{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.noor-name input{flex:1;min-width:120px;border:1.5px solid #1E1B18;border-radius:999px;padding:8px 14px;font:inherit;background:#FFFCF6}
+.noor-name input:focus{outline:none;border-color:#C2522F}
+.noor-name button{border:none;background:#1E1B18;color:#FFFCF6;border-radius:999px;padding:8px 14px;font:inherit;font-weight:600;cursor:pointer}
+.noor-name .skip{background:none;color:#6E6357;font-weight:400;padding:8px 6px}
+
 .noor-chips{display:flex;gap:6px;flex-wrap:wrap;padding:0 14px 10px}
-.noor-chips button{background:none;border:1px dashed var(--border2);color:var(--off);border-radius:999px;padding:5px 11px;font-size:12.5px;cursor:pointer;font-family:inherit}
-.noor-chips button:hover{border-color:var(--blue);color:var(--white)}
+.noor-chips button{background:#FFFCF6;border:1.5px dashed #CDBFA7;color:#2E2924;border-radius:999px;padding:5px 12px;font-size:13px;cursor:pointer;font-family:inherit}
+.noor-chips button:hover{border-color:#C2522F;border-style:solid}
 
-.noor-input{display:flex;align-items:flex-end;gap:6px;padding:10px;border-top:1px dashed var(--border2)}
-.noor-input textarea{flex:1;resize:none;background:var(--panel);border:1px solid var(--border);border-radius:16px;color:var(--white);
-  padding:10px 14px;font:inherit;font-size:14.5px;max-height:120px;min-height:42px;line-height:1.45}
-.noor-input textarea:focus{outline:none;border-color:var(--blue)}
-.noor-send{background:var(--blue);color:#1B1612;border:none;width:42px;height:42px;border-radius:50%;cursor:pointer;display:grid;place-items:center;flex-shrink:0}
-.noor-send:disabled{opacity:.5;cursor:default}
-.noor-mic.rec{color:var(--red);border-color:var(--red);animation:noor-rec 1.2s ease-in-out infinite}
-@keyframes noor-rec{50%{box-shadow:0 0 0 6px rgba(229,96,77,.18)}}
-.noor-foot{font-size:10.5px;color:var(--muted);text-align:center;padding:0 12px 9px}
+.noor-input{display:flex;align-items:flex-end;gap:6px;padding:10px;border-top:1.5px dashed #D9CDB8}
+.noor-input textarea{flex:1;resize:none;background:#F5EFE4;border:1.5px solid transparent;border-radius:18px;color:#1E1B18;
+  padding:10px 14px;font:inherit;font-size:15px;max-height:120px;min-height:42px;line-height:1.45}
+.noor-input textarea:focus{outline:none;border-color:#1E1B18;background:#FFFCF6}
+.noor-send{background:#C2522F;color:#FFFCF6;border:none;width:42px;height:42px;border-radius:50%;cursor:pointer;display:grid;place-items:center;flex-shrink:0}
+.noor-send:hover{background:#9E3F22}.noor-send:disabled{opacity:.5;cursor:default}
+.noor-mic.rec{color:#B8402A;border-color:#B8402A;animation:noor-rec 1.2s ease-in-out infinite}
+@keyframes noor-rec{50%{box-shadow:0 0 0 6px rgba(184,64,42,.15)}}
+.noor-foot{font-size:11px;color:#6E6357;text-align:center;padding:0 12px 9px}
+.noor-forget{background:none;border:none;color:#6E6357;text-decoration:underline;font:inherit;cursor:pointer}
 
-/* Urdu: right-to-left, Nastaliq */
-.noor-panel[data-lang="ur"] .noor-msgs,.noor-panel[data-lang="ur"] textarea,.noor-panel[data-lang="ur"] .noor-chips{direction:rtl}
-.noor-panel[data-lang="ur"] .noor-msg,.noor-panel[data-lang="ur"] textarea,.noor-panel[data-lang="ur"] .noor-chips button,.noor-voice[data-lang="ur"] .noor-voice-text{font-family:var(--font-urdu);line-height:2.1}
-.noor-panel[data-lang="ur"] .noor-msg.bot{align-self:flex-end;border-radius:18px 4px 18px 18px}
-.noor-panel[data-lang="ur"] .noor-msg.user{align-self:flex-start;border-radius:4px 18px 18px 18px}
+/* right-to-left scripts */
+.noor-panel[data-dir="rtl"] .noor-msgs,.noor-panel[data-dir="rtl"] .noor-chips,.noor-panel[data-dir="rtl"] .noor-name{direction:rtl}
+.noor-panel[data-dir="rtl"] .noor-msg.bot{align-self:flex-end;border-radius:18px 4px 18px 18px}
+.noor-panel[data-dir="rtl"] .noor-msg.user{align-self:flex-start;border-radius:4px 18px 18px 18px}
+.noor-panel[data-font="urdu"] .noor-msg,.noor-panel[data-font="urdu"] textarea,.noor-panel[data-font="urdu"] .noor-chips button,.noor-panel[data-font="urdu"] .noor-name,
+.noor-voice[data-font="urdu"] .noor-voice-text,.noor-voice[data-font="urdu"] .noor-voice-status{font-family:'Noto Nastaliq Urdu',serif;line-height:2.15}
+.noor-panel[data-font="naskh"] .noor-msg,.noor-panel[data-font="naskh"] textarea,.noor-voice[data-font="naskh"] .noor-voice-text{font-family:'Noto Naskh Arabic',serif;line-height:1.9}
+.noor-voice[data-dir="rtl"] .noor-voice-text{direction:rtl}
 
-/* ── Voice call ── */
-.noor-voice{position:fixed;inset:0;z-index:220;display:none;flex-direction:column;align-items:center;justify-content:center;gap:28px;
-  background:radial-gradient(ellipse at 50% 40%,rgba(224,122,95,.18),transparent 60%),rgba(21,17,14,.96);backdrop-filter:blur(10px);padding:24px}
-.noor-voice.open{display:flex}
-.noor-orb{width:min(220px,55vw);aspect-ratio:1;position:relative}
-.noor-orb span{position:absolute;inset:0;border-radius:46% 54% 52% 48%/55% 45% 55% 45%;mix-blend-mode:screen;animation:noor-morph 6s ease-in-out infinite,noor-spin 18s linear infinite}
-.noor-orb span:nth-child(1){background:radial-gradient(circle at 40% 40%,#F4A98F,#E07A5F 60%,transparent 72%)}
-.noor-orb span:nth-child(2){background:radial-gradient(circle at 60% 45%,#F2B84B,transparent 65%);animation-duration:7s,22s;animation-direction:normal,reverse;opacity:.8}
-.noor-orb span:nth-child(3){background:radial-gradient(circle at 45% 65%,#8FB996,transparent 62%);animation-duration:8s,26s;opacity:.7}
+/* ── live voice call ── */
+.noor-voice{position:fixed;inset:0;z-index:220;display:none;flex-direction:column;align-items:center;justify-content:center;gap:26px;padding:24px;
+  background:#F5EFE4;color:#1E1B18;font-family:'Instrument Sans',system-ui,sans-serif}
+.noor-voice::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 60% 45% at 50% 38%,rgba(242,205,184,.8),transparent 70%),radial-gradient(ellipse 40% 30% at 70% 80%,rgba(207,224,210,.7),transparent 70%)}
+.noor-voice.open{display:flex;animation:noor-in .35s ease-out}
+.noor-voice>*{position:relative}
+.noor-orb{--lvl:0;width:min(230px,56vw);aspect-ratio:1;position:relative;transform:scale(calc(1 + var(--lvl) * .18));transition:transform .12s linear}
+.noor-orb span{position:absolute;inset:0;border-radius:46% 54% 52% 48%/55% 45% 55% 45%;mix-blend-mode:multiply;animation:noor-morph 6s ease-in-out infinite,noor-spin 18s linear infinite}
+.noor-orb span:nth-child(1){background:#C2522F;opacity:.85}
+.noor-orb span:nth-child(2){background:#DDA032;opacity:.7;inset:6%;animation-duration:7s,22s;animation-direction:normal,reverse}
+.noor-orb span:nth-child(3){background:#2E5946;opacity:.45;inset:14%;animation-duration:8s,26s}
 @keyframes noor-spin{to{transform:rotate(360deg)}}
-.noor-voice[data-state="listening"] .noor-orb{animation:noor-breathe 2.4s ease-in-out infinite}
-.noor-voice[data-state="speaking"] .noor-orb{animation:noor-talk .5s ease-in-out infinite}
-.noor-voice[data-state="thinking"] .noor-orb span{animation-duration:2s,5s}
-@keyframes noor-breathe{50%{transform:scale(1.06)}}
-@keyframes noor-talk{50%{transform:scale(1.1)}}
-.noor-voice-status{font-family:var(--font-hand);font-size:28px;color:var(--cyan)}
-.noor-voice-text{max-width:560px;text-align:center;color:var(--off);font-size:16px;line-height:1.7;min-height:3.4em}
-.noor-voice-text em{color:var(--muted);font-style:normal;display:block;font-size:14px;margin-bottom:6px}
+.noor-voice[data-state="connecting"] .noor-orb span{animation-duration:2s,4s;opacity:.4}
+.noor-voice-status{font-family:'Caveat',cursive;font-size:32px;color:#C2522F;min-height:1.2em}
+.noor-voice-text{max-width:600px;text-align:center;color:#2E2924;font-size:18px;line-height:1.7;min-height:3.4em}
+.noor-voice-text em{color:#6E6357;font-style:normal;display:block;font-size:15px;margin-bottom:8px}
 .noor-voice-actions{display:flex;gap:14px}
-.noor-voice-actions button{border:none;border-radius:999px;padding:12px 22px;font:inherit;font-weight:700;cursor:pointer}
-.noor-end{background:var(--red);color:#fff}
-.noor-mute{background:var(--raised);color:var(--off);border:1px solid var(--border2)!important}
+.noor-voice-actions button{border-radius:999px;padding:12px 24px;font:inherit;font-weight:700;cursor:pointer;border:1.5px solid #1E1B18;box-shadow:3px 4px 0 #1E1B18}
+.noor-end{background:#B8402A;color:#FFFCF6}
+.noor-mute{background:#FFFCF6;color:#1E1B18}
 
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 @media(max-width:520px){
   .noor-launch{right:14px;bottom:14px;padding-right:14px}
-  .noor-panel{right:0;bottom:0;width:100vw;height:100dvh;border-radius:0}
+  .noor-panel{right:0;bottom:0;width:100vw;height:100dvh;border-radius:0;border:none;box-shadow:none}
 }
 @media(prefers-reduced-motion:reduce){.noor-face,.noor-orb,.noor-orb span{animation:none!important}}

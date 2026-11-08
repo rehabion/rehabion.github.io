@@ -13,17 +13,17 @@
   function noise(x){const i=Math.floor(x),f=x-i,u=f*f*(3-2*f);return P[i&511]*(1-u)+P[(i+1)&511]*u;}
 
   const washes=[
-    {c:[224,122,95], r:.42,ax:.18,ay:.12,sx:.00011,sy:.00015,ox:.18,oy:.22,ph:0},
-    {c:[242,184,75], r:.34,ax:.22,ay:.16,sx:.00009,sy:.00012,ox:.82,oy:.30,ph:2},
-    {c:[143,185,150],r:.38,ax:.16,ay:.20,sx:.00013,sy:.00008,ox:.65,oy:.78,ph:4},
-    {c:[196,88,61],  r:.30,ax:.20,ay:.14,sx:.00010,sy:.00014,ox:.25,oy:.85,ph:1},
-    {c:[245,237,225],r:.22,ax:.25,ay:.18,sx:.00007,sy:.00011,ox:.50,oy:.50,ph:3}
+    {c:[194,82,47],  r:.42,ax:.18,ay:.12,sx:.00011,sy:.00015,ox:.18,oy:.22,ph:0},
+    {c:[221,160,50], r:.34,ax:.22,ay:.16,sx:.00009,sy:.00012,ox:.82,oy:.30,ph:2},
+    {c:[46,89,70],   r:.38,ax:.16,ay:.20,sx:.00013,sy:.00008,ox:.65,oy:.78,ph:4},
+    {c:[169,203,218],r:.30,ax:.20,ay:.14,sx:.00010,sy:.00014,ox:.25,oy:.85,ph:1},
+    {c:[242,205,184],r:.22,ax:.25,ay:.18,sx:.00007,sy:.00011,ox:.50,oy:.50,ph:3}
   ];
   const strokes=Array.from({length:7},(_,i)=>({
     y:.12+i*.13, amp:18+Math.random()*34, freq:.0016+Math.random()*.0018,
     speed:.00022+Math.random()*.00025, seed:Math.random()*200,
-    w:.8+Math.random()*1.6, a:.07+Math.random()*.08,
-    c:i%3===0?'242,184,75':i%3===1?'224,122,95':'227,213,195'
+    w:.7+Math.random()*1.2, a:.05+Math.random()*.06,
+    c:i%3===0?'194,82,47':i%3===1?'46,89,70':'30,27,24'
   }));
 
   function resize(){
@@ -49,8 +49,8 @@
     }
     const g=ctx.createRadialGradient(cx,cy,0,cx,cy,R);
     const [r,gg,b]=w.c;
-    g.addColorStop(0,`rgba(${r},${gg},${b},.13)`);
-    g.addColorStop(.55,`rgba(${r},${gg},${b},.05)`);
+    g.addColorStop(0,`rgba(${r},${gg},${b},.10)`);
+    g.addColorStop(.55,`rgba(${r},${gg},${b},.04)`);
     g.addColorStop(1,`rgba(${r},${gg},${b},0)`);
     ctx.fillStyle=g;ctx.fill();
   }
@@ -81,7 +81,7 @@
     t+=now-last||16;last=now;
     mouse.x+=(mouse.tx-mouse.x)*.04;mouse.y+=(mouse.ty-mouse.y)*.04;
     ctx.clearRect(0,0,W,H);
-    ctx.globalCompositeOperation='lighter';
+    ctx.globalCompositeOperation='multiply'; /* pigment on paper */
     washes.forEach(drawWash);
     ctx.globalCompositeOperation='source-over';
     strokes.forEach(drawStroke);

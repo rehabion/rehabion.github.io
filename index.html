@@ -3,1746 +3,813 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>REHABION — AI-Powered Rehabilitation Technology | Pakistan</title>
+<title>REHABION — Rehabilitation Technology from Pakistan</title>
 <meta name="description" content="Pakistan's first game-based rehabilitation platform. AI physiotherapy tools, biomedical wearables, and clinical dashboards built by biomedical engineers.">
 <meta name="keywords" content="rehabilitation technology, AI physiotherapy, game-based rehab, biomedical engineering, Pakistan, Dr Faisal Amin, Muhammad Ramzan">
 <meta name="author" content="REHABION">
 <meta name="robots" content="index, follow">
-<meta property="og:title" content="REHABION — AI-Powered Rehabilitation Technology | Pakistan">
+<meta name="theme-color" content="#F5EFE4">
+<meta property="og:title" content="REHABION — Rehabilitation Technology from Pakistan">
 <meta property="og:description" content="Pakistan's first game-based rehabilitation platform. AI physiotherapy tools, biomedical wearables, and clinical dashboards built by biomedical engineers.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://rehabion.github.io">
 <meta property="og:image" content="https://rehabion.github.io/images/og-cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="REHABION — AI-Powered Rehabilitation Technology from Pakistan">
+<meta property="og:image:alt" content="REHABION — Rehabilitation Technology from Pakistan">
 <meta property="og:site_name" content="REHABION">
 <meta property="og:locale" content="en_PK">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="REHABION — AI Rehabilitation Technology | Pakistan">
-<meta name="twitter:description" content="Pakistan's first game-based rehab platform. AI physio tools, biomedical wearables, clinical dashboards.">
+<meta name="twitter:title" content="REHABION — Rehabilitation Technology from Pakistan">
+<meta name="twitter:description" content="Pakistan's first game-based rehab platform. Physio tools, biomedical wearables, clinical dashboards.">
 <meta name="twitter:image" content="https://rehabion.github.io/images/og-cover.png">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formspree.io https://*.workers.dev; media-src 'self' blob: data:;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formspree.io https://*.workers.dev wss://generativelanguage.googleapis.com; media-src 'self' blob: data:;">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Caveat:wght@500;700&family=Noto+Nastaliq+Urdu:wght@400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..800,50;1,9..144,300..800,100&family=Instrument+Sans:wght@400;500;600;700&family=Caveat:wght@500;700&family=Noto+Nastaliq+Urdu:wght@400;600&family=Noto+Naskh+Arabic:wght@400;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --void:   #15110E;
-  --deep:   #1B1612;
-  --panel:  #231C17;
-  --raised: #2C231D;
-  --border: #3A2E25;
-  --border2:#4A3A2E;
+:root{
+  --paper:#F5EFE4; --paper-2:#EDE3D1; --card:#FFFCF6;
+  --ink:#1E1B18; --ink-2:#4A433B; --muted:#6E6357; --line:#D9CDB8;
+  --terra:#C2522F; --terra-deep:#9E3F22; --blush:#F2CDB8;
+  --forest:#2E5946; --forest-deep:#203F32; --mint:#CFE0D2;
+  --mustard:#DDA032; --sky:#A9CBDA;
 
-  --blue:       #E07A5F;
-  --blue-dim:   #C4583D;
-  --blue-bright:#F4A98F;
-  --blue-glow:  rgba(224,122,95,0.10);
-  --blue-glow2: rgba(224,122,95,0.20);
-  --blue-glow3: rgba(224,122,95,0.35);
+  --font-body:'Instrument Sans',system-ui,sans-serif;
+  --font-serif:'Fraunces',Georgia,serif;
+  --font-hand:'Caveat',cursive;
+  --font-urdu:'Noto Nastaliq Urdu',serif;
+  --ease:cubic-bezier(.22,.8,.24,1);
 
-  --cyan:      #F2B84B;
-  --cyan-dim:  #D99A2B;
-  --cyan-glow: rgba(242,184,75,0.12);
-
-  --purple:    #8FB996;
-  --purple-glow: rgba(143,185,150,0.12);
-
-  --white:  #F5EDE1;
-  --off:    #E3D5C3;
-  --muted:  #B3A08A;
-  --dim:    #2E251E;
-
-  --green:  #7FB685;
-  --amber:  #F2B84B;
-  --red:    #E5604D;
-
-  --font-head: 'Plus Jakarta Sans', sans-serif;
-  --font-mono: 'Space Mono', monospace;
-  --font-serif: 'Fraunces', Georgia, serif;
-  --font-hand: 'Caveat', cursive;
-  --font-urdu: 'Noto Nastaliq Urdu', serif;
-
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
+  /* names the assistant widget reads */
+  --panel:var(--card); --raised:#FBF6EC; --border:var(--line); --border2:#CDBFA7;
+  --white:var(--ink); --off:var(--ink-2); --blue:var(--terra); --cyan:var(--terra);
+  --red:#B8402A; --green:var(--forest); --font-head:var(--font-body);
 }
-
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:16px}
-body{background:var(--void);color:var(--white);font-family:var(--font-head);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-::-webkit-scrollbar{width:3px}
-::-webkit-scrollbar-track{background:var(--deep)}
-::-webkit-scrollbar-thumb{background:var(--blue);border-radius:2px}
-::selection{background:rgba(224,122,95,.25);color:var(--blue-bright)}
-:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+::selection{background:var(--blush);color:var(--ink)}
+:focus-visible{outline:2px dashed var(--terra);outline-offset:4px;border-radius:4px}
+.wrap{width:min(1180px,100% - 40px);margin-inline:auto}
+.hand{font-family:var(--font-hand);font-weight:600;color:var(--terra)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
-/* ── LIVING BACKGROUND (hand-drawn ink + paper grain) ── */
 #life-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
-.grain{
-  position:fixed;inset:-50%;z-index:2;pointer-events:none;opacity:.09;mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation:grain-shift 1.2s steps(4) infinite;
-}
-@keyframes grain-shift{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}100%{transform:translate(0,0)}}
+.grain{position:fixed;inset:-50%;z-index:60;pointer-events:none;opacity:.06;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 1.4s steps(4) infinite}
+@keyframes grain{25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}}
+main,header,footer,nav{position:relative;z-index:1}
 
-/* ── AMBIENT ORBS ── */
-.orb{position:absolute;border-radius:50%;pointer-events:none;z-index:0}
-.orb-hero-l{width:600px;height:600px;top:-100px;left:-200px;
-  background:radial-gradient(circle,rgba(224,122,95,.07) 0%,transparent 70%)}
-.orb-hero-r{width:700px;height:700px;top:-150px;right:-250px;
-  background:radial-gradient(circle,rgba(242,184,75,.05) 0%,transparent 70%)}
-.orb-mid{width:800px;height:400px;
-  background:radial-gradient(ellipse,rgba(224,122,95,.05) 0%,transparent 70%);
-  left:50%;transform:translateX(-50%)}
-.orb-team{width:900px;height:500px;top:0;left:50%;transform:translateX(-50%);
-  background:radial-gradient(ellipse,rgba(143,185,150,.04) 0%,transparent 65%)}
+/* ── nav ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .3s,box-shadow .3s}
+.nav.scrolled{background:rgba(245,239,228,.88);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:74px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--font-serif);font-size:26px;font-weight:600;letter-spacing:-.02em}
+.brand svg{width:34px;height:34px}
+.brand em{font-style:italic;color:var(--terra);font-weight:500}
+.nav-links{display:flex;gap:30px;list-style:none;align-items:center}
+.nav-links a{text-decoration:none;font-weight:500;font-size:15px;position:relative}
+.nav-links a:not(.pill)::after{content:'';position:absolute;left:0;right:0;bottom:-4px;height:6px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 8' preserveAspectRatio='none'%3E%3Cpath d='M1 5 Q 25 1 50 4 T 99 3' fill='none' stroke='%23C2522F' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+  clip-path:inset(0 100% 0 0);transition:clip-path .35s var(--ease)}
+.nav-links a:hover::after{clip-path:inset(0 0 0 0)}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--paper)!important;text-decoration:none;
+  padding:11px 20px;border-radius:999px;font-weight:600;font-size:15px;border:none;cursor:pointer;font-family:inherit;
+  transition:transform .25s var(--ease),background .25s}
+.pill:hover{transform:translateY(-2px) rotate(-1deg);background:var(--terra)}
+.pill.ghost{background:transparent;color:var(--ink)!important;box-shadow:inset 0 0 0 1.5px var(--ink)}
+.pill.ghost:hover{background:var(--ink);color:var(--paper)!important}
+.burger{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.burger span{display:block;width:24px;height:2px;background:var(--ink);margin:5px 0;border-radius:2px;transition:transform .3s}
+.mobile-menu{display:none;position:fixed;inset:74px 0 auto 0;z-index:49;background:var(--paper);border-bottom:1px solid var(--line);padding:10px 20px 20px;flex-direction:column}
+.mobile-menu.open{display:flex}
+.mobile-menu a{padding:12px 0;font-family:var(--font-serif);font-size:24px;text-decoration:none;border-bottom:1px dashed var(--line)}
 
-/* ── NAV ── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:0 5%;height:66px;
-  display:flex;align-items:center;justify-content:space-between;
-  background:rgba(21,17,14,.92);backdrop-filter:blur(28px) saturate(160%);
-  border-bottom:1px solid var(--border);transition:border-color .3s,box-shadow .3s;
-}
-nav.scrolled{border-bottom-color:rgba(224,122,95,.4);box-shadow:0 2px 40px rgba(224,122,95,.08)}
+/* ── hero ── */
+.hero{padding:140px 0 70px;min-height:100vh;display:flex;align-items:center}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.hero-kicker{font-family:var(--font-hand);font-size:26px;color:var(--terra);transform:rotate(-2deg);display:inline-block;margin-bottom:10px}
+.hero h1{font-family:var(--font-serif);font-weight:400;font-size:clamp(46px,7vw,98px);line-height:.98;letter-spacing:-.035em;font-variation-settings:'SOFT' 50}
+.hero h1 em{font-style:italic;font-weight:500;color:var(--terra);position:relative;white-space:nowrap}
+.hero h1 em svg{position:absolute;left:-4%;bottom:-.1em;width:108%;height:.35em;overflow:visible}
+.hero h1 .w{display:inline-block;opacity:0;transform:translateY(.4em) rotate(2deg);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.hero.in h1 .w{opacity:1;transform:none}
+.hero-sub{font-size:19px;color:var(--ink-2);max-width:520px;margin:28px 0 34px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.talk-link{display:inline-flex;align-items:center;gap:10px;font-weight:600;text-decoration:none;padding:10px 4px}
+.talk-link .dot{width:40px;height:40px;border-radius:50%;background:var(--blush);display:grid;place-items:center;position:relative}
+.talk-link .dot::after{content:'';position:absolute;inset:-5px;border-radius:50%;border:1.5px solid var(--terra);opacity:0;animation:ring 2.4s var(--ease) infinite}
+@keyframes ring{0%{transform:scale(.8);opacity:.8}100%{transform:scale(1.35);opacity:0}}
+.talk-link small{display:block;font-weight:400;color:var(--muted);font-size:13px}
+.hero-note{margin-top:46px;display:flex;gap:28px;flex-wrap:wrap;color:var(--muted);font-size:14px}
+.hero-note b{display:block;font-family:var(--font-serif);font-size:30px;font-weight:500;color:var(--ink);line-height:1.1}
 
-.nav-logo{display:flex;align-items:center;gap:11px;text-decoration:none;flex-shrink:0}
-.logo-mark{
-  width:36px;height:36px;border:1.5px solid rgba(224,122,95,.6);border-radius:9px;
-  background:linear-gradient(135deg,var(--panel),var(--raised));
-  display:flex;align-items:center;justify-content:center;position:relative;
-  box-shadow:0 0 12px rgba(224,122,95,.15),inset 0 1px 0 rgba(255,255,255,.05);
-}
-.logo-mark svg{width:24px;height:13px}
-.logo-text{font-size:18px;font-weight:800;letter-spacing:.07em;color:var(--white)}
-.logo-text span{color:var(--blue)}
-.nav-chip{
-  font-family:var(--font-mono);font-size:8px;color:var(--green);letter-spacing:.14em;
-  border:1px solid rgba(127,182,133,.35);padding:2px 6px;border-radius:3px;
-  background:rgba(127,182,133,.07);display:flex;align-items:center;gap:4px;
-}
-.live-dot{width:5px;height:5px;background:var(--green);border-radius:50%;animation:blink 1.5s ease-in-out infinite;flex-shrink:0}
-@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 4px var(--green)}50%{opacity:.2;box-shadow:none}}
+.hero-art{position:relative;aspect-ratio:1/1.05}
+.hero-art .blob{position:absolute;inset:6% 2% 4% 8%;background:var(--blush);border-radius:58% 42% 50% 50%/48% 56% 44% 52%;animation:blob 14s ease-in-out infinite}
+.hero-art .blob.b2{inset:auto 0 0 auto;width:38%;height:30%;background:var(--mint);animation-duration:18s;animation-direction:reverse}
+@keyframes blob{0%,100%{border-radius:58% 42% 50% 50%/48% 56% 44% 52%;transform:rotate(0)}50%{border-radius:44% 56% 42% 58%/58% 42% 58% 42%;transform:rotate(6deg)}}
+.hero-art svg.figure{position:relative;width:100%;height:100%}
+.arm{transform-box:view-box;transform-origin:212px 214px;animation:raise 4.2s ease-in-out infinite}
+@keyframes raise{0%,100%{transform:rotate(58deg)}45%,55%{transform:rotate(-8deg)}}
+.twinkle{transform-box:fill-box;transform-origin:center;animation:twinkle 4.2s ease-in-out infinite}
+@keyframes twinkle{0%,40%,100%{transform:scale(.85) rotate(0)}50%{transform:scale(1.25) rotate(20deg)}}
+.deg{font-family:var(--font-hand);font-size:22px;fill:var(--terra);stroke:none}
 
-.nav-links{display:flex;align-items:center;gap:1.75rem;list-style:none}
-.nav-links a{
-  color:var(--muted);text-decoration:none;font-size:13.5px;font-weight:500;
-  letter-spacing:.01em;transition:color .2s;position:relative;white-space:nowrap;
-}
-.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--blue);transition:width .25s}
-.nav-links a:hover{color:var(--blue)}
-.nav-links a:hover::after{width:100%}
-.nav-cta{
-  background:linear-gradient(135deg,var(--blue),var(--blue-dim))!important;
-  color:#fff!important;padding:8px 18px;border-radius:7px;font-size:13px!important;
-  font-weight:700!important;box-shadow:0 4px 16px rgba(224,122,95,.25)!important;
-  transition:all .2s!important;border:none!important;
-}
-.nav-cta:hover{transform:translateY(-1px)!important;box-shadow:0 6px 24px rgba(224,122,95,.4)!important}
-.nav-cta::after{display:none!important}
+/* line drawing */
+.draw{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.2s var(--ease)}
+.in .draw,.draw.in{stroke-dashoffset:0}
+.d2{transition-delay:.35s}.d3{transition-delay:.7s}.d4{transition-delay:1.05s}.d5{transition-delay:1.4s}
+.fade{opacity:0;transition:opacity 1s var(--ease) 1.6s}.in .fade{opacity:1}
 
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
-.hamburger span{display:block;width:22px;height:1.5px;background:var(--white);border-radius:2px;transition:all .3s}
-.mobile-nav{
-  display:none;position:fixed;top:66px;left:0;right:0;z-index:99;
-  background:rgba(27,22,18,.97);backdrop-filter:blur(24px);
-  border-bottom:1px solid var(--border);padding:1.25rem 5%;flex-direction:column;
-}
-.mobile-nav.open{display:flex}
-.mobile-nav a{color:var(--muted);text-decoration:none;font-size:15px;font-weight:500;padding:.7rem 0;border-bottom:1px solid var(--border);transition:color .2s}
-.mobile-nav a:hover{color:var(--blue)}
+/* ── marquee ── */
+.marquee{background:var(--ink);color:var(--paper);transform:rotate(-1.6deg);margin:20px -20px;padding:18px 0;overflow:hidden;position:relative;z-index:2}
+.marquee-track{display:flex;width:max-content;animation:marq 38s linear infinite}
+.marquee span{font-family:var(--font-serif);font-size:clamp(26px,3.4vw,44px);font-style:italic;padding:0 22px;white-space:nowrap;display:flex;align-items:center;gap:44px}
+.marquee span::after{content:'';width:14px;height:14px;background:var(--mustard);border-radius:50% 40% 55% 45%}
+.marquee .ur{font-family:var(--font-urdu);font-style:normal;font-size:clamp(20px,2.6vw,32px)}
+@keyframes marq{to{transform:translateX(-50%)}}
 
-/* ── HERO ── */
-.hero{
-  position:relative;z-index:1;min-height:100vh;
-  display:grid;grid-template-columns:1fr 1fr;
-  align-items:center;padding:118px 5% 80px;gap:5rem;overflow:hidden;
-}
+/* ── generic section ── */
+section{padding:120px 0}
+.label{font-family:var(--font-hand);font-size:26px;color:var(--terra);display:inline-flex;align-items:center;gap:10px;margin-bottom:8px}
+.label svg{width:34px;height:14px}
+.h2{font-family:var(--font-serif);font-weight:400;font-size:clamp(36px,5vw,66px);line-height:1.02;letter-spacing:-.03em}
+.h2 em{font-style:italic;color:var(--terra);font-weight:500}
+.lede{font-size:19px;color:var(--ink-2);max-width:600px;margin-top:20px}
+.rv{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv.r2{transition-delay:.12s}.rv.r3{transition-delay:.24s}.rv.r4{transition-delay:.36s}
 
-.hero-eyebrow{
-  font-family:var(--font-mono);font-size:9.5px;color:var(--blue);
-  letter-spacing:.24em;text-transform:uppercase;margin-bottom:1.5rem;
-  display:flex;align-items:center;gap:10px;
-}
-.hero-eyebrow::before{content:'';display:inline-block;width:20px;height:1px;background:var(--blue);box-shadow:0 0 6px var(--blue)}
+/* ── problem ── */
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:56px}
+.ratio{background:var(--card);border-radius:26px 26px 26px 6px;padding:40px;box-shadow:0 1px 0 var(--line),0 24px 50px -30px rgba(60,40,20,.35);position:relative}
+.ratio .tape{position:absolute;top:-14px;left:50%;width:110px;height:28px;background:rgba(221,160,50,.55);transform:translateX(-50%) rotate(-3deg)}
+.ratio h3{font-family:var(--font-serif);font-weight:500;font-size:22px;margin-bottom:26px}
+.bar-row{display:grid;grid-template-columns:120px 1fr 52px;align-items:center;gap:14px;margin:18px 0}
+.bar-row span{font-size:14px;color:var(--muted)}
+.bar{height:34px;border-radius:6px 14px 10px 6px;background:var(--paper-2);overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:inherit;transition:width 1.8s var(--ease) .3s}
+.ratio.in .bar.need i{width:100%;background:var(--forest)}
+.ratio.in .bar.have i{width:10%;background:var(--terra)}
+.bar-row b{font-family:var(--font-serif);font-size:26px;font-weight:500}
+.ratio .scribble{font-family:var(--font-hand);font-size:24px;color:var(--terra);margin-top:16px;transform:rotate(-1.5deg)}
+.ratio .src{font-size:12px;color:var(--muted);margin-top:14px}
+.points{counter-reset:p}
+.point{display:grid;grid-template-columns:54px 1fr;gap:10px;padding:26px 0;border-top:1px solid var(--line)}
+.point:first-child{border-top:none;padding-top:0}
+.point::before{counter-increment:p;content:counter(p,decimal-leading-zero);font-family:var(--font-serif);font-style:italic;font-size:26px;color:var(--terra)}
+.point h3{font-family:var(--font-serif);font-weight:500;font-size:24px;line-height:1.2;margin-bottom:6px}
+.point p{color:var(--ink-2)}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:80px;padding-top:40px;border-top:2px solid var(--ink)}
+.fact b{display:block;font-family:var(--font-serif);font-weight:400;font-size:clamp(48px,6vw,80px);line-height:1;letter-spacing:-.04em}
+.fact p{margin-top:10px;color:var(--ink-2)}
+.fact small{display:block;margin-top:6px;color:var(--muted);font-size:12.5px}
 
-.hero h1{
-  font-size:clamp(38px,4.8vw,72px);font-weight:800;line-height:1.04;
-  letter-spacing:-.035em;margin-bottom:1.5rem;
-}
-.hero h1 .line-muted{color:var(--muted);font-weight:300;font-style:italic}
-.gradient-text{
-  background:linear-gradient(120deg,var(--blue-bright) 0%,var(--cyan) 50%,var(--purple) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
+/* ── services ── */
+#services{background:var(--card)}
+.svc-list{margin-top:60px;border-top:1px solid var(--ink)}
+.svc{display:grid;grid-template-columns:90px 1.1fr 1.4fr 130px;gap:30px;align-items:baseline;padding:34px 18px;border-bottom:1px solid var(--line);position:relative;transition:background .4s var(--ease)}
+.svc::before{content:'';position:absolute;inset:0;background:var(--blush);transform:scaleY(0);transform-origin:bottom;transition:transform .45s var(--ease);z-index:-1;border-radius:4px}
+.svc:hover::before{transform:scaleY(1)}
+.svc{z-index:0}
+.svc .n{font-family:var(--font-serif);font-style:italic;font-size:22px;color:var(--muted)}
+.svc h3{font-family:var(--font-serif);font-weight:500;font-size:clamp(24px,2.6vw,34px);line-height:1.1;letter-spacing:-.02em;transition:transform .45s var(--ease)}
+.svc:hover h3{transform:translateX(10px)}
+.svc p{color:var(--ink-2)}
+.svc .st{font-family:var(--font-hand);font-size:24px;color:var(--forest);text-align:right;transform:rotate(-3deg)}
+.svc .st.lab{color:var(--mustard)}.svc .st.proto{color:var(--terra)}
 
-.hero-sub{
-  font-size:16.5px;color:var(--muted);line-height:1.82;max-width:460px;margin-bottom:2.5rem;
-}
-.hero-sub strong{color:var(--off);font-weight:600}
+/* ── projects ── */
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:60px}
+.proj{background:var(--card);border-radius:28px;overflow:hidden;box-shadow:0 1px 0 var(--line),0 30px 60px -40px rgba(60,40,20,.45);transition:transform .5s var(--ease)}
+.proj:hover{transform:translateY(-6px) rotate(-.4deg)}
+.proj:nth-child(2):hover{transform:translateY(-6px) rotate(.4deg)}
+.proj-art{aspect-ratio:16/10;position:relative;overflow:hidden}
+.proj:nth-child(1) .proj-art{background:var(--mint)}
+.proj:nth-child(2) .proj-art{background:#F6E2B8}
+.proj-art svg{width:100%;height:100%}
+.proj-body{padding:30px 34px 36px}
+.proj-meta{display:flex;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-bottom:12px}
+.proj-meta span{border:1px solid var(--line);border-radius:999px;padding:3px 12px}
+.proj-meta .live{border-color:var(--forest);color:var(--forest);font-weight:600}
+.proj h3{font-family:var(--font-serif);font-weight:500;font-size:32px;letter-spacing:-.02em;line-height:1.1}
+.proj p{color:var(--ink-2);margin:12px 0 18px}
+.textlink{font-weight:600;text-decoration:none;border-bottom:2px solid var(--terra);padding-bottom:2px;transition:color .2s}
+.textlink:hover{color:var(--terra)}
+.proj-more{grid-column:1/-1;border:2px dashed var(--border2);border-radius:28px;padding:40px;display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap}
+.proj-more h3{font-family:var(--font-serif);font-weight:400;font-size:30px}
+.proj-more p{color:var(--ink-2);max-width:620px}
+.footstep{opacity:0;animation:step 4s infinite}
+@keyframes step{0%{opacity:0}8%,60%{opacity:1}80%,100%{opacity:0}}
 
-.hero-actions{display:flex;gap:.875rem;flex-wrap:wrap;margin-bottom:2.75rem}
-.hero>*{min-width:0}
+/* ── journey ── */
+#journey{background:var(--paper-2)}
+.journey{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;margin-top:20px}
+.journey-intro{position:sticky;top:120px;align-self:start}
+.tl{position:relative;padding-left:58px}
+.tl-path{position:absolute;left:0;top:0;width:40px;height:100%}
+.tl-path path{stroke-dasharray:1;stroke-dashoffset:var(--p,1)}
+.tl-item{position:relative;padding:0 0 46px}
+.tl-item::before{content:'';position:absolute;left:-49px;top:8px;width:18px;height:18px;border-radius:50%;background:var(--paper-2);border:2.5px solid var(--terra)}
+.tl-item.done::before{background:var(--terra)}
+.tl-item .when{font-family:var(--font-hand);font-size:24px;color:var(--terra)}
+.tl-item h3{font-family:var(--font-serif);font-weight:500;font-size:26px;line-height:1.15}
+.tl-item p{color:var(--ink-2);margin-top:6px;max-width:520px}
+.tl-item .tag{display:inline-block;margin-top:10px;font-size:13px;font-weight:600;padding:3px 12px;border-radius:999px;background:var(--mint);color:var(--forest-deep)}
+.tl-item .tag.next{background:#F6E2B8;color:#7A5410}
+.tl-item .tag.goal{background:var(--blush);color:var(--terra-deep)}
 
-.btn-primary{
-  background:linear-gradient(135deg,var(--blue),var(--blue-dim));
-  color:#fff;border:none;padding:13px 24px;border-radius:var(--radius-sm);
-  font-family:var(--font-head);font-size:14.5px;font-weight:700;cursor:pointer;
-  text-decoration:none;display:inline-flex;align-items:center;gap:8px;
-  transition:all .22s;letter-spacing:.01em;
-  box-shadow:0 4px 20px rgba(224,122,95,.28),inset 0 1px 0 rgba(255,255,255,.12);
-}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(224,122,95,.42),inset 0 1px 0 rgba(255,255,255,.15)}
-.btn-primary:active{transform:translateY(0)}
+/* ── team ── */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:70px;align-items:start}
+.polaroid{background:var(--card);padding:16px 16px 26px;box-shadow:0 2px 0 var(--line),0 30px 50px -36px rgba(60,40,20,.5);transform:rotate(-2deg);transition:transform .5s var(--ease);position:relative}
+.polaroid:nth-child(2){transform:rotate(1.6deg);margin-top:40px}
+.polaroid:hover{transform:rotate(0) translateY(-6px)}
+.polaroid .tape{position:absolute;top:-12px;left:50%;width:90px;height:26px;background:rgba(169,203,218,.7);transform:translateX(-50%) rotate(2deg)}
+.portrait{aspect-ratio:1;display:grid;place-items:center;position:relative;overflow:hidden}
+.portrait span{font-family:var(--font-serif);font-size:120px;font-style:italic;font-weight:300;color:var(--paper);line-height:1;position:relative}
+.portrait svg{position:absolute;inset:0;width:100%;height:100%}
+.polaroid h3{font-family:var(--font-serif);font-weight:500;font-size:26px;margin-top:18px}
+.polaroid .role{font-family:var(--font-hand);font-size:22px;color:var(--terra)}
+.polaroid p{color:var(--ink-2);font-size:15.5px;margin-top:8px}
+.polaroid .skills{font-size:13px;color:var(--muted);margin-top:12px}
+.join{border:2px dashed var(--border2);border-radius:20px;padding:34px;margin-top:20px;transform:rotate(-1deg)}
+.join h3{font-family:var(--font-serif);font-weight:400;font-size:30px;line-height:1.1}
+.join p{color:var(--ink-2);margin:12px 0 18px}
 
-.btn-outline{
-  background:transparent;color:var(--off);
-  border:1.5px solid var(--border2);padding:13px 24px;border-radius:var(--radius-sm);
-  font-family:var(--font-head);font-size:14.5px;font-weight:500;cursor:pointer;
-  text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .22s;
-}
-.btn-outline:hover{border-color:var(--blue);color:var(--blue-bright);transform:translateY(-2px);background:var(--blue-glow)}
+/* ── investors ── */
+#investors{background:var(--forest);color:#F3EDE2;border-radius:48px 48px 0 0}
+#investors .label{color:var(--mustard)}
+#investors .h2 em{color:var(--mustard)}
+.letter{display:grid;grid-template-columns:1.25fr .75fr;gap:70px;margin-top:50px;align-items:start}
+.letter-body{font-size:19px;line-height:1.75;color:#E5DECF}
+.letter-body p+p{margin-top:18px}
+.letter-body .dear{font-family:var(--font-serif);font-style:italic;font-size:28px;color:#fff}
+.letter-body ul{list-style:none;margin:26px 0}
+.letter-body li{padding:14px 0 14px 34px;border-top:1px solid rgba(255,255,255,.14);position:relative}
+.letter-body li::before{content:'';position:absolute;left:0;top:22px;width:18px;height:10px;border-left:2.5px solid var(--mustard);border-bottom:2.5px solid var(--mustard);transform:rotate(-45deg)}
+.letter-body li b{color:#fff;font-weight:600}
+.sign{font-family:var(--font-hand);font-size:42px;color:var(--mustard);transform:rotate(-3deg);display:inline-block;margin-top:10px;line-height:1}
+.sign small{display:block;font-family:var(--font-body);font-size:13px;color:#BFD0C4;transform:rotate(3deg);margin-top:8px}
+.inv-side{background:var(--forest-deep);border-radius:24px;padding:34px}
+.inv-side .stage{font-family:var(--font-hand);font-size:26px;color:var(--mustard)}
+.inv-num{padding:20px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.inv-num b{display:block;font-family:var(--font-serif);font-weight:400;font-size:48px;line-height:1;color:#fff}
+.inv-num span{font-size:14px;color:#BFD0C4}
+.inv-side .pill{margin-top:26px;width:100%;justify-content:center;background:var(--mustard);color:var(--ink)!important}
+.inv-side .pill:hover{background:#fff}
+.inv-side .alt{display:block;text-align:center;margin-top:14px;color:#E5DECF;font-size:15px}
 
-/* Vitals strip */
-.vitals-strip{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  background:var(--panel);border:1px solid var(--border);
-  border-radius:var(--radius-md);overflow:hidden;
-  box-shadow:0 4px 24px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.04);
-}
-.vital{padding:.85rem 1rem;border-right:1px solid var(--border);position:relative}
-.vital:last-child{border-right:none}
-.vital-label{font-family:var(--font-mono);font-size:8px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:5px}
-.vital-value{font-family:var(--font-mono);font-size:22px;font-weight:700;color:var(--blue-bright);line-height:1;transition:color .3s}
-.vital-unit{font-size:11px;color:var(--muted);font-weight:400;margin-left:1px}
+/* ── resources ── */
+#resources{background:var(--forest);padding-top:0}
+.shelf-wrap{background:var(--paper);border-radius:48px 48px 0 0;padding:110px 0 120px}
+.shelf{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;margin-top:60px}
+.book{text-decoration:none;display:block}
+.cover{aspect-ratio:3/4;border-radius:4px 14px 14px 4px;padding:26px 22px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;
+  box-shadow:inset 8px 0 0 rgba(0,0,0,.12),0 26px 40px -26px rgba(40,20,10,.6);transition:transform .5s var(--ease)}
+.book:hover .cover{transform:translateY(-10px) rotate(-2deg)}
+.cover h3{font-family:var(--font-serif);font-weight:500;font-size:24px;line-height:1.08;letter-spacing:-.01em}
+.cover small{font-size:12px;letter-spacing:.06em;opacity:.75}
+.cover svg{position:absolute;right:-14px;top:54px;width:56%;opacity:.3}
+.cover h3{position:relative}
+.c1{background:var(--terra);color:#FFF4EA}.c2{background:var(--mustard);color:var(--ink)}.c3{background:var(--sky);color:var(--ink)}.c4{background:var(--ink);color:var(--paper)}
+.book p{color:var(--ink-2);font-size:15px;margin:16px 0 8px}
+.book .price{font-weight:700}
+.book .price em{font-style:normal;font-family:var(--font-hand);font-size:24px;color:var(--terra);font-weight:600}
 
-/* ECG Monitor */
-.hero-monitor{
-  position:relative;background:var(--panel);
-  border:1px solid var(--border);border-radius:var(--radius-lg);
-  overflow:hidden;aspect-ratio:16/11;display:flex;flex-direction:column;
-  box-shadow:
-    0 0 0 1px rgba(224,122,95,.1),
-    0 20px 60px rgba(0,0,0,.5),
-    0 0 80px rgba(224,122,95,.08),
-    0 0 160px rgba(242,184,75,.04);
-}
-.monitor-header{
-  padding:.6rem 1.1rem;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  background:linear-gradient(180deg,var(--raised),var(--panel));
-}
-.monitor-title{font-family:var(--font-mono);font-size:8.5px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
-.monitor-badges{display:flex;gap:.5rem;align-items:center}
-.monitor-badge{font-family:var(--font-mono);font-size:8px;letter-spacing:.1em;padding:2px 5px;border-radius:2px}
-.badge-rec{color:var(--green);background:rgba(127,182,133,.1);border:1px solid rgba(127,182,133,.3);display:flex;align-items:center;gap:3px}
-.badge-ch{color:var(--muted);background:rgba(255,255,255,.04);border:1px solid var(--border)}
-.monitor-body{flex:1;position:relative;background:#120E0B;overflow:hidden}
-.monitor-grid{
-  position:absolute;inset:0;
-  background-image:
-    linear-gradient(rgba(92,72,56,.28) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(92,72,56,.28) 1px,transparent 1px),
-    linear-gradient(rgba(92,72,56,.1) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(92,72,56,.1) 1px,transparent 1px);
-  background-size:52px 52px,52px 52px,13px 13px,13px 13px;
-}
-#ecg-canvas{position:absolute;inset:0;width:100%;height:100%}
-.monitor-sidebar{
-  position:absolute;right:0;top:0;bottom:0;width:68px;
-  background:linear-gradient(180deg,rgba(18,14,11,.9),rgba(18,14,11,.7));
-  border-left:1px solid rgba(92,72,56,.5);
-  display:flex;flex-direction:column;justify-content:space-around;padding:.5rem .4rem;
-}
-.monitor-readout{text-align:center}
-.readout-val{font-family:var(--font-mono);font-size:10px;font-weight:700;color:var(--cyan);display:block;line-height:1.2}
-.readout-lbl{font-family:var(--font-mono);font-size:7px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;display:block}
-.monitor-footer{
-  padding:.5rem 1.1rem;border-top:1px solid var(--border);
-  display:flex;justify-content:space-between;align-items:center;
-  background:linear-gradient(0deg,var(--raised),var(--panel));
-}
-.monitor-readout-bar{font-family:var(--font-mono);font-size:8px;color:var(--muted);letter-spacing:.06em}
-.bpm-display{font-family:var(--font-mono);font-size:22px;font-weight:700;color:var(--cyan);letter-spacing:.04em;line-height:1;text-shadow:0 0 16px rgba(242,184,75,.6)}
+/* ── contact ── */
+.contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;align-items:start}
+.ways{margin-top:34px;display:grid;gap:4px}
+.way{display:flex;align-items:center;gap:16px;padding:16px 0;border-bottom:1px dashed var(--line);text-decoration:none;transition:padding .3s var(--ease)}
+a.way:hover{padding-left:10px}
+.way i{width:44px;height:44px;border-radius:50%;background:var(--card);display:grid;place-items:center;flex-shrink:0;box-shadow:0 1px 0 var(--line)}
+.way b{display:block;font-weight:600}
+.way span{font-size:14px;color:var(--muted)}
+.form-card{background:var(--card);border-radius:30px 30px 30px 8px;padding:44px;box-shadow:0 1px 0 var(--line),0 40px 70px -46px rgba(60,40,20,.5);position:relative}
+.form-card::after{content:'we read every message';position:absolute;top:-22px;right:30px;font-family:var(--font-hand);font-size:24px;color:var(--terra);transform:rotate(4deg)}
+.field{margin-bottom:22px}
+.field label{display:block;font-size:14px;font-weight:600;margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;background:transparent;border:none;border-bottom:1.5px solid var(--border2);padding:10px 2px;font:inherit;color:var(--ink);border-radius:0;transition:border-color .2s}
+.field textarea{min-height:120px;resize:vertical;border:1.5px solid var(--border2);border-radius:14px;padding:12px 14px}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--terra)}
+.hp-field{position:absolute;left:-9999px}
+.form-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.status{font-size:14px;color:var(--muted)}
+.news{margin-top:50px;background:var(--blush);border-radius:24px;padding:30px}
+.news h3{font-family:var(--font-serif);font-weight:500;font-size:24px}
+.news p{color:var(--ink-2);font-size:15px;margin:4px 0 14px}
+.news-row{display:flex;gap:10px;flex-wrap:wrap}
+.news-row input{flex:1;min-width:200px;border:1.5px solid var(--ink);background:var(--paper);border-radius:999px;padding:11px 18px;font:inherit}
+.news-row input:focus{outline:none;border-color:var(--terra)}
 
-/* ── HUMAN TYPE ── */
-.hero h1,.section-title,.investors-hero h3,.newsletter-strip h3{font-family:var(--font-serif);font-weight:600;letter-spacing:-.02em}
-.hero h1 .line-muted{font-family:var(--font-serif)}
-.hero-eyebrow,.section-eyebrow{font-family:var(--font-hand)!important;font-size:21px!important;letter-spacing:.01em!important;text-transform:none!important;color:var(--cyan)!important}
-.hero-eyebrow::before,.section-eyebrow::before{box-shadow:none!important;height:2px!important;border-radius:2px;transform:rotate(-4deg)}
-.section-title span{position:relative;white-space:nowrap}
-.section-title span::after{content:'';position:absolute;left:-2%;right:-2%;bottom:-.12em;height:.32em;pointer-events:none;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 16' preserveAspectRatio='none'%3E%3Cpath d='M2 11 C 40 4, 80 14, 120 7 S 180 5, 198 9' fill='none' stroke='%23F2B84B' stroke-width='3' stroke-linecap='round' opacity='.75'/%3E%3C/svg%3E") no-repeat center/100% 100%}
+/* ── footer ── */
+footer{background:var(--ink);color:#D8CFBF;padding:90px 0 40px;overflow:hidden}
+.foot-big{font-family:var(--font-serif);font-weight:300;font-size:clamp(70px,17vw,240px);line-height:.85;letter-spacing:-.05em;color:var(--paper)}
+.foot-big em{font-style:italic;color:var(--terra)}
+.foot-cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-top:60px}
+.foot-cols h4{font-family:var(--font-hand);font-size:24px;font-weight:600;color:var(--mustard);margin-bottom:10px}
+.foot-cols ul{list-style:none}
+.foot-cols li{margin:6px 0}
+.foot-cols a{text-decoration:none;color:#D8CFBF}
+.foot-cols a:hover{color:#fff}
+.foot-bottom{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:60px;padding-top:24px;border-top:1px solid #3A342D;font-size:13.5px;color:#9E9383}
 
-/* ── SECTIONS ── */
-section{position:relative;z-index:1;padding:96px 5%}
-
-.section-eyebrow{
-  font-family:var(--font-mono);font-size:9.5px;color:var(--blue);
-  letter-spacing:.22em;text-transform:uppercase;margin-bottom:.65rem;
-  display:flex;align-items:center;gap:8px;
+/* ── responsive ── */
+@media(max-width:1000px){
+  .nav-links{display:none}.burger{display:block}
+  .hero .wrap,.problem-grid,.journey,.letter,.contact-grid{grid-template-columns:1fr}
+  .hero{padding-top:110px}
+  .hero-art{max-width:460px;margin:0 auto;width:100%}
+  .journey-intro{position:static}
+  .svc{grid-template-columns:60px 1fr;gap:6px 18px}
+  .svc p,.svc .st{grid-column:2}.svc .st{text-align:left}
+  .proj-grid{grid-template-columns:1fr}
+  .team-grid{grid-template-columns:1fr 1fr}
+  .shelf{grid-template-columns:1fr 1fr}
+  .foot-cols{grid-template-columns:1fr 1fr}
 }
-.section-eyebrow::before{content:'';display:inline-block;width:16px;height:1px;background:var(--blue);box-shadow:0 0 6px var(--blue)}
-.section-title{font-size:clamp(26px,3.6vw,46px);font-weight:800;letter-spacing:-.035em;line-height:1.08;margin-bottom:.7rem}
-.section-title span{color:var(--blue)}
-.section-sub{font-size:16px;color:var(--muted);max-width:520px;line-height:1.82;margin-bottom:3rem}
-
-/* Trust bar */
-.trust-bar{
-  position:relative;z-index:1;
-  background:linear-gradient(180deg,var(--panel),var(--deep));
-  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-  padding:.9rem 5%;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:1.75rem;
-}
-.trust-item{display:flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
-.trust-dot{width:4px;height:4px;background:var(--blue);border-radius:50%;box-shadow:0 0 6px var(--blue);flex-shrink:0}
-
-/* ── MARKET OPPORTUNITY ── */
-#market{background:rgba(27,22,18,.72);overflow:hidden}
-.market-inner{max-width:1100px;margin:0 auto}
-.market-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
-.market-left .section-sub{max-width:100%}
-
-.market-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;margin-top:2rem}
-.mstat{background:var(--panel);padding:1.5rem;position:relative;overflow:hidden}
-.mstat::before{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--blue),transparent);opacity:.7}
-.mstat-val{font-family:var(--font-mono);font-size:32px;font-weight:700;color:var(--blue-bright);line-height:1;display:block;margin-bottom:4px}
-.mstat-label{font-size:13px;color:var(--muted);line-height:1.5}
-.mstat-src{font-family:var(--font-mono);font-size:8px;color:var(--dim);letter-spacing:.06em;margin-top:4px;display:block}
-
-.problem-list{display:flex;flex-direction:column;gap:.875rem;margin-top:2rem}
-.problem-item{display:flex;gap:1rem;align-items:flex-start;padding:1rem 1.25rem;background:var(--panel);border:1px solid var(--border);border-radius:var(--radius-sm)}
-.problem-icon{font-size:18px;flex-shrink:0;margin-top:1px}
-.problem-text{font-size:14px;color:var(--muted);line-height:1.65}
-.problem-text strong{color:var(--white);display:block;margin-bottom:2px;font-size:14px}
-
-.opportunity-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  background:linear-gradient(135deg,rgba(224,122,95,.1),rgba(242,184,75,.06));
-  border:1px solid rgba(224,122,95,.25);border-radius:100px;
-  padding:6px 14px 6px 8px;font-family:var(--font-mono);font-size:9px;
-  color:var(--blue);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.25rem;
-}
-.opp-dot{width:6px;height:6px;background:var(--blue);border-radius:50%;box-shadow:0 0 8px var(--blue)}
-
-/* ── SERVICES ── */
-#services{background:transparent}
-.services-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:1px;background:var(--border);border:1px solid var(--border);
-  border-radius:var(--radius-lg);overflow:hidden;
-}
-.service-card{
-  background:var(--void);padding:2rem;transition:background .25s;cursor:default;position:relative;overflow:hidden;
-}
-.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--blue),transparent);opacity:0;transition:opacity .3s}
-.service-card:hover{background:var(--panel)}
-.service-card:hover::before{opacity:1}
-.service-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.25rem}
-.service-icon{
-  width:44px;height:44px;border:1px solid var(--border2);border-radius:var(--radius-sm);
-  display:flex;align-items:center;justify-content:center;font-size:20px;
-  background:linear-gradient(135deg,var(--panel),var(--raised));
-  transition:border-color .25s,box-shadow .25s;
-}
-.service-card:hover .service-icon{border-color:var(--blue);box-shadow:0 0 16px var(--blue-glow2)}
-.badge{font-family:var(--font-mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;padding:3px 7px;border-radius:3px;display:flex;align-items:center;gap:4px;white-space:nowrap}
-.badge-live{color:var(--green);background:rgba(127,182,133,.07);border:1px solid rgba(127,182,133,.25)}
-.badge-dev{color:var(--amber);background:rgba(242,184,75,.07);border:1px solid rgba(242,184,75,.25)}
-.badge-proto{color:var(--blue);background:rgba(224,122,95,.07);border:1px solid rgba(224,122,95,.25)}
-.badge-open{color:var(--cyan);background:rgba(242,184,75,.07);border:1px solid rgba(242,184,75,.25)}
-.service-card h3{font-size:16.5px;font-weight:700;margin-bottom:.45rem;letter-spacing:-.02em}
-.service-card p{font-size:13.5px;color:var(--muted);line-height:1.75}
-
-/* ── PROJECTS ── */
-#projects{background:rgba(27,22,18,.62)}
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.25rem}
-.project-card{
-  background:var(--panel);border:1px solid var(--border);border-radius:var(--radius-lg);
-  overflow:hidden;transition:transform .25s,border-color .28s,box-shadow .28s;
-}
-.project-card:hover{transform:translateY(-5px);border-color:rgba(224,122,95,.5);box-shadow:0 20px 60px rgba(0,0,0,.4),0 0 40px rgba(224,122,95,.08)}
-
-/* SVG-based project thumbnails — no emoji */
-.project-thumb{
-  height:180px;position:relative;overflow:hidden;
-  display:flex;align-items:center;justify-content:center;
-}
-.pt-001{background:linear-gradient(135deg,#1B1612 0%,#2A211A 60%,#2E241C 100%)}
-.pt-002{background:linear-gradient(135deg,#1A1511 0%,#1E1813 60%,#251D17 100%)}
-.pt-003{background:linear-gradient(135deg,#17120F 0%,#1C1612 60%,#211A15 100%)}
-
-.pt-mockup{width:100%;height:100%;padding:18px;display:flex;flex-direction:column;gap:8px;position:relative;z-index:1}
-.pt-bar{height:5px;border-radius:3px;background:var(--border)}
-.pt-bar.active{background:linear-gradient(90deg,var(--blue),var(--cyan));animation:scan .8s ease-in-out infinite alternate}
-@keyframes scan{0%{opacity:.6}100%{opacity:1}}
-.pt-row{display:flex;gap:6px;align-items:center}
-.pt-circle{border-radius:50%;border:1.5px solid var(--blue);flex-shrink:0}
-.pt-line{height:2px;border-radius:2px;background:var(--border);flex:1}
-.pt-line.hl{background:linear-gradient(90deg,var(--blue-glow2),var(--blue));opacity:.8}
-.pt-skeleton{display:grid;gap:5px;padding:0 4px}
-.pt-block{border-radius:3px;background:var(--border)}
-.pt-block.blue{background:rgba(224,122,95,.25)}
-.pt-block.cyan{background:rgba(242,184,75,.2)}
-.pt-ecg{width:100%;height:50px;overflow:visible}
-.pt-num{
-  position:absolute;top:12px;left:14px;
-  font-family:var(--font-mono);font-size:9px;color:var(--muted);letter-spacing:.1em;
-}
-.pt-badge{
-  position:absolute;top:12px;right:14px;
-  font-family:var(--font-mono);font-size:8px;font-weight:700;letter-spacing:.08em;
-  padding:2px 7px;border-radius:3px;
-}
-.pt-badge-live{color:var(--green);background:rgba(127,182,133,.15);border:1px solid rgba(127,182,133,.3)}
-.pt-badge-soon{color:var(--amber);background:rgba(242,184,75,.15);border:1px solid rgba(242,184,75,.3)}
-.pt-scan-line{
-  position:absolute;top:0;bottom:0;width:1.5px;
-  background:linear-gradient(180deg,transparent,var(--blue),transparent);
-  opacity:.7;animation:pt-scan 2.5s ease-in-out infinite;
-}
-@keyframes pt-scan{0%{left:10%;opacity:.4}50%{opacity:.9}100%{left:85%;opacity:.4}}
-
-.project-body{padding:1.5rem}
-.project-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:.75rem}
-.project-tag{font-family:var(--font-mono);font-size:8.5px;color:var(--blue);letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--blue-glow2);padding:2px 7px;border-radius:3px;background:var(--blue-glow)}
-.project-card h3{font-size:17px;font-weight:700;margin-bottom:.4rem;letter-spacing:-.02em}
-.project-card p{font-size:13.5px;color:var(--muted);line-height:1.68;margin-bottom:1.25rem}
-.project-link{font-size:13px;color:var(--blue);text-decoration:none;font-weight:600;letter-spacing:.04em;display:inline-flex;align-items:center;gap:6px;transition:gap .2s,color .2s}
-.project-link:hover{gap:10px;color:var(--cyan)}
-
-/* ── MILESTONES ── */
-#milestones{background:transparent;overflow:hidden}
-.milestones-inner{max-width:760px;margin:0 auto;text-align:center}
-.milestones-inner .section-eyebrow{justify-content:center}
-.milestones-inner .section-title{text-align:center}
-.milestones-inner .section-sub{text-align:center;margin:0 auto 3rem}
-
-.timeline{position:relative;padding-left:0}
-.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,var(--border),var(--border2),var(--border),transparent);transform:translateX(-50%)}
-
-.timeline-item{
-  display:grid;grid-template-columns:1fr 40px 1fr;
-  gap:0 1.5rem;align-items:start;margin-bottom:2rem;
-}
-.tl-left{text-align:right;padding-top:4px}
-.tl-right{padding-top:4px}
-.tl-center{display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;z-index:1}
-.tl-dot{
-  width:14px;height:14px;border-radius:50%;border:2px solid var(--blue);
-  background:var(--void);box-shadow:0 0 0 3px rgba(224,122,95,.15),0 0 14px rgba(224,122,95,.3);
-  flex-shrink:0;transition:all .3s;
-}
-.timeline-item.done .tl-dot{background:var(--blue);box-shadow:0 0 0 4px rgba(224,122,95,.2),0 0 20px rgba(224,122,95,.5)}
-.timeline-item.upcoming .tl-dot{border-color:var(--border2);background:transparent;box-shadow:none}
-.tl-line-seg{width:1px;flex:1;background:var(--border);min-height:20px}
-.tl-date{font-family:var(--font-mono);font-size:9px;color:var(--blue);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;display:block}
-.tl-title{font-size:15px;font-weight:700;letter-spacing:-.01em;margin-bottom:3px}
-.tl-desc{font-size:12.5px;color:var(--muted);line-height:1.6}
-.timeline-item.upcoming .tl-title{color:var(--muted)}
-.tl-tag{display:inline-block;font-family:var(--font-mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;padding:2px 6px;border-radius:3px;margin-top:4px}
-.tl-tag-done{color:var(--green);background:rgba(127,182,133,.1);border:1px solid rgba(127,182,133,.25)}
-.tl-tag-up{color:var(--amber);background:rgba(242,184,75,.1);border:1px solid rgba(242,184,75,.25)}
-
-/* ── TEAM ── */
-#team{background:rgba(27,22,18,.62);overflow:hidden}
-.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.25rem}
-
-.team-card{
-  background:var(--panel);border:1px solid var(--border);border-radius:var(--radius-lg);
-  padding:2rem;position:relative;overflow:hidden;
-  transition:border-color .28s,transform .28s,box-shadow .28s;
-}
-.team-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--blue),transparent);opacity:0;transition:opacity .3s}
-.team-card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,.3)}
-.team-card:hover::after{opacity:1}
-.team-card.featured{border-color:rgba(224,122,95,.4);box-shadow:0 0 0 1px rgba(224,122,95,.08),0 8px 40px rgba(224,122,95,.08)}
-.team-card.featured::after{opacity:.8}
-
-.team-badge-pill{
-  position:absolute;top:16px;right:16px;
-  font-family:var(--font-mono);font-size:8px;color:var(--blue);letter-spacing:.12em;text-transform:uppercase;
-  border:1px solid rgba(224,122,95,.35);padding:3px 8px;border-radius:100px;
-  background:rgba(224,122,95,.07);
-}
-
-.team-avatar{
-  width:92px;height:92px;border-radius:var(--radius-md);
-  background:linear-gradient(135deg,var(--raised),var(--panel));
-  border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;
-  font-size:24px;margin-bottom:1.25rem;font-weight:800;color:var(--blue-bright);
-  font-family:var(--font-mono);letter-spacing:.04em;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);position:relative;overflow:hidden;
-}
-.team-avatar::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(circle at 30% 30%,rgba(224,122,95,.12),transparent 70%);
-}
-.team-card.featured .team-avatar{
-  border-color:rgba(224,122,95,.5);
-  box-shadow:0 0 24px rgba(224,122,95,.2),inset 0 1px 0 rgba(255,255,255,.08);
-}
-.team-card h3{font-size:18px;font-weight:800;margin-bottom:2px;letter-spacing:-.025em}
-.team-role{font-family:var(--font-mono);font-size:9.5px;color:var(--blue);letter-spacing:.08em;margin-bottom:3px;display:block;text-transform:uppercase}
-.team-dept{font-size:12px;color:var(--cyan);margin-bottom:.85rem;display:flex;align-items:center;gap:5px;opacity:.8}
-.team-dept::before{content:'';width:14px;height:1px;background:var(--cyan);opacity:.5}
-.team-card p{font-size:13.5px;color:var(--muted);line-height:1.7;margin-bottom:1.25rem}
-.team-skills{display:flex;flex-wrap:wrap;gap:5px}
-.skill-tag{font-family:var(--font-mono);font-size:8.5px;color:var(--muted);border:1px solid var(--border2);padding:3px 7px;border-radius:3px;letter-spacing:.06em;text-transform:uppercase}
-
-/* ── INVESTORS ── */
-#investors{background:transparent;overflow:hidden}
-.investors-inner{max-width:900px;margin:0 auto}
-.investors-hero{
-  background:linear-gradient(135deg,var(--panel) 0%,var(--raised) 100%);
-  border:1px solid var(--border);border-radius:var(--radius-lg);padding:3rem;
-  position:relative;overflow:hidden;margin-bottom:2rem;
-}
-.investors-hero::before{
-  content:'';position:absolute;top:-60px;right:-80px;width:300px;height:300px;
-  background:radial-gradient(circle,rgba(224,122,95,.1),transparent 70%);
-  pointer-events:none;
-}
-.investors-hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;flex-wrap:wrap;margin-bottom:2rem}
-.stage-badge{
-  font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:.14em;text-transform:uppercase;
-  border:1px solid rgba(242,184,75,.35);padding:5px 12px;border-radius:100px;
-  background:rgba(242,184,75,.07);display:inline-flex;align-items:center;gap:6px;flex-shrink:0;
-}
-.investors-hero h3{font-size:26px;font-weight:800;letter-spacing:-.03em;margin-bottom:.5rem}
-.investors-hero p{font-size:15px;color:var(--muted);line-height:1.75;max-width:580px}
-.raise-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden}
-.raise-item{background:var(--panel);padding:1.25rem;text-align:center}
-.raise-val{font-family:var(--font-mono);font-size:20px;font-weight:700;color:var(--blue-bright);display:block;line-height:1;margin-bottom:4px}
-.raise-lbl{font-size:12px;color:var(--muted)}
-
-.inv-perks{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.875rem}
-.inv-perk{
-  background:var(--panel);border:1px solid var(--border);border-radius:var(--radius-md);
-  padding:1.25rem;display:flex;gap:.875rem;align-items:flex-start;
-  transition:border-color .2s;
-}
-.inv-perk:hover{border-color:var(--border2)}
-.inv-perk-icon{font-size:22px;flex-shrink:0;margin-top:1px}
-.inv-perk h4{font-size:14px;font-weight:700;margin-bottom:3px;letter-spacing:-.01em}
-.inv-perk p{font-size:12.5px;color:var(--muted);line-height:1.6}
-
-/* ── RESOURCES ── */
-#resources{background:rgba(27,22,18,.62)}
-.resources-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem}
-.resource-card{
-  background:var(--panel);border:1px solid var(--border);border-radius:var(--radius-md);
-  padding:1.75rem;display:flex;flex-direction:column;gap:.75rem;
-  transition:border-color .22s,transform .22s;
-}
-.resource-card:hover{border-color:var(--border2);transform:translateY(-2px)}
-.resource-icon{font-size:26px}
-.resource-card h4{font-size:15px;font-weight:700;letter-spacing:-.015em}
-.resource-card p{font-size:13px;color:var(--muted);line-height:1.68;flex:1}
-.resource-price{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:.75rem;border-top:1px solid var(--border)}
-.price-tag{font-family:var(--font-mono);font-size:18px;font-weight:700;color:var(--blue-bright)}
-.price-tag.free{color:var(--green)}
-.resource-btn{
-  font-family:var(--font-head);font-size:12px;font-weight:700;padding:7px 14px;
-  border-radius:6px;border:1.5px solid var(--blue);background:transparent;
-  color:var(--blue);cursor:pointer;text-decoration:none;transition:all .2s;
-}
-.resource-btn:hover{background:var(--blue);color:var(--void)}
-
-/* ── CONTACT ── */
-#contact{background:transparent}
-.contact-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:5rem;align-items:start}
-.contact-info p{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:2.5rem}
-.contact-items{display:flex;flex-direction:column;gap:.75rem}
-.contact-item{
-  display:flex;align-items:center;gap:12px;padding:.875rem 1rem;
-  background:var(--panel);border:1px solid var(--border);border-radius:var(--radius-sm);
-  color:var(--muted);text-decoration:none;font-size:13.5px;transition:border-color .2s,color .2s;
-}
-.contact-item:hover{border-color:rgba(224,122,95,.4);color:var(--blue-bright)}
-.contact-item-icon{
-  width:34px;height:34px;border:1px solid var(--border2);border-radius:7px;
-  display:flex;align-items:center;justify-content:center;font-size:15px;
-  flex-shrink:0;background:var(--raised);
-}
-.contact-form{
-  background:var(--panel);border:1px solid var(--border);border-radius:var(--radius-lg);
-  padding:2.25rem;box-shadow:0 8px 40px rgba(0,0,0,.3);
-}
-.form-group{margin-bottom:1.2rem}
-.form-group label{display:block;font-size:10.5px;font-family:var(--font-mono);color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
-.form-group input,.form-group select,.form-group textarea{
-  width:100%;background:var(--raised);border:1px solid var(--border2);
-  border-radius:7px;padding:11px 14px;color:var(--white);font-family:var(--font-head);
-  font-size:14px;transition:border-color .2s,box-shadow .2s;outline:none;
-}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
-  border-color:var(--blue);box-shadow:0 0 0 3px rgba(224,122,95,.12);
-}
-.form-group select option{background:var(--raised);color:var(--white)}
-.form-group textarea{min-height:108px;resize:vertical;line-height:1.65}
-.hp-field{display:none!important;visibility:hidden!important}
-.form-submit{
-  width:100%;background:linear-gradient(135deg,var(--blue),var(--blue-dim));
-  color:#fff;border:none;padding:14px;border-radius:8px;font-family:var(--font-head);
-  font-size:15px;font-weight:700;cursor:pointer;transition:all .22s;letter-spacing:.02em;
-  box-shadow:0 4px 16px rgba(224,122,95,.25);
-}
-.form-submit:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(224,122,95,.4)}
-.form-notice{font-size:10.5px;color:var(--muted);text-align:center;margin-top:.75rem;font-family:var(--font-mono);letter-spacing:.04em}
-
-/* ── CONNECT ── */
-#connect{background:rgba(27,22,18,.62);border-top:1px solid var(--border)}
-.connect-inner{max-width:820px;margin:0 auto;text-align:center}
-.connect-inner .section-eyebrow{justify-content:center}
-.connect-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:3rem}
-.connect-card{
-  background:var(--panel);border:1px solid var(--border);border-radius:var(--radius-md);
-  padding:1.75rem 1.25rem;text-align:center;text-decoration:none;
-  display:flex;flex-direction:column;align-items:center;gap:.65rem;
-  transition:border-color .22s,transform .22s,box-shadow .22s;
-}
-.connect-card:hover{border-color:rgba(224,122,95,.4);transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.3),0 0 24px rgba(224,122,95,.06)}
-.connect-card-icon{font-size:30px;line-height:1}
-.connect-card-label{font-size:14px;font-weight:700;color:var(--white)}
-.connect-card-sub{font-size:11.5px;color:var(--muted);line-height:1.55}
-.connect-card-tag{font-family:var(--font-mono);font-size:8.5px;color:var(--blue);letter-spacing:.1em;border:1px solid var(--blue-glow2);padding:2px 7px;border-radius:3px;background:var(--blue-glow);text-transform:uppercase}
-
-.newsletter-strip{
-  background:linear-gradient(135deg,var(--panel),var(--raised));
-  border:1px solid var(--border);border-radius:var(--radius-lg);
-  padding:2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;
-  gap:2rem;flex-wrap:wrap;
-}
-.newsletter-strip h3{font-size:17px;font-weight:700;letter-spacing:-.02em;margin-bottom:4px}
-.newsletter-strip p{font-size:13.5px;color:var(--muted);line-height:1.55}
-.newsletter-form{display:flex;flex-direction:column;gap:.5rem;flex-shrink:0}
-.nl-row{display:flex;gap:.75rem}
-.newsletter-input{
-  background:var(--raised);border:1px solid var(--border2);border-radius:7px;
-  padding:11px 16px;color:var(--white);font-family:var(--font-head);font-size:14px;
-  outline:none;transition:border-color .2s;width:220px;
-}
-.newsletter-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(224,122,95,.12)}
-.newsletter-input::placeholder{color:var(--muted)}
-.newsletter-btn{
-  background:linear-gradient(135deg,var(--blue),var(--blue-dim));
-  color:#fff;border:none;padding:11px 18px;border-radius:7px;
-  font-family:var(--font-head);font-size:13.5px;font-weight:700;
-  cursor:pointer;white-space:nowrap;transition:all .2s;
-  box-shadow:0 4px 14px rgba(224,122,95,.2);
-}
-.newsletter-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(224,122,95,.35)}
-.newsletter-notice{font-family:var(--font-mono);font-size:9.5px;color:var(--muted);letter-spacing:.04em}
-
-/* ── FOOTER ── */
-footer{background:rgba(27,22,18,.85);border-top:1px solid var(--border);padding:3rem 5% 2rem;position:relative;z-index:1}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
-.footer-brand p{font-size:13.5px;color:var(--muted);line-height:1.75;margin-top:.875rem;max-width:250px}
-.footer-col h4{font-size:10px;font-family:var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.875rem}
-.footer-col ul{list-style:none}
-.footer-col li{margin-bottom:.45rem}
-.footer-col a{color:var(--muted);text-decoration:none;font-size:13.5px;transition:color .2s}
-.footer-col a:hover{color:var(--blue)}
-.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:2rem;border-top:1px solid var(--border);flex-wrap:wrap;gap:1rem}
-.footer-bottom p{font-size:11.5px;color:var(--muted);font-family:var(--font-mono);letter-spacing:.04em}
-.footer-legal{display:flex;gap:1.5rem}
-.footer-legal a{font-size:11.5px;color:var(--muted);text-decoration:none;font-family:var(--font-mono);transition:color .2s}
-.footer-legal a:hover{color:var(--blue)}
-
-/* ── ANIMATIONS ── */
-.fade-up{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
-.fade-up.visible{opacity:1;transform:translateY(0)}
-.fade-up:nth-child(2){transition-delay:.09s}
-.fade-up:nth-child(3){transition-delay:.18s}
-.fade-up:nth-child(4){transition-delay:.27s}
-
-/* ── RESPONSIVE ── */
-@media(max-width:1024px){
-  .market-grid{grid-template-columns:1fr;gap:3rem}
-  .timeline::before{left:20px;transform:none}
-  .timeline-item{grid-template-columns:20px 1fr;column-gap:.75rem}
-  .tl-left{display:none}
-  .tl-center{flex-direction:row;align-items:center;gap:.5rem}
-  .tl-line-seg{display:none}
-}
-@media(max-width:960px){
-  .hero{grid-template-columns:1fr;padding-top:110px;gap:3rem}
-  .hero-monitor{display:none}
-  .nav-links{display:none}
-  .hamburger{display:flex}
-  .contact-grid{grid-template-columns:1fr;gap:3rem}
-  .footer-grid{grid-template-columns:1fr 1fr;gap:2rem}
-  .vitals-strip{grid-template-columns:repeat(2,1fr)}
-  .vital:nth-child(2){border-right:none}
-  .vital:nth-child(3){border-top:1px solid var(--border)}
-  .vital:nth-child(4){border-top:1px solid var(--border)}
-  .investors-hero-top{flex-direction:column}
-  .raise-grid{grid-template-columns:1fr}
-}
-@media(max-width:640px){
-  section{padding:72px 5%}
-  .hero{padding:100px 5% 64px}
-  .footer-grid{grid-template-columns:1fr;gap:1.75rem}
-  .footer-bottom{flex-direction:column;align-items:flex-start}
-  .trust-bar{gap:1rem;justify-content:flex-start}
-  .newsletter-strip{flex-direction:column;align-items:flex-start}
-  .investors-hero{padding:2rem}
-  .raise-grid{grid-template-columns:repeat(3,1fr)}
-  .timeline-item{grid-template-columns:20px 1fr}
+@media(max-width:620px){
+  body{font-size:16px}
+  section{padding:84px 0}
+  .facts{grid-template-columns:1fr;gap:28px}
+  .team-grid{grid-template-columns:1fr}.polaroid:nth-child(2){margin-top:0}
+  .ratio,.form-card{padding:28px 22px}
+  .bar-row{grid-template-columns:90px 1fr 44px}
+  .shelf{gap:18px}
+  .cover h3{font-size:19px}
+  .foot-cols{grid-template-columns:1fr}
+  #investors,.shelf-wrap{border-radius:30px 30px 0 0}
 }
 @media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
-  .grain{animation:none}
-  #ecg-canvas{display:none}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rv,.hero h1 .w,.fade{opacity:1;transform:none}
+  .draw{stroke-dashoffset:0}
 }
-
-/* ── FUTURISTIC ANIMATIONS ── */
-@keyframes pulse-glow{0%,100%{box-shadow:0 0 10px rgba(224,122,95,.15)}50%{box-shadow:0 0 22px rgba(224,122,95,.3)}}
-@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
-@keyframes float-y{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-@keyframes float-y2{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
-@keyframes gradient-pan{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-@keyframes border-spin{0%{background-position:0% 0%}100%{background-position:400% 0%}}
-@keyframes data-flow{0%{transform:translateX(-100%);opacity:0}20%{opacity:1}80%{opacity:1}100%{transform:translateX(200%);opacity:0}}
-@keyframes icon-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.7;transform:scale(1.08)}}
-@keyframes scan-h{0%{top:-2px}100%{top:100%}}
-@keyframes reveal-up{0%{opacity:0;transform:translateY(30px)}100%{opacity:1;transform:translateY(0)}}
-@keyframes orb-pulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.15);opacity:1}}
-@keyframes dot-bounce{0%,80%,100%{transform:scale(0)}40%{transform:scale(1)}}
-@keyframes timeline-fill{0%{height:0}100%{height:100%}}
-@keyframes card-glow{0%,100%{border-color:rgba(224,122,95,.25)}50%{border-color:rgba(224,122,95,.6)}}
-@keyframes number-pop{0%{transform:scale(1)}50%{transform:scale(1.06)}100%{transform:scale(1)}}
-@keyframes waveform{0%{stroke-dashoffset:0}100%{stroke-dashoffset:-200}}
-
-/* Animated gradient text */
-.gradient-text{background-size:200% auto!important;animation:gradient-pan 4s ease infinite}
-
-/* Shimmer buttons */
-.btn-primary{background-size:200% auto;animation:gradient-pan 3s ease infinite}
-.btn-primary::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);animation:shimmer 2.5s ease infinite;pointer-events:none}
-.btn-primary{position:relative;overflow:hidden}
-
-/* Pulsing logo */
-.logo-mark{animation:pulse-glow 3s ease-in-out infinite}
-
-/* Floating hero monitor */
-.hero-monitor{animation:float-y 6s ease-in-out infinite}
-
-/* Floating orbs */
-.orb-hero-l{animation:orb-pulse 8s ease-in-out infinite}
-.orb-hero-r{animation:orb-pulse 10s ease-in-out infinite .5s}
-.orb-mid{animation:orb-pulse 12s ease-in-out infinite 1s}
-.orb-team{animation:orb-pulse 9s ease-in-out infinite .3s}
-
-/* Service icons pulse */
-.service-icon svg{animation:icon-pulse 3s ease-in-out infinite}
-.service-card:nth-child(2) .service-icon svg{animation-delay:.4s}
-.service-card:nth-child(3) .service-icon svg{animation-delay:.8s}
-.service-card:nth-child(4) .service-icon svg{animation-delay:1.2s}
-.service-card:nth-child(5) .service-icon svg{animation-delay:1.6s}
-.service-card:nth-child(6) .service-icon svg{animation-delay:2s}
-
-/* Animated scan on project thumbs */
-.project-card:hover .pt-scan-line{animation-duration:.8s}
-
-/* Featured team card pulse */
-.team-card.featured{animation:card-glow 3s ease-in-out infinite}
-
-/* Vitals animate */
-.vital-value{animation:number-pop 4s ease-in-out infinite}
-.vital:nth-child(2) .vital-value{animation-delay:.5s}
-.vital:nth-child(3) .vital-value{animation-delay:1s}
-.vital:nth-child(4) .vital-value{animation-delay:1.5s}
-
-/* Timeline dots pulse */
-.timeline-item.done .tl-dot{animation:pulse-glow 2.5s ease-in-out infinite}
-
-/* Connect cards float */
-.connect-card:nth-child(1){animation:float-y 7s ease-in-out infinite}
-.connect-card:nth-child(2){animation:float-y 7s ease-in-out infinite 1s}
-.connect-card:nth-child(3){animation:float-y 7s ease-in-out infinite 2s}
-.connect-card:nth-child(4){animation:float-y 7s ease-in-out infinite 3s}
-
-/* Data flow on project thumbs */
-.pt-001::after,.pt-002::after,.pt-003::after{
-  content:'';position:absolute;top:0;left:0;right:0;height:1.5px;
-  background:linear-gradient(90deg,transparent,var(--blue),var(--cyan),transparent);
-  animation:data-flow 2.5s ease-in-out infinite;
-}
-
-/* Market stat cards subtle pulse */
-.mstat{animation:card-glow 5s ease-in-out infinite}
-.mstat:nth-child(2){animation-delay:1s}
-.mstat:nth-child(3){animation-delay:2s}
-.mstat:nth-child(4){animation-delay:3s}
-
-/* Hero eyebrow shimmer */
-.hero-eyebrow::before{animation:shimmer 2s linear infinite}
-
-/* Nav CTA shimmer */
-.nav-cta{position:relative;overflow:hidden}
-.nav-cta::before{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);animation:shimmer 2s ease infinite;display:block}
-
-/* Investor raise items glow */
-.raise-item{transition:all .3s}
-.raise-item:nth-child(1){animation:card-glow 4s ease-in-out infinite}
-.raise-item:nth-child(2){animation:card-glow 4s ease-in-out infinite 1s}
-.raise-item:nth-child(3){animation:card-glow 4s ease-in-out infinite 2s}
-
-/* BPM display pulse */
-.bpm-display{animation:pulse-glow 1.5s ease-in-out infinite}
-
-/* Resource cards float stagger */
-.resource-card:nth-child(1){animation:float-y 8s ease-in-out infinite}
-.resource-card:nth-child(2){animation:float-y 8s ease-in-out infinite 1.5s}
-.resource-card:nth-child(3){animation:float-y 8s ease-in-out infinite 3s}
-.resource-card:nth-child(4){animation:float-y 8s ease-in-out infinite 4.5s}
-
-/* Section eyebrow shimmer line */
-.section-eyebrow::before{animation:shimmer 2.5s linear infinite}
-.hero-eyebrow::before{animation:shimmer 2s linear infinite}
-
 </style>
 <link rel="stylesheet" href="assistant.css">
 </head>
 <body>
-
 <canvas id="life-canvas" aria-hidden="true"></canvas>
 <div class="grain" aria-hidden="true"></div>
 
-<!-- NAV -->
-<nav id="main-nav" role="navigation" aria-label="Main navigation">
-  <a href="#" class="nav-logo" aria-label="REHABION Home">
-    <div class="logo-mark" aria-hidden="true">
-      <svg viewBox="0 0 24 13" fill="none"><polyline points="0,6.5 3.5,6.5 5.5,1.5 7.5,11.5 9.5,0.5 12,11.5 14,4.5 16,6.5 20,6.5 22,3.5 24,6.5" stroke="#E07A5F" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </div>
-    <span class="logo-text">REHAB<span>ION</span></span>
-    <div class="nav-chip"><span class="live-dot"></span>ACTIVE</div>
-  </a>
+<!-- shared hand-drawn wobble filter -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="3"/></filter>
+</svg>
 
-  <ul class="nav-links" role="list">
-    <li><a href="#market">Opportunity</a></li>
-    <li><a href="#services">Solutions</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#team">Team</a></li>
-    <li><a href="#investors">Investors</a></li>
-    <li><a href="#contact" class="nav-cta">Work with us</a></li>
-  </ul>
-
-  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-
-<nav class="mobile-nav" id="mobile-menu" aria-label="Mobile navigation">
-  <a href="#market" onclick="closeMobileNav()">Opportunity</a>
-  <a href="#services" onclick="closeMobileNav()">Solutions</a>
-  <a href="#projects" onclick="closeMobileNav()">Projects</a>
-  <a href="#team" onclick="closeMobileNav()">Team</a>
-  <a href="#milestones" onclick="closeMobileNav()">Milestones</a>
-  <a href="#investors" onclick="closeMobileNav()">Investors</a>
-  <a href="#contact" onclick="closeMobileNav()">Contact</a>
-</nav>
-
-<!-- HERO -->
-<header class="hero" role="banner">
-  <div class="orb orb-hero-l" aria-hidden="true"></div>
-  <div class="orb orb-hero-r" aria-hidden="true"></div>
-
-  <div class="hero-content" style="position:relative;z-index:1">
-    <p class="hero-eyebrow">Pakistan's #1 Rehabilitation Technology Company</p>
-
-    <h1>
-      Where <span class="gradient-text">Clinical Science</span><br>
-      Meets Intelligent<br>
-      <span class="line-muted">Rehabilitation</span>
-    </h1>
-
-    <p class="hero-sub">
-      REHABION engineers <strong>game-based therapy systems</strong>, AI clinical tools, and biomedical wearables — built by biomedical engineers, validated by clinicians, from <strong>Islamabad to the world.</strong>
-    </p>
-
-    <div class="hero-actions">
-      <a href="https://calendly.com/muhammadrmzn84/rehabion" target="_blank" rel="noopener noreferrer" class="btn-primary">Book a Free Demo →</a>
-      <a href="#" class="btn-outline" data-noor="voice"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0014 0M12 17v5"/></svg>Talk to Danisa</a>
-      <a href="#investors" class="btn-outline">Investor Deck →</a>
-    </div>
-
-    <div class="vitals-strip" role="list" aria-label="Company statistics">
-      <div class="vital" role="listitem">
-        <span class="vital-label">Market by 2033</span>
-        <span class="vital-value"><span class="counter" data-target="8.1" data-suffix="B" data-prefix="$">$0B</span></span>
-      </div>
-      <div class="vital" role="listitem">
-        <span class="vital-label">PK Competitors</span>
-        <span class="vital-value"><span class="counter" data-target="0" data-integer="1">0</span></span>
-      </div>
-      <div class="vital" role="listitem">
-        <span class="vital-label">Global CAGR</span>
-        <span class="vital-value"><span class="counter" data-target="13.4" data-suffix="%" >0%</span></span>
-      </div>
-      <div class="vital" role="listitem">
-        <span class="vital-label">South Asia Rank</span>
-        <span class="vital-value"><span class="counter" data-target="1" data-suffix="st" data-integer="1">0</span></span>
-      </div>
-    </div>
+<nav class="nav" id="main-nav" aria-label="Main navigation">
+  <div class="wrap">
+    <a href="#" class="brand" aria-label="REHABION home">
+      <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#F2CDB8"/><path d="M5 21 h8 l3 -7 l4 13 l4 -16 l3 10 h8" stroke="#C2522F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" filter="url(#rough)"/></svg>
+      <span>rehab<em>ion</em></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#problem">Why</a></li>
+      <li><a href="#services">What we build</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#team">People</a></li>
+      <li><a href="#investors">Invest</a></li>
+      <li><a href="#contact" class="pill">Say hello</a></li>
+    </ul>
+    <button class="burger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
   </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#problem">Why it matters</a><a href="#services">What we build</a><a href="#projects">Projects</a>
+  <a href="#journey">Our journey</a><a href="#team">People</a><a href="#investors">Invest</a><a href="#contact">Say hello</a>
+</div>
 
-  <!-- ECG Monitor -->
-  <div class="hero-monitor" aria-hidden="true">
-    <div class="monitor-header">
-      <span class="monitor-title">REHABION · BioSignal Monitor v1.0</span>
-      <div class="monitor-badges">
-        <span class="monitor-badge badge-rec"><span class="live-dot"></span>REC</span>
-        <span class="monitor-badge badge-ch">CH1: ECG-II</span>
+<main>
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <span class="hero-kicker">made in Islamabad, for everyone</span>
+      <h1 aria-label="Getting better, one game at a time.">
+        <span class="w">Getting</span> <span class="w">better,</span><br>
+        <span class="w">one</span> <em class="w">game<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path class="draw d3" pathLength="1" d="M3 14 C 50 4, 110 18, 197 7" fill="none" stroke="#DDA032" stroke-width="5" stroke-linecap="round"/></svg></em><br>
+        <span class="w">at a time.</span>
+      </h1>
+      <p class="hero-sub">REHABION builds game-based therapy, clinical tools and biomedical wearables for people recovering from stroke, surgery and injury — designed by biomedical engineers, checked by clinicians, made to work in Pakistan's real clinics.</p>
+      <div class="hero-actions">
+        <a class="pill" href="https://calendly.com/muhammadrmzn84/rehabion" target="_blank" rel="noopener noreferrer">Book a free demo
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="talk-link" href="#" data-noor="voice">
+          <span class="dot"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C2522F" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0014 0M12 17v5"/></svg></span>
+          <span>Talk to Danisa<small>our assistant · اردو / English</small></span>
+        </a>
+      </div>
+      <div class="hero-note">
+        <div><b>2</b>clinical systems live</div>
+        <div><b>20</b>stroke patients in our first pilot</div>
+        <div><b>0</b>other rehab-tech companies in Pakistan</div>
       </div>
     </div>
-    <div class="monitor-body">
-      <div class="monitor-grid"></div>
-      <canvas id="ecg-canvas"></canvas>
-      <div class="monitor-sidebar">
-        <div class="monitor-readout">
-          <span class="readout-val" id="bpm-display">72</span>
-          <span class="readout-lbl">BPM</span>
-        </div>
-        <div class="monitor-readout">
-          <span class="readout-val" style="color:var(--green)" id="spo2-display">98</span>
-          <span class="readout-lbl">SpO₂%</span>
-        </div>
-        <div class="monitor-readout">
-          <span class="readout-val" style="color:var(--purple)" id="hrv-display">42</span>
-          <span class="readout-lbl">HRV ms</span>
-        </div>
-      </div>
-    </div>
-    <div class="monitor-footer">
-      <span class="monitor-readout-bar">25mm/s &nbsp;·&nbsp; 10mm/mV &nbsp;·&nbsp; Filter: 0.5–40Hz</span>
-      <span style="font-family:var(--font-mono);font-size:9px;color:var(--muted)">REHABION BioSense</span>
+
+    <div class="hero-art" aria-hidden="true">
+      <div class="blob"></div><div class="blob b2"></div>
+      <svg class="figure" viewBox="0 0 460 480" fill="none" stroke="#1E1B18" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+        <g filter="url(#rough)">
+          <!-- range-of-motion arc -->
+          <path class="draw d4" pathLength="1" d="M262 330 A 120 120 0 0 0 330 120" stroke="#C2522F" stroke-width="2" stroke-dasharray="1" />
+          <!-- chair -->
+          <path class="draw" pathLength="1" d="M128 300 h120 M140 300 v120 M236 300 v120 M150 360 h76"/>
+          <!-- body -->
+          <circle class="draw" pathLength="1" cx="200" cy="150" r="34"/>
+          <path class="draw d2" pathLength="1" d="M200 184 C 196 220, 200 260, 206 296"/>
+          <path class="draw d2" pathLength="1" d="M206 296 C 240 300, 262 304, 270 330 L 268 410 M206 296 C 228 306, 240 318, 244 340 L 242 412"/>
+          <path class="draw d3" pathLength="1" d="M268 410 l22 4 M242 412 l20 4"/>
+          <!-- resting arm -->
+          <path class="draw d3" pathLength="1" d="M198 212 C 182 240, 176 262, 186 290 L 214 296"/>
+          <!-- face -->
+          <path class="fade" d="M190 148 q3 -3 6 0 M206 148 q3 -3 6 0 M192 164 q8 7 16 0" stroke-width="2.4"/>
+          <path class="fade" d="M168 140 C 170 108, 228 104, 234 140" stroke-width="2.4"/>
+        </g>
+        <!-- exercising arm -->
+        <g class="arm" filter="url(#rough)">
+          <path d="M212 214 C 240 216, 262 218, 286 218 C 306 218, 324 216, 340 214" stroke-width="3.4"/>
+          <circle cx="348" cy="213" r="9" fill="#F5EFE4"/>
+        </g>
+        <!-- game target -->
+        <g class="twinkle"><path d="M368 96 l7 15 16 2 -12 11 3 16 -14 -8 -14 8 3 -16 -12 -11 16 -2z" fill="#DDA032" stroke="#1E1B18" stroke-width="2.2"/></g>
+        <g class="fade">
+          <text x="300" y="70" class="deg">reach the star!</text>
+          <path d="M346 78 q 14 4 18 18" stroke-width="2" stroke="#C2522F"/>
+          <text x="40" y="250" class="deg">shoulder</text>
+          <text x="40" y="274" class="deg">abduction → 92°</text>
+          <path d="M150 262 q 22 -6 40 -34" stroke-width="2" stroke="#C2522F"/>
+          <text x="300" y="380" class="deg" style="fill:#2E5946">tracked live</text>
+        </g>
+      </svg>
     </div>
   </div>
 </header>
 
-<!-- Trust bar -->
-<div class="trust-bar" role="complementary">
-  <div class="trust-item"><div class="trust-dot"></div>HTTPS Encrypted</div>
-  <div class="trust-item"><div class="trust-dot"></div>GDPR Compliant</div>
-  <div class="trust-item"><div class="trust-dot"></div>No Patient Data Stored</div>
-  <div class="trust-item"><div class="trust-dot"></div>IRB-Approved Research</div>
-  <div class="trust-item"><div class="trust-dot"></div>ISO 27001 Aligned</div>
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>move</span><span>heal</span><span>play</span><span class="ur">حرکت</span><span>stroke</span><span>knee</span><span>neuro</span><span class="ur">صحت</span><span>paediatric</span><span>recover</span>
+    <span>move</span><span>heal</span><span>play</span><span class="ur">حرکت</span><span>stroke</span><span>knee</span><span>neuro</span><span class="ur">صحت</span><span>paediatric</span><span>recover</span>
+  </div>
 </div>
 
-<!-- MARKET OPPORTUNITY -->
-<section id="market" aria-labelledby="market-title">
-  <div class="orb orb-mid" style="top:0" aria-hidden="true"></div>
-  <div class="market-inner">
-    <div class="market-grid">
-      <div class="market-left fade-up">
-        <div class="opportunity-badge"><span class="opp-dot"></span>Investment Opportunity</div>
-        <p class="section-eyebrow">The problem</p>
-        <h2 class="section-title" id="market-title">220 Million People.<br><span>Zero Solutions.</span></h2>
-        <p class="section-sub" style="max-width:100%">Pakistan has one of the world's largest unmet rehabilitation needs. With only 0.5 physiotherapists per 10,000 people against a recommended 5, and no domestic rehabilitation technology companies, the gap is enormous — and entirely unaddressed.</p>
+<!-- PROBLEM -->
+<section id="problem" aria-labelledby="problem-title">
+  <div class="wrap">
+    <p class="label rv"><svg viewBox="0 0 34 14" fill="none"><path d="M1 8 C 10 2, 20 12, 33 6" stroke="#C2522F" stroke-width="2" stroke-linecap="round"/></svg>why this matters</p>
+    <h2 class="h2 rv r2" id="problem-title">220 million people.<br>Almost <em>nobody</em> to help them move again.</h2>
 
-        <div class="problem-list">
-          <div class="problem-item fade-up">
-            <div class="problem-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 22V11L12 3l8 8v11H4z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg></div>
-            <div class="problem-text">
-              <strong>Access collapse</strong>
-              Less than 8% of Pakistanis who need rehabilitation ever receive it. Geography, cost, and capacity are all barriers.
-            </div>
-          </div>
-          <div class="problem-item fade-up">
-            <div class="problem-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23,18 13.5,8.5 8.5,13.5 1,6"/><polyline points="17,18 23,18 23,12"/></svg></div>
-            <div class="problem-text">
-              <strong>Zero digital rehabilitation infrastructure</strong>
-              No Pakistani company builds game-based rehab, AI clinical tools, or biomedical wearables. The market is completely open.
-            </div>
-          </div>
-          <div class="problem-item fade-up">
-            <div class="problem-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18h6M10 22h4M12 2a7 7 0 017 7c0 2.5-1.5 4.5-3 6H8c-1.5-1.5-3-3.5-3-6a7 7 0 017-7z"/></svg></div>
-            <div class="problem-text">
-              <strong>REHABION fills the gap</strong>
-              We build what Pakistan's clinicians actually need — at pricing they can afford, in languages they speak, validated for their patient populations.
-            </div>
-          </div>
-        </div>
+    <div class="problem-grid">
+      <div class="ratio rv">
+        <div class="tape"></div>
+        <h3>Physiotherapists for every 10,000 people</h3>
+        <div class="bar-row"><span>WHO recommends</span><div class="bar need"><i></i></div><b>5</b></div>
+        <div class="bar-row"><span>Pakistan has</span><div class="bar have"><i></i></div><b>0.5</b></div>
+        <p class="scribble">that's one tenth of what's needed ↑</p>
+        <p class="src">Source: WHO Pakistan 2023</p>
       </div>
+      <div class="points">
+        <div class="point rv"><div><h3>Most people never get rehab at all</h3><p>Less than 8% of Pakistanis who need rehabilitation ever receive it. Distance, cost and a shortage of therapists all get in the way.</p></div></div>
+        <div class="point rv r2"><div><h3>No digital rehab exists here — yet</h3><p>No Pakistani company builds game-based rehab, clinical AI tools or biomedical wearables. The field is completely open.</p></div></div>
+        <div class="point rv r3"><div><h3>So we're building it</h3><p>We make what Pakistan's clinicians actually need — at prices they can afford, in the languages their patients speak, tested on the people who'll use it.</p></div></div>
+      </div>
+    </div>
 
-      <div class="market-right fade-up">
-        <p class="section-eyebrow">Market size</p>
-        <h3 class="section-title" style="font-size:clamp(22px,2.8vw,34px)">A <span>$8.1 Billion</span> Market with No Local Competitor</h3>
-        <div class="market-stats">
-          <div class="mstat">
-            <span class="mstat-val counter" data-target="8.1" data-prefix="$" data-suffix="B">$0B</span>
-            <span class="mstat-label">Global rehab tech market by 2033</span>
-            <span class="mstat-src">SOURCE: Grand View Research 2024</span>
-          </div>
-          <div class="mstat">
-            <span class="mstat-val counter" data-target="13.4" data-suffix="%">0%</span>
-            <span class="mstat-label">Compound annual growth rate</span>
-            <span class="mstat-src">SOURCE: Allied Market Research 2024</span>
-          </div>
-          <div class="mstat">
-            <span class="mstat-val">220M</span>
-            <span class="mstat-label">Pakistan's addressable population</span>
-            <span class="mstat-src">SOURCE: World Bank 2024</span>
-          </div>
-          <div class="mstat">
-            <span class="mstat-val">0.5</span>
-            <span class="mstat-label">Physiotherapists per 10,000 Pakistanis</span>
-            <span class="mstat-src">SOURCE: WHO Pakistan 2023</span>
-          </div>
-        </div>
-      </div>
+    <div class="facts">
+      <div class="fact rv"><b>$8.1B</b><p>global rehab-tech market by 2033</p><small>Grand View Research 2024</small></div>
+      <div class="fact rv r2"><b>13.4%</b><p>growth every year, worldwide</p><small>Allied Market Research 2024</small></div>
+      <div class="fact rv r3"><b>220M</b><p>people in Pakistan who could benefit</p><small>World Bank 2024</small></div>
     </div>
   </div>
 </section>
 
 <!-- SERVICES -->
 <section id="services" aria-labelledby="services-title">
-  <p class="section-eyebrow">What we build</p>
-  <h2 class="section-title" id="services-title">Rehabilitation Solutions <span>On Demand</span></h2>
-  <p class="section-sub">From a custom game therapy system to a full clinical AI stack — engineered for therapists, hospitals, and researchers across Pakistan and beyond.</p>
-
-  <div class="services-grid" role="list">
-    <div class="service-card fade-up" role="listitem">
-      <div class="service-header">
-        <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="13" rx="4"/><path d="M8 13h4M10 11v4M16 12h.01M18 14h.01"/></svg></div>
-        <span class="badge badge-live"><span class="live-dot"></span>Live</span>
-      </div>
-      <h3>Game-Based Rehab Systems</h3>
-      <p>Custom therapeutic games where every mechanic maps to a clinical exercise. Stroke, ortho, neuro, paediatric — built to your protocol with real-time biomechanical tracking.</p>
-    </div>
-    <div class="service-card fade-up" role="listitem">
-      <div class="service-header">
-        <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M12 2v6M9 21v-3h6v3M9.5 13h.01M14.5 13h.01M9 17h6"/><path d="M3 12H1M23 12h-2"/></svg></div>
-        <span class="badge badge-dev">In Development</span>
-      </div>
-      <h3>AI Physiotherapy Tools</h3>
-      <p>RehabLLM-powered clinical assistants, automated SOAP notes, AI exercise prescription, and patient chatbots in Urdu and English for the Pakistani clinical context.</p>
-    </div>
-    <div class="service-card fade-up" role="listitem">
-      <div class="service-header">
-        <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3h6l2 5H7L9 3zM7 8v4a5 5 0 0010 0V8"/><path d="M6 20h12M12 16v4"/></svg></div>
-        <span class="badge badge-proto">Prototype</span>
-      </div>
-      <h3>BioSense Wearables</h3>
-      <p>Custom EMG, IMU, and wearable sensor prototypes under our BioSense platform. Clinical-grade data quality at Pakistan-accessible cost — no import dependency.</p>
-    </div>
-    <div class="service-card fade-up" role="listitem">
-      <div class="service-header">
-        <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="14" width="4" height="7" rx="1"/><rect x="10" y="9" width="4" height="12" rx="1"/><rect x="17" y="4" width="4" height="17" rx="1"/><line x1="3" y1="21" x2="21" y2="21"/></svg></div>
-        <span class="badge badge-live"><span class="live-dot"></span>Live</span>
-      </div>
-      <h3>TherapistOS Dashboard</h3>
-      <p>Real-time ROM tracking, biomechanics analytics, recovery prediction, and session management. Replace paper notes with clinical-grade intelligence.</p>
-    </div>
-    <div class="service-card fade-up" role="listitem">
-      <div class="service-header">
-        <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 22V11L12 3l8 8v11H4z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg></div>
-        <span class="badge badge-live"><span class="live-dot"></span>Live</span>
-      </div>
-      <h3>Hospital Integration</h3>
-      <p>Plug into existing EHR systems, PIMS networks, or standalone clinic setups. Full DRAP compliance pathway and clinical validation for Pakistani healthcare facilities.</p>
-    </div>
-    <div class="service-card fade-up" role="listitem">
-      <div class="service-header">
-        <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 10l-10-6L2 10l10 6 10-6z"/><path d="M6 12.5v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/><line x1="22" y1="10" x2="22" y2="17"/></svg></div>
-        <span class="badge badge-open">Open</span>
-      </div>
-      <h3>Research Collaboration</h3>
-      <p>IRB-approved rehabilitation studies, game-based measurement tools, and co-authorship on peer-reviewed publications with the REHABION biomedical engineering team.</p>
+  <div class="wrap">
+    <p class="label rv"><svg viewBox="0 0 34 14" fill="none"><path d="M1 8 C 10 2, 20 12, 33 6" stroke="#C2522F" stroke-width="2" stroke-linecap="round"/></svg>what we build</p>
+    <h2 class="h2 rv r2" id="services-title">Six things we make,<br><em>for therapists</em> and the people they treat.</h2>
+    <div class="svc-list">
+      <div class="svc rv"><span class="n">01</span><h3>Game-based rehab systems</h3><p>Therapeutic games where every move maps to a clinical exercise — stroke, ortho, neuro and paediatric — built to your protocol, with live motion tracking.</p><span class="st">live!</span></div>
+      <div class="svc rv"><span class="n">02</span><h3>Physiotherapy assistant tools</h3><p>RehabLLM clinical assistant, automatic SOAP notes, exercise prescription, and patient chat in Urdu and English for Pakistani clinics.</p><span class="st lab">in the lab</span></div>
+      <div class="svc rv"><span class="n">03</span><h3>BioSense wearables</h3><p>EMG and motion-sensor prototypes giving clinical-quality data at a price Pakistan can afford — no import dependency.</p><span class="st proto">prototype</span></div>
+      <div class="svc rv"><span class="n">04</span><h3>TherapistOS dashboard</h3><p>Range-of-motion tracking, movement analytics, recovery prediction and session notes — goodbye, paper files.</p><span class="st">live!</span></div>
+      <div class="svc rv"><span class="n">05</span><h3>Hospital integration</h3><p>Plugs into existing EHR systems, PIMS networks or standalone clinics, with a DRAP compliance pathway and clinical validation.</p><span class="st">live!</span></div>
+      <div class="svc rv"><span class="n">06</span><h3>Research collaboration</h3><p>IRB-approved rehab studies, game-based measurement tools and co-authorship on peer-reviewed papers with our engineering team.</p><span class="st">open to you</span></div>
     </div>
   </div>
 </section>
 
 <!-- PROJECTS -->
 <section id="projects" aria-labelledby="projects-title">
-  <p class="section-eyebrow">Our work</p>
-  <h2 class="section-title" id="projects-title">Active <span>Projects</span></h2>
-  <p class="section-sub">Built by the REHABION biomedical engineering team. Real clinical problems, real engineering solutions.</p>
-
-  <div class="projects-grid">
-    <!-- RBN-001 -->
-    <article class="project-card fade-up">
-      <div class="project-thumb pt-001">
-        <span class="pt-num">RBN-001</span>
-        <span class="pt-badge pt-badge-live">LIVE</span>
-        <div class="pt-mockup">
-          <div class="pt-bar active" style="width:70%"></div>
-          <div class="pt-row">
-            <div class="pt-circle" style="width:28px;height:28px;border-color:var(--blue)"></div>
-            <div class="pt-line hl" style="width:40%"></div>
-            <div class="pt-line" style="width:30%"></div>
-          </div>
-          <div class="pt-bar" style="width:45%"></div>
-          <div class="pt-row">
-            <div class="pt-line" style="width:20%"></div>
-            <div class="pt-circle" style="width:18px;height:18px;border-color:var(--cyan);border-width:1px"></div>
-            <div class="pt-line hl" style="width:55%"></div>
-          </div>
-          <div class="pt-bar active" style="width:85%;animation-delay:.4s"></div>
-          <div class="pt-row">
-            <div class="pt-line" style="width:60%"></div>
-            <div class="pt-circle" style="width:22px;height:22px;border-color:var(--purple);border-width:1px"></div>
-          </div>
+  <div class="wrap">
+    <p class="label rv"><svg viewBox="0 0 34 14" fill="none"><path d="M1 8 C 10 2, 20 12, 33 6" stroke="#C2522F" stroke-width="2" stroke-linecap="round"/></svg>on the workbench</p>
+    <h2 class="h2 rv r2" id="projects-title">Real patients, <em>real</em> problems,<br>things that already work.</h2>
+    <div class="proj-grid">
+      <article class="proj rv">
+        <div class="proj-art" aria-hidden="true">
+          <svg viewBox="0 0 400 250" fill="none" stroke="#1E1B18" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+            <g filter="url(#rough)">
+              <rect x="40" y="30" width="320" height="190" rx="18" fill="#FFFCF6"/>
+              <path d="M90 190 A 120 120 0 0 1 310 190" stroke="#2E5946" stroke-dasharray="4 10"/>
+              <path d="M110 120 l5 10 11 1 -8 8 2 11 -10 -6 -10 6 2 -11 -8 -8 11 -1z" fill="#DDA032"/>
+              <path d="M200 64 l5 10 11 1 -8 8 2 11 -10 -6 -10 6 2 -11 -8 -8 11 -1z" fill="#DDA032"/>
+              <path d="M288 120 l5 10 11 1 -8 8 2 11 -10 -6 -10 6 2 -11 -8 -8 11 -1z" fill="#DDA032"/>
+              <text x="60" y="58" font-family="Caveat" font-size="22" fill="#C2522F" stroke="none">score 12</text>
+            </g>
+            <circle r="13" fill="#C2522F" stroke="#1E1B18">
+              <animateMotion dur="4.5s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;.5;1" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1" path="M90 190 A 120 120 0 0 1 310 190"/>
+            </circle>
+          </svg>
         </div>
-        <div class="pt-scan-line"></div>
-      </div>
-      <div class="project-body">
-        <div class="project-tags">
-          <span class="project-tag">Unity</span>
-          <span class="project-tag">Stroke Rehab</span>
-          <span class="project-tag">Motion Capture</span>
+        <div class="proj-body">
+          <div class="proj-meta"><span class="live">RBN-001 · live</span><span>Unity</span><span>Stroke rehab</span><span>Motion capture</span></div>
+          <h3>Upper-limb stroke game</h3>
+          <p>Stroke survivors raise and stretch their arm to play. Shoulder abduction and elbow extension drive the game, and range of motion is measured live, with clinical accuracy.</p>
+          <a class="textlink" href="https://calendly.com/muhammadrmzn84/rehabion" target="_blank" rel="noopener noreferrer">See it in a demo →</a>
         </div>
-        <h3>Upper Limb Stroke Game</h3>
-        <p>Therapeutic game for stroke survivors mapping shoulder abduction and elbow extension to gameplay mechanics. Tracks range of motion in real time with clinical-grade accuracy.</p>
-        <a href="https://calendly.com/muhammadrmzn84/rehabion" target="_blank" rel="noopener noreferrer" class="project-link">Book a demo →</a>
-      </div>
-    </article>
-
-    <!-- RBN-002 -->
-    <article class="project-card fade-up">
-      <div class="project-thumb pt-002">
-        <span class="pt-num">RBN-002</span>
-        <span class="pt-badge pt-badge-live">LIVE</span>
-        <div class="pt-mockup">
-          <div class="pt-bar active" style="width:100%;background:linear-gradient(90deg,var(--cyan-dim),var(--cyan))"></div>
-          <div class="pt-skeleton" style="margin-top:4px">
-            <div class="pt-row" style="gap:4px">
-              <div class="pt-block" style="width:12px;height:40px;border-radius:3px"></div>
-              <div class="pt-block blue" style="width:12px;height:52px;border-radius:3px"></div>
-              <div class="pt-block" style="width:12px;height:32px;border-radius:3px"></div>
-              <div class="pt-block cyan" style="width:12px;height:48px;border-radius:3px"></div>
-              <div class="pt-block" style="width:12px;height:28px;border-radius:3px"></div>
-              <div class="pt-block blue" style="width:12px;height:44px;border-radius:3px"></div>
-              <div class="pt-block" style="width:12px;height:36px;border-radius:3px"></div>
-              <div class="pt-block cyan" style="width:12px;height:50px;border-radius:3px"></div>
-            </div>
-          </div>
-          <div style="display:flex;gap:8px;margin-top:8px">
-            <div class="pt-block" style="height:10px;flex:1;border-radius:2px"></div>
-            <div class="pt-block blue" style="height:10px;width:30%;border-radius:2px"></div>
-          </div>
-          <div style="display:flex;gap:8px;margin-top:4px">
-            <div class="pt-block cyan" style="height:8px;width:40%;border-radius:2px"></div>
-            <div class="pt-block" style="height:8px;flex:1;border-radius:2px"></div>
-          </div>
+      </article>
+      <article class="proj rv r2">
+        <div class="proj-art" aria-hidden="true">
+          <svg viewBox="0 0 400 250" fill="none" stroke="#1E1B18" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+            <g filter="url(#rough)">
+              <rect x="150" y="22" width="110" height="206" rx="20" fill="#FFFCF6"/>
+              <path d="M188 36 h34"/>
+              <path d="M168 190 C 190 150, 210 170, 240 120 S 250 90, 246 70" stroke="#2E5946" stroke-width="2"/>
+            </g>
+            <g fill="#C2522F" stroke="none">
+              <ellipse class="footstep" style="animation-delay:0s" cx="60" cy="200" rx="10" ry="17"/>
+              <ellipse class="footstep" style="animation-delay:.5s" cx="90" cy="170" rx="10" ry="17"/>
+              <ellipse class="footstep" style="animation-delay:1s" cx="68" cy="135" rx="10" ry="17"/>
+              <ellipse class="footstep" style="animation-delay:1.5s" cx="98" cy="102" rx="10" ry="17"/>
+              <ellipse class="footstep" style="animation-delay:2s" cx="76" cy="68" rx="10" ry="17"/>
+            </g>
+            <g font-family="Caveat" font-size="22" stroke="none">
+              <text x="285" y="80" fill="#2E5946">symmetry 94%</text>
+              <text x="285" y="112" fill="#C2522F">cadence 102</text>
+              <text x="285" y="144" fill="#1E1B18">posture ✓</text>
+            </g>
+          </svg>
         </div>
-      </div>
-      <div class="project-body">
-        <div class="project-tags">
-          <span class="project-tag">Computer Vision</span>
-          <span class="project-tag">Knee Rehab</span>
-          <span class="project-tag">Smartphone</span>
+        <div class="proj-body">
+          <div class="proj-meta"><span class="live">RBN-002 · live</span><span>Computer vision</span><span>Knee rehab</span><span>Smartphone</span></div>
+          <h3>Phone-camera gait analyser</h3>
+          <p>For patients after knee surgery — no wearable needed. A phone camera measures step symmetry, cadence and posture, with validated clinical output.</p>
+          <a class="textlink" href="https://calendly.com/muhammadrmzn84/rehabion" target="_blank" rel="noopener noreferrer">See it in a demo →</a>
         </div>
-        <h3>CV-Based Gait Analyser</h3>
-        <p>Smartphone camera gait analysis for post-surgical knee patients. No wearable required. Provides step symmetry, cadence, and posture scores with validated clinical output.</p>
-        <a href="https://calendly.com/muhammadrmzn84/rehabion" target="_blank" rel="noopener noreferrer" class="project-link">Book a demo →</a>
+      </article>
+      <div class="proj-more rv">
+        <div><span class="hand" style="font-size:24px">RBN-003 and beyond</span><h3>Got a clinical problem? Let's build it.</h3>
+        <p>New challenges, new engineering. Talk to us about a collaboration, a custom build, or a research partnership.</p></div>
+        <a class="pill ghost" href="#contact">Start a conversation</a>
       </div>
-    </article>
-
-    <!-- RBN-003 -->
-    <article class="project-card fade-up">
-      <div class="project-thumb pt-003">
-        <span class="pt-num">RBN-003</span>
-        <span class="pt-badge pt-badge-soon">IN PROGRESS</span>
-        <div class="pt-mockup" style="opacity:.5">
-          <div style="display:flex;flex-direction:column;gap:6px;width:100%">
-            <div class="pt-block" style="height:14px;width:60%;border-radius:3px"></div>
-            <div class="pt-block" style="height:8px;width:90%;border-radius:2px"></div>
-            <div class="pt-block" style="height:8px;width:75%;border-radius:2px"></div>
-            <svg class="pt-ecg" viewBox="0 0 200 50"><polyline points="0,25 20,25 28,8 36,42 44,4 54,42 60,20 68,25 100,25 108,12 116,25 200,25" stroke="#E07A5F" stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".7"/></svg>
-          </div>
-        </div>
-      </div>
-      <div class="project-body">
-        <div class="project-tags">
-          <span class="project-tag">Biomedical</span>
-          <span class="project-tag">In Progress</span>
-        </div>
-        <h3>More Projects in Pipeline</h3>
-        <p>New clinical challenges, new engineering solutions. Contact us to discuss a collaboration, request a custom build, or propose a research partnership.</p>
-        <a href="#contact" class="project-link">Collaborate with us →</a>
-      </div>
-    </article>
+    </div>
   </div>
 </section>
 
-<!-- MILESTONES -->
-<section id="milestones" aria-labelledby="milestones-title">
-  <div class="milestones-inner">
-    <p class="section-eyebrow">Traction</p>
-    <h2 class="section-title" id="milestones-title">Our <span>Journey</span></h2>
-    <p class="section-sub" style="text-align:center;margin:0 auto 3rem">From research idea to functional prototype — each milestone is a proof of execution.</p>
-
-    <div class="timeline" role="list">
-      <div class="timeline-item done fade-up" role="listitem">
-        <div class="tl-left">
-          <span class="tl-date">Q1 2025</span>
-          <div class="tl-title">Company Founded</div>
-          <div class="tl-desc">REHABION established as Pakistan's first dedicated rehabilitation technology initiative.</div>
-          <span class="tl-tag tl-tag-done">Completed</span>
-        </div>
-        <div class="tl-center"><div class="tl-dot"></div><div class="tl-line-seg"></div></div>
-        <div class="tl-right"></div>
-      </div>
-
-      <div class="timeline-item done fade-up" role="listitem">
-        <div class="tl-left"></div>
-        <div class="tl-center"><div class="tl-dot"></div><div class="tl-line-seg"></div></div>
-        <div class="tl-right">
-          <span class="tl-date">Q2 2025</span>
-          <div class="tl-title">Research Programme</div>
-          <div class="tl-desc">Formal research collaboration established with Dr. Faisal Amin as Technical Supervisor.</div>
-          <span class="tl-tag tl-tag-done">Completed</span>
-        </div>
-      </div>
-
-      <div class="timeline-item done fade-up" role="listitem">
-        <div class="tl-left">
-          <span class="tl-date">Q2 2025</span>
-          <div class="tl-title">First Prototype</div>
-          <div class="tl-desc">RBN-001 Upper Limb Stroke Game prototype built and validated. RBN-002 Gait Analyser in active testing.</div>
-          <span class="tl-tag tl-tag-done">Completed</span>
-        </div>
-        <div class="tl-center"><div class="tl-dot"></div><div class="tl-line-seg"></div></div>
-        <div class="tl-right"></div>
-      </div>
-
-      <div class="timeline-item done fade-up" role="listitem">
-        <div class="tl-left"></div>
-        <div class="tl-center"><div class="tl-dot"></div><div class="tl-line-seg"></div></div>
-        <div class="tl-right">
-          <span class="tl-date">Q2 2025</span>
-          <div class="tl-title">Platform Launch</div>
-          <div class="tl-desc">rehabion.github.io launched. Formspree contact, WhatsApp, Calendly demo booking all live.</div>
-          <span class="tl-tag tl-tag-done">Completed</span>
-        </div>
-      </div>
-
-      <div class="timeline-item upcoming fade-up" role="listitem">
-        <div class="tl-left">
-          <span class="tl-date">Q3 2025</span>
-          <div class="tl-title">Clinical Trial — Phase 1</div>
-          <div class="tl-desc">IRB-approved pilot study with 20 stroke patients using RBN-001 at partner facility in Islamabad.</div>
-          <span class="tl-tag tl-tag-up">Upcoming</span>
-        </div>
-        <div class="tl-center"><div class="tl-dot"></div><div class="tl-line-seg"></div></div>
-        <div class="tl-right"></div>
-      </div>
-
-      <div class="timeline-item upcoming fade-up" role="listitem">
-        <div class="tl-left"></div>
-        <div class="tl-center"><div class="tl-dot"></div><div class="tl-line-seg"></div></div>
-        <div class="tl-right">
-          <span class="tl-date">Q4 2025</span>
-          <div class="tl-title">RehabLLM Beta</div>
-          <div class="tl-desc">AI physiotherapy assistant enters closed beta with select clinics. Urdu + English interface.</div>
-          <span class="tl-tag tl-tag-up">Upcoming</span>
-        </div>
-      </div>
-
-      <div class="timeline-item upcoming fade-up" role="listitem">
-        <div class="tl-left">
-          <span class="tl-date">2026</span>
-          <div class="tl-title">Pre-Seed Funding Round</div>
-          <div class="tl-desc">Target raise to fund clinical validation, BioSense hardware production, and first hospital contracts.</div>
-          <span class="tl-tag tl-tag-up">Target</span>
-        </div>
-        <div class="tl-center"><div class="tl-dot"></div></div>
-        <div class="tl-right"></div>
-      </div>
+<!-- JOURNEY -->
+<section id="journey" aria-labelledby="journey-title">
+  <div class="wrap journey">
+    <div class="journey-intro">
+      <p class="label rv"><svg viewBox="0 0 34 14" fill="none"><path d="M1 8 C 10 2, 20 12, 33 6" stroke="#C2522F" stroke-width="2" stroke-linecap="round"/></svg>so far</p>
+      <h2 class="h2 rv r2" id="journey-title">From an idea to things that <em>work.</em></h2>
+      <p class="lede rv r3">Every milestone here is something we actually shipped, or a date we're holding ourselves to.</p>
+    </div>
+    <div class="tl" id="timeline">
+      <svg class="tl-path" viewBox="0 0 40 1000" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M20 0 C 4 120, 36 240, 20 360 S 4 600, 20 720 S 36 900, 20 1000" fill="none" stroke="#C2522F" stroke-width="2.5" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>
+      <div class="tl-item done rv"><span class="when">Q1 2025</span><h3>REHABION is born</h3><p>Started as Pakistan's first dedicated rehabilitation technology initiative.</p><span class="tag">done</span></div>
+      <div class="tl-item done rv"><span class="when">Q2 2025</span><h3>Research programme</h3><p>Formal research collaboration begins, with Dr. Faisal Amin as Technical Supervisor.</p><span class="tag">done</span></div>
+      <div class="tl-item done rv"><span class="when">Q2 2025</span><h3>First prototypes</h3><p>RBN-001 stroke game built and validated; RBN-002 gait analyser in active testing.</p><span class="tag">done</span></div>
+      <div class="tl-item done rv"><span class="when">Q2 2025</span><h3>We open our doors online</h3><p>This website, contact, WhatsApp and demo booking go live.</p><span class="tag">done</span></div>
+      <div class="tl-item rv"><span class="when">Q3 2025</span><h3>Clinical trial — phase 1</h3><p>IRB-approved pilot with 20 stroke patients using RBN-001 at a partner facility in Islamabad.</p><span class="tag next">coming up</span></div>
+      <div class="tl-item rv"><span class="when">Q4 2025</span><h3>RehabLLM beta</h3><p>Our physiotherapy assistant enters closed beta with selected clinics, in Urdu and English.</p><span class="tag next">coming up</span></div>
+      <div class="tl-item rv"><span class="when">2026</span><h3>Pre-seed round</h3><p>Raising to fund clinical validation, BioSense hardware production and our first hospital contracts.</p><span class="tag goal">the goal</span></div>
     </div>
   </div>
 </section>
 
 <!-- TEAM -->
 <section id="team" aria-labelledby="team-title">
-  <div class="orb orb-team" aria-hidden="true"></div>
-  <p class="section-eyebrow">The people</p>
-  <h2 class="section-title" id="team-title">Built by <span>Biomedical Engineers</span></h2>
-  <p class="section-sub">A multidisciplinary team of biomedical engineers and AI researchers — building Pakistan's first rehabilitation technology company.</p>
-
-  <div class="team-grid">
-    <div class="team-card featured fade-up">
-      <span class="team-badge-pill">Technical Lead</span>
-      <div class="team-avatar">FA</div>
-      <h3>Dr. Faisal Amin</h3>
-      <span class="team-role">Technical Supervisor · Chief Science Officer</span>
-      <span class="team-dept">Biomedical Engineer</span>
-      <p>Leading researcher in rehabilitation engineering and biomedical sciences. Drives the scientific integrity, clinical validation, and technical direction of every REHABION system.</p>
-      <div class="team-skills">
-        <span class="skill-tag">Neurorehabilitation</span>
-        <span class="skill-tag">Biomedical Eng.</span>
-        <span class="skill-tag">Clinical Research</span>
-        <span class="skill-tag">Signal Processing</span>
-        <span class="skill-tag">AI / ML</span>
+  <div class="wrap">
+    <p class="label rv"><svg viewBox="0 0 34 14" fill="none"><path d="M1 8 C 10 2, 20 12, 33 6" stroke="#C2522F" stroke-width="2" stroke-linecap="round"/></svg>the people</p>
+    <h2 class="h2 rv r2" id="team-title">Biomedical engineers who<br>would rather <em>build</em> than wait.</h2>
+    <div class="team-grid">
+      <article class="polaroid rv">
+        <div class="tape"></div>
+        <div class="portrait" style="background:var(--forest)"><svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="160" cy="40" r="60" fill="#3C6C57"/></svg><span>FA</span></div>
+        <h3>Dr. Faisal Amin</h3>
+        <span class="role">Technical Supervisor · Chief Science Officer</span>
+        <p>A leading researcher in rehabilitation engineering. He keeps every REHABION system scientifically honest — clinical validation, methods and technical direction.</p>
+        <p class="skills">Neurorehabilitation · Biomedical engineering · Clinical research · Signal processing · ML</p>
+      </article>
+      <article class="polaroid rv r2">
+        <div class="tape"></div>
+        <div class="portrait" style="background:var(--terra)"><svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="40" cy="170" r="70" fill="#D06A48"/></svg><span>MR</span></div>
+        <h3>Muhammad Ramzan</h3>
+        <span class="role">Founder · Lead Engineer</span>
+        <p>Biomedical engineer and developer building Pakistan's first game-based rehab platform and RehabLLM — so world-class recovery isn't only for people who can fly abroad for it.</p>
+        <p class="skills">Game dev · AI · Biomedical engineering · Hardware · Full-stack</p>
+      </article>
+      <div class="join rv r3">
+        <span class="hand" style="font-size:26px">this could be you</span>
+        <h3>Physio? Engineer? Researcher?</h3>
+        <p>We're looking for people who want to build something that matters for healthcare in Pakistan.</p>
+        <a class="textlink" href="mailto:muhammadrmzn84@gmail.com?subject=Joining%20REHABION">Write to us →</a>
       </div>
-    </div>
-
-    <div class="team-card fade-up">
-      <div class="team-avatar">MR</div>
-      <h3>Muhammad Ramzan</h3>
-      <span class="team-role">Founder · Lead Engineer</span>
-      <span class="team-dept">Biomedical Engineer</span>
-      <p>Biomedical engineer and AI developer building Pakistan's first game-based rehabilitation platform and the RehabLLM. Driven to make world-class recovery technology accessible from Islamabad to the world.</p>
-      <div class="team-skills">
-        <span class="skill-tag">Game Dev</span>
-        <span class="skill-tag">AI / LLM</span>
-        <span class="skill-tag">Biomedical Eng.</span>
-        <span class="skill-tag">Hardware</span>
-        <span class="skill-tag">Full-Stack</span>
-      </div>
-    </div>
-
-    <div class="team-card fade-up" style="border-style:dashed;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:1rem">
-      <div class="team-avatar" style="border-style:dashed;border-color:var(--border2);color:var(--muted)">+</div>
-      <div>
-        <h3 style="margin-bottom:4px">Join the Team</h3>
-        <p style="font-size:13.5px;color:var(--muted);line-height:1.68">We're looking for physiotherapists, biomedical engineers, and AI researchers ready to build something that matters for Pakistan's healthcare.</p>
-      </div>
-      <a href="#contact" class="btn-outline" style="font-size:13px;padding:10px 18px">Apply now →</a>
     </div>
   </div>
 </section>
 
 <!-- INVESTORS -->
 <section id="investors" aria-labelledby="investors-title">
-  <div class="investors-inner">
-    <p class="section-eyebrow">Investment</p>
-    <h2 class="section-title" id="investors-title">Invest in <span>Pakistan's Healthcare Future</span></h2>
-    <p class="section-sub" style="max-width:700px">REHABION is seeking its first institutional investors to accelerate clinical validation, scale hardware production, and establish Pakistan's first hospital-connected rehabilitation technology network.</p>
-
-    <div class="investors-hero fade-up">
-      <div class="investors-hero-top">
-        <div>
-          <span class="stage-badge">⚡ Pre-Seed Stage</span>
-          <h3 style="margin-top:1rem">First-Mover Advantage in a $8.1B Market</h3>
-          <p>No other company in Pakistan, and almost none in South Asia, is building clinical rehabilitation technology at this depth. REHABION is a category-creator, not a market follower.</p>
-        </div>
-        <div class="raise-grid" style="min-width:260px">
-          <div class="raise-item">
-            <span class="raise-val">$0</span>
-            <span class="raise-lbl">Competitors (Pakistan)</span>
-          </div>
-          <div class="raise-item">
-            <span class="raise-val">220M</span>
-            <span class="raise-lbl">Addressable market</span>
-          </div>
-          <div class="raise-item">
-            <span class="raise-val">2026</span>
-            <span class="raise-lbl">Target raise year</span>
-          </div>
-        </div>
+  <div class="wrap">
+    <p class="label rv"><svg viewBox="0 0 34 14" fill="none"><path d="M1 8 C 10 2, 20 12, 33 6" stroke="#DDA032" stroke-width="2" stroke-linecap="round"/></svg>for investors</p>
+    <h2 class="h2 rv r2" id="investors-title">Help us build Pakistan's <em>first</em><br>rehab-technology network.</h2>
+    <div class="letter">
+      <div class="letter-body rv">
+        <p class="dear">Dear future partner,</p>
+        <p>We're looking for our first institutional investors — people who want to speed up clinical validation, scale our hardware, and connect Pakistan's hospitals to rehabilitation technology for the first time.</p>
+        <p>Nobody else in Pakistan, and almost nobody in South Asia, is building clinical rehab technology at this depth. Here's why we think it's the right time:</p>
+        <ul>
+          <li><b>We're creating the category.</b> The first clinical rehab-tech company in a 220-million-person market.</li>
+          <li><b>The science is supervised.</b> Dr. Faisal Amin, an IRB-approved research pipeline, and a peer-reviewed publication track.</li>
+          <li><b>The market is growing fast.</b> 13.4% a year globally, reaching $8.1B by 2033.</li>
+          <li><b>Built for hospitals.</b> DRAP compliance pathway in progress; designed to plug straight into clinics.</li>
+        </ul>
+        <p>We'd love to show you what we've built.</p>
+        <span class="sign">Muhammad Ramzan<small>Founder, REHABION</small></span>
       </div>
-    </div>
-
-    <div class="inv-perks">
-      <div class="inv-perk fade-up">
-        <div class="inv-perk-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3h12l-1.5 8a4.5 4.5 0 01-9 0L6 3z"/><path d="M6 3H3l.5 4a4 4 0 002.5 3M18 3h3l-.5 4a4 4 0 01-2.5 3"/><path d="M12 15v4M9 19h6"/></svg></div>
-        <div>
-          <h4>Category Creator</h4>
-          <p>First clinical rehab tech company in Pakistan — no competition for the foreseeable future in a 220M-person market.</p>
-        </div>
-      </div>
-      <div class="inv-perk fade-up">
-        <div class="inv-perk-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3h6l2 5H7L9 3zM7 8v4a5 5 0 0010 0V8"/><path d="M6 20h12M12 16v4"/></svg></div>
-        <div>
-          <h4>Clinical Validation</h4>
-          <p>Supervised by Dr. Faisal Amin, IRB-approved research pipeline, peer-reviewed publication track.</p>
-        </div>
-      </div>
-      <div class="inv-perk fade-up">
-        <div class="inv-perk-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23,6 13.5,15.5 8.5,10.5 1,18"/><polyline points="17,6 23,6 23,12"/></svg></div>
-        <div>
-          <h4>13.4% CAGR</h4>
-          <p>The global rehabilitation technology market grows at 13.4% annually and reaches $8.1B by 2033.</p>
-        </div>
-      </div>
-      <div class="inv-perk fade-up">
-        <div class="inv-perk-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
-        <div>
-          <h4>Hospital-Ready</h4>
-          <p>DRAP compliance pathway in progress. Products designed for direct hospital and clinic integration.</p>
-        </div>
-      </div>
-    </div>
-
-    <div style="text-align:center;margin-top:2.5rem">
-      <a href="https://calendly.com/muhammadrmzn84/rehabion" target="_blank" rel="noopener noreferrer" class="btn-primary" style="margin-right:.875rem">Schedule Investor Call →</a>
-      <a href="mailto:muhammadrmzn84@gmail.com?subject=Investment Inquiry — REHABION" class="btn-outline">Request Deck via Email →</a>
+      <aside class="inv-side rv r2">
+        <span class="stage">pre-seed stage</span>
+        <div class="inv-num"><b>0</b><span>competitors in Pakistan</span></div>
+        <div class="inv-num"><b>220M</b><span>addressable population</span></div>
+        <div class="inv-num"><b>2026</b><span>target raise year</span></div>
+        <a class="pill" href="https://calendly.com/muhammadrmzn84/rehabion" target="_blank" rel="noopener noreferrer">Book an investor call</a>
+        <a class="alt" href="mailto:muhammadrmzn84@gmail.com?subject=Investment%20Inquiry%20—%20REHABION">or ask for the deck by email →</a>
+      </aside>
     </div>
   </div>
 </section>
 
 <!-- RESOURCES -->
 <section id="resources" aria-labelledby="resources-title">
-  <p class="section-eyebrow">Knowledge store</p>
-  <h2 class="section-title" id="resources-title">Rehab <span>Resources</span></h2>
-  <p class="section-sub">Clinical guides, research protocols, and developer tools — created by our biomedical engineering team.</p>
-
-  <div class="resources-grid">
-    <div class="resource-card fade-up">
-      <div class="resource-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M8 4H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2h-3"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="13" y2="16"/></svg></div>
-      <h4>Stroke Rehab Exercise Protocol</h4>
-      <p>Evidence-based 12-week upper limb protocol for post-stroke patients. Session plans, ROM targets, and validated outcome measurement sheets.</p>
-      <div class="resource-price"><span class="price-tag free">FREE</span><a href="https://rehabion.gumroad.com/l/stroke-protocol" target="_blank" rel="noopener noreferrer" class="resource-btn">Download</a></div>
-    </div>
-    <div class="resource-card fade-up">
-      <div class="resource-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="13" rx="4"/><path d="M8 13h4M10 11v4M16 12h.01M18 14h.01"/></svg></div>
-      <h4>Game-Based Rehab Design Guide</h4>
-      <p>How to design therapeutic games that map clinical exercises to game mechanics — for developers and physiotherapists building rehab technology together.</p>
-      <div class="resource-price"><span class="price-tag">$9</span><a href="https://rehabion.gumroad.com/l/game-rehab-guide" target="_blank" rel="noopener noreferrer" class="resource-btn">Buy on Gumroad</a></div>
-    </div>
-    <div class="resource-card fade-up">
-      <div class="resource-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M12 2v6M9 21v-3h6v3M9.5 13h.01M14.5 13h.01M9 17h6"/><path d="M3 12H1M23 12h-2"/></svg></div>
-      <h4>RehabLLM Prompt Library</h4>
-      <p>100+ tested prompts for AI in physiotherapy — exercise prescription, SOAP notes, patient education, and outcome prediction workflows.</p>
-      <div class="resource-price"><span class="price-tag">$19</span><a href="https://rehabion.gumroad.com/l/rehabllm-prompts" target="_blank" rel="noopener noreferrer" class="resource-btn">Buy on Gumroad</a></div>
-    </div>
-    <div class="resource-card fade-up">
-      <div class="resource-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="14" width="4" height="7" rx="1"/><rect x="10" y="9" width="4" height="12" rx="1"/><rect x="17" y="4" width="4" height="17" rx="1"/><line x1="3" y1="21" x2="21" y2="21"/></svg></div>
-      <h4>Pakistan Rehab Market Report</h4>
-      <p>First-ever analysis of Pakistan's rehabilitation technology landscape, competitive gap analysis, and 5-year opportunity map for investors and researchers.</p>
-      <div class="resource-price"><span class="price-tag">$29</span><a href="https://rehabion.gumroad.com/l/pakistan-rehab-report" target="_blank" rel="noopener noreferrer" class="resource-btn">Buy on Gumroad</a></div>
+  <div class="shelf-wrap">
+    <div class="wrap">
+      <p class="label rv"><svg viewBox="0 0 34 14" fill="none"><path d="M1 8 C 10 2, 20 12, 33 6" stroke="#C2522F" stroke-width="2" stroke-linecap="round"/></svg>from our shelf</p>
+      <h2 class="h2 rv r2" id="resources-title">Guides we wrote <em>so you don't</em> have to.</h2>
+      <div class="shelf">
+        <a class="book rv" href="#contact">
+          <div class="cover c1"><small>PROTOCOL · 12 WEEKS</small><h3>Stroke Rehab Exercise Protocol</h3><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3"><circle cx="50" cy="50" r="40"/><path d="M30 55 l14 14 28 -34"/></svg></div>
+          <p>An evidence-based upper-limb plan for after a stroke: session plans, range-of-motion targets and outcome sheets.</p>
+          <span class="price"><em>free</em> — ask us for a copy</span>
+        </a>
+        <a class="book rv r2" href="https://rehabion.gumroad.com/l/game-rehab-guide" target="_blank" rel="noopener noreferrer">
+          <div class="cover c2"><small>GUIDE</small><h3>Designing Games That Heal</h3><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3"><rect x="14" y="30" width="72" height="44" rx="20"/><path d="M34 44 v16 M26 52 h16"/><circle cx="64" cy="48" r="3"/><circle cx="70" cy="58" r="3"/></svg></div>
+          <p>How to turn clinical exercises into game mechanics — for developers and physiotherapists working together.</p>
+          <span class="price">$9 on Gumroad</span>
+        </a>
+        <a class="book rv r3" href="https://rehabion.gumroad.com/l/rehabllm-prompts" target="_blank" rel="noopener noreferrer">
+          <div class="cover c3"><small>LIBRARY · 100+ PROMPTS</small><h3>RehabLLM Prompt Library</h3><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 24 h64 v42 h-38 l-16 14 v-14 h-10z"/></svg></div>
+          <p>Tested prompts for physiotherapy: exercise prescription, SOAP notes, patient education and outcome prediction.</p>
+          <span class="price">$19 on Gumroad</span>
+        </a>
+        <a class="book rv r4" href="https://rehabion.gumroad.com/l/pakistan-rehab-report" target="_blank" rel="noopener noreferrer">
+          <div class="cover c4"><small>REPORT · 5-YEAR MAP</small><h3>Pakistan Rehab Market Report</h3><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3"><path d="M16 80 h70 M24 70 v-16 M42 70 v-30 M60 70 v-22 M78 70 v-46"/></svg></div>
+          <p>The first look at Pakistan's rehab-technology landscape: gaps, competition and opportunities.</p>
+          <span class="price">$29 on Gumroad</span>
+        </a>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" aria-labelledby="contact-title">
-  <div class="contact-grid">
-    <div class="contact-info">
-      <p class="section-eyebrow">Get in touch</p>
-      <h2 class="section-title" id="contact-title">Let's Build <span>Together</span></h2>
-      <p>Whether you're a hospital, physiotherapist, researcher, or investor — we want to hear from you. REHABION takes on a limited number of custom projects each quarter.</p>
-      <div class="contact-items" role="list">
-        <a href="mailto:muhammadrmzn84@gmail.com" class="contact-item" role="listitem">
-          <div class="contact-item-icon">✉</div>muhammadrmzn84@gmail.com
-        </a>
-        <a href="https://wa.me/923498228037?text=Hi%20REHABION%2C%20I%20found%20your%20website%20and%20would%20like%20to%20connect." target="_blank" rel="noopener noreferrer" class="contact-item" role="listitem">
-          <div class="contact-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>WhatsApp — +92 349 822 8037
-        </a>
-        <div class="contact-item" role="listitem">
-          <div class="contact-item-icon">📍</div>Islamabad / Rawalpindi, Pakistan
-        </div>
-        <div class="contact-item" role="listitem">
-          <div class="contact-item-icon">⏱</div>We reply within 48 hours
-        </div>
+<section id="contact" aria-labelledby="contact-title" style="padding-top:40px">
+  <div class="wrap contact-grid">
+    <div>
+      <p class="label rv"><svg viewBox="0 0 34 14" fill="none"><path d="M1 8 C 10 2, 20 12, 33 6" stroke="#C2522F" stroke-width="2" stroke-linecap="round"/></svg>say hello</p>
+      <h2 class="h2 rv r2" id="contact-title">Let's build it <em>together.</em></h2>
+      <p class="lede rv r3">Hospital, physiotherapist, researcher, investor or patient — we'd like to hear from you. We take on a small number of custom projects each quarter.</p>
+      <div class="ways rv r3">
+        <a class="way" href="https://wa.me/923498228037?text=Hi%20REHABION%2C%20I%20found%20your%20website%20and%20would%20like%20to%20connect." target="_blank" rel="noopener noreferrer">
+          <i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2E5946" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></i>
+          <div><b>WhatsApp · +92 349 822 8037</b><span>quickest way to reach us</span></div></a>
+        <a class="way" href="mailto:muhammadrmzn84@gmail.com">
+          <i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C2522F" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></i>
+          <div><b>muhammadrmzn84@gmail.com</b><span>proposals and partnerships · reply within 48 hours</span></div></a>
+        <a class="way" href="https://calendly.com/muhammadrmzn84/rehabion" target="_blank" rel="noopener noreferrer">
+          <i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9E6B12" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></i>
+          <div><b>Book a 15-minute call</b><span>free demo or investor chat</span></div></a>
+        <div class="way">
+          <i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1E1B18" stroke-width="1.8"><path d="M12 22s-7-6.5-7-12a7 7 0 0114 0c0 5.5-7 12-7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></i>
+          <div><b>Islamabad / Rawalpindi</b><span>Pakistan</span></div></div>
       </div>
+      <form class="news rv" id="newsletter-form" novalidate>
+        <h3>Get our research notes</h3>
+        <p>New clinical findings and project launches, a few times a year. No spam.</p>
+        <div class="news-row">
+          <label class="sr" for="nl-email">Email</label>
+          <input type="email" id="nl-email" placeholder="your@email.com" required maxlength="254" autocomplete="email">
+          <button type="submit" class="pill" id="nl-btn">Subscribe</button>
+        </div>
+        <p class="status" id="nl-status" style="margin-top:10px">Unsubscribe any time.</p>
+      </form>
     </div>
 
-    <form class="contact-form" id="contact-form" novalidate aria-label="Contact form">
-      <div class="hp-field" aria-hidden="true">
-        <label for="website">Website</label>
-        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
-      </div>
-      <div class="form-group">
-        <label for="name">Your name</label>
-        <input type="text" id="name" name="name" placeholder="Dr. Sarah Ahmed" required autocomplete="name" maxlength="100">
-      </div>
-      <div class="form-group">
-        <label for="email">Email address</label>
-        <input type="email" id="email" name="email" placeholder="you@hospital.pk" required autocomplete="email" maxlength="254">
-      </div>
-      <div class="form-group">
-        <label for="inquiry-type">I am a</label>
+    <form class="form-card rv r2" id="contact-form" novalidate aria-label="Contact form">
+      <div class="hp-field" aria-hidden="true"><label for="website">Website</label><input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>
+      <div class="field"><label for="name">Your name</label><input type="text" id="name" name="name" placeholder="Dr. Sarah Ahmed" required autocomplete="name" maxlength="100"></div>
+      <div class="field"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="you@hospital.pk" required autocomplete="email" maxlength="254"></div>
+      <div class="field"><label for="inquiry-type">I am a…</label>
         <select id="inquiry-type" name="inquiry_type" required>
-          <option value="" disabled selected>Select your role</option>
-          <option value="investor">Investor</option>
-          <option value="hospital">Hospital / Clinic</option>
-          <option value="therapist">Physiotherapist</option>
-          <option value="researcher">Researcher / Academic</option>
-          <option value="sponsor">Potential Sponsor</option>
-          <option value="patient">Patient / Family</option>
-          <option value="other">Other</option>
-        </select>
+          <option value="" disabled selected>choose one</option>
+          <option value="investor">Investor</option><option value="hospital">Hospital / clinic</option>
+          <option value="therapist">Physiotherapist</option><option value="researcher">Researcher / academic</option>
+          <option value="sponsor">Potential sponsor</option><option value="patient">Patient / family</option><option value="other">Something else</option>
+        </select></div>
+      <div class="field"><label for="message">Message</label><textarea id="message" name="message" placeholder="Tell us about your project, your clinic, or how you'd like to work together…" required minlength="20" maxlength="2000"></textarea></div>
+      <div class="form-row">
+        <p class="status" id="form-status" role="status" aria-live="polite">Encrypted · no data sold</p>
+        <button type="submit" class="pill" id="form-submit-btn">Send message</button>
       </div>
-      <div class="form-group">
-        <label for="message">Message</label>
-        <textarea id="message" name="message" placeholder="Tell us about your project, investment interest, or how you'd like to collaborate..." required minlength="20" maxlength="2000"></textarea>
-      </div>
-      <button type="submit" class="form-submit" id="form-submit-btn">Send Message →</button>
-      <p class="form-notice" id="form-status" role="status" aria-live="polite">🔒 Encrypted · We reply within 48 hours · No data sold</p>
     </form>
   </div>
 </section>
+</main>
 
-<!-- CONNECT -->
-<section id="connect" aria-labelledby="connect-title">
-  <div class="connect-inner">
-    <p class="section-eyebrow">Stay connected</p>
-    <h2 class="section-title" id="connect-title">Connect with <span>REHABION</span></h2>
-    <p class="section-sub" style="text-align:center;margin:0 auto 2.5rem">Follow our journey building Pakistan's first rehabilitation technology company.</p>
-
-    <div class="connect-cards">
-      <a href="https://wa.me/923498228037?text=Hi%20REHABION%2C%20I%20would%20like%20to%20connect." target="_blank" rel="noopener noreferrer" class="connect-card">
-        <div class="connect-card-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
-        <span class="connect-card-label">WhatsApp</span>
-        <span class="connect-card-sub">Message directly for quick queries</span>
-        <span class="connect-card-tag">Most responsive</span>
-      </a>
-      <a href="mailto:muhammadrmzn84@gmail.com" class="connect-card">
-        <div class="connect-card-icon">✉️</div>
-        <span class="connect-card-label">Email</span>
-        <span class="connect-card-sub">For formal proposals and partnerships</span>
-        <span class="connect-card-tag">48hr reply</span>
-      </a>
-      <a href="https://calendly.com/muhammadrmzn84/rehabion" target="_blank" rel="noopener noreferrer" class="connect-card">
-        <div class="connect-card-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-        <span class="connect-card-label">Book a Call</span>
-        <span class="connect-card-sub">15-minute demo or investor call</span>
-        <span class="connect-card-tag">Free · 15 min</span>
-      </a>
-      <a href="#contact" class="connect-card">
-        <div class="connect-card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
-        <span class="connect-card-label">Partner</span>
-        <span class="connect-card-sub">Hospitals, investors, researchers</span>
-        <span class="connect-card-tag">B2B enquiries</span>
-      </a>
+<footer>
+  <div class="wrap">
+    <div class="foot-big">rehab<em>ion</em></div>
+    <div class="foot-cols">
+      <div><p>Pakistan's first rehabilitation technology company — game-based therapy, clinical tools and biosensor wearables, made by biomedical engineers.</p>
+        <p style="margin-top:14px;font-size:13px;color:#9E9383">HTTPS encrypted · No patient data stored · IRB-approved research</p></div>
+      <div><h4>build</h4><ul><li><a href="#services">Game-based rehab</a></li><li><a href="#services">Physio tools</a></li><li><a href="#services">BioSense wearables</a></li><li><a href="#services">Hospital systems</a></li></ul></div>
+      <div><h4>company</h4><ul><li><a href="#problem">Why</a></li><li><a href="#journey">Journey</a></li><li><a href="#team">People</a></li><li><a href="#investors">Invest</a></li><li><a href="#resources">Resources</a></li></ul></div>
+      <div><h4>legal</h4><ul><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li><li><a href="disclaimer.html">Medical disclaimer</a></li><li><a href="security.html">Security</a></li></ul></div>
     </div>
-
-    <div class="newsletter-strip">
-      <div>
-        <h3>Get our research updates</h3>
-        <p>New clinical findings, project launches, and rehab tech insights — no spam.</p>
-      </div>
-      <form class="newsletter-form" id="newsletter-form" novalidate>
-        <div class="nl-row">
-          <input type="email" class="newsletter-input" id="nl-email" placeholder="your@email.com" required maxlength="254" autocomplete="email">
-          <button type="submit" class="newsletter-btn" id="nl-btn">Subscribe →</button>
-        </div>
-        <p class="newsletter-notice" id="nl-status">🔒 No spam. Unsubscribe any time.</p>
-      </form>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer role="contentinfo">
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <a href="#" class="nav-logo" style="text-decoration:none" aria-label="REHABION Home">
-        <div class="logo-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 13" fill="none"><polyline points="0,6.5 3.5,6.5 5.5,1.5 7.5,11.5 9.5,0.5 12,11.5 14,4.5 16,6.5 20,6.5 22,3.5 24,6.5" stroke="#E07A5F" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <span class="logo-text">REHAB<span>ION</span></span>
-      </a>
-      <p>Pakistan's first AI-powered rehabilitation technology company — game-based therapy, clinical AI, and biosensor wearables, built by biomedical engineers.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Solutions</h4>
-      <ul>
-        <li><a href="#services">Game-Based Rehab</a></li>
-        <li><a href="#services">AI Physio Tools</a></li>
-        <li><a href="#services">BioSense Wearables</a></li>
-        <li><a href="#services">Hospital Systems</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Company</h4>
-      <ul>
-        <li><a href="#market">Opportunity</a></li>
-        <li><a href="#milestones">Milestones</a></li>
-        <li><a href="#team">Team</a></li>
-        <li><a href="#investors">Investors</a></li>
-        <li><a href="#resources">Resources</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Legal</h4>
-      <ul>
-        <li><a href="privacy.html">Privacy Policy</a></li>
-        <li><a href="terms.html">Terms of Service</a></li>
-        <li><a href="disclaimer.html">Medical Disclaimer</a></li>
-        <li><a href="security.html">Security Policy</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2025 REHABION. All rights reserved. Engineered in Islamabad / Rawalpindi, Pakistan 🇵🇰</p>
-    <div class="footer-legal">
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
-      <a href="security.html">Security</a>
-    </div>
+    <div class="foot-bottom"><span>© <span id="yr">2026</span> REHABION · Islamabad / Rawalpindi, Pakistan</span><span>made by hand, with care</span></div>
   </div>
 </footer>
 
 <script>
-/* ── ECG Canvas ── */
-(function(){
-  const canvas=document.getElementById('ecg-canvas');
-  if(!canvas)return;
-  const ctx=canvas.getContext('2d');
-  let W,H,animId,offset=0;
-  const SPEED=1.6,COLOR='#F2B84B';
+/* nav */
+const nav=document.getElementById('main-nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>30),{passive:true});
+const burger=document.getElementById('hamburger'),menu=document.getElementById('mobile-menu');
+burger.addEventListener('click',()=>{const o=menu.classList.toggle('open');burger.setAttribute('aria-expanded',o);});
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.classList.remove('open');burger.setAttribute('aria-expanded','false');}));
+document.getElementById('yr').textContent=new Date().getFullYear();
 
-  function resize(){
-    W=canvas.width=canvas.parentElement.offsetWidth;
-    H=canvas.height=canvas.parentElement.offsetHeight;
-  }
+/* reveal on scroll */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.15,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv,.ratio').forEach(el=>io.observe(el));
+requestAnimationFrame(()=>document.querySelector('.hero').classList.add('in'));
+document.querySelectorAll('.hero h1 .w').forEach((w,i)=>w.style.transitionDelay=(.1+i*.09)+'s');
 
-  function ecgY(t){
-    const p=130,n=((t%p)+p)%p/p;
-    if(n<.06)return 0;
-    if(n<.17){const x=(n-.06)/.11;return Math.sin(x*Math.PI)*.14;}
-    if(n<.27)return 0;
-    if(n<.30){const x=(n-.27)/.03;return -Math.sin(x*Math.PI)*.1;}
-    if(n<.38){const x=(n-.30)/.08;return Math.sin(x*Math.PI);}
-    if(n<.44){const x=(n-.38)/.06;return -Math.sin(x*Math.PI)*.2;}
-    if(n<.51)return 0;
-    if(n<.74){const x=(n-.51)/.23;return Math.sin(x*Math.PI)*.3;}
-    return 0;
-  }
-
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    const sideW=68,mid=H/2,amp=H*.4,pw=W-sideW,scanX=offset%pw;
-    const clearW=30;
-
-    /* ghost */
-    ctx.beginPath();
-    for(let x=0;x<pw;x++){const y=mid-ecgY(x)*amp;x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}
-    ctx.strokeStyle='rgba(242,184,75,.06)';ctx.lineWidth=1;ctx.stroke();
-
-    /* erase */
-    ctx.fillStyle='#120E0B';
-    if(scanX+clearW<pw){ctx.fillRect(scanX,0,clearW,H);}
-    else{ctx.fillRect(scanX,0,pw-scanX,H);ctx.fillRect(0,0,clearW-(pw-scanX),H);}
-
-    /* active line with glow */
-    ctx.save();
-    ctx.shadowColor=COLOR;ctx.shadowBlur=22;
-    ctx.beginPath();let started=false;
-    for(let x=0;x<pw;x++){
-      const ahead=((x-scanX)+pw)%pw;
-      if(ahead<clearW)continue;
-      const y=mid-ecgY(((x-scanX)+pw)%pw)*amp;
-      if(!started){ctx.moveTo(x,y);started=true;}else ctx.lineTo(x,y);
-    }
-    ctx.strokeStyle=COLOR;ctx.lineWidth=2;ctx.stroke();
-    ctx.restore();
-
-    /* head dot */
-    const hy=mid-ecgY(0)*amp;
-    ctx.save();ctx.shadowColor=COLOR;ctx.shadowBlur=28;
-    ctx.beginPath();ctx.arc(scanX,hy,4,0,Math.PI*2);
-    ctx.fillStyle='#fff';ctx.fill();ctx.restore();
-
-    offset+=SPEED;
-    animId=requestAnimationFrame(draw);
-  }
-
-  /* Sidebar readouts */
-  const bpmEl=document.getElementById('bpm-display');
-  const spo2El=document.getElementById('spo2-display');
-  const hrvEl=document.getElementById('hrv-display');
-  setInterval(()=>{
-    if(bpmEl)bpmEl.textContent=68+Math.floor(Math.random()*14);
-    if(spo2El)spo2El.textContent=96+Math.floor(Math.random()*4);
-    if(hrvEl)hrvEl.textContent=38+Math.floor(Math.random()*18);
-  },2400);
-
-  if(!window.matchMedia('(prefers-reduced-motion:reduce)').matches){
-    resize();draw();
-    window.addEventListener('resize',()=>{cancelAnimationFrame(animId);resize();offset=0;});
-  }
-})();
-
-/* ── Nav scroll ── */
-window.addEventListener('scroll',()=>{
-  document.getElementById('main-nav').classList.toggle('scrolled',window.scrollY>60);
-},{passive:true});
-
-/* ── Mobile nav ── */
-const hamburger=document.getElementById('hamburger');
-const mobileMenu=document.getElementById('mobile-menu');
-hamburger.addEventListener('click',()=>{
-  const open=mobileMenu.classList.toggle('open');
-  hamburger.setAttribute('aria-expanded',open);
-});
-function closeMobileNav(){mobileMenu.classList.remove('open');hamburger.setAttribute('aria-expanded','false');}
-
-/* ── Scroll fade-up ── */
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});
-},{threshold:0.08});
-document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
-
-/* ── Animated counters ── */
-function animateCounter(el){
-  const target=parseFloat(el.dataset.target);
-  const prefix=el.dataset.prefix||'';
-  const suffix=el.dataset.suffix||'';
-  const isInt=el.dataset.integer==='1';
-  const duration=1600;
-  const start=performance.now();
-  function step(now){
-    const p=Math.min((now-start)/duration,1);
-    const ease=1-Math.pow(1-p,3);
-    const val=target*ease;
-    el.textContent=prefix+(isInt?Math.round(val):(Math.round(val*10)/10))+suffix;
-    if(p<1)requestAnimationFrame(step);
-  }
-  requestAnimationFrame(step);
+/* timeline line draws as you scroll */
+const tl=document.getElementById('timeline'),tlPath=tl.querySelector('.tl-path path');
+function drawTimeline(){
+  const r=tl.getBoundingClientRect(),vh=innerHeight;
+  const p=Math.min(1,Math.max(0,(vh*.7-r.top)/r.height));
+  tlPath.style.setProperty('--p',1-p);
 }
-const counterObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){animateCounter(e.target);counterObs.unobserve(e.target);}
-  });
-},{threshold:0.5});
-document.querySelectorAll('.counter').forEach(el=>counterObs.observe(el));
+addEventListener('scroll',drawTimeline,{passive:true});drawTimeline();
 
-/* ── Newsletter ── */
+/* newsletter */
 document.getElementById('newsletter-form').addEventListener('submit',function(e){
   e.preventDefault();
-  const email=document.getElementById('nl-email').value.trim();
-  const status=document.getElementById('nl-status');
-  const btn=document.getElementById('nl-btn');
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){status.textContent='⚠ Enter a valid email.';return;}
+  const email=document.getElementById('nl-email').value.trim(),status=document.getElementById('nl-status'),btn=document.getElementById('nl-btn');
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){status.textContent='Please enter a valid email.';return;}
   btn.disabled=true;btn.textContent='Subscribing…';
-  fetch('https://formspree.io/f/mzdlbqel',{
-    method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body:JSON.stringify({email,source:'newsletter'})
-  }).then(r=>r.json()).then(d=>{
-    if(d.ok){status.textContent='✅ Subscribed! Watch your inbox.';btn.textContent='Subscribed ✓';btn.style.background='var(--green)';}
-    else{status.textContent='⚠ Error — email: muhammadrmzn84@gmail.com';btn.disabled=false;btn.textContent='Subscribe →';}
-  }).catch(()=>{status.textContent='⚠ Network error.';btn.disabled=false;btn.textContent='Subscribe →';});
+  fetch('https://formspree.io/f/mzdlbqel',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email,source:'newsletter'})})
+  .then(r=>r.json()).then(d=>{
+    if(d.ok){status.textContent='Thank you — you\'re on the list.';btn.textContent='Subscribed';}
+    else{status.textContent='Something went wrong — email muhammadrmzn84@gmail.com';btn.disabled=false;btn.textContent='Subscribe';}
+  }).catch(()=>{status.textContent='Network problem — please try again.';btn.disabled=false;btn.textContent='Subscribe';});
 });
 
-/* ── Contact form ── */
+/* contact form */
 document.getElementById('contact-form').addEventListener('submit',function(e){
   e.preventDefault();
   if(this.querySelector('[name="website"]').value)return;
-  const name=this.name.value.trim();
-  const email=this.email.value.trim();
-  const type=this.inquiry_type.value;
-  const message=this.message.value.trim();
-  const status=document.getElementById('form-status');
-  const btn=document.getElementById('form-submit-btn');
-  if(!name||name.length<2){status.textContent='⚠ Please enter your name.';return;}
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){status.textContent='⚠ Please enter a valid email.';return;}
-  if(!type){status.textContent='⚠ Please select your role.';return;}
-  if(message.length<20){status.textContent='⚠ Message too short — please add more detail.';return;}
+  const name=this.name.value.trim(),email=this.email.value.trim(),type=this.inquiry_type.value,message=this.message.value.trim();
+  const status=document.getElementById('form-status'),btn=document.getElementById('form-submit-btn');
+  if(name.length<2){status.textContent='Please tell us your name.';return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){status.textContent='Please enter a valid email.';return;}
+  if(!type){status.textContent='Please choose who you are.';return;}
+  if(message.length<20){status.textContent='Could you add a little more detail?';return;}
   const safe=s=>s.replace(/[<>"'&]/g,c=>({'<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#x27;','&':'&amp;'}[c]));
   btn.disabled=true;btn.textContent='Sending…';
-  fetch('https://formspree.io/f/mzdlbqel',{
-    method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body:JSON.stringify({name:safe(name),email:safe(email),inquiry_type:type,message:safe(message)})
-  }).then(r=>r.json()).then(d=>{
-    if(d.ok){
-      status.textContent="✅ Message received! We'll reply within 48 hours.";
-      btn.textContent='Sent ✓';btn.style.background='var(--green)';this.reset();
-      setTimeout(()=>{btn.disabled=false;btn.textContent='Send Message →';btn.style.background='';status.textContent='🔒 Encrypted · We reply within 48 hours · No data sold';},60000);
-    }else{status.textContent='⚠ Error — email: muhammadrmzn84@gmail.com';btn.disabled=false;btn.textContent='Send Message →';}
-  }).catch(()=>{status.textContent='⚠ Network error. Email: muhammadrmzn84@gmail.com';btn.disabled=false;btn.textContent='Send Message →';});
+  fetch('https://formspree.io/f/mzdlbqel',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({name:safe(name),email:safe(email),inquiry_type:type,message:safe(message)})})
+  .then(r=>r.json()).then(d=>{
+    if(d.ok){status.textContent="Got it — we'll reply within 48 hours.";btn.textContent='Sent';this.reset();
+      setTimeout(()=>{btn.disabled=false;btn.textContent='Send message';status.textContent='Encrypted · no data sold';},60000);}
+    else{status.textContent='Something went wrong — email muhammadrmzn84@gmail.com';btn.disabled=false;btn.textContent='Send message';}
+  }).catch(()=>{status.textContent='Network problem — email muhammadrmzn84@gmail.com';btn.disabled=false;btn.textContent='Send message';});
 });
 </script>
 <script src="life.js"></script>
