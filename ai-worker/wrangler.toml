@@ -1,0 +1,6 @@
+name = "rehabion-ai"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+GEMINI_MODEL = "gemini-3-flash-preview"
