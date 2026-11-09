@@ -6,7 +6,7 @@
 
    Secrets: FOUNDER_PIN (unlocks setting up a phone), VAPID_PRIVATE_JWK
    Vars:    VAPID_PUBLIC (base64url, 65-byte P-256 public key), VAPID_SUBJECT
-   Optional secrets: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID */
+   Optional secret: TELEGRAM_BOT_TOKEN (the chat is linked via /push/telegram-link) */
 import { DurableObject } from 'cloudflare:workers';
 
 const b64url = buf => btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
@@ -40,10 +40,12 @@ export async function pushAll(env) {
 }
 
 export async function telegram(env, text, link) {
-  if (!env.TELEGRAM_BOT_TOKEN || !env.TELEGRAM_CHAT_ID) return false;
+  if (!env.TELEGRAM_BOT_TOKEN) return false;
+  const chat = env.TELEGRAM_CHAT_ID || await env.INBOX.get(env.INBOX.idFromName('founder')).telegramChat();
+  if (!chat) return false;
   const r = await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`, {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: env.TELEGRAM_CHAT_ID, text, disable_web_page_preview: true,
+    body: JSON.stringify({ chat_id: chat, text, disable_web_page_preview: true,
       reply_markup: { inline_keyboard: [[{ text: '📞 Answer now', url: link }]] } })
   });
   return r.ok;
@@ -61,6 +63,21 @@ export async function handlePush(request, env, headers, path) {
     if (!sub || typeof sub.endpoint !== 'string' || !/^https:\/\//.test(sub.endpoint)) return json({ error: 'Bad subscription' }, 400, headers);
     const res = await inbox.subscribe(String(b.pin || ''), env.FOUNDER_PIN || '', sub.endpoint, String(b.label || '').slice(0, 40));
     return json(res, res.error ? 403 : 200, headers);
+  }
+
+  /* link Telegram: the founder messages his bot, then this finds his chat (PIN-protected) */
+  if (path === '/push/telegram-link' && request.method === 'POST') {
+    let b; try { b = await request.json(); } catch { return json({ error: 'Bad JSON' }, 400, headers); }
+    if (!env.FOUNDER_PIN || String(b.pin || '') !== env.FOUNDER_PIN) return json({ error: 'Wrong PIN.' }, 403, headers);
+    if (!env.TELEGRAM_BOT_TOKEN) return json({ error: 'Bot token not set.' }, 400, headers);
+    const d = await (await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/getUpdates`)).json();
+    const msgs = (d.result || []).map(u => u.message || u.edited_message).filter(m => m && m.chat && m.chat.type === 'private');
+    if (!msgs.length) return json({ error: 'No message found — send "hi" to your bot in Telegram, then try again.' }, 404, headers);
+    const chat = msgs[msgs.length - 1].chat;
+    await inbox.setTelegramChat(String(chat.id));
+    await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: chat.id, text: '✅ REHABION call alerts are on. When a website visitor asks for you, you’ll get a message here with an Answer button.' }) });
+    return json({ linked: true, name: chat.first_name || chat.username || '' }, 200, headers);
   }
 
   const device = url.searchParams.get('d') || '';
@@ -96,6 +113,8 @@ export class Inbox extends DurableObject {
     const subs = (await this.ctx.storage.get('subs')) || {};
     return Object.entries(subs).map(([device, s]) => ({ device, endpoint: s.endpoint }));
   }
+  async telegramChat() { return (await this.ctx.storage.get('telegramChat')) || ''; }
+  async setTelegramChat(id) { await this.ctx.storage.put('telegramChat', id); }
   async known(device) { return !!((await this.ctx.storage.get('subs')) || {})[device]; }
   async forget(device) {
     const subs = (await this.ctx.storage.get('subs')) || {};
