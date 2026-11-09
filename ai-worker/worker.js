@@ -16,7 +16,8 @@
 */
 
 import { handleHandoff, HandoffRoom, RateLimit } from './handoff.js';
-export { HandoffRoom, RateLimit };
+import { handlePush, Inbox } from './push.js';
+export { HandoffRoom, RateLimit, Inbox };
 
 const DEFAULT_ORIGINS = ['https://rehabion.github.io', 'http://localhost:8080', 'http://127.0.0.1:8080', 'http://127.0.0.1:8081'];
 const API = 'https://generativelanguage.googleapis.com';
@@ -167,6 +168,7 @@ export default {
     if (request.method === 'OPTIONS') return new Response(null, { headers });
     const route = new URL(request.url).pathname.replace(/\/+$/, '');
     if (route.startsWith('/handoff')) return handleHandoff(request, env, headers, route);
+    if (route.startsWith('/push')) return handlePush(request, env, headers, route);
     if (request.method !== 'POST') return json({ error: 'POST only' }, 405, headers);
     if (!env.GEMINI_API_KEY) return json({ error: 'GEMINI_API_KEY is not set on the worker' }, 500, headers);
     let body;

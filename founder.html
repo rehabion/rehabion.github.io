@@ -3,11 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Incoming call — REHABION</title>
+<title>REHABION Founder</title>
+<link rel="manifest" href="founder.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="REHABION">
 <meta name="robots" content="noindex, nofollow">
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#F5EFE4">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://*.workers.dev wss://*.workers.dev; media-src 'self' blob:; img-src 'self' data:;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://*.workers.dev wss://*.workers.dev; worker-src 'self'; manifest-src 'self'; media-src 'self' blob:; img-src 'self' data:;">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Instrument+Sans:wght@400;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
@@ -40,10 +44,22 @@ button:active{transform:translate(2px,2px);box-shadow:1px 2px 0 var(--ink)}
 .hidden{display:none!important}
 .note{width:100%;margin-top:12px;border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;font:inherit;font-size:15px;background:var(--paper)}
 .small{font-size:13px;color:var(--muted);margin-top:18px}
+#app{text-align:left}#app h1{margin:6px 0 8px}
+#app .lead{color:var(--ink-2);font-size:15.5px;line-height:1.6}
+.pin{display:flex;gap:10px;margin:18px 0 6px}.pin input{flex:1;min-width:0;border:1.5px solid var(--ink);border-radius:999px;padding:12px 16px;font:inherit;font-size:18px;letter-spacing:.2em;background:var(--paper)}
+.err{color:#B8402A;font-size:14px;min-height:1.2em}
+.hint{background:#F6E2B8;border-radius:14px;padding:12px 14px;font-size:14px;margin-top:14px}
+.ok{display:flex;align-items:center;gap:10px;background:#CFE0D2;color:#203F32;border-radius:14px;padding:12px 14px;font-weight:600;margin:16px 0}
+.req{display:flex;gap:12px;align-items:center;padding:14px 0;border-top:1px dashed var(--line)}
+.req .av{width:42px;height:42px;border-radius:50%;background:var(--blush);display:grid;place-items:center;font-family:'Fraunces',serif;font-style:italic;color:var(--terra);font-size:20px;flex-shrink:0}
+.req div{flex:1;min-width:0}.req b{display:block}.req span{font-size:13.5px;color:var(--muted);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.req a{font-weight:700;color:#fff;background:var(--forest);border-radius:999px;padding:8px 14px;text-decoration:none;font-size:14px}
+.empty{color:var(--muted);font-size:14.5px;padding:14px 0;border-top:1px dashed var(--line)}
+#app button{font-size:15px;padding:11px 18px}
 </style>
 </head>
 <body data-s="loading">
-<main class="card">
+<main class="card hidden" id="callCard">
   <div class="brand">rehab<em>ion</em></div>
   <p class="hand" id="kicker">someone wants to talk to you</p>
   <div class="ring"><span id="initial">?</span></div>
@@ -60,6 +76,23 @@ button:active{transform:translate(2px,2px);box-shadow:1px 2px 0 var(--ink)}
     <button class="end" id="end">End call</button>
   </div>
   <p class="small">Your phone number is never shared — this call runs through your browser.</p>
+</main>
+<main class="card hidden" id="app">
+  <div class="brand">rehab<em>ion</em> <span style="font-family:'Caveat',cursive;color:var(--muted);font-weight:600">founder</span></div>
+  <section id="setup" class="hidden">
+    <h1>Ring this phone when someone asks for you</h1>
+    <p class="lead">Turn on call alerts once. When a visitor asks Danisa for the founder, this phone rings — tap it and you're talking to them through the website. Your number is never shared.</p>
+    <div class="hint hidden" id="iosHint">On iPhone: tap <b>Share → Add to Home Screen</b> first, open REHABION from your home screen, then come back here.</div>
+    <div class="pin"><input id="pin" inputmode="numeric" autocomplete="off" maxlength="20" placeholder="PIN" aria-label="Founder PIN"><button class="answer" id="enable">Turn on</button></div>
+    <p class="err" id="err"></p>
+  </section>
+  <section id="inbox" class="hidden">
+    <div class="ok">✓ This phone will ring for new requests</div>
+    <h1 style="font-size:24px">Recent requests</h1>
+    <div id="list"></div>
+    <div class="row" style="justify-content:flex-start;margin-top:16px"><button id="test">Send a test ring</button></div>
+    <p class="err" id="testMsg" style="color:var(--muted)"></p>
+  </section>
 </main>
 <script src="handoff-call.js"></script>
 <script src="founder.js"></script>

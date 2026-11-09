@@ -6,6 +6,7 @@ compatibility_date = "2026-10-01"
 GEMINI_MODEL = "gemini-3-flash-preview"
 LIVE_MODEL = "gemini-3.8-live"
 TTS_MODEL = "gemini-3.8-flash-tts"
+VAPID_PUBLIC = "BJsTMSBuBIkeJvM7XP_9sUTeSQNvR1XSXJ_zmuZw3Mlipe7yUwwqb9IgnzpyBacLuRed6yLr2B2UGmS0FcqQXqQ"
 
 [[durable_objects.bindings]]
 name = "ROOMS"
@@ -15,6 +16,14 @@ class_name = "HandoffRoom"
 name = "LIMITS"
 class_name = "RateLimit"
 
+[[durable_objects.bindings]]
+name = "INBOX"
+class_name = "Inbox"
+
 [[migrations]]
 tag = "v1"
 new_sqlite_classes = ["HandoffRoom", "RateLimit"]
+
+[[migrations]]
+tag = "v2"
+new_sqlite_classes = ["Inbox"]

@@ -4,14 +4,15 @@
    two browsers are connected with a WebRTC voice call. The founder's phone number
    lives only in Worker secrets — it is never sent to a visitor.
 
-   Secrets (all optional, set any you use):
-     CALLMEBOT_PHONE, CALLMEBOT_KEY     WhatsApp notifications via callmebot.com
-     TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID   Telegram notifications (with an Answer button)
+   Alerts (see push.js): our own phone notifications (Web Push), Telegram's
+   official Bot API, and an e-mail copy through the site's contact form.
+   Optional secrets:
      TURN_KEY_ID, TURN_KEY_API_TOKEN    Cloudflare Realtime TURN (helps calls through strict networks)
      FOUNDER_NAME                       defaults to "Muhammad Ramzan"
      SITE_URL                           defaults to https://rehabion.github.io
 */
 import { DurableObject } from 'cloudflare:workers';
+import { pushAll, telegram } from './push.js';
 
 const RING_SECONDS = 120;          // how long a visitor waits for an answer
 const KEEP_HOURS = 24;             // request details are wiped after this
@@ -21,23 +22,18 @@ const hex = n => [...crypto.getRandomValues(new Uint8Array(n))].map(b => b.toStr
 const clean = (s, n) => typeof s === 'string' ? s.replace(/[\u0000-\u001f<>]/g, ' ').trim().slice(0, n) : '';
 const json = (body, status, headers) => new Response(JSON.stringify(body), { status, headers: { ...headers, 'Content-Type': 'application/json' } });
 
-async function notifyFounder(env, req, link) {
-  const text = `📞 REHABION website — ${req.name} wants to talk to you now.\n` +
-    `About: ${req.reason || '—'}\n` + (req.contact ? `Their contact: ${req.contact}\n` : '') +
-    `\nAnswer in your browser (rings for ${RING_SECONDS / 60} min):\n${link}`;
-  const jobs = [];
-  if (env.CALLMEBOT_PHONE && env.CALLMEBOT_KEY) {
-    const u = `https://api.callmebot.com/whatsapp.php?phone=${encodeURIComponent(env.CALLMEBOT_PHONE)}&text=${encodeURIComponent(text)}&apikey=${encodeURIComponent(env.CALLMEBOT_KEY)}`;
-    jobs.push(fetch(u).then(r => r.ok));
-  }
-  if (env.TELEGRAM_BOT_TOKEN && env.TELEGRAM_CHAT_ID) {
-    jobs.push(fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: env.TELEGRAM_CHAT_ID, text, disable_web_page_preview: true,
-        reply_markup: { inline_keyboard: [[{ text: '📞 Answer now', url: link }]] } })
-    }).then(r => r.ok));
-  }
-  /* always also e-mail it through the site's existing Formspree form, so nothing is ever lost */
+async function notifyFounder(env, req, link, id) {
+  const text = `📞 REHABION website — ${req.name} wants to talk to you now.
+` +
+    `About: ${req.reason || '—'}
+` + (req.contact ? `Their contact: ${req.contact}
+` : '') +
+    `
+Answer in your browser (rings for ${RING_SECONDS / 60} min):
+${link}`;
+  /* our own inbox + phone ring first, then Telegram, then e-mail as a safety net */
+  await env.INBOX.get(env.INBOX.idFromName('founder')).add({ id, name: req.name, reason: req.reason, contact: req.contact, link, createdAt: Date.now() });
+  const jobs = [pushAll(env), telegram(env, text, link)];
   const form = env.FORMSPREE_FORM || 'mzdlbqel';
   if (form !== 'off' && env.HANDOFF_DEBUG !== '1') {
     jobs.push(fetch(`https://formspree.io/f/${form}`, {
@@ -79,7 +75,7 @@ export async function handleHandoff(request, env, headers, path) {
     await room.init({ ...req, id, founderKey, visitorKey, createdAt: Date.now() }, RING_SECONDS);
     const site = env.SITE_URL || 'https://rehabion.github.io';
     const link = `${site}/founder.html#r=${id}&k=${founderKey}`;
-    const notified = await notifyFounder(env, req, link);
+    const notified = await notifyFounder(env, req, link, id);
     return json({ id, visitorKey, notified, ringSeconds: RING_SECONDS, founder: env.FOUNDER_NAME || 'Muhammad Ramzan', ...(env.HANDOFF_DEBUG === '1' ? { founderLink: link } : {}) }, 200, headers);
   }
 
