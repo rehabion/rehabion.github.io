@@ -1,0 +1,18 @@
+# Outside check every 6 hours: is Danisa's server up and healthy?
+# A failed run makes GitHub e-mail the repo owner — a second alarm besides the worker's own Telegram alert.
+name: monitor
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Danisa health
+        run: |
+          d=$(curl -sf --max-time 20 https://rehabion-ai.rehabion.workers.dev/health) || { echo "worker unreachable"; exit 1; }
+          echo "$d"
+          echo "$d" | grep -q '"ok":true' || { echo "worker reports a problem"; exit 1; }
+      - name: Website up
+        run: curl -sf --max-time 20 -o /dev/null https://rehabion.github.io/

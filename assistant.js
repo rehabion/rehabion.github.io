@@ -5,10 +5,13 @@
    Text chat  → worker "/"      (same auto-language behaviour)
    Listen 🔊  → worker "/tts"   (Gemini TTS — real Urdu voice, not a browser voice)
    Memory: name + recent conversation are kept in this browser only, so Danisa
-   picks up where you left off — in chat and in voice. */
+   picks up where you left off — in chat and in voice.
+   Bot check: an invisible Cloudflare Turnstile check (loaded only once you open Danisa)
+   earns a 2-hour pass; without it everything still works, just with tighter limits. */
 (function(){
   const AI_ENDPOINT = window.REHABION_AI_ENDPOINT || 'https://rehabion-ai.rehabion.workers.dev';
   const LIVE_WS = 'wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1alpha.GenerativeService.BidiGenerateContentConstrained';
+  const SITEKEY = window.REHABION_TURNSTILE_SITEKEY || '0x4AAAAAAF52bwC6PRfUhZ32';
 
   /* interface words only — Danisa herself answers in whatever language you use */
   const T = {
@@ -24,10 +27,11 @@
       micDenied:'I need microphone permission to hear you. Please allow it in your browser and try again.',
       noMic:'Your browser can’t use a microphone here. Please try Chrome, Edge, Firefox or Safari.',
       voiceErr:"The call dropped. Please try again in a moment.",
+      voiceBusy:"Lots of people are talking to me right now — please type to me for a moment, or try the call again in a little while.",
       offline:"I'm having trouble connecting right now. Please try again, or tap **Talk to the founder** below.",
       founderBtn:'Talk to the founder', founder:'Muhammad Ramzan',
       hoIntro:"I'll ring **Muhammad Ramzan**, our founder, right now. He answers in his browser — no phone numbers needed.",
-      hoReason:'What would you like to talk about?', hoContact:'Phone or email for a call-back (optional)', hoGo:'Ring him',
+      hoReason:'What would you like to talk about?', hoContact:'Phone or email for a call-back (optional)', hoGo:'Ring him', hoConsent:'Danisa may take notes of the call for Muhammad',
       hoRinging:'Ringing…', hoWaitText:"He's been notified. If he's free he'll pick up in a moment.", hoOpened:'Danisa is checking with him now…',
       hoConnecting:'He’s free — connecting you…', hoConnected:'Connected', hoNotes:'Danisa will introduce you, then quietly take notes for Muhammad.',
       hoBusy:"He can't talk right now.", hoMissed:"He couldn't pick up just now.",
@@ -48,10 +52,11 @@
       micDenied:'آپ کی آواز سننے کے لیے مائیکروفون کی اجازت چاہیے۔ براؤزر میں اجازت دے کر دوبارہ کوشش کریں۔',
       noMic:'یہ براؤزر مائیکروفون استعمال نہیں کر سکتا۔ Chrome، Edge، Firefox یا Safari آزمائیں۔',
       voiceErr:'کال کٹ گئی۔ تھوڑی دیر بعد دوبارہ کوشش کریں۔',
+      voiceBusy:'ابھی بہت لوگ مجھ سے بات کر رہے ہیں — تھوڑی دیر کے لیے لکھ کر بات کریں، یا کچھ دیر بعد دوبارہ کال کریں۔',
       offline:'ابھی رابطے میں مسئلہ ہے۔ دوبارہ کوشش کریں یا نیچے **بانی سے بات کریں** پر ٹیپ کریں۔',
       founderBtn:'بانی سے بات کریں', founder:'محمد رمضان',
       hoIntro:'میں ابھی ہمارے بانی **محمد رمضان** کو کال ملاتی ہوں۔ وہ اپنے براؤزر سے جواب دیتے ہیں — کسی فون نمبر کی ضرورت نہیں۔',
-      hoReason:'آپ کس بارے میں بات کرنا چاہتے ہیں؟', hoContact:'واپسی کال کے لیے فون یا ای میل (اختیاری)', hoGo:'کال ملائیں',
+      hoReason:'آپ کس بارے میں بات کرنا چاہتے ہیں؟', hoContact:'واپسی کال کے لیے فون یا ای میل (اختیاری)', hoGo:'کال ملائیں', hoConsent:'دانیسا محمد کے لیے کال کے نوٹس لے سکتی ہیں',
       hoRinging:'گھنٹی جا رہی ہے…', hoWaitText:'انہیں اطلاع دے دی گئی ہے۔ اگر وہ فارغ ہیں تو ابھی جواب دیں گے۔', hoOpened:'دانیسا ان سے پوچھ رہی ہیں…',
       hoConnecting:'وہ فارغ ہیں — جوڑ رہے ہیں…', hoConnected:'جڑ گئے', hoNotes:'دانیسا تعارف کروائیں گی، پھر محمد کے لیے خاموشی سے نوٹس لیں گی۔',
       hoBusy:'وہ ابھی بات نہیں کر سکتے۔', hoMissed:'وہ ابھی کال نہیں اٹھا سکے۔',
@@ -175,11 +180,32 @@
   }
 
   /* ── text chat ── */
-  let busy=false;
+  let busy=false,pass='',passExp=0,passJob=null;
+  function getPass(){
+    if(pass&&Date.now()<passExp-60e3)return Promise.resolve(pass);
+    if(!passJob)passJob=new Promise(done=>{
+      const give=async tok=>{
+        try{const r=await fetch(AI_ENDPOINT+'/pass',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:tok})});
+          const d=await r.json();if(d.pass){pass=d.pass;passExp=d.expires||Date.now()+3600e3;}}catch(e){}
+        passJob=null;done(pass);
+      };
+      const run=()=>{try{
+        let box=document.getElementById('danisa-check');
+        if(!box){box=document.createElement('div');box.id='danisa-check';box.style.cssText='position:fixed;left:-9999px;bottom:0;width:1px;height:1px;overflow:hidden';document.body.appendChild(box);}
+        if(box.dataset.w)window.turnstile.reset(box.dataset.w);
+        else box.dataset.w=window.turnstile.render(box,{sitekey:SITEKEY,callback:give,'error-callback':()=>{passJob=null;done('');}});
+      }catch(e){passJob=null;done('');}};
+      if(window.turnstile)run();
+      else{const sc=document.createElement('script');sc.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';sc.async=true;sc.onload=run;sc.onerror=()=>{passJob=null;done('');};document.head.appendChild(sc);}
+      setTimeout(()=>{if(passJob){passJob=null;done('');}},9000);   /* never hold Danisa up for long */
+    });
+    return passJob;
+  }
   async function api(path,body){
+    const p=await Promise.race([getPass(),new Promise(r=>setTimeout(()=>r(''),4000))]);
     const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),40000);
     try{
-      const r=await fetch(AI_ENDPOINT+path,{method:'POST',headers:{'Content-Type':'application/json'},signal:ctrl.signal,body:JSON.stringify(body)});
+      const r=await fetch(AI_ENDPOINT+path,{method:'POST',headers:Object.assign({'Content-Type':'application/json'},p?{'X-Danisa-Pass':p}:{}),signal:ctrl.signal,body:JSON.stringify(body)});
       const d=await r.json();if(!r.ok)throw new Error(d.error||'bad response');return d;
     }finally{clearTimeout(timer);}
   }
@@ -247,23 +273,18 @@
   async function openSocket(){
     const d=await api('/live',{lang:'auto',name:knownName(),memory:memorySummary()});
     const ws=new WebSocket(LIVE_WS+'?access_token='+encodeURIComponent(d.token));call.ws=ws;
+    let ready=false;
+    setTimeout(()=>{if(!ready&&call.on&&call.ws===ws){vText.textContent=t.voiceErr;setTimeout(endCall,2500);}},12000);   /* bad network: say so, don't spin */
+    /* her instructions, voice and tools are locked into the pass by the worker */
     ws.onopen=()=>ws.send(JSON.stringify({setup:{
       model:'models/'+d.model,
-      generationConfig:{responseModalities:['AUDIO'],speechConfig:{voiceConfig:{prebuiltVoiceConfig:{voiceName:'Kore'}}}},
-      systemInstruction:{parts:[{text:d.instructions}]},
-      inputAudioTranscription:{},outputAudioTranscription:{},
       contextWindowCompression:{slidingWindow:{}},             /* long calls don't run out of context */
-      sessionResumption:call.handle?{handle:call.handle}:{},   /* reconnects keep the same conversation */
-      tools:[{functionDeclarations:[{name:'remember_name',description:"Save the user's name as soon as they say it.",
-        parameters:{type:'OBJECT',properties:{name:{type:'STRING',description:'The name, as the user said it'}},required:['name']}},
-        {name:'connect_to_founder',description:'Ring the founder, Muhammad Ramzan, so the user can talk to him live through the website. Use when the user wants to speak to the founder or a real person.',
-        parameters:{type:'OBJECT',properties:{name:{type:'STRING',description:"The user's name"},reason:{type:'STRING',description:'What they want to talk about, in a short sentence'},
-          contact:{type:'STRING',description:'Optional phone or email for a call-back'}},required:['reason']}}]}]
+      sessionResumption:call.handle?{handle:call.handle}:{}    /* reconnects keep the same conversation */
     }}));
     ws.onmessage=async e=>{
       const m=JSON.parse(typeof e.data==='string'?e.data:await e.data.text());
       if(m.setupComplete){
-        setState('listening');
+        ready=true;setState('listening');
         if(!call.started){call.started=true;call.t0=Date.now();
           ws.send(JSON.stringify({realtimeInput:{text:knownName()
             ?`(The call just started. Greet ${knownName()} warmly by name and carry on naturally.)`
@@ -276,7 +297,8 @@
         const responses=(m.toolCall.functionCalls||[]).map(fc=>{
           if(fc.name==='remember_name'&&fc.args&&fc.args.name){mem.name=String(fc.args.name).slice(0,40);save();}
           if(fc.name==='connect_to_founder'){
-            call.handoff=Object.assign({name:knownName()},fc.args||{});call.handoffAt=Date.now();
+            const a=fc.args||{};
+            call.handoff={name:a.name||knownName(),reason:a.reason||'',contact:a.contact||'',notes:a.notes_ok===true};call.handoffAt=Date.now();
             setTimeout(maybeHandoff,9000);   /* don't wait forever for her to finish speaking */
             return {id:fc.id,name:fc.name,response:{result:'Ringing him now. Tell the user in one short sentence that you are checking if he is free and to stay on the line.'}};
           }
@@ -305,6 +327,7 @@
     if(call.on)return;
     if(!navigator.mediaDevices||!window.AudioWorkletNode){openPanel();bubble('bot',esc(t.noMic));return;}
     if(ho.active)return;
+    getPass();
     Object.assign(call,{on:true,muted:false,started:false,handle:null,userLine:'',botLine:'',level:0,t0:0,handoff:null,handoffTurnDone:false});
     vName.textContent='Danisa';endBtn.textContent=t.end;muteBtn.hidden=false;voice.dataset.mode='ai';
     /* audio contexts must be created inside the click */
@@ -326,7 +349,10 @@
       };
       call.src.connect(call.node);
       await openSocket();
-    }catch(e){vText.textContent=t.voiceErr;setTimeout(endCall,3000);}
+    }catch(e){
+      if(/busy/.test(String(e.message))){endCall();openPanel();bubble('bot',md(t.voiceBusy),t.voiceBusy);return;}
+      vText.textContent=t.voiceErr;setTimeout(endCall,3000);
+    }
   }
   function endCall(){
     if(!call.on)return;
@@ -375,7 +401,7 @@
     ringTone(true);
     let d,info;
     try{
-      d=await api('/handoff',{name:req.name||knownName()||'',reason:req.reason||'',contact:req.contact||'',context:memorySummary()});
+      d=await api('/handoff',{name:req.name||knownName()||'',reason:req.reason||'',contact:req.contact||'',notes:req.notes===true,context:memorySummary()});
       info=await (await fetch(AI_ENDPOINT+'/handoff/info?r='+d.id+'&k='+d.visitorKey)).json();
     }catch(e){ringTone(false);ho.result='failed';hoState('idle','',/busy/.test(String(e.message))?t.hoLimit:t.hoFail);endBtn.textContent=t.close;return;}
     if(!ho.active){ringTone(false);return;}
@@ -388,7 +414,7 @@
         if(st==='busy'){ho.result='busy';hoState('idle',t.hoBusy,(m.note?'“'+m.note+'”\n\n':'')+t.hoSaved(req.contact));}
         if(st==='missed'){ho.result='missed';hoState('idle',t.hoMissed,t.hoSaved(req.contact));}
       },
-      onConnected:()=>{ringTone(false);ho.result='talked';hoState('speaking',t.hoConnected,t.hoNotes);muteBtn.hidden=false;endBtn.textContent=t.end;
+      onConnected:()=>{ringTone(false);ho.result='talked';hoState('speaking',t.hoConnected,req.notes?t.hoNotes:'');muteBtn.hidden=false;endBtn.textContent=t.end;
         ho.t0=Date.now();ho.clock=setInterval(hoTick,500);hoTick();},
       onEnded:why=>{
         ringTone(false);clearInterval(ho.clock);
@@ -421,18 +447,19 @@
     f.innerHTML=`<input name="n" maxlength="60" dir="auto" autocomplete="name" placeholder="${esc(t.namePh)}" value="${esc(knownName())}" required>
       <input name="r" maxlength="300" dir="auto" placeholder="${esc(t.hoReason)}" required>
       <input name="c" maxlength="80" dir="auto" autocomplete="tel" placeholder="${esc(t.hoContact)}">
+      <label class="noor-consent"><input type="checkbox" name="ok"> <span>${esc(t.hoConsent)}</span></label>
       <button type="submit">📞 ${esc(t.hoGo)}</button>`;
     d.appendChild(f);setTimeout(()=>f.querySelector(knownName()?'[name=r]':'[name=n]').focus(),80);
     f.onsubmit=e=>{e.preventDefault();
       const name=f.n.value.trim().slice(0,60),reason=f.r.value.trim().slice(0,300),contact=f.c.value.trim().slice(0,80);
       if(!name||!reason)return;
       if(!knownName()){mem.name=name;save();}
-      d.remove();startHandoff({name,reason,contact});};
+      d.remove();startHandoff({name,reason,contact,notes:f.ok.checked});};
   }
   $('.noor-founder').onclick=founderForm;
 
   /* ── wiring ── */
-  function openPanel(){panel.classList.add('open');launch.style.display='none';setTimeout(()=>{const n=panel.querySelector('.noor-name input');(n||ta).focus();},60);}
+  function openPanel(){getPass();panel.classList.add('open');launch.style.display='none';setTimeout(()=>{const n=panel.querySelector('.noor-name input');(n||ta).focus();},60);}
   function closePanel(){panel.classList.remove('open');launch.style.display='';}
   launch.onclick=openPanel;
   $('.noor-close').onclick=closePanel;

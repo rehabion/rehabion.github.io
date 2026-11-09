@@ -23,7 +23,7 @@
 <meta name="twitter:title" content="REHABION — Rehabilitation Technology from Pakistan">
 <meta name="twitter:description" content="Pakistan's first game-based rehab platform. Physio tools, biomedical wearables, clinical dashboards.">
 <meta name="twitter:image" content="https://rehabion.github.io/images/og-cover.png">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formspree.io https://*.workers.dev wss://*.workers.dev wss://generativelanguage.googleapis.com; media-src 'self' blob: data:;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formspree.io https://challenges.cloudflare.com https://*.workers.dev wss://*.workers.dev wss://generativelanguage.googleapis.com; media-src 'self' blob: data:;">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -351,7 +351,7 @@ footer{background:var(--ink);color:#D8CFBF;padding:90px 0 40px;overflow:hidden}
   .draw{stroke-dashoffset:0}
 }
 </style>
-<link rel="stylesheet" href="assistant.css">
+<link rel="stylesheet" href="assistant.css?v=20261109">
 </head>
 <body>
 <canvas id="life-canvas" aria-hidden="true"></canvas>
@@ -745,7 +745,7 @@ footer{background:var(--ink);color:#D8CFBF;padding:90px 0 40px;overflow:hidden}
     <div class="foot-big">rehab<em>ion</em></div>
     <div class="foot-cols">
       <div><p>Pakistan's first rehabilitation technology company — game-based therapy, clinical tools and biosensor wearables, made by biomedical engineers.</p>
-        <p style="margin-top:14px;font-size:13px;color:#9E9383">HTTPS encrypted · No patient data stored · IRB-approved research</p></div>
+        <p style="margin-top:14px;font-size:13px;color:#9E9383">HTTPS encrypted · No data sold · Research-stage tools, not medical advice</p></div>
       <div><h4>build</h4><ul><li><a href="#services">Game-based rehab</a></li><li><a href="#services">Physio tools</a></li><li><a href="#services">BioSense wearables</a></li><li><a href="#services">Hospital systems</a></li></ul></div>
       <div><h4>company</h4><ul><li><a href="#problem">Why</a></li><li><a href="#journey">Journey</a></li><li><a href="#team">People</a></li><li><a href="#investors">Invest</a></li><li><a href="#resources">Resources</a></li></ul></div>
       <div><h4>legal</h4><ul><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li><li><a href="disclaimer.html">Medical disclaimer</a></li><li><a href="security.html">Security</a></li></ul></div>
@@ -812,8 +812,8 @@ document.getElementById('contact-form').addEventListener('submit',function(e){
   }).catch(()=>{status.textContent='Network problem — email muhammadrmzn84@gmail.com';btn.disabled=false;btn.textContent='Send message';});
 });
 </script>
-<script src="life.js"></script>
-<script src="handoff-call.js"></script>
-<script src="assistant.js"></script>
+<script src="life.js?v=20261109"></script>
+<script src="handoff-call.js?v=20261109"></script>
+<script src="assistant.js?v=20261109"></script>
 </body>
 </html>

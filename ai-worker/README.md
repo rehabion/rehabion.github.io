@@ -1,29 +1,61 @@
-# Danisa's AI brain (Gemini + Google Search)
+# Danisa's server (Cloudflare Worker)
 
-The website works without this: Danisa answers questions about REHABION from built-in notes.
-Connecting this worker lets her answer **anything**, in English and Urdu, using Google Gemini with live Google Search.
+The website is static (GitHub Pages). Everything that needs a secret or has to stay online runs in this worker:
+`https://rehabion-ai.rehabion.workers.dev`.
 
-The API key must stay secret, so it lives in a free Cloudflare Worker, not in the public website.
+| File | What it does |
+|---|---|
+| `worker.js` | Router, text chat (Gemini), voice passes for Gemini Live, text-to-speech, `/health`, daily cron |
+| `guard.js` | Turnstile → 2-hour pass, per-IP and daily limits, usage counters |
+| `health.js` | Picks working models from Google's live list each day, alerts on Telegram, daily summary |
+| `handoff.js` | "Talk to the founder": rooms, ringing, WebRTC signalling, consented notes, the report |
+| `push.js` | Our own phone alerts (Web Push/VAPID), Telegram, the founder inbox and stats |
 
-## Setup (about 10 minutes, free)
+## How a founder call works
+1. The visitor asks Danisa for the founder, by voice or with the button. Danisa asks whether she may take notes.
+2. `POST /handoff` creates a private room (it lives 24 h) and rings the founder: push notification, Telegram and email.
+3. The founder opens the link. Danisa (a locked Gemini Live session) tells him who is waiting and asks if he's free.
+   He can also tap **Skip Danisa — connect me**.
+4. If he's free, the two browsers connect directly over WebRTC, and Danisa introduces them.
+   If the visitor agreed, two transcribers write down each side, and the lines go to the room every 4 seconds.
+5. When the call ends, the report is written once and sent to Telegram, and Danisa offers a spoken debrief.
+   If the founder's tab died, the room writes the report itself 25 seconds after the call ends.
 
-1. **Get a Gemini API key:** go to https://aistudio.google.com/apikey, sign in with Google, and click **Create API key**.
-2. **Create the worker:** go to https://dash.cloudflare.com, create a free account, then open **Workers & Pages → Create → Create Worker**. Name it `rehabion-ai` and click **Deploy**.
-3. Click **Edit code**, delete everything, paste in the contents of [`worker.js`](worker.js), and click **Deploy**.
-4. In the worker, open **Settings → Variables and Secrets → Add**:
-   - Type **Secret**, name `GEMINI_API_KEY`, value = your key.
-   - Optional: `GEMINI_MODEL` (default `gemini-3-flash-preview`).
-5. Copy the worker URL, e.g. `https://rehabion-ai.yourname.workers.dev`.
-6. In `assistant.js` on the website, set:
-   ```js
-   const AI_ENDPOINT = window.REHABION_AI_ENDPOINT || 'https://rehabion-ai.yourname.workers.dev';
-   ```
-   Then commit and push.
+## Secrets (`npx wrangler secret put NAME`)
+| Name | Needed | Notes |
+|---|---|---|
+| `GEMINI_API_KEY` | yes | https://aistudio.google.com/apikey |
+| `FOUNDER_PIN` | yes | unlocks the founder app on a phone, plus stats; 8 wrong tries lock it for 1 hour |
+| `VAPID_PRIVATE_JWK` | yes | phone alerts (the public key is in `wrangler.toml`) |
+| `TELEGRAM_BOT_TOKEN` | optional | alerts and reports; link the chat from the founder app |
+| `TURNSTILE_SECRET` | optional | bot check; the site key is in `assistant.js` |
+| `TURN_KEY_ID`, `TURN_KEY_API_TOKEN` | recommended | Cloudflare TURN relay, so calls connect on strict mobile networks |
 
-## Google Search
-Live Google Search answers need billing enabled on your Google AI Studio project. Without it, Danisa answers from Gemini's own knowledge, and the worker switches automatically.
+Optional vars: `GEMINI_MODEL`, `LIVE_MODEL`, `TRANSCRIBE_MODEL`, `TTS_MODEL` pin a model and switch off the automatic choice.
+Also `FOUNDER_NAME`, `SITE_URL`, `ALLOWED_ORIGINS`, `FORMSPREE_FORM` (`off` disables email).
 
-## Voice notes
-- Voice chat uses the browser's built-in speech engine: Chrome, Edge or Safari, and it needs microphone permission.
-- Urdu speech recognition (`ur-PK`) works in Chrome and Edge.
-- The quality of the Urdu *speaking* voice depends on the device. Microsoft Edge has natural Urdu voices (Uzma, Asad). If no Urdu voice is installed, Danisa still shows her reply as text.
+## Limits (guard.js)
+Per IP per hour, with a Turnstile pass / without one:
+
+| Action | With a pass | Without |
+|---|---|---|
+| Chat | 120 | 20 |
+| Text-to-speech | 60 | 10 |
+| Voice calls | 30 | 4 |
+| Founder requests | 4 | 2 |
+
+Daily caps for everyone: 600 voice calls, 60 founder requests. Email copies stop at 45 a month (Formspree's free plan allows 50).
+
+## Develop and test
+```sh
+cd ai-worker && npm install
+# .dev.vars (git-ignored), e.g.:
+#   FOUNDER_PIN="1234"
+#   TURNSTILE_SECRET="1x0000000000000000000000000000000AA"   (Cloudflare's always-pass test key)
+#   HANDOFF_DEBUG="1"                                         (returns the founder link, skips email)
+#   GEMINI_API_KEY="…"                                        (only for real AI answers)
+npm run dev
+BASE=http://127.0.0.1:8788 npm test           # API + static tests, also run by GitHub Actions on every push
+node ../tests/e2e/secretary.mjs v.wav f.wav   # full two-browser rehearsal with real voices (needs puppeteer-core)
+```
+Deploy: `npx wrangler deploy`. `.github/workflows/monitor.yml` checks `/health` every 6 hours.

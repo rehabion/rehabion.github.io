@@ -90,13 +90,13 @@ body { background-image: radial-gradient(ellipse 80% 50% at 15% 0%, rgba(242,205
     <div class="logo-icon" aria-hidden="true"></div>
     <span class="logo-text">REHAB<span>ION</span></span>
   </a>
-  <a href="index.html" class="nav-back">â† Back to site</a>
+  <a href="index.html" class="nav-back">← Back to site</a>
 </nav>
 
 <main>
   <p class="page-eyebrow">Legal</p>
   <h1>Security <span>Policy</span></h1>
-  <span class="last-updated">Last updated: June 2025</span>
+  <span class="last-updated">Last updated: 9 November 2026</span>
 
   <div class="highlight-box">
     <p>Security is fundamental to REHABION. We handle sensitive healthcare technology and take the protection of data, systems, and research infrastructure seriously. If you discover a security vulnerability, please report it responsibly.</p>
@@ -110,7 +110,11 @@ body { background-image: radial-gradient(ellipse 80% 50% at 15% 0%, rgba(242,205
       <li><strong>Content Security Policy (CSP)</strong> — restricts which scripts and resources can be loaded</li>
       <li><strong>Anti-spam protection</strong> — honeypot fields on all contact forms to block bots</li>
       <li><strong>Input sanitisation</strong> — all user input is sanitised before processing or display</li>
-      <li><strong>No patient data on web infrastructure</strong> — clinical data is never stored on public-facing servers</li>
+      <li><strong>No clinical records on the website</strong> — the website and its assistant are not used to store patient medical records</li>
+      <li><strong>Short-lived data</strong> — requests to talk to the founder and call notes are deleted automatically after 24 hours; note-taking happens only with the visitor's consent</li>
+      <li><strong>Abuse protection</strong> — per-visitor rate limits, daily caps and an invisible Cloudflare Turnstile bot check on the AI assistant</li>
+      <li><strong>Locked AI sessions</strong> — voice sessions use short-lived, single-use passes that are locked to our assistant's instructions, so they can't be reused for anything else</li>
+      <li><strong>No phone numbers</strong> — founder calls run browser-to-browser over encrypted WebRTC; no one's number is shown or used</li>
       <li><strong>Dependency minimisation</strong> — we use no client-side JavaScript frameworks that expand our attack surface</li>
       <li><strong>Git secret protection</strong> — API keys and credentials are never committed to version control</li>
     </ul>
@@ -146,7 +150,7 @@ body { background-image: radial-gradient(ellipse 80% 50% at 15% 0%, rgba(242,205
     <h2>4. Scope</h2>
     <p>This policy applies to:</p>
     <ul>
-      <li>The REHABION website (rehabion.com.pk)</li>
+      <li>The REHABION website (rehabion.github.io)</li>
       <li>Any REHABION web applications or APIs currently in development</li>
       <li>The GitHub repositories under the REHABION organisation</li>
     </ul>
@@ -154,13 +158,13 @@ body { background-image: radial-gradient(ellipse 80% 50% at 15% 0%, rgba(242,205
   </div>
 
   <div class="policy-section">
-    <h2>5. Data Protection Standards</h2>
-    <p>REHABION aligns with the following standards for handling sensitive data:</p>
+    <h2>5. Data Protection Approach</h2>
+    <p>We are an early-stage startup and hold no security certifications yet. We follow these practices:</p>
     <ul>
-      <li><strong>ISO 27001</strong> information security management principles</li>
-      <li><strong>GDPR</strong> principles for any data involving EU residents</li>
-      <li><strong>Pakistan's Electronic Data Protection Bill</strong> (and applicable PEMRA guidelines)</li>
-      <li><strong>National Bioethics Committee (NBC) Pakistan</strong> guidelines for research data</li>
+      <li>Collect as little as possible, and delete it quickly (see our <a href="privacy.html">Privacy Policy</a>)</li>
+      <li>Ask before recording anything from a call</li>
+      <li>Follow Pakistan's applicable data-protection law as it develops, and the National Bioethics Committee (NBC) guidelines for research data</li>
+      <li>Handle any clinical research data separately from this website, under the relevant ethics approval</li>
     </ul>
   </div>
 

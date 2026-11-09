@@ -1,0 +1,29 @@
+# Every push: static checks on the site + API tests against the worker running locally.
+# No secrets needed — the worker runs with test-only values (Cloudflare's always-pass Turnstile key).
+name: tests
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+        working-directory: ai-worker
+      - name: Start the worker
+        working-directory: ai-worker
+        run: |
+          printf 'FOUNDER_PIN="1234"\nTURNSTILE_SECRET="1x0000000000000000000000000000000AA"\nHANDOFF_DEBUG="1"\nFORMSPREE_FORM="off"\n' > .dev.vars
+          npx wrangler dev --port 8788 --ip 127.0.0.1 > ../wrangler.log 2>&1 &
+          for i in $(seq 1 60); do curl -sf http://127.0.0.1:8788/health > /dev/null && exit 0; sleep 1; done
+          cat ../wrangler.log; exit 1
+      - run: node --test tests/static.test.mjs tests/worker.test.mjs
+        env:
+          BASE: http://127.0.0.1:8788
+      - if: failure()
+        run: tail -100 wrangler.log

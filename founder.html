@@ -60,6 +60,10 @@ body[data-s="danisa"] .ring::before,body[data-s="danisa"] .ring::after,body[data
 .req a{font-weight:700;color:#fff;background:var(--forest);border-radius:999px;padding:8px 14px;text-decoration:none;font-size:14px}
 .empty{color:var(--muted);font-size:14.5px;padding:14px 0;border-top:1px dashed var(--line)}
 #app button{font-size:15px;padding:11px 18px}
+.stats{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px;font-variant-numeric:tabular-nums}
+.stats th,.stats td{padding:7px 4px;border-top:1px dashed var(--line);text-align:right}.stats th:first-child,.stats td:first-child{text-align:left}
+.stats th{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.health{font-size:13.5px;color:var(--muted);margin-top:10px}.health.bad{color:#B8402A}
 </style>
 </head>
 <body data-s="loading">
@@ -77,11 +81,13 @@ body[data-s="danisa"] .ring::before,body[data-s="danisa"] .ring::after,body[data
   <input class="note hidden" id="note" maxlength="200" placeholder="Optional short note for them (e.g. “I’ll call you at 6pm”)">
   <p class="notes hidden" id="notes">✍️ Danisa is taking notes</p>
   <pre class="report hidden" id="report"></pre>
+  <div class="row hidden" id="danisaBtns"><button id="direct">Skip Danisa — connect me</button></div>
   <div class="row hidden" id="debriefBtns"><button id="skip">No thanks, I'll read it</button></div>
   <div class="row hidden" id="callBtns">
     <button id="mute">Mute</button>
     <button class="end" id="end">End call</button>
   </div>
+  <p class="small hidden" id="tip">🎧 Earphones help — then Danisa hears you and them separately and her notes stay clean.</p>
   <p class="small">Your phone number is never shared — this call runs through your browser.</p>
 </main>
 <main class="card hidden" id="app">
@@ -99,10 +105,13 @@ body[data-s="danisa"] .ring::before,body[data-s="danisa"] .ring::after,body[data
     <div id="list"></div>
     <div class="row" style="justify-content:flex-start;margin-top:16px"><button id="test">Send a test ring</button></div>
     <p class="err" id="testMsg" style="color:var(--muted)"></p>
+    <h1 style="font-size:24px;margin-top:22px">Last 7 days</h1>
+    <table class="stats" id="stats"></table>
+    <p class="health" id="health"></p>
   </section>
 </main>
-<script src="handoff-call.js"></script>
-<script src="live-client.js"></script>
-<script src="founder.js"></script>
+<script src="handoff-call.js?v=20261109"></script>
+<script src="live-client.js?v=20261109"></script>
+<script src="founder.js?v=20261109"></script>
 </body>
 </html>

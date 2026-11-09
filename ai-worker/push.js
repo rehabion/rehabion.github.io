@@ -62,7 +62,8 @@ export async function telegramText(env, text) {
   return r.ok;
 }
 
-/* Routes: GET /push/vapid · POST /push/subscribe · GET /push/pending · POST /push/test */
+/* Routes: GET /push/vapid · POST /push/subscribe · POST /push/telegram-link · POST /push/stats
+           GET /push/pending · POST /push/test */
 export async function handlePush(request, env, headers, path) {
   const inbox = env.INBOX.get(env.INBOX.idFromName('founder'));
   const url = new URL(request.url);
@@ -72,14 +73,15 @@ export async function handlePush(request, env, headers, path) {
     let b; try { b = await request.json(); } catch { return json({ error: 'Bad JSON' }, 400, headers); }
     const sub = b.subscription;
     if (!sub || typeof sub.endpoint !== 'string' || !/^https:\/\//.test(sub.endpoint)) return json({ error: 'Bad subscription' }, 400, headers);
-    const res = await inbox.subscribe(String(b.pin || ''), env.FOUNDER_PIN || '', sub.endpoint, String(b.label || '').slice(0, 40));
+    const res = await inbox.subscribe(String(b.pin || ''), env.FOUNDER_PIN || '', sub.endpoint, String(b.label || '').slice(0, 40).replace(/[<>]/g, ''));
     return json(res, res.error ? 403 : 200, headers);
   }
 
   /* link Telegram: the founder messages his bot, then this finds his chat (PIN-protected) */
   if (path === '/push/telegram-link' && request.method === 'POST') {
     let b; try { b = await request.json(); } catch { return json({ error: 'Bad JSON' }, 400, headers); }
-    if (!env.FOUNDER_PIN || String(b.pin || '') !== env.FOUNDER_PIN) return json({ error: 'Wrong PIN.' }, 403, headers);
+    const bad = await inbox.checkPin(String(b.pin || ''), env.FOUNDER_PIN || '');
+    if (bad) return json({ error: bad }, 403, headers);
     if (!env.TELEGRAM_BOT_TOKEN) return json({ error: 'Bot token not set.' }, 400, headers);
     const d = await (await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/getUpdates`)).json();
     const msgs = (d.result || []).map(u => u.message || u.edited_message).filter(m => m && m.chat && m.chat.type === 'private');
@@ -89,6 +91,14 @@ export async function handlePush(request, env, headers, path) {
     await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`, { method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ chat_id: chat.id, text: '✅ REHABION call alerts are on. When a website visitor asks for you, you’ll get a message here with an Answer button.' }) });
     return json({ linked: true, name: chat.first_name || chat.username || '' }, 200, headers);
+  }
+
+  /* the last 30 days of usage, for the founder app (PIN or a registered phone) */
+  if (path === '/push/stats' && request.method === 'POST') {
+    let b; try { b = await request.json(); } catch { return json({ error: 'Bad JSON' }, 400, headers); }
+    const ok = (/^[0-9a-f]{32}$/.test(String(b.device || '')) && await inbox.known(String(b.device))) || !(await inbox.checkPin(String(b.pin || ''), env.FOUNDER_PIN || ''));
+    if (!ok) return json({ error: 'Not allowed' }, 403, headers);
+    return json({ stats: await inbox.stats(30), health: await inbox.getConfig('health') }, 200, headers);
   }
 
   const device = url.searchParams.get('d') || '';
@@ -107,12 +117,18 @@ export async function handlePush(request, env, headers, path) {
 
 /* The founder's private inbox: registered phones + the last day's requests. */
 export class Inbox extends DurableObject {
-  async subscribe(pin, realPin, endpoint, label) {
+  /* one PIN check for everything, with a lock-out: null = OK, otherwise the reason */
+  async checkPin(pin, realPin) {
     const fails = (await this.ctx.storage.get('fails')) || { hour: 0, n: 0 };
     const hour = Math.floor(Date.now() / 3600e3);
     if (fails.hour !== hour) { fails.hour = hour; fails.n = 0; }
-    if (fails.n >= 8) return { error: 'Too many wrong PINs — try again in an hour.' };
-    if (!realPin || pin !== realPin) { fails.n++; await this.ctx.storage.put('fails', fails); return { error: 'Wrong PIN.' }; }
+    if (fails.n >= 8) return 'Too many wrong PINs — try again in an hour.';
+    if (!realPin || pin !== realPin) { fails.n++; await this.ctx.storage.put('fails', fails); return 'Wrong PIN.'; }
+    return null;
+  }
+  async subscribe(pin, realPin, endpoint, label) {
+    const bad = await this.checkPin(pin, realPin);
+    if (bad) return { error: bad };
     const subs = (await this.ctx.storage.get('subs')) || {};
     for (const [d, s] of Object.entries(subs)) if (s.endpoint === endpoint) delete subs[d];
     const device = hex(16);
@@ -137,6 +153,31 @@ export class Inbox extends DurableObject {
     list.unshift(req);
     await this.ctx.storage.put('requests', list.slice(0, 30));
   }
+  /* usage counters, one bucket per day, 35 days kept */
+  async count(events) {
+    const day = new Date().toISOString().slice(0, 10);
+    const all = (await this.ctx.storage.get('stats')) || {};
+    const d = all[day] || (all[day] = {});
+    for (const e of events) d[e] = (d[e] || 0) + 1;
+    const keep = Object.keys(all).sort().slice(-35);
+    await this.ctx.storage.put('stats', Object.fromEntries(keep.map(k => [k, all[k]])));
+  }
+  async stats(days) {
+    const all = (await this.ctx.storage.get('stats')) || {};
+    return Object.fromEntries(Object.keys(all).sort().slice(-days).map(k => [k, all[k]]));
+  }
+  /* Formspree's free plan allows 50 e-mails a month — stop before it silently fails */
+  async allowEmail(max) {
+    const month = new Date().toISOString().slice(0, 7);
+    const e = (await this.ctx.storage.get('email')) || { month, n: 0 };
+    if (e.month !== month) { e.month = month; e.n = 0; }
+    if (e.n >= max) return false;
+    e.n++; await this.ctx.storage.put('email', e);
+    return true;
+  }
+  async getConfig(k) { return (await this.ctx.storage.get('cfg:' + k)) || null; }
+  async setConfig(k, v) { await this.ctx.storage.put('cfg:' + k, v); }
+
   async pending(device) {
     if (!(await this.known(device))) return null;
     const day = Date.now() - 24 * 3600e3;

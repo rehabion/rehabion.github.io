@@ -2,6 +2,7 @@
    founder.html#r=…&k=…  → answer one request (opened from the alert)
    founder.html           → the founder app: set up call alerts on this phone + recent requests */
 (function(){
+  if(top!==self){try{top.location=self.location;}catch(e){}return;}   /* never inside someone else's frame */
   const API=window.REHABION_AI_ENDPOINT||'https://rehabion-ai.rehabion.workers.dev';
   const $=id=>document.getElementById(id);
   const show=(id,on)=>$(id).classList.toggle('hidden',!on);
@@ -75,6 +76,7 @@
       }catch(e){list.innerHTML='<p class="empty">Offline — will refresh.</p>';}
     }
     load();setInterval(load,15000);
+    stats(device);
     $('test').onclick=async()=>{
       $('testMsg').textContent='Sending…';
       try{const d=await (await fetch(API+'/push/test?d='+device,{method:'POST'})).json();
@@ -83,14 +85,29 @@
     };
   }
 
+  /* the last week at a glance + whether Danisa's models are healthy */
+  async function stats(device){
+    try{
+      const d=await (await fetch(API+'/push/stats',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({device})})).json();
+      const days=Object.keys(d.stats||{}).sort().slice(-7).reverse(),n=(x,k)=>(x&&x[k])||0;
+      const cols=[['chat','Chats'],['live','Voice'],['handoff','Asked'],['answered','Talked'],['missed','Missed'],['blocked','Blocked']];
+      $('stats').innerHTML='<tr><th>Day</th>'+cols.map(c=>'<th>'+c[1]+'</th>').join('')+'</tr>'+
+        (days.length?days.map(k=>'<tr><td>'+k.slice(5)+'</td>'+cols.map(c=>'<td>'+n(d.stats[k],c[0])+'</td>').join('')+'</tr>').join(''):'<tr><td colspan="7" style="text-align:left">Nothing yet.</td></tr>');
+      const h=d.health;
+      $('health').textContent=!h?'Health check: runs daily at 8 am.':h.ok?'✓ Danisa is healthy · checked '+new Date(h.checkedAt).toLocaleString():'⚠ '+h.problems.join(' · ');
+      $('health').classList.toggle('bad',!!h&&!h.ok);
+    }catch(e){}
+  }
+
   /* ── answering one request ──
      Danisa calls you → you tell her if you're free → she introduces you to the visitor,
      takes notes while you talk → report to Telegram + an optional spoken debrief. */
   function answerScreen(){
     show('callCard',true);
     const say=(s,txt)=>{document.body.dataset.s=s;$('status').textContent=txt;};
-    let info=null,call=null,stream=null,ctx=null,live=null,danisa=null,player=null,notes=[],transcript=[];
-    let t0=0,clock=0,muted=false,poll=0,decision=null,talked=false;
+    let info=null,call=null,stream=null,ctx=null,live=null,danisa=null,player=null,notes=[],pending=[],noteToken=null;
+    let t0=0,clock=0,flush=0,muted=false,poll=0,decision=null,talked=false,sent=false;
+    const pass=purpose=>fetch(API+'/handoff/live?purpose='+purpose+'&r='+r+'&k='+k).then(x=>x.json());
     const TEXT={
       ringing:'They are waiting on the website.',danisa:'Danisa is on the line…',
       accepted:'Connecting you…','in-call':'',
@@ -98,14 +115,15 @@
       missed:'Missed — they waited but the call wasn’t answered.',
       cancelled:'They hung up before you answered.',left:'They left the website before you answered.',
       ended:'Call ended.',failed:'The connection failed — their network may be blocking calls.',disconnected:'Disconnected.',
-      writing:'Danisa is writing up her notes…',debrief:'Danisa is debriefing you…',done:'All done — the report is on your Telegram.'
+      writing:'Danisa is writing up her notes…',debrief:'Danisa is debriefing you…',done:'All done — the report is on your Telegram.',
+      saved:'All done — the report is below (Telegram didn’t go through).'
     };
     function render(status){
       say(status,TEXT[status]||status);
       show('ringingBtns',status==='ringing');show('note',status==='ringing');
       show('callBtns',status==='accepted'||status==='in-call');
-      show('notes',status==='in-call');
-      show('debriefBtns',status==='debrief');
+      show('notes',status==='in-call'&&info&&info.notes);show('tip',status==='ringing'&&info&&info.notes);
+      show('debriefBtns',status==='debrief');show('danisaBtns',status==='danisa');
       if(['missed','cancelled','left'].includes(status)&&info&&info.contact)$('status').textContent+=' You can reach them yourself at the contact above.';
     }
     function tick(){const s=Math.floor((Date.now()-t0)/1000);$('status').innerHTML='<span class="timer">'+String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')+'</span>';}
@@ -117,6 +135,7 @@
       $('who').textContent=info.name;$('initial').textContent=(info.name||'?').trim().charAt(0).toUpperCase();
       if(info.reason||info.contact){show('about',true);$('reason').textContent=info.reason||'—';}
       if(info.contact){show('contactLbl',true);show('contact',true);$('contact').textContent=info.contact;}
+      if(!info.notes)$('reason').textContent+='  (no notes — they asked)';
       if(info.status!=='ringing'){$('kicker').textContent='asked '+Math.round((Date.now()-info.createdAt)/60000)+' min ago';}
       render(info.status);showReport(info.report);
       if(info.status==='ringing')poll=setInterval(refresh,3000);
@@ -130,8 +149,8 @@
       call=RehabCall.start({wsUrl:API.replace(/^http/,'ws')+'/handoff/ws?r='+r+'&k='+k,iceServers:info.iceServers,role:'founder',stream:outStream,onOpen,
         onRemote:rs=>takeNotes('visitor',rs),
         onStatus:s=>{if(!['in-call','accepted','ended','ringing'].includes(s))render(s);},
-        onConnected:()=>{talked=true;render('in-call');t0=Date.now();clock=setInterval(tick,500);tick();introduce();takeNotes('founder',stream);},
-        onEnded:why=>{clearInterval(clock);notes.forEach(n=>n.close());notes=[];if(talked)afterCall();else{render(why);cleanup();}}
+        onConnected:()=>{talked=true;render('in-call');t0=Date.now();clock=setInterval(tick,500);tick();introduce();takeNotes('founder',stream);flush=setInterval(saveNotes,4000);},
+        onEnded:why=>{clearInterval(clock);clearInterval(flush);notes.forEach(n=>n.close());notes=[];if(talked)afterCall();else{render(why);cleanup();}}
       });
     }
     function cleanup(){try{danisa&&danisa.close();}catch(e){}if(stream)stream.getTracks().forEach(t=>t.stop());}
@@ -144,15 +163,10 @@
       ctx=new (window.AudioContext||window.webkitAudioContext)();player=new RehabLive.Player(ctx);
       render('danisa');show('ringingBtns',false);
       try{
-        live=await (await fetch(API+'/handoff/live?r='+r+'&k='+k)).json();
+        /* her script, voice and tool are locked into the pass on the server */
+        live=await pass('secretary');
         if(!live.token)throw new Error(live.error||'no token');
-        danisa=await RehabLive.open({token:live.token,ctx,stream,
-          setup:{model:'models/'+live.model,
-            generationConfig:{responseModalities:['AUDIO'],speechConfig:{voiceConfig:{prebuiltVoiceConfig:{voiceName:'Kore'}}}},
-            systemInstruction:{parts:[{text:live.instructions}]},
-            tools:[{functionDeclarations:[{name:'founder_decision',description:'Record whether the founder is free to talk to the visitor now.',
-              parameters:{type:'OBJECT',properties:{free:{type:'BOOLEAN'},note:{type:'STRING',description:'Message for the visitor if he is not free'}},required:['free']}}]}]},
-          onMessage:onDanisa});
+        danisa=await RehabLive.open({token:live.token,ctx,stream,setup:{model:'models/'+live.model},onMessage:onDanisa});
         danisa.send({realtimeInput:{text:'(He has just picked up. Start.)'}});
       }catch(e){
         /* no voice? fall back to joining straight away */
@@ -198,15 +212,23 @@
         const s=ctx.createBufferSource();s.buffer=buf;s.connect(ctx.out);s.connect(ctx.destination);s.start();
       }catch(e){}
     }
+    /* only if the visitor agreed; lines go to the server every few seconds so a crash loses nothing */
     async function takeNotes(who,s){
-      if(!live||!live.token||!s)return;
+      if(!info.notes||!s)return;
       try{
-        const n=await RehabLive.open({token:live.token,ctx,stream:s,
-          setup:{model:'models/'+live.transcribeModel,inputAudioTranscription:{}},
-          onMessage:m=>{const tx=m.serverContent&&m.serverContent.inputTranscription;if(tx&&tx.text&&tx.text.trim())transcript.push({who,text:tx.text.trim(),at:Date.now()-t0});},
+        if(!noteToken)noteToken=pass('notes');
+        const p=await noteToken;if(!p.token)return;
+        const n=await RehabLive.open({token:p.token,ctx,stream:s,setup:{model:'models/'+p.model},
+          onMessage:m=>{const tx=m.serverContent&&m.serverContent.inputTranscription;if(tx&&tx.text&&tx.text.trim())pending.push({who,text:tx.text.trim(),at:Date.now()-t0});},
           onClose:()=>{if(call&&talked&&document.body.dataset.s==='in-call')setTimeout(()=>takeNotes(who,s),500);}});
         notes.push(n);
       }catch(e){}
+    }
+    async function saveNotes(){
+      if(!pending.length)return;
+      const lines=pending.splice(0,200);
+      try{const res=await fetch(API+'/handoff/notes?r='+r+'&k='+k,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({lines})});if(!res.ok)throw 0;}
+      catch(e){pending.unshift(...lines);}
     }
 
     /* 3 — after the call: report to Telegram, then offer a spoken debrief */
@@ -214,21 +236,17 @@
       render('writing');
       let rep='';
       try{
-        transcript.sort((a,b)=>a.at-b.at);
         const d=await (await fetch(API+'/handoff/report?r='+r+'&k='+k,{method:'POST',headers:{'Content-Type':'application/json'},
-          body:JSON.stringify({transcript,seconds:Math.round((Date.now()-t0)/1000)})})).json();
-        rep=d.report||'';
+          body:JSON.stringify({lines:pending.splice(0)})})).json();
+        rep=d.report||'';sent=!!d.sent;
       }catch(e){}
       showReport(rep);
-      if(!rep||!live||!live.token){render('done');cleanup();return;}
+      const fin=()=>{render(sent?'done':'saved');cleanup();};
+      if(!rep||!info.notes){fin();return;}
       render('debrief');
       try{
-        danisa=await RehabLive.open({token:live.token,ctx,stream,
-          setup:{model:'models/'+live.model,
-            generationConfig:{responseModalities:['AUDIO'],speechConfig:{voiceConfig:{prebuiltVoiceConfig:{voiceName:'Kore'}}}},
-            systemInstruction:{parts:[{text:'You are Danisa, the founder’s assistant at REHABION. His call with '+info.name+' just ended and you took notes. Here is your report:\n\n'+rep+
-              '\n\nSpeak in a natural Pakistani Urdu–English mix unless he uses another language. First ask, in one short sentence, if he wants you to run through the main points (the full report is already on his Telegram). If yes, go through them briefly in spoken sentences — no emojis, no lists read out symbol by symbol — then answer any questions. If he says no or thanks, say goodbye warmly in one sentence and call end_debrief.'}]},
-            tools:[{functionDeclarations:[{name:'end_debrief',description:'Finish the debrief when he is done or does not want it.',parameters:{type:'OBJECT',properties:{}}}]}]},
+        const p=await pass('debrief');if(!p.token)throw new Error(p.error);
+        danisa=await RehabLive.open({token:p.token,ctx,stream,setup:{model:'models/'+p.model},
           onMessage:m=>{
             if(m.toolCall){danisa.send({toolResponse:{functionResponses:m.toolCall.functionCalls.map(f=>({id:f.id,name:f.name,response:{result:'ok'}}))}});
               player.onIdle=finish;setTimeout(finish,6000);return;}
@@ -237,12 +255,13 @@
             (sc.modelTurn&&sc.modelTurn.parts||[]).forEach(p=>{if(p.inlineData&&p.inlineData.data)player.play(p.inlineData.data);});
           }});
         danisa.send({realtimeInput:{text:'(The call just ended. Start.)'}});
-      }catch(e){render('done');cleanup();}
+      }catch(e){fin();}
     }
-    function finish(){player&&player.stop();if(player)player.onIdle=null;render('done');cleanup();danisa=null;}
+    function finish(){player&&player.stop();if(player)player.onIdle=null;render(sent?'done':'saved');cleanup();danisa=null;}
 
     $('busy').onclick=()=>{clearInterval(poll);const note=$('note').value.trim();stream=new MediaStream();connect(stream,()=>call.send({t:'busy',note}));};
     $('skip').onclick=finish;
+    $('direct').onclick=()=>{decision=null;if(danisa){danisa.close();danisa=null;}player&&player.stop();if(!call)join();};
     $('end').onclick=()=>{call&&call.hangup();};
     $('mute').onclick=()=>{muted=!muted;stream&&stream.getAudioTracks().forEach(t=>t.enabled=!muted);$('mute').textContent=muted?'Unmute':'Mute';};
     load();

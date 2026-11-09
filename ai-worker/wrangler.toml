@@ -3,9 +3,6 @@ main = "worker.js"
 compatibility_date = "2026-10-01"
 
 [vars]
-GEMINI_MODEL = "gemini-3-flash-preview"
-LIVE_MODEL = "gemini-3.8-live"
-TTS_MODEL = "gemini-3.8-flash-tts"
 VAPID_PUBLIC = "BJsTMSBuBIkeJvM7XP_9sUTeSQNvR1XSXJ_zmuZw3Mlipe7yUwwqb9IgnzpyBacLuRed6yLr2B2UGmS0FcqQXqQ"
 
 [[durable_objects.bindings]]
@@ -27,3 +24,6 @@ new_sqlite_classes = ["HandoffRoom", "RateLimit"]
 [[migrations]]
 tag = "v2"
 new_sqlite_classes = ["Inbox"]
+
+[triggers]
+crons = ["0 3 * * *"]

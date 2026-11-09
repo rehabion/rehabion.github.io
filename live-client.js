@@ -20,6 +20,7 @@
     return new Promise((resolve,reject)=>{
       const ws=new WebSocket(WS+encodeURIComponent(token));
       let stopMic=null,muted=false,ready=false;
+      const slow=setTimeout(()=>{if(!ready){reject(new Error('voice connection timed out'));try{ws.close();}catch(e){}}},12000);   /* bad network: fail fast, don't hang */
       const send=m=>{if(ws.readyState===1)ws.send(JSON.stringify(m));};
       ws.onopen=()=>send({setup});
       ws.onerror=()=>{if(!ready)reject(new Error('voice connection failed'));};
@@ -27,7 +28,7 @@
       ws.onmessage=async e=>{
         const m=JSON.parse(typeof e.data==='string'?e.data:await e.data.text());
         if(m.setupComplete&&!ready){
-          ready=true;
+          ready=true;clearTimeout(slow);
           if(stream)stopMic=await micPipe(ctx,stream,pcm=>{if(!muted)send({realtimeInput:{audio:{data:b64(pcm),mimeType:'audio/pcm;rate=16000'}}});});
           resolve({send,mute:on=>{muted=on;},close:()=>{stopMic&&stopMic();try{ws.close();}catch(err){}}});
           return;

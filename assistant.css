@@ -66,6 +66,8 @@
 .noor-ho{flex-direction:column;align-items:stretch}
 .noor-ho input{min-width:0}
 .noor-ho button{align-self:flex-start;background:#2E5946}
+.noor-consent{display:flex;gap:8px;align-items:flex-start;font-size:13.5px;line-height:1.4;color:#4A433B;cursor:pointer}
+.noor-consent input{flex:none;min-width:0;width:17px;height:17px;margin-top:1px;accent-color:#2E5946}
 .noor-voice[data-mode="human"] .noor-orb span:nth-child(1){background:#2E5946}
 .noor-voice[data-mode="human"] .noor-orb span:nth-child(3){background:#C2522F}
 .noor-voice-text p+p{margin-top:8px}

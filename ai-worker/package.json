@@ -1,0 +1,13 @@
+{
+  "name": "rehabion-ai",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --port 8788",
+    "deploy": "wrangler deploy",
+    "test": "node --test ../tests/static.test.mjs ../tests/worker.test.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "4.158.0"
+  }
+}
