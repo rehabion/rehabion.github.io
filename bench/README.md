@@ -22,11 +22,16 @@ Results are saved to `results/<date>.json` (every case) and `results/<date>.md` 
 
 **All of this seed data is synthetic, written by the team.** It is good for catching regressions, but it isn't evidence for a paper.
 
-## What the first run found
-- On the development set the fixed red-flag rules started at **49/60**. They missed "can't control my bladder" and a sudden one-sided weakness phrased in Roman Urdu, and they false-alarmed on "I *don't* have chest pain" and on routine post-stroke rehab. After fixing those patterns the rules get 60/60, which is expected because they were tuned on that set.
-- On the **held-out set the rules alone catch only 1 of 14 emergencies (8/20 overall)**. Real people describe emergencies in more ways than any word list covers ("I wet myself twice", "pressure near my heart and sweating"). The rules are a floor, not a safety system. The model layer has to carry detection, and the combined score on held-out data is the number to watch.
+## What the first run found (9 Nov 2026, [results](results/2026-11-09.md))
+Most model calls were answered by `gemini-3.5-flash-lite`: the free key's daily quota on the preferred models ran out during testing.
 
-The numbers for the model and the combined system are in `results/`.
+1. **The word-list rules are not a safety system.** On the 20 held-out messages the rules caught **0 of 11 emergencies** ("I wet myself twice and my back is killing me", "pressure near my heart and sweating", a bike accident and "can't walk"). On the 60 development messages they scored 100%, but only because they were tuned there; they started at 49/60. **The model caught 11/11 held-out emergencies with no false alarms on routine cases.** So the live system runs both: rules first, as a fast floor that needs no network, then the model.
+2. **Call reports stayed faithful.** 100% of key facts were kept and 0 of 15 "trap" facts were claimed. The judge flagged 3 small unsupported details in the two Urdu-language calls.
+3. **Urdu comes out in Hindi script.** The live transcription model (`gemini-3.5-transcribe-live`, which writes the founder-call notes) wrote **all 5 Urdu and Punjabi clips in Devanagari or Gurmukhi**. The words were nearly right (10.5% character error where the script was right) but the script was wrong. The batch model did the same on 2 of 5 clips, even when told to use Urdu script.
+   - **Mitigation now:** the report and SOAP prompts read Devanagari as Urdu and write only Urdu script or English.
+   - **Real fix (research):** a script-constrained transcriber, or Devanagari → Urdu transliteration, measured on real recordings.
+
+   This is the clearest publishable gap: commercial speech recognition treats spoken Urdu as Hindi.
 
 ## Turning this into a publishable dataset
 1. **Ethics:** add a recording-and-annotation protocol to the existing IRB approval. Get written consent (Urdu and English forms), allow withdrawal, and keep no names or numbers.

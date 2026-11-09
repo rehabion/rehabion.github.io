@@ -1,0 +1,968 @@
+{
+  "date": "2026-11-09T15:50:34.211Z",
+  "models": {
+    "text": "gemini-3-flash-preview",
+    "tts": "gemini-3.8-flash-tts",
+    "live_asr": "gemini-3.5-transcribe-live"
+  },
+  "reports": {
+    "n": 5,
+    "mean_fact_recall": 100,
+    "total_traps_claimed": 0,
+    "total_unsupported_claims": 3,
+    "rows": [
+      {
+        "id": "r01",
+        "lang": "en",
+        "fact_recall": 100,
+        "traps_claimed": 0,
+        "unsupported": [],
+        "report": "👤 Who — Ayesha, ayesha@clinic.pk\n\n🎯 What they want — demo of stroke game\n\n📝 Key points — bullets with •\n• Runs a physiotherapy clinic in Lahore with twelve therapists\n• Wants to try the stroke game with their patients\n\n✅ Agreed / next steps — Send pricing sheet before the demo, and do a demo next Tuesday at 3 pm at the clinic\n\n⏰ Follow-ups for Muhammad — Send pricing sheet before next Tuesday; do demo at Ayesha's clinic next Tuesday at 3 pm\n\n💡 Danisa's note — Budget is around two lakh rupees; hot lead with a specific clinic setup and budget"
+      },
+      {
+        "id": "r02",
+        "lang": "ur-roman",
+        "fact_recall": 100,
+        "traps_claimed": 0,
+        "unsupported": [
+          "Danisa's note — hot lead, potential angel investor looking to invest up to fifty thousand dollars in pre-seed"
+        ],
+        "report": "👤 Who — Bilal, from Karachi (Angel Investor)\nContact — not mentioned\n\n🎯 What they want — investment\n\n📝 Key points — bullets with •\n• Bilal is an angel investor calling from Karachi\n• Looking to invest up to fifty thousand dollars in pre-seed\n• Asked Muhammad Ramzan to send the pitch deck\n• Will send his email address via WhatsApp later\n\n✅ Agreed / next steps — Muhammad Ramzan to email the pitch deck by this evening after receiving Bilal's email on WhatsApp\n\n⏰ Follow-ups for Muhammad — send pitch deck to Bilal by this evening once his email is received\n\n💡 Danisa's note — hot lead, potential angel investor looking to invest up to fifty thousand dollars in pre-seed"
+      },
+      {
+        "id": "r03",
+        "lang": "ur",
+        "fact_recall": 100,
+        "traps_claimed": 0,
+        "unsupported": [
+          "Follow-ups for Muhammad — follow up regarding ethics committee approval and next month's pilot",
+          "Danisa's note — hot lead with daily volume of 80 patients at PIMS, conditional on ethics committee approval"
+        ],
+        "report": "👤 Who — Dr. Nazia, Head of Physiotherapy Department at PIMS\nContact — not mentioned\n\n🎯 What they want — hospital integration and patient progress tracking\n\n📝 Key points\n• Department gets about 80 patients daily\n• Needs patient progress tracking system\n\n✅ Agreed / next steps\n• Start a pilot program next month\n• Get approval from the ethics committee first\n\n⏰ Follow-ups for Muhammad — follow up regarding ethics committee approval and next month's pilot\n\n💡 Danisa's note — hot lead with daily volume of 80 patients at PIMS, conditional on ethics committee approval"
+      },
+      {
+        "id": "r04",
+        "lang": "mix",
+        "fact_recall": 100,
+        "traps_claimed": 0,
+        "unsupported": [],
+        "report": "👤 Who — Hamza\n0300-0000000\n\n🎯 What they want\ninternship\n\n📝 Key points — bullets with •\n• NUST biomedical engineering final year student\n• Has experience in Python and a little bit in Unity\n• Final Year Project is on EMG signals\n\n✅ Agreed / next steps\n• Send CV\n• Short interview next week\n\n⏰ Follow-ups for Muhammad — concrete, with any times or numbers mentioned\n• Review Hamza's CV and conduct a short interview next week\n\n💡 Danisa's note — anything important (urgency, budget, a hot lead, concerns)\nnot mentioned"
+      },
+      {
+        "id": "r05",
+        "lang": "en",
+        "fact_recall": 100,
+        "traps_claimed": 0,
+        "unsupported": [],
+        "report": "👤 Who — Sara, sara@ngo.org\n\n🎯 What they want — NGO partnership\n\n📝 Key points — bullets with •\n• Works with an NGO in Swat supporting flood-affected families\n• Older people have mobility problems and no nearby physiotherapist\n• Muhammad suggested phone-camera gait tool for community health workers\n• Thirty health workers available\n• Would need Pashto support\n\n✅ Agreed / next steps — Muhammad to send a short proposal by Friday\n\n⏰ Follow-ups for Muhammad — Send proposal by Friday\n\n💡 Danisa's note — not mentioned"
+      }
+    ]
+  },
+  "calls_per_model": {
+    "gemini-3.5-flash-lite": 95,
+    "gemini-3-flash-preview": 1,
+    "gemini-3.1-flash-lite": 2
+  },
+  "triage": {
+    "n": 60,
+    "rules": {
+      "accuracy": 100,
+      "emergency_sensitivity": 100,
+      "emergency_specificity": 100,
+      "any_flag_sensitivity": 100,
+      "routine_false_alarm": 0,
+      "missed_emergencies": []
+    },
+    "model": {
+      "accuracy": 100,
+      "emergency_sensitivity": 100,
+      "emergency_specificity": 100,
+      "any_flag_sensitivity": 100,
+      "routine_false_alarm": 0,
+      "missed_emergencies": []
+    },
+    "combined": {
+      "accuracy": 100,
+      "emergency_sensitivity": 100,
+      "emergency_specificity": 100,
+      "any_flag_sensitivity": 100,
+      "routine_false_alarm": 0,
+      "missed_emergencies": []
+    },
+    "byLang": {
+      "en": {
+        "n": 19,
+        "combined_accuracy": 100,
+        "combined_emergency_sensitivity": 100
+      },
+      "ur-roman": {
+        "n": 19,
+        "combined_accuracy": 100,
+        "combined_emergency_sensitivity": 100
+      },
+      "ur": {
+        "n": 12,
+        "combined_accuracy": 100,
+        "combined_emergency_sensitivity": 100
+      },
+      "pa": {
+        "n": 2,
+        "combined_accuracy": 100,
+        "combined_emergency_sensitivity": 100
+      },
+      "pa-roman": {
+        "n": 2,
+        "combined_accuracy": 100,
+        "combined_emergency_sensitivity": 100
+      },
+      "mix": {
+        "n": 6,
+        "combined_accuracy": 100,
+        "combined_emergency_sensitivity": 100
+      }
+    },
+    "rows": [
+      {
+        "id": "t01",
+        "lang": "en",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "t02",
+        "lang": "en",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "t03",
+        "lang": "en",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t04",
+        "lang": "en",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t05",
+        "lang": "en",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t06",
+        "lang": "en",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t07",
+        "lang": "en",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "t08",
+        "lang": "en",
+        "truth": "urgent",
+        "rule": "urgent",
+        "model": "urgent",
+        "combined": "urgent"
+      },
+      {
+        "id": "t09",
+        "lang": "en",
+        "truth": "urgent",
+        "rule": "urgent",
+        "model": "urgent",
+        "combined": "urgent"
+      },
+      {
+        "id": "t10",
+        "lang": "en",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "t11",
+        "lang": "en",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t12",
+        "lang": "en",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "t13",
+        "lang": "en",
+        "truth": "urgent",
+        "rule": "urgent",
+        "model": "urgent",
+        "combined": "urgent"
+      },
+      {
+        "id": "t14",
+        "lang": "en",
+        "truth": "urgent",
+        "rule": "urgent",
+        "model": "urgent",
+        "combined": "urgent"
+      },
+      {
+        "id": "t15",
+        "lang": "en",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t16",
+        "lang": "ur-roman",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "t17",
+        "lang": "ur-roman",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t18",
+        "lang": "ur-roman",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t19",
+        "lang": "ur-roman",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t20",
+        "lang": "ur-roman",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "t21",
+        "lang": "ur-roman",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t22",
+        "lang": "ur-roman",
+        "truth": "urgent",
+        "rule": "urgent",
+        "model": "urgent",
+        "combined": "urgent"
+      },
+      {
+        "id": "t23",
+        "lang": "ur-roman",
+        "truth": "urgent",
+        "rule": "urgent",
+        "model": "urgent",
+        "combined": "urgent"
+      },
+      {
+        "id": "t24",
+        "lang": "ur-roman",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "t25",
+        "lang": "ur-roman",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t26",
+        "lang": "ur-roman",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "t27",
+        "lang": "ur-roman",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t28",
+        "lang": "ur-roman",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "t29",
+        "lang": "ur-roman",
+        "truth": "urgent",
+        "rule": "urgent",
+        "model": "urgent",
+        "combined": "urgent"
+      },
+      {
+        "id": "t30",
+        "lang": "ur-roman",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "t31",
+        "lang": "ur",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "t32",
+        "lang": "ur",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t33",
+        "lang": "ur",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t34",
+        "lang": "ur",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t35",
+        "lang": "ur",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "t36",
+        "lang": "ur",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t37",
+        "lang": "ur",
+        "truth": "urgent",
+        "rule": "urgent",
+        "model": "urgent",
+        "combined": "urgent"
+      },
+      {
+        "id": "t38",
+        "lang": "ur",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "t39",
+        "lang": "ur",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t40",
+        "lang": "ur",
+        "truth": "urgent",
+        "rule": "urgent",
+        "model": "urgent",
+        "combined": "urgent"
+      },
+      {
+        "id": "t41",
+        "lang": "ur",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "t42",
+        "lang": "ur",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t43",
+        "lang": "pa",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "t44",
+        "lang": "pa",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t45",
+        "lang": "pa-roman",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "t46",
+        "lang": "pa-roman",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t47",
+        "lang": "mix",
+        "truth": "urgent",
+        "rule": "urgent",
+        "model": "urgent",
+        "combined": "urgent"
+      },
+      {
+        "id": "t48",
+        "lang": "mix",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "t49",
+        "lang": "mix",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t50",
+        "lang": "mix",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "t51",
+        "lang": "mix",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t52",
+        "lang": "mix",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t53",
+        "lang": "en",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t54",
+        "lang": "ur-roman",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t55",
+        "lang": "ur-roman",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t56",
+        "lang": "ur-roman",
+        "truth": "emergency",
+        "rule": "emergency",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "t57",
+        "lang": "en",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "t58",
+        "lang": "en",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "t59",
+        "lang": "ur-roman",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "t60",
+        "lang": "en",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      }
+    ]
+  },
+  "triage_holdout": {
+    "n": 20,
+    "rules": {
+      "accuracy": 40,
+      "emergency_sensitivity": 0,
+      "emergency_specificity": 100,
+      "any_flag_sensitivity": 7.7,
+      "routine_false_alarm": 0,
+      "missed_emergencies": [
+        "h01",
+        "h02",
+        "h03",
+        "h05",
+        "h07",
+        "h08",
+        "h10",
+        "h13",
+        "h14",
+        "h17",
+        "h19"
+      ]
+    },
+    "model": {
+      "accuracy": 100,
+      "emergency_sensitivity": 100,
+      "emergency_specificity": 100,
+      "any_flag_sensitivity": 100,
+      "routine_false_alarm": 0,
+      "missed_emergencies": []
+    },
+    "combined": {
+      "accuracy": 100,
+      "emergency_sensitivity": 100,
+      "emergency_specificity": 100,
+      "any_flag_sensitivity": 100,
+      "routine_false_alarm": 0,
+      "missed_emergencies": []
+    },
+    "byLang": {
+      "en": {
+        "n": 6,
+        "combined_accuracy": 100,
+        "combined_emergency_sensitivity": 100
+      },
+      "ur-roman": {
+        "n": 6,
+        "combined_accuracy": 100,
+        "combined_emergency_sensitivity": 100
+      },
+      "ur": {
+        "n": 4,
+        "combined_accuracy": 100,
+        "combined_emergency_sensitivity": 100
+      },
+      "pa-roman": {
+        "n": 2,
+        "combined_accuracy": 100,
+        "combined_emergency_sensitivity": 100
+      },
+      "mix": {
+        "n": 2,
+        "combined_accuracy": 100,
+        "combined_emergency_sensitivity": 100
+      }
+    },
+    "rows": [
+      {
+        "id": "h01",
+        "lang": "en",
+        "truth": "emergency",
+        "rule": "routine",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "h02",
+        "lang": "en",
+        "truth": "emergency",
+        "rule": "routine",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "h03",
+        "lang": "en",
+        "truth": "emergency",
+        "rule": "routine",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "h04",
+        "lang": "en",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "h05",
+        "lang": "en",
+        "truth": "emergency",
+        "rule": "routine",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "h06",
+        "lang": "en",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "h07",
+        "lang": "ur-roman",
+        "truth": "emergency",
+        "rule": "routine",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "h08",
+        "lang": "ur-roman",
+        "truth": "emergency",
+        "rule": "routine",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "h09",
+        "lang": "ur-roman",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "h10",
+        "lang": "ur-roman",
+        "truth": "emergency",
+        "rule": "routine",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "h11",
+        "lang": "ur-roman",
+        "truth": "urgent",
+        "rule": "routine",
+        "model": "urgent",
+        "combined": "urgent"
+      },
+      {
+        "id": "h12",
+        "lang": "ur-roman",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "h13",
+        "lang": "ur",
+        "truth": "emergency",
+        "rule": "routine",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "h14",
+        "lang": "ur",
+        "truth": "emergency",
+        "rule": "routine",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "h15",
+        "lang": "ur",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "h16",
+        "lang": "ur",
+        "truth": "urgent",
+        "rule": "urgent",
+        "model": "urgent",
+        "combined": "urgent"
+      },
+      {
+        "id": "h17",
+        "lang": "pa-roman",
+        "truth": "emergency",
+        "rule": "routine",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "h18",
+        "lang": "pa-roman",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      },
+      {
+        "id": "h19",
+        "lang": "mix",
+        "truth": "emergency",
+        "rule": "routine",
+        "model": "emergency",
+        "combined": "emergency"
+      },
+      {
+        "id": "h20",
+        "lang": "mix",
+        "truth": "routine",
+        "rule": "routine",
+        "model": "routine",
+        "combined": "routine"
+      }
+    ]
+  },
+  "asr": {
+    "n": 8,
+    "audio": "synthetic (Gemini TTS) — replace with consented real recordings",
+    "batch_model": "gemini-3-flash-preview / gemini-3.5-flash-lite / gemini-3.1-flash-lite",
+    "live_model": "gemini-3.5-transcribe-live",
+    "wrong_script": {
+      "urdu_punjabi_clips": 5,
+      "batch": 2,
+      "live": 5
+    },
+    "mean": {
+      "batch_cer": 39.7,
+      "live_cer": 66.5,
+      "batch_wer": 45,
+      "live_wer": 92.6,
+      "batch_cer_right_script": 15.8,
+      "live_cer_right_script": 10.5
+    },
+    "rows": [
+      {
+        "id": "a01",
+        "lang": "ur",
+        "ref": "مجھے دو ہفتوں سے کمر میں درد ہے اور بیٹھنے سے بڑھ جاتا ہے۔",
+        "script": "arabic",
+        "batch": "mujhe do hafton se kamar mein dard hai aur baithne se badh jata hai",
+        "live": "मुझे दो हफ्तों से कमर में दर्द है और बैठने से बढ़ जाता है।",
+        "batch_script": "latin",
+        "live_script": "devanagari",
+        "batch_cer": 122.7,
+        "live_cer": 100,
+        "batch_wer": 100,
+        "live_wer": 135.7
+      },
+      {
+        "id": "a02",
+        "lang": "ur",
+        "ref": "میرے والد کو تین مہینے پہلے فالج ہوا تھا، ان کا دایاں ہاتھ کمزور ہے۔",
+        "script": "arabic",
+        "batch": "मेरे वाले को 3 महीने पहले फालिज हुआ था। उनका दायां हाथ कमजोर है।",
+        "live": "मेरे वालिद को तीन महीने पहले फालिज हुआ था। उनका दायां हाथ कमजोर है।",
+        "batch_script": "devanagari",
+        "live_script": "devanagari",
+        "batch_cer": 100,
+        "live_cer": 100,
+        "batch_wer": 153.3,
+        "live_wer": 166.7
+      },
+      {
+        "id": "a03",
+        "lang": "ur",
+        "ref": "کل صبح دس بجے کی اپائنٹمنٹ مل سکتی ہے؟ میرا نمبر صفر تین سو ایک دو تین چار پانچ چھ سات ہے۔",
+        "script": "arabic",
+        "batch": "کل صبح 10 بجے کی اپوائنٹمنٹ مل سکتی ہے؟ میرا نمبر 03001234567 ہے۔",
+        "live": "कल सुबह 10:00 बजे की अपॉइंटमेंट मिल सकती है? मेरा नंबर 03001234567 है।",
+        "batch_script": "arabic",
+        "live_script": "devanagari",
+        "batch_cer": 46.3,
+        "live_cer": 100,
+        "batch_wer": 54.5,
+        "live_wer": 100
+      },
+      {
+        "id": "a04",
+        "lang": "mix",
+        "ref": "Doctor sahab, mera shoulder abduction ab ninety two degree tak ja raha hai, pehle eighty tha.",
+        "script": "latin",
+        "batch": "Doctor Sahab mera shoulder abduction ab 92 degree tak ja raha hai. Pehle 80 tha.",
+        "live": "Doctor sahab, mera shoulder abduction ab 92 degree tak ja raha hai. Pehle 80 tha.",
+        "batch_script": "latin",
+        "live_script": "latin",
+        "batch_cer": 20,
+        "live_cer": 20,
+        "batch_wer": 18.8,
+        "live_wer": 18.8
+      },
+      {
+        "id": "a05",
+        "lang": "mix",
+        "ref": "Lower back pain hai, especially jab main subah uthta hoon, aur left leg mein tingling hoti hai.",
+        "script": "latin",
+        "batch": "Lower back pain hai, especially jab main subah uthta hoon aur left leg mein tingling hoti hai.",
+        "live": "Lower back pain hai especially jab main subah uthta hun aur left leg mein tingling hoti hai.",
+        "batch_script": "latin",
+        "live_script": "latin",
+        "batch_cer": 0,
+        "live_cer": 2.6,
+        "batch_wer": 0,
+        "live_wer": 5.9
+      },
+      {
+        "id": "a06",
+        "lang": "en",
+        "ref": "I had a knee replacement six weeks ago and I can bend it to about ninety degrees now.",
+        "script": "latin",
+        "batch": "I had a knee replacement 6 weeks ago and I can bend it to about 90° now.",
+        "live": "I had a knee replacement six weeks ago and I can bend it to about 90 degrees now.",
+        "batch_script": "latin",
+        "live_script": "latin",
+        "batch_cer": 23.9,
+        "live_cer": 9,
+        "batch_wer": 16.7,
+        "live_wer": 5.6
+      },
+      {
+        "id": "a07",
+        "lang": "pa",
+        "ref": "میرے گوڈے وچ بڑا درد اے، پوڑیاں چڑھن ویلے ودھ جاندا اے۔",
+        "script": "arabic",
+        "batch": "میرے گوڈے وچ بڑا درد ہے پوڑیاں چڑھن ویلے ودھ جاندا ہے",
+        "live": "ਮੇਰੇ ਗੋਡੇ ਵਿੱਚ ਬੜਾ ਦਰਦ ਹੈ, ਪੌੜੀਆਂ ਚੜ੍ਹਨ ਵੇਲੇ ਵੱਧ ਜਾਂਦਾ ਹੈ।",
+        "batch_script": "arabic",
+        "live_script": "gurmukhi",
+        "batch_cer": 4.8,
+        "live_cer": 100,
+        "batch_wer": 16.7,
+        "live_wer": 175
+      },
+      {
+        "id": "a08",
+        "lang": "ur",
+        "ref": "سینے میں درد ہے اور سانس پھول رہی ہے، کیا میں آج آ سکتا ہوں؟",
+        "script": "arabic",
+        "batch": "سينے میں درد ہے اور سانس پھول رہی ہے کیا میں آج آ سکتا ہوں؟",
+        "live": "सीने में दर्द है और सांस फूल रही है। क्या मैं आज आ सकता हूं?",
+        "batch_script": "arabic",
+        "live_script": "devanagari",
+        "batch_cer": 0,
+        "live_cer": 100,
+        "batch_wer": 0,
+        "live_wer": 133.3
+      }
+    ]
+  }
+}

@@ -43,8 +43,8 @@ const asJson = s => JSON.parse(s.replace(/^```(json)?|```$/g, '').trim());
 const pct = (a, b) => b ? Math.round(1000 * a / b) / 10 : null;
 
 /* ── 1. emergency detection ── */
-async function triage() {
-  const cases = load('triage.jsonl'), rows = [];
+async function triage(file = 'triage.jsonl') {
+  const cases = load(file), rows = [];
   for (const c of cases) {
     const rule = screen(c.text).level;
     let model = 'error';
@@ -102,6 +102,9 @@ function edit(a, b) {
   for (let i = 1; i <= a.length; i++) { let prev = d[0]; d[0] = i; for (let j = 1; j <= b.length; j++) { const t = d[j]; d[j] = Math.min(d[j] + 1, d[j - 1] + 1, prev + (a[i - 1] === b[j - 1] ? 0 : 1)); prev = t; } }
   return d[b.length];
 }
+/* which writing system a transcript came out in — Urdu speech written in Hindi (Devanagari) is a failure even if every word is right */
+const SCRIPTS = { arabic: /[؀-ۿ]/g, devanagari: /[ऀ-ॿ]/g, gurmukhi: /[਀-੿]/g, latin: /[A-Za-z]/g };
+const scriptOf = s => Object.entries(SCRIPTS).map(([k, re]) => [k, (s.match(re) || []).length]).sort((a, b) => b[1] - a[1])[0][0];
 const cer = (ref, hyp) => { const r = [...norm(ref).replace(/ /g, '')], h = [...norm(hyp).replace(/ /g, '')]; return r.length ? Math.round(1000 * edit(r, h) / r.length) / 10 : null; };
 const wer = (ref, hyp) => { const r = norm(ref).split(' '), h = norm(hyp).split(' ').filter(Boolean); return Math.round(1000 * edit(r, h) / r.length) / 10; };
 
@@ -157,12 +160,19 @@ async function asr() {
     const batch = textOf(await gen({ contents: [{ role: 'user', parts: [{ inlineData: { mimeType: 'audio/wav', data: file.toString('base64') } },
       { text: 'Transcribe this audio exactly, in the script the speaker would write it (Urdu and Punjabi in Urdu/Shahmukhi script, Roman/English words as spoken). Output only the transcript.' }] }], generationConfig: { temperature: 0 } }));
     const live = await liveTranscribe(to16k(file));
-    out.push({ id: c.id, lang: c.lang, ref: c.text, batch, live, batch_cer: cer(c.text, batch), live_cer: cer(c.text, live), batch_wer: wer(c.text, batch), live_wer: wer(c.text, live) });
+    const want = scriptOf(c.text);
+    out.push({ id: c.id, lang: c.lang, ref: c.text, script: want, batch, live, batch_script: scriptOf(batch), live_script: scriptOf(live),
+      batch_cer: cer(c.text, batch), live_cer: cer(c.text, live), batch_wer: wer(c.text, batch), live_wer: wer(c.text, live) });
     process.stdout.write('.');
   }
   const mean = k => { const v = out.map(r => r[k]).filter(x => x !== null); return Math.round(10 * v.reduce((a, b) => a + b, 0) / v.length) / 10; };
-  return { n: out.length, audio: 'synthetic (Gemini TTS) — replace with consented real recordings', batch_model: TEXT, live_model: LIVE_ASR,
-    mean: { batch_cer: mean('batch_cer'), live_cer: mean('live_cer'), batch_wer: mean('batch_wer'), live_wer: mean('live_wer') }, rows: out };
+  /* error rates only where the script is right, so "wrong script" and "wrong words" are reported separately */
+  const meanOk = (k, s) => { const v = out.filter(r => r[s] === r.script).map(r => r[k]); return v.length ? Math.round(10 * v.reduce((a, b) => a + b, 0) / v.length) / 10 : null; };
+  const nastaliq = out.filter(r => r.script === 'arabic');
+  return { n: out.length, audio: 'synthetic (Gemini TTS) — replace with consented real recordings', batch_model: Object.keys(used).filter(m => !/tts/.test(m)).join(' / ') || TEXT, live_model: LIVE_ASR,
+    wrong_script: { urdu_punjabi_clips: nastaliq.length, batch: nastaliq.filter(r => r.batch_script !== 'arabic').length, live: nastaliq.filter(r => r.live_script !== 'arabic').length },
+    mean: { batch_cer: mean('batch_cer'), live_cer: mean('live_cer'), batch_wer: mean('batch_wer'), live_wer: mean('live_wer'),
+      batch_cer_right_script: meanOk('batch_cer', 'batch_script'), live_cer_right_script: meanOk('live_cer', 'live_script') }, rows: out };
 }
 
 const results = { date: new Date().toISOString(), models: { text: TEXT, tts: TTS, live_asr: LIVE_ASR } };
@@ -173,6 +183,12 @@ for (const t of tasks) {
 }
 const day = results.date.slice(0, 10);
 results.calls_per_model = used;
+/* tasks run separately on the same day end up in one report */
+if (existsSync(`${DIR}results/${day}.json`)) {
+  const old = JSON.parse(readFileSync(`${DIR}results/${day}.json`, 'utf8'));
+  for (const k of ['triage', 'triage_holdout', 'reports', 'asr']) if (!results[k] && old[k]) results[k] = old[k];
+  for (const [m, n] of Object.entries(old.calls_per_model || {})) used[m] = (used[m] || 0) + n;
+}
 writeFileSync(`${DIR}results/${day}.json`, JSON.stringify(results, null, 2));
 
 const md = [`# Danisa benchmark — ${day}`, '', `Models: text \`${TEXT}\` (calls actually answered: ${Object.entries(used).map(([m, n]) => m + ' ' + n).join(', ')}), live transcription \`${LIVE_ASR}\`, TTS \`${TTS}\`.`, ''];
@@ -189,8 +205,11 @@ if (results.reports) {
 }
 if (results.asr) {
   const A = results.asr;
-  md.push(`## Transcription (${A.n} clips, ${A.audio})`, '', '| | CER % | WER % |', '|---|---|---|', `| Batch (\`${A.batch_model}\`) | ${A.mean.batch_cer} | ${A.mean.batch_wer} |`, `| Live (\`${A.live_model}\`, used for call notes) | ${A.mean.live_cer} | ${A.mean.live_wer} |`, '',
-    '| Clip | Language | Batch CER | Live CER |', '|---|---|---|---|', ...A.rows.map(x => `| ${x.id} | ${x.lang} | ${x.batch_cer} | ${x.live_cer} |`), '');
+  md.push(`## Transcription (${A.n} clips, ${A.audio})`, '',
+    `**Wrong script:** of ${A.wrong_script.urdu_punjabi_clips} clips spoken in Urdu or Punjabi, the batch model wrote ${A.wrong_script.batch} and the live model wrote ${A.wrong_script.live} in Devanagari (Hindi) or Gurmukhi script instead of Urdu/Shahmukhi.`, '',
+    '| | CER % (all) | CER % (right script only) | WER % |', '|---|---|---|---|',
+    `| Batch (\`${A.batch_model}\`) | ${A.mean.batch_cer} | ${A.mean.batch_cer_right_script ?? '—'} | ${A.mean.batch_wer} |`, `| Live (\`${A.live_model}\`, used for call notes) | ${A.mean.live_cer} | ${A.mean.live_cer_right_script ?? '—'} | ${A.mean.live_wer} |`, '',
+    '| Clip | Language | Batch script | Batch CER | Live script | Live CER |', '|---|---|---|---|---|---|', ...A.rows.map(x => `| ${x.id} | ${x.lang} | ${x.batch_script} | ${x.batch_cer} | ${x.live_script} | ${x.live_cer} |`), '');
 }
 writeFileSync(`${DIR}results/${day}.md`, md.join('\n'));
 console.log('\n\n' + md.join('\n'));
