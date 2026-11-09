@@ -1,0 +1,60 @@
+{"id":"t01","lang":"en","text":"I have had lower back pain for three weeks, it gets worse when I sit for long.","level":"routine"}
+{"id":"t02","lang":"en","text":"My knee hurts when I climb stairs, I play football on weekends.","level":"routine"}
+{"id":"t03","lang":"en","text":"Since this morning my father's face is drooping on one side and his speech is slurred.","level":"emergency"}
+{"id":"t04","lang":"en","text":"Back pain since yesterday and I can't control my bladder anymore.","level":"emergency"}
+{"id":"t05","lang":"en","text":"I had knee replacement two weeks ago and now my calf is swollen, red and hot.","level":"emergency"}
+{"id":"t06","lang":"en","text":"Chest feels tight and I am short of breath when I walk.","level":"emergency"}
+{"id":"t07","lang":"en","text":"Neck stiffness after sleeping wrong, no other problems.","level":"routine"}
+{"id":"t08","lang":"en","text":"I have a fever and my lower back is very painful.","level":"urgent"}
+{"id":"t09","lang":"en","text":"Pain wakes me up at night and I've lost 6 kg without trying.","level":"urgent"}
+{"id":"t10","lang":"en","text":"I want to book physio for my frozen shoulder.","level":"routine"}
+{"id":"t11","lang":"en","text":"My mother fell in the bathroom and now she can't stand up, her hip hurts badly.","level":"emergency"}
+{"id":"t12","lang":"en","text":"Tennis elbow, it's been two months.","level":"routine"}
+{"id":"t13","lang":"en","text":"Both my legs are getting numb and weaker every day.","level":"urgent"}
+{"id":"t14","lang":"en","text":"My knee is hot, red and swollen since yesterday, no injury.","level":"urgent"}
+{"id":"t15","lang":"en","text":"I feel like I want to end my life, the pain never stops.","level":"emergency"}
+{"id":"t16","lang":"ur-roman","text":"Mujhe kamar mein dard hai do hafte se, baithne se barhta hai.","level":"routine"}
+{"id":"t17","lang":"ur-roman","text":"Abbu ka munh tedha ho gaya hai aur zuban larkhara rahi hai.","level":"emergency"}
+{"id":"t18","lang":"ur-roman","text":"Kamar dard ke saath peshab pe control nahi raha.","level":"emergency"}
+{"id":"t19","lang":"ur-roman","text":"Seene mein dard hai aur saans phool rahi hai.","level":"emergency"}
+{"id":"t20","lang":"ur-roman","text":"Ghutne mein dard hai seerhiyan charhne se.","level":"routine"}
+{"id":"t21","lang":"ur-roman","text":"Operation ke baad pindli mein soojan aur surkhi hai.","level":"emergency"}
+{"id":"t22","lang":"ur-roman","text":"Bukhar hai aur kamar mein bohat dard hai.","level":"urgent"}
+{"id":"t23","lang":"ur-roman","text":"Gardan akar gayi hai aur tez bukhar hai.","level":"urgent"}
+{"id":"t24","lang":"ur-roman","text":"Kandhe mein dard hai, haath upar nahi jata.","level":"routine"}
+{"id":"t25","lang":"ur-roman","text":"Ammi gir gayin hain aur unki haddi toot gayi lagti hai.","level":"emergency"}
+{"id":"t26","lang":"ur-roman","text":"Stroke ke baad physio chahiye, 3 mahine ho gaye.","level":"routine"}
+{"id":"t27","lang":"ur-roman","text":"Achanak se ek taraf ka haath aur taang kamzor ho gaye hain.","level":"emergency"}
+{"id":"t28","lang":"ur-roman","text":"Edi mein dard hai subah uthte hi.","level":"routine"}
+{"id":"t29","lang":"ur-roman","text":"Raat ko dard se uth jata hoon aur wazan kam ho raha hai.","level":"urgent"}
+{"id":"t30","lang":"ur-roman","text":"Bachay ke paon mein moch aa gayi hai khelte hue.","level":"routine"}
+{"id":"t31","lang":"ur","text":"مجھے دو ہفتوں سے کمر میں درد ہے۔","level":"routine"}
+{"id":"t32","lang":"ur","text":"میرے والد کا منہ ٹیڑھا ہو گیا ہے اور زبان لڑکھڑا رہی ہے۔","level":"emergency"}
+{"id":"t33","lang":"ur","text":"سینے میں درد ہے اور سانس نہیں آ رہی۔","level":"emergency"}
+{"id":"t34","lang":"ur","text":"کمر درد کے ساتھ پیشاب پر قابو نہیں رہا۔","level":"emergency"}
+{"id":"t35","lang":"ur","text":"گھٹنے میں درد ہے، سیڑھیاں چڑھنا مشکل ہے۔","level":"routine"}
+{"id":"t36","lang":"ur","text":"آپریشن کے بعد پنڈلی سوج گئی ہے اور گرم ہے۔","level":"emergency"}
+{"id":"t37","lang":"ur","text":"بخار ہے اور کمر میں شدید درد ہے۔","level":"urgent"}
+{"id":"t38","lang":"ur","text":"کندھے کی جکڑن کے لیے فزیو تھراپی چاہیے۔","level":"routine"}
+{"id":"t39","lang":"ur","text":"امی گر گئیں ہیں اور سر پر چوٹ لگی ہے، الٹیاں آ رہی ہیں۔","level":"emergency"}
+{"id":"t40","lang":"ur","text":"گردن اکڑ گئی ہے اور تیز بخار ہے۔","level":"urgent"}
+{"id":"t41","lang":"ur","text":"فالج کے بعد ورزش کے لیے اپائنٹمنٹ چاہیے، چھ مہینے ہو گئے ہیں۔","level":"routine"}
+{"id":"t42","lang":"ur","text":"دادا جان بے ہوش ہو گئے ہیں۔","level":"emergency"}
+{"id":"t43","lang":"pa","text":"میرے گوڈے وچ درد اے، ٹرن نال ودھ جاندا اے۔","level":"routine"}
+{"id":"t44","lang":"pa","text":"چھاتی وچ درد اے تے ساہ نئیں آ رہیا۔","level":"emergency"}
+{"id":"t45","lang":"pa-roman","text":"Mere lak wich dard ae, do hafte ton.","level":"routine"}
+{"id":"t46","lang":"pa-roman","text":"Abba ji da munh tera ho gaya te bolde nahi pa rahe.","level":"emergency"}
+{"id":"t47","lang":"mix","text":"Mujhe lower back pain hai aur legs mein numbness bhi hai, dono legs mein.","level":"urgent"}
+{"id":"t48","lang":"mix","text":"Gym mein shoulder injure ho gaya, overhead press karte hue.","level":"routine"}
+{"id":"t49","lang":"mix","text":"Surgery ke baad mera calf bohat swollen aur painful hai.","level":"emergency"}
+{"id":"t50","lang":"mix","text":"Neck pain hai laptop use karne se, koi aur issue nahi.","level":"routine"}
+{"id":"t51","lang":"mix","text":"Accident hua tha bike se, ab walk nahi kar pa raha, leg bent lag rahi hai.","level":"emergency"}
+{"id":"t52","lang":"mix","text":"Mujhe chest mein tightness feel ho rahi hai jab se exercise shuru ki.","level":"emergency"}
+{"id":"t53","lang":"en","text":"My grandmother is confused and suddenly can't lift her right arm.","level":"emergency"}
+{"id":"t54","lang":"ur-roman","text":"Peeth mein dard hai aur saddle area sun ho gaya hai.","level":"emergency"}
+{"id":"t55","lang":"ur-roman","text":"Mera dil karta hai khudkushi kar loon.","level":"emergency"}
+{"id":"t56","lang":"ur-roman","text":"Khoon ruk nahi raha chot se.","level":"emergency"}
+{"id":"t57","lang":"en","text":"Plantar fasciitis, my heel hurts in the morning.","level":"routine"}
+{"id":"t58","lang":"en","text":"Can I get an appointment for my son's ankle sprain from cricket?","level":"routine"}
+{"id":"t59","lang":"ur-roman","text":"Haath mein jhunjhunahat hai raat ko, computer kaam se.","level":"routine"}
+{"id":"t60","lang":"en","text":"I don't have chest pain, just a sore shoulder from painting the house.","level":"routine"}

@@ -93,6 +93,11 @@
       const cols=[['chat','Chats'],['live','Voice'],['handoff','Asked'],['answered','Talked'],['missed','Missed'],['blocked','Blocked']];
       $('stats').innerHTML='<tr><th>Day</th>'+cols.map(c=>'<th>'+c[1]+'</th>').join('')+'</tr>'+
         (days.length?days.map(k=>'<tr><td>'+k.slice(5)+'</td>'+cols.map(c=>'<td>'+n(d.stats[k],c[0])+'</td>').join('')+'</tr>').join(''):'<tr><td colspan="7" style="text-align:left">Nothing yet.</td></tr>');
+      /* the traction numbers: of everyone who asked for you, how many talked, how fast, and what came of it */
+      const all=Object.values(d.stats||{}),sum=k=>all.reduce((t,x)=>t+n(x,k),0),pc=(x,y)=>y?Math.round(100*x/y)+'%':'—';
+      const wait=sum('connectSecN')?Math.round(sum('connectSec')/sum('connectSecN'))+' s':'—';
+      $('funnel').innerHTML='<b>Last 30 days</b> · '+sum('handoff')+' asked for you → '+sum('answered')+' talked ('+pc(sum('answered'),sum('handoff'))+') · avg wait '+wait+
+        ' · reports 👍 '+(sum('rate_up')-sum('unrate_up'))+' 👎 '+(sum('rate_down')-sum('unrate_down'))+' · <b>'+sum('demo')+' demos / deals</b> ('+pc(sum('demo'),sum('handoff'))+' of requests)';
       const h=d.health;
       $('health').textContent=!h?'Health check: runs daily at 8 am.':h.ok?'✓ Danisa is healthy · checked '+new Date(h.checkedAt).toLocaleString():'⚠ '+h.problems.join(' · ');
       $('health').classList.toggle('bad',!!h&&!h.ok);

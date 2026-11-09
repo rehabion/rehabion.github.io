@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home Exercises · Danisa</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#F5EFE4">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="../icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://challenges.cloudflare.com https://*.workers.dev wss://generativelanguage.googleapis.com; worker-src 'self'; manifest-src 'self'; media-src 'self' blob:; img-src 'self' data:;">
+<link rel="icon" href="../icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Instrument+Sans:wght@400;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../clinic.css?v=20261110">
+<style>
+.week{display:flex;gap:6px;margin:6px 0}.week span{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;font-size:12px;color:var(--muted)}
+.week span.on{background:var(--forest);border-color:var(--forest);color:#fff}
+.ex{padding:12px 0;border-top:1px dashed var(--line)}.ex b{font-size:17px}
+.goal{font-family:'Fraunces',serif;font-size:26px;color:var(--terra)}
+</style>
+</head>
+<body data-v="idle">
+<div class="wrap">
+  <div class="top"><span class="brand">rehab<em>ion</em><small>home exercises</small></span><span class="muted" id="clinic"></span></div>
+  <section id="bad" class="card hidden"><h2>This link isn’t working</h2><p class="lead" id="badMsg">Please ask your clinic for a new link.</p></section>
+  <main id="app" class="hidden">
+    <p class="hand" id="hello">Assalam o Alaikum</p>
+    <h1 id="title">Today’s exercises</h1>
+    <div class="week" id="week" aria-label="days done this week"></div>
+    <p class="muted" id="weekText"></p>
+
+    <section class="card">
+      <div class="orb" id="orb" role="button" tabindex="0" aria-label="Start with Danisa">Start with<br>Danisa</div>
+      <p class="status" id="status">Danisa will check how you feel, then count the exercises with you.</p>
+      <div class="row hidden" id="callBtns" style="justify-content:center;margin-top:8px"><button id="mute">Mute</button><button class="stop" id="end">End</button></div>
+      <div class="log" id="log" aria-live="polite"></div>
+      <div class="ok hidden" id="saved" style="margin-top:12px">✓ Today’s session is saved — your physiotherapist can see it.</div>
+    </section>
+
+    <section class="card"><h2>Your plan</h2><div id="plan"></div></section>
+
+    <section class="soft" id="remind">
+      <h3>Daily reminder</h3>
+      <div class="row"><select id="hour" style="flex:1;min-width:140px"></select><button id="remindBtn">Remind me</button></div>
+      <p class="muted" id="remindMsg" style="margin-top:6px"></p>
+    </section>
+    <p class="foot">Danisa is an AI exercise coach following your physiotherapist’s plan — not a doctor. If you have severe pain, new numbness or weakness, chest pain or trouble breathing, stop and call your clinic, or <a href="tel:1122">1122</a> in an emergency. <a href="../privacy.html">Privacy</a></p>
+  </main>
+</div>
+<script src="../live-client.js?v=20261110"></script>
+<script src="../voice-session.js?v=20261110"></script>
+<script src="coach.js?v=20261110"></script>
+</body>
+</html>

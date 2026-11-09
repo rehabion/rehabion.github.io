@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clinic Receptionist · Danisa</title>
+<meta name="description" content="Book a physiotherapy appointment by talking to Danisa, in Urdu, English, Punjabi or any language.">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#F5EFE4">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://challenges.cloudflare.com https://*.workers.dev wss://generativelanguage.googleapis.com; media-src 'self' blob:; img-src 'self' data:;">
+<link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Instrument+Sans:wght@400;600;700&family=Caveat:wght@600&family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="clinic.css?v=20261110">
+<style>
+.ur{font-family:'Noto Nastaliq Urdu',serif;direction:rtl;font-size:.95em;line-height:2}
+.head p{margin-top:6px}
+.booked{border-color:var(--forest);box-shadow:5px 6px 0 var(--forest)}
+.booked .code{font-family:'Fraunces',serif;font-size:30px;letter-spacing:.12em;color:var(--forest)}
+.callrow{justify-content:center;margin-top:8px}
+</style>
+</head>
+<body data-v="idle">
+<div class="wrap">
+  <div class="top"><a class="brand" href="index.html">rehab<em>ion</em><small>for clinics</small></a><span class="muted" id="hours"></span></div>
+
+  <div class="warn hidden" id="demo" style="background:var(--sun);border-color:#DDA032;color:var(--ink)">This is a demo clinic — bookings here are not real appointments.</div>
+
+  <header class="head">
+    <p class="hand">Assalam o Alaikum — main Danisa hoon</p>
+    <h1 id="name">Loading…</h1>
+    <p class="lead" id="where"></p>
+  </header>
+
+  <div class="warn hidden" id="emergency" role="alert">
+    <span id="emText">This could be an emergency. Please call 1122 now or go to the nearest emergency department.</span>
+    <p class="ur">یہ ایمرجنسی ہو سکتی ہے۔ ابھی 1122 پر کال کریں یا قریبی ایمرجنسی میں جائیں۔</p>
+    <a href="tel:1122">📞 Call 1122</a>
+  </div>
+
+  <section class="card booked hidden" id="booked" aria-live="polite">
+    <p class="hand">✓ You're booked</p>
+    <h2 id="bkWhen"></h2>
+    <p id="bkWith"></p>
+    <p class="muted" style="margin-top:8px">Booking code</p>
+    <p class="code" id="bkCode"></p>
+    <p class="muted" id="bkWhere"></p>
+    <p class="muted" style="margin-top:8px">Please bring any reports, X-rays or MRI. To cancel or change, talk to Danisa again with your code.</p>
+  </section>
+
+  <section class="card">
+    <div class="orb" id="orb" role="button" tabindex="0" aria-label="Talk to Danisa">Talk to<br>Danisa</div>
+    <p class="status" id="status">Tap to talk — Urdu, English, Punjabi, any language. <span class="ur">بات کرنے کے لیے دبائیں</span></p>
+    <div class="row callrow hidden" id="callBtns"><button id="mute">Mute</button><button class="stop" id="end">End call</button></div>
+    <div class="log" id="log" aria-live="polite"></div>
+    <form class="send" id="form" autocomplete="off">
+      <input id="text" maxlength="600" placeholder="Or type here… / یہاں لکھیں" aria-label="Message">
+      <button class="go" id="sendBtn">Send</button>
+    </form>
+  </section>
+
+  <section class="soft" id="about">
+    <h3>Services</h3><div id="services"></div>
+    <h3>Physiotherapists</h3><div id="therapists"></div>
+    <p class="muted" id="fees" style="margin-top:8px"></p>
+  </section>
+
+  <p class="foot">Danisa is an AI receptionist: she books appointments and answers questions about the clinic. She doesn't give medical advice. Emergencies: <a href="tel:1122">1122</a>.<br>
+  Your name, number and the reason for your visit go to the clinic to arrange your appointment. <a href="privacy.html">Privacy</a></p>
+</div>
+<script src="live-client.js?v=20261110"></script>
+<script src="voice-session.js?v=20261110"></script>
+<script src="clinic.js?v=20261110"></script>
+</body>
+</html>

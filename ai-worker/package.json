@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "wrangler dev --port 8788",
     "deploy": "wrangler deploy",
-    "test": "node --test ../tests/static.test.mjs ../tests/worker.test.mjs"
+    "test": "node --test ../tests/static.test.mjs ../tests/worker.test.mjs ../tests/clinic.test.mjs",
+    "bench": "node ../bench/run.mjs"
   },
   "devDependencies": {
     "wrangler": "4.158.0"

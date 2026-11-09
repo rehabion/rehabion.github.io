@@ -5,10 +5,11 @@
 (function(){
   const WS='wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1alpha.GenerativeService.BidiGenerateContentConstrained?access_token=';
   const loaded=new WeakSet();
+  const WORKLET=new URL('mic-worklet.js',document.currentScript&&document.currentScript.src||location.href).href;   /* works from sub-folders too (coach/) */
   const b64=buf=>{let s='';const u=new Uint8Array(buf);for(let i=0;i<u.length;i+=0x8000)s+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000));return btoa(s);};
 
   async function micPipe(ctx,stream,onPCM){
-    if(!loaded.has(ctx)){await ctx.audioWorklet.addModule('mic-worklet.js');loaded.add(ctx);}
+    if(!loaded.has(ctx)){await ctx.audioWorklet.addModule(WORKLET);loaded.add(ctx);}
     const src=ctx.createMediaStreamSource(stream),node=new AudioWorkletNode(ctx,'mic-pcm');
     node.port.onmessage=e=>onPCM(e.data.pcm,e.data.level);
     src.connect(node);

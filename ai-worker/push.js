@@ -8,6 +8,7 @@
    Vars:    VAPID_PUBLIC (base64url, 65-byte P-256 public key), VAPID_SUBJECT
    Optional secret: TELEGRAM_BOT_TOKEN (the chat is linked via /push/telegram-link) */
 import { DurableObject } from 'cloudflare:workers';
+import { hmac } from './guard.js';
 
 const b64url = buf => btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 const enc = s => new TextEncoder().encode(s);
@@ -39,6 +40,15 @@ export async function pushAll(env) {
   return any;
 }
 
+/* one phone (a patient's exercise reminder) — returns the push service's HTTP status */
+export async function pushOne(env, endpoint) {
+  if (!env.VAPID_PRIVATE_JWK || !env.VAPID_PUBLIC) return 0;
+  try {
+    const r = await fetch(endpoint, { method: 'POST', headers: { Authorization: await vapidHeader(env, endpoint), TTL: '3600', Urgency: 'normal', 'Content-Length': '0' } });
+    return r.status;
+  } catch (e) { return 0; }
+}
+
 export async function telegram(env, text, link) {
   if (!env.TELEGRAM_BOT_TOKEN) return false;
   const chat = env.TELEGRAM_CHAT_ID || await env.INBOX.get(env.INBOX.idFromName('founder')).telegramChat();
@@ -51,15 +61,30 @@ export async function telegram(env, text, link) {
   return r.ok;
 }
 
-export async function telegramText(env, text) {
+/* buttons: optional rows of { text, url }; chat: send somewhere other than the founder (a clinic) */
+export async function telegramText(env, text, buttons, chat) {
   if (!env.TELEGRAM_BOT_TOKEN) return false;
-  const chat = env.TELEGRAM_CHAT_ID || await env.INBOX.get(env.INBOX.idFromName('founder')).telegramChat();
+  chat = chat || env.TELEGRAM_CHAT_ID || await env.INBOX.get(env.INBOX.idFromName('founder')).telegramChat();
   if (!chat) return false;
   const r = await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`, {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: chat, text, disable_web_page_preview: true })
+    body: JSON.stringify({ chat_id: chat, text, disable_web_page_preview: true, ...(buttons ? { reply_markup: { inline_keyboard: buttons } } : {}) })
   });
   return r.ok;
+}
+
+/* 👍 / 👎 / "became a demo" under each call report — signed links back to this worker */
+const WORKER = env => env.WORKER_URL || 'https://rehabion-ai.rehabion.workers.dev';
+export async function rateLinks(env, id) {
+  const url = async v => `${WORKER(env)}/rate?r=${id}&v=${v}&s=${await hmac(env, 'rate', id + v)}`;
+  return [[{ text: '👍 Useful', url: await url('up') }, { text: '👎 Not useful', url: await url('down') }], [{ text: '🗓 Became a demo / deal', url: await url('demo') }]];
+}
+export async function handleRate(request, env) {
+  const u = new URL(request.url), id = u.searchParams.get('r') || '', v = u.searchParams.get('v') || '';
+  const page = (msg, status = 200) => new Response(`<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>REHABION</title><body style="font:18px system-ui;background:#F5EFE4;color:#1E1B18;display:grid;place-items:center;min-height:90vh;text-align:center"><p>${msg}</p>`, { status, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+  if (!/^[0-9a-f]{24}$/.test(id) || !['up', 'down', 'demo'].includes(v) || u.searchParams.get('s') !== await hmac(env, 'rate', id + v)) return page('This link is not valid.', 400);
+  await env.INBOX.get(env.INBOX.idFromName('founder')).rate(id, v);
+  return page(v === 'demo' ? '🗓 Counted as a demo / deal. Nice work!' : v === 'up' ? '👍 Thanks — noted that the report was useful.' : '👎 Thanks — noted. Danisa will learn from it.');
 }
 
 /* Routes: GET /push/vapid · POST /push/subscribe · POST /push/telegram-link · POST /push/stats
@@ -162,6 +187,28 @@ export class Inbox extends DurableObject {
     const keep = Object.keys(all).sort().slice(-35);
     await this.ctx.storage.put('stats', Object.fromEntries(keep.map(k => [k, all[k]])));
   }
+  /* sums (seconds to connect, etc.) — shown as averages next to the counts */
+  async addSums(values) {
+    const day = new Date().toISOString().slice(0, 10);
+    const all = (await this.ctx.storage.get('stats')) || {};
+    const d = all[day] || (all[day] = {});
+    for (const [k, v] of Object.entries(values)) { d[k] = (d[k] || 0) + (Number(v) || 0); d[k + 'N'] = (d[k + 'N'] || 0) + 1; }
+    await this.ctx.storage.put('stats', all);
+  }
+  /* one rating per report (changing your mind moves the count); a demo is counted once */
+  async rate(id, v) {
+    const r = (await this.ctx.storage.get('ratings')) || {};
+    const was = r[id] || {}, events = [];
+    if (v === 'demo') { if (!was.demo) events.push('demo'); was.demo = true; }
+    else if (was.vote !== v) { events.push('rate_' + v); if (was.vote) events.push('unrate_' + was.vote); was.vote = v; }
+    r[id] = { ...was, at: Date.now() };
+    const keep = Object.entries(r).sort((a, b) => b[1].at - a[1].at).slice(0, 300);
+    await this.ctx.storage.put('ratings', Object.fromEntries(keep));
+    if (events.length) await this.count(events);
+  }
+  /* clinics the cron should visit */
+  async clinics() { return (await this.ctx.storage.get('clinics')) || []; }
+  async addClinic(slug) { const l = await this.clinics(); if (!l.includes(slug)) { l.push(slug); await this.ctx.storage.put('clinics', l); } }
   async stats(days) {
     const all = (await this.ctx.storage.get('stats')) || {};
     return Object.fromEntries(Object.keys(all).sort().slice(-days).map(k => [k, all[k]]));

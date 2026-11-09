@@ -22,7 +22,7 @@ jobs:
           npx wrangler dev --port 8788 --ip 127.0.0.1 > ../wrangler.log 2>&1 &
           for i in $(seq 1 60); do curl -sf http://127.0.0.1:8788/health > /dev/null && exit 0; sleep 1; done
           cat ../wrangler.log; exit 1
-      - run: node --test tests/static.test.mjs tests/worker.test.mjs
+      - run: node --test tests/static.test.mjs tests/worker.test.mjs tests/clinic.test.mjs
         env:
           BASE: http://127.0.0.1:8788
       - if: failure()

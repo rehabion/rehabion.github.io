@@ -8,7 +8,9 @@
      /pass    Turnstile → pass    → { pass, expires }       (normal limits instead of tight ones)
      GET /health                  → { ok, models, checkedAt }
      /handoff*  talk to the founder (handoff.js)   /push*  founder alerts (push.js)
-   Cron (daily): model health check + usage summary to Telegram (health.js).
+     /clinic*  /coach*  Danisa for clinics: receptionist, SOAP scribe, home-exercise coach (clinic.js)
+     GET /rate  👍/👎/demo buttons under call reports (push.js)
+   Cron: daily model health check + usage summary to Telegram (health.js); hourly exercise reminders.
 
    Secrets / vars (Cloudflare → Worker → Settings → Variables):
      GEMINI_API_KEY   (secret, required)
@@ -21,11 +23,12 @@
 */
 
 import { handleHandoff, HandoffRoom, RateLimit } from './handoff.js';
-import { handlePush, Inbox } from './push.js';
+import { handlePush, handleRate, Inbox } from './push.js';
+import { handleClinic, handleCoach, clinicCron, Clinic } from './clinic.js';
 import { issuePass, limit, count } from './guard.js';
 import { models, chain, healthCheck, dailySummary } from './health.js';
 import { voiceToken } from './handoff.js';
-export { HandoffRoom, RateLimit, Inbox };
+export { HandoffRoom, RateLimit, Inbox, Clinic };
 
 const DEFAULT_ORIGINS = ['https://rehabion.github.io', 'http://localhost:8080', 'http://127.0.0.1:8080', 'http://127.0.0.1:8081'];
 const API = 'https://generativelanguage.googleapis.com';
@@ -43,7 +46,7 @@ REHABION — Pakistan's first rehabilitation technology company, based in Islama
 Team: Muhammad Ramzan (Founder · Lead Engineer, biomedical engineer & developer, building the game-based rehab platform and RehabLLM).
 Dr. Faisal Amin (Technical Supervisor · Chief Science Officer; rehabilitation engineering, neurorehabilitation, signal processing, clinical research).
 Solutions: Game-Based Rehab Systems (live; stroke, ortho, neuro, paediatric games mapped to clinical exercises with real-time motion tracking);
-Physiotherapy assistant tools (in development; RehabLLM clinical assistant, automated SOAP notes, exercise prescription, Urdu/English patient chat);
+Danisa for clinics (pilot; an AI receptionist that books physiotherapy appointments in Urdu/English/Punjabi and screens for red flags, SOAP notes drafted from a recorded session for the therapist to review, and a voice home-exercise coach that uses each patient's RBN-001 range-of-motion results; demo at https://rehabion.github.io/clinic.html?c=demo; clinics can ask the founder to join the pilot); RehabLLM clinical assistant (in development);
 BioSense Wearables (prototype; EMG, IMU sensors at Pakistan-accessible cost); TherapistOS Dashboard (live; ROM tracking, analytics, recovery prediction, session notes);
 Hospital Integration (live; EHR/PIMS integration, DRAP compliance pathway); Research Collaboration (IRB-approved studies, co-authorship).
 Projects: RBN-001 Upper-limb stroke game (Unity, motion capture; shoulder abduction & elbow extension; live). RBN-002 Phone-camera gait analyser (post-surgical knee; step symmetry, cadence, posture; live). RBN-003+ in pipeline.
@@ -84,7 +87,7 @@ function cors(origin, env) {
   return {
     'Access-Control-Allow-Origin': allowed.includes(origin) ? origin : allowed[0],
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, X-Danisa-Pass',
+    'Access-Control-Allow-Headers': 'Content-Type, X-Danisa-Pass, X-Clinic-Token, X-Patient-Key',
     'Access-Control-Max-Age': '86400',
     'Vary': 'Origin'
   };
@@ -113,8 +116,9 @@ async function chat(body, env, headers, ctx) {
           contents: messages,
           ...(search ? { tools: [{ google_search: {} }] } : {}),
           generationConfig: { temperature: 0.7, maxOutputTokens: body.voice ? 2048 : 4096 }
-        })
-      });
+        }),
+        signal: AbortSignal.timeout(30000)          // a stuck model shouldn't hold the visitor up — try the next
+      }).catch(() => new Response('timeout', { status: 503 }));
       if (res.ok) break outer;
       detail = await res.text();
       if (res.status !== 429 && res.status !== 404 && res.status !== 503) break outer;
@@ -186,6 +190,9 @@ export default {
     }
     if (route.startsWith('/handoff')) return handleHandoff(request, env, headers, route, ctx);
     if (route.startsWith('/push')) return handlePush(request, env, headers, route);
+    if (route.startsWith('/clinic')) return handleClinic(request, env, headers, route, ctx);
+    if (route.startsWith('/coach')) return handleCoach(request, env, headers, route, ctx);
+    if (route === '/rate') return handleRate(request, env);
     if (request.method !== 'POST') return json({ error: 'POST only' }, 405, headers);
     if (route === '/pass') {
       let b = {}; try { b = await request.json(); } catch {}
@@ -205,8 +212,9 @@ export default {
     return chat(body, env, headers, ctx);
   },
 
-  /* daily at 03:00 UTC (8 am in Pakistan) */
+  /* daily at 03:00 UTC (8 am in Pakistan) + every hour for exercise reminders */
   async scheduled(event, env, ctx) {
-    ctx.waitUntil((async () => { await healthCheck(env); await dailySummary(env); })());
+    if (event.cron === '0 3 * * *') ctx.waitUntil((async () => { await healthCheck(env); await dailySummary(env); })());
+    else ctx.waitUntil(clinicCron(env));
   }
 };

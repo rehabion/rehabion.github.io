@@ -5,10 +5,11 @@
    changed or broke. Every route asks models(env) instead of hard-coding names.
    A daily one-line usage summary goes to Telegram too (only if anything happened). */
 import { telegramText } from './push.js';
+import { clinicSummary } from './clinic.js';
 
 const API = 'https://generativelanguage.googleapis.com';
 const PREFER = {
-  text: ['gemini-3-flash-preview', 'gemini-3.8-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite', 'gemini-flash-latest'],
+  text: ['gemini-3-flash-preview', 'gemini-3.8-flash', 'gemini-3.7-flash', 'gemini-3.5-flash', 'gemini-3.6-flash', 'gemini-3.5-flash-lite', 'gemini-3.1-flash-lite', 'gemini-flash-latest', 'gemini-2.5-flash'],   // free keys: ~20 requests a day each
   live: ['gemini-3.8-live', 'gemini-3.1-flash-live-preview', 'gemini-2.5-flash-native-audio-latest'],
   transcribe: ['gemini-3.5-transcribe-live'],
   tts: ['gemini-3.8-flash-tts', 'gemini-3.8-flash-lite-tts', 'gemini-3.1-flash-tts-preview', 'gemini-2.5-flash-preview-tts']
@@ -59,6 +60,17 @@ export async function healthCheck(env) {
       else { picked[job] = id; if (id !== want[0]) problems.push(`${job}: ${want[0]} is gone — switched to ${id}`); }
     }
   }
+  /* the free tier has a small daily cap per model — say so before visitors notice */
+  if (picked.text) {
+    try {
+      const g = await fetch(`${API}/v1beta/models/${picked.text}:generateContent`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': env.GEMINI_API_KEY },
+        body: JSON.stringify({ contents: [{ parts: [{ text: 'ok' }] }], generationConfig: { maxOutputTokens: 4 } }) });
+      if (g.status === 429) {
+        const why = await g.text();
+        problems.push(/FreeTier/.test(why) ? `${picked.text}: free-tier daily limit reached (${(why.match(/"quotaValue":\s*"(\d+)"/) || [])[1] || '?'} requests/day) — answers fall back to slower models. Turn on billing for the Gemini key (aistudio.google.com → Billing).` : `${picked.text}: rate-limited (429)`);
+      }
+    } catch (e) {}
+  }
   /* can we still hand out voice passes? */
   try {
     const t = await fetch(`${API}/v1alpha/auth_tokens`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': env.GEMINI_API_KEY },
@@ -80,14 +92,18 @@ export async function healthCheck(env) {
 export async function dailySummary(env) {
   const day = new Date(Date.now() - 86400e3).toISOString().slice(0, 10);
   const s = ((await inbox(env).stats(2)) || {})[day];
-  if (!s || !Object.keys(s).length) return;
-  const n = k => s[k] || 0;
+  const n = k => (s && s[k]) || 0;
   const lines = [
     `💬 ${n('chat')} chat messages · 🎙 ${n('live')} voice calls`,
     n('handoff') ? `📞 ${n('handoff')} asked for you → ${n('answered')} talked, ${n('busy')} busy, ${n('missed')} missed, ${n('left') + n('cancelled')} gave up` : '📞 nobody asked for you',
+    n('connectSecN') ? `⏱ ${Math.round(n('connectSec') / n('connectSecN'))} s average wait until you picked up` : '',
     n('report') ? `📋 ${n('report')} call reports written` : '',
+    n('rate_up') + n('rate_down') ? `👍 ${n('rate_up') - n('unrate_up')} · 👎 ${n('rate_down') - n('unrate_down')} on reports` : '',
+    n('demo') ? `🗓 ${n('demo')} became a demo / deal` : '',
+    ...(await clinicSummary(env, day).catch(() => [])),
     n('blocked') ? `🛡 ${n('blocked')} requests blocked (limits / bots)` : '',
     n('error') ? `⚠️ ${n('error')} AI errors` : ''
   ].filter(Boolean);
+  if (lines.length === 2 && !n('chat') && !n('live')) return;      // a quiet day — no message
   await telegramText(env, `📊 REHABION website — ${day}\n\n` + lines.join('\n'));
 }

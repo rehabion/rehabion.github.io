@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clinic Staff · Danisa</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#F5EFE4">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://*.workers.dev; media-src 'self' blob:; img-src 'self' data:;">
+<link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Instrument+Sans:wght@400;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="clinic.css?v=20261110">
+<style>
+.plan-row{display:grid;grid-template-columns:2fr repeat(5,1fr) auto;gap:6px;align-items:end;margin-bottom:6px}
+.plan-row label{margin:0 0 2px;font-size:11.5px}
+@media (max-width:620px){.plan-row{grid-template-columns:1fr 1fr 1fr}.plan-row .x{grid-column:span 3}}
+.hours-row{display:grid;grid-template-columns:70px 90px 1fr 1fr;gap:8px;align-items:center;margin-bottom:6px}
+.th-row{display:grid;grid-template-columns:1fr 1.4fr auto;gap:8px;margin-bottom:6px}
+.soapf textarea{min-height:90px}
+.rec{font-variant-numeric:tabular-nums;font-weight:700;color:var(--red)}
+details{margin-top:10px}summary{cursor:pointer;font-weight:600}
+code{font-size:13px;background:var(--paper);padding:2px 6px;border-radius:6px;word-break:break-all}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a class="brand" href="index.html">rehab<em>ion</em><small>clinic</small></a><button class="small hidden noprint" id="logout">Log out</button></div>
+
+  <section class="card hidden" id="login">
+    <p class="hand">Danisa for clinics</p>
+    <h1>Staff login</h1>
+    <label for="lgClinic">Clinic id</label><input id="lgClinic" autocomplete="off" placeholder="e.g. shifa-physio">
+    <label for="lgPin">PIN</label><input id="lgPin" type="password" inputmode="numeric" autocomplete="current-password">
+    <label class="check"><input type="checkbox" id="lgFounder"> I’m REHABION’s founder (pilot support)</label>
+    <div class="row" style="margin-top:14px"><button class="go" id="lgGo">Log in</button><button class="link" id="toCreate">Set up a new clinic</button></div>
+    <p class="err" id="lgErr"></p>
+  </section>
+
+  <section class="card hidden" id="create">
+    <p class="hand">New pilot clinic</p>
+    <h1>Set up a clinic</h1>
+    <p class="lead">Only REHABION’s founder can do this. The clinic gets its own receptionist link and a staff PIN.</p>
+    <label for="crPin">Founder PIN</label><input id="crPin" type="password" autocomplete="off">
+    <div class="grid2">
+      <div><label for="crSlug">Clinic id (used in the link)</label><input id="crSlug" placeholder="shifa-physio" autocomplete="off"></div>
+      <div><label for="crName">Clinic name</label><input id="crName" placeholder="Shifa Physiotherapy Centre"></div>
+    </div>
+    <label class="check"><input type="checkbox" id="crDemo"> Demo clinic (shows “bookings are not real”)</label>
+    <div class="row" style="margin-top:14px"><button class="go" id="crGo">Create</button><button class="link" id="toLogin">Back to login</button></div>
+    <p class="err" id="crErr"></p>
+    <div class="ok hidden" id="crDone"></div>
+  </section>
+
+  <main class="hidden" id="main">
+    <h1 id="cName"></h1>
+    <p class="muted" id="cLink"></p>
+    <div class="tabs noprint" role="tablist">
+      <button role="tab" data-tab="today" aria-selected="true">Today</button>
+      <button role="tab" data-tab="patients">Patients &amp; coach</button>
+      <button role="tab" data-tab="scribe">Session notes</button>
+      <button role="tab" data-tab="settings">Settings</button>
+      <button role="tab" data-tab="numbers">Numbers</button>
+    </div>
+
+    <!-- today -->
+    <section data-pane="today">
+      <div class="card"><h2>Red flags</h2><div id="flags"></div></div>
+      <div class="card"><h2>Please call back</h2><div id="callbacks"></div></div>
+      <div class="card"><h2>Appointments</h2><div id="bookings"></div></div>
+    </section>
+
+    <!-- patients -->
+    <section data-pane="patients" class="hidden">
+      <div class="card" id="pList">
+        <div class="row" style="justify-content:space-between"><h2>Home-exercise patients</h2><button class="go small" id="pAdd">+ Add patient</button></div>
+        <p class="muted">Danisa coaches each patient by voice using their plan and measured progress (RBN-001 game or your measurements), reminds them daily, and alerts you if pain or red flags come up.</p>
+        <div id="patients"></div>
+      </div>
+      <div class="card hidden" id="pForm">
+        <h2 id="pfTitle">Add patient</h2>
+        <div class="grid2">
+          <div><label for="pfName">Name</label><input id="pfName"></div>
+          <div><label for="pfPhone">Mobile (for the clinic only)</label><input id="pfPhone" inputmode="tel"></div>
+        </div>
+        <label for="pfCond">Condition / notes for Danisa</label><input id="pfCond" placeholder="e.g. Left MCA stroke, 6 weeks; right shoulder weak">
+        <div class="grid2">
+          <div><label for="pfTher">Physiotherapist</label><select id="pfTher"></select></div>
+          <div><label for="pfHour">Daily reminder</label><select id="pfHour"></select></div>
+        </div>
+        <h3>Exercise plan</h3>
+        <div id="pfPlan"></div>
+        <button class="small" id="pfAddEx">+ Exercise</button>
+        <div class="row" style="margin-top:16px"><button class="go" id="pfSave">Save</button><button id="pfCancel">Cancel</button></div>
+        <p class="err" id="pfErr"></p>
+      </div>
+      <div class="card hidden" id="pView"></div>
+    </section>
+
+    <!-- scribe -->
+    <section data-pane="scribe" class="hidden">
+      <div class="card noprint">
+        <h2>SOAP note from a session</h2>
+        <p class="muted">Record the session (or paste notes). Danisa drafts a SOAP note for you to check, edit and sign. The recording is sent once to write the note and is not stored.</p>
+        <label for="sPatient">Patient (optional — adds their measurements, lets you save the note)</label><select id="sPatient"></select>
+        <label class="check" style="margin-top:12px"><input type="checkbox" id="sConsent"> The patient agreed to this session being recorded for notes.</label>
+        <div class="row" style="margin-top:12px"><button class="go" id="sRec">● Record</button><span class="rec hidden" id="sTime">00:00</span></div>
+        <label for="sText">Or paste a transcript / your rough notes</label><textarea id="sText" rows="4"></textarea>
+        <div class="row" style="margin-top:12px"><button class="go" id="sGo">Write SOAP note</button></div>
+        <p class="err" id="sErr"></p>
+      </div>
+      <div class="card hidden soapf" id="sOut">
+        <p class="hand">Draft — check before you sign</p>
+        <h2 id="sHead">SOAP note</h2>
+        <div class="warn hidden" id="sFlags"></div>
+        <label>S — Subjective</label><textarea id="s_subjective"></textarea>
+        <label>O — Objective</label><textarea id="s_objective"></textarea>
+        <label>A — Assessment</label><textarea id="s_assessment"></textarea>
+        <label>P — Plan</label><textarea id="s_plan"></textarea>
+        <label>Home exercises</label><textarea id="s_home_exercises"></textarea>
+        <label>Follow-up</label><textarea id="s_follow_up" style="min-height:50px"></textarea>
+        <p class="muted" id="sMissing" style="margin-top:8px"></p>
+        <details><summary>Transcript</summary><pre class="note" id="sTranscript"></pre></details>
+        <div class="row noprint" style="margin-top:14px"><button id="sCopy">Copy</button><button id="sPrint">Print</button><button class="go hidden" id="sSave">Save to patient</button></div>
+        <p class="err" id="sMsg" style="color:var(--muted)"></p>
+      </div>
+    </section>
+
+    <!-- settings -->
+    <section data-pane="settings" class="hidden">
+      <div class="card">
+        <h2>What Danisa tells patients</h2>
+        <div class="grid2">
+          <div><label for="gName">Clinic name</label><input id="gName"></div>
+          <div><label for="gCity">City</label><input id="gCity"></div>
+          <div><label for="gAddr">Address</label><input id="gAddr"></div>
+          <div><label for="gPhone">Clinic phone (shown to patients — optional)</label><input id="gPhone"></div>
+        </div>
+        <label for="gFees">Fees</label><input id="gFees" placeholder="First assessment Rs 2,500 · follow-up Rs 2,000">
+        <label for="gServices">Services (comma separated)</label><input id="gServices">
+        <label for="gFaq">Other things patients ask (parking, what to wear, women physiotherapists…)</label><textarea id="gFaq" rows="4"></textarea>
+        <h3>Opening hours</h3><div id="gHours"></div>
+        <div class="grid2">
+          <div><label for="gBreak1">Break from</label><input type="time" id="gBreak1"></div>
+          <div><label for="gBreak2">Break until</label><input type="time" id="gBreak2"></div>
+        </div>
+        <label for="gSlot">Appointment length</label><select id="gSlot"><option>15</option><option>20</option><option>30</option><option>45</option><option>60</option></select>
+        <h3>Physiotherapists</h3><div id="gTher"></div><button class="small" id="gAddTher">+ Physiotherapist</button>
+        <div class="row" style="margin-top:16px"><button class="go" id="gSave">Save</button></div>
+        <p class="err" id="gMsg"></p>
+      </div>
+      <div class="card">
+        <h2>Telegram for the team</h2>
+        <p class="muted" id="tgState"></p>
+        <div class="row" style="margin-top:10px"><button id="tgLink">Link Telegram</button><button id="tgCheck">I pressed Start — check</button></div>
+        <p class="err" id="tgMsg"></p>
+      </div>
+      <div class="card">
+        <h2>Staff PIN</h2>
+        <div class="row"><input id="newPin" type="password" inputmode="numeric" placeholder="New PIN (6–12 digits)" style="flex:1;min-width:180px"><button id="pinSave">Change PIN</button></div>
+        <p class="err" id="pinMsg"></p>
+      </div>
+    </section>
+
+    <!-- numbers -->
+    <section data-pane="numbers" class="hidden">
+      <div class="card"><h2>Last 30 days</h2><div id="funnel" class="row" style="margin-bottom:10px"></div><div class="scroll"><table id="stats"></table></div></div>
+    </section>
+  </main>
+  <p class="foot noprint">Danisa drafts — your clinicians decide. Patient data stays in this clinic’s account; bookings are deleted 30 days after the appointment. <a href="privacy.html">Privacy</a></p>
+</div>
+<script src="clinic-admin.js?v=20261110"></script>
+</body>
+</html>

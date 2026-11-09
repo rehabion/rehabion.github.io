@@ -12,9 +12,10 @@ const PASS_HOURS = 2;
 
 /* per IP, per hour — [with pass, without] */
 export const LIMITS = {
-  chat: [120, 20], tts: [60, 10], live: [30, 4], handoff: [4, 2]
+  chat: [120, 20], tts: [60, 10], live: [30, 4], handoff: [4, 2],
+  tool: [200, 40], book: [6, 3], data: [600, 600], scribe: [40, 40]   // clinics: receptionist tools, bookings, game data, SOAP notes
 };
-export const GLOBAL_PER_DAY = { live: 600, handoff: 60 };   // keeps the free Gemini quota and the founder's phone safe
+export const GLOBAL_PER_DAY = { live: 600, handoff: 60, scribe: 300 };   // keeps the free Gemini quota and the founder's phone safe
 
 export const ipOf = request => request.headers.get('CF-Connecting-IP') || '0.0.0.0';
 
@@ -64,4 +65,12 @@ export async function limit(env, request, bucket) {
 export function count(env, ctx, ...events) {
   const job = env.INBOX.get(env.INBOX.idFromName('founder')).count(events).catch(() => {});
   if (ctx && ctx.waitUntil) ctx.waitUntil(job); else return job;
+}
+
+/* signed values for links and logins (rating buttons, clinic staff sessions) */
+const keys = {};
+export async function hmac(env, purpose, text) {
+  const base = env.LINK_SECRET || env.TURNSTILE_SECRET || env.GEMINI_API_KEY || 'dev-only';
+  if (!keys[purpose]) keys[purpose] = await crypto.subtle.importKey('raw', await crypto.subtle.digest('SHA-256', enc(purpose + ':' + base)), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+  return b64url(await crypto.subtle.sign('HMAC', keys[purpose], enc(text))).slice(0, 32);
 }

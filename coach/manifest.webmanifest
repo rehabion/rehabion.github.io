@@ -1,0 +1,13 @@
+{
+  "name": "Danisa — home exercises",
+  "short_name": "Exercises",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F5EFE4",
+  "theme_color": "#F5EFE4",
+  "icons": [
+    { "src": "../icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "../icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
