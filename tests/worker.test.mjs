@@ -1,7 +1,7 @@
 /* API tests for the Danisa worker — run against `wrangler dev`:
-     cd ai-worker && npx wrangler dev --port 8788 --var HANDOFF_DEBUG:1 --var FOUNDER_PIN:1234 \
-       --var TURNSTILE_SECRET:1x0000000000000000000000000000000AA
-     BASE=http://127.0.0.1:8788 node --test tests/
+     cd ai-worker && npx wrangler dev --port 8788     (ai-worker/.dev.vars holding HANDOFF_DEBUG="1",
+       FOUNDER_PIN="1234", TURNSTILE_SECRET="1x0000000000000000000000000000000AA")
+     BASE=http://127.0.0.1:8788 node --test tests/static.test.mjs tests/worker.test.mjs
    No Gemini key needed: the call report falls back to a plain summary without one.
    (The always-pass TURNSTILE_SECRET above is Cloudflare's official test key.) */
 import test from 'node:test';
