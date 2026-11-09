@@ -187,11 +187,15 @@ export default {
     if (route.startsWith('/handoff')) return handleHandoff(request, env, headers, route, ctx);
     if (route.startsWith('/push')) return handlePush(request, env, headers, route);
     if (request.method !== 'POST') return json({ error: 'POST only' }, 405, headers);
+    if (route === '/pass') {
+      let b = {}; try { b = await request.json(); } catch {}
+      const p = await issuePass(env, request, b.token);
+      return json(p, p.error ? 403 : 200, headers);
+    }
     if (!env.GEMINI_API_KEY) return json({ error: 'GEMINI_API_KEY is not set on the worker' }, 500, headers);
     if (Number(request.headers.get('Content-Length')) > 200000) return json({ error: 'Too big' }, 413, headers);
     let body;
     try { body = await request.json(); } catch { return json({ error: 'Bad JSON' }, 400, headers); }
-    if (route === '/pass') { const p = await issuePass(env, request, body.token); return json(p, p.error ? 403 : 200, headers); }
     const bucket = route === '/live' ? 'live' : route === '/tts' ? 'tts' : 'chat';
     const why = await limit(env, request, bucket);
     if (why) { count(env, ctx, 'blocked'); return json({ error: 'busy', why }, 429, headers); }
