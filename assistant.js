@@ -28,8 +28,8 @@
       founderBtn:'Talk to the founder', founder:'Muhammad Ramzan',
       hoIntro:"I'll ring **Muhammad Ramzan**, our founder, right now. He answers in his browser — no phone numbers needed.",
       hoReason:'What would you like to talk about?', hoContact:'Phone or email for a call-back (optional)', hoGo:'Ring him',
-      hoRinging:'Ringing…', hoWaitText:"He's been notified. If he's free he'll pick up in a moment.", hoOpened:'He’s looking at your message…',
-      hoConnecting:'Picking up…', hoConnected:'Connected',
+      hoRinging:'Ringing…', hoWaitText:"He's been notified. If he's free he'll pick up in a moment.", hoOpened:'Danisa is checking with him now…',
+      hoConnecting:'He’s free — connecting you…', hoConnected:'Connected', hoNotes:'Danisa will introduce you, then quietly take notes for Muhammad.',
       hoBusy:"He can't talk right now.", hoMissed:"He couldn't pick up just now.",
       hoSaved:c=>c?"He has your message and your contact — he'll get back to you soon.":"He has your message. Leave a contact next time so he can call you back.",
       hoFail:'The call could not connect. He still has your message.', hoLimit:'Lots of requests right now — please try again a little later.',
@@ -52,8 +52,8 @@
       founderBtn:'بانی سے بات کریں', founder:'محمد رمضان',
       hoIntro:'میں ابھی ہمارے بانی **محمد رمضان** کو کال ملاتی ہوں۔ وہ اپنے براؤزر سے جواب دیتے ہیں — کسی فون نمبر کی ضرورت نہیں۔',
       hoReason:'آپ کس بارے میں بات کرنا چاہتے ہیں؟', hoContact:'واپسی کال کے لیے فون یا ای میل (اختیاری)', hoGo:'کال ملائیں',
-      hoRinging:'گھنٹی جا رہی ہے…', hoWaitText:'انہیں اطلاع دے دی گئی ہے۔ اگر وہ فارغ ہیں تو ابھی جواب دیں گے۔', hoOpened:'وہ آپ کا پیغام دیکھ رہے ہیں…',
-      hoConnecting:'جڑ رہے ہیں…', hoConnected:'جڑ گئے',
+      hoRinging:'گھنٹی جا رہی ہے…', hoWaitText:'انہیں اطلاع دے دی گئی ہے۔ اگر وہ فارغ ہیں تو ابھی جواب دیں گے۔', hoOpened:'دانیسا ان سے پوچھ رہی ہیں…',
+      hoConnecting:'وہ فارغ ہیں — جوڑ رہے ہیں…', hoConnected:'جڑ گئے', hoNotes:'دانیسا تعارف کروائیں گی، پھر محمد کے لیے خاموشی سے نوٹس لیں گی۔',
       hoBusy:'وہ ابھی بات نہیں کر سکتے۔', hoMissed:'وہ ابھی کال نہیں اٹھا سکے۔',
       hoSaved:c=>c?'آپ کا پیغام اور رابطہ ان تک پہنچ گیا ہے — وہ جلد آپ سے رابطہ کریں گے۔':'آپ کا پیغام ان تک پہنچ گیا ہے۔ اگلی بار رابطہ بھی دیں تاکہ وہ واپس کال کر سکیں۔',
       hoFail:'کال نہیں جڑ سکی۔ آپ کا پیغام ان تک پہنچ چکا ہے۔', hoLimit:'ابھی بہت درخواستیں ہیں — تھوڑی دیر بعد کوشش کریں۔',
@@ -375,7 +375,7 @@
     ringTone(true);
     let d,info;
     try{
-      d=await api('/handoff',{name:req.name||knownName()||'',reason:req.reason||'',contact:req.contact||''});
+      d=await api('/handoff',{name:req.name||knownName()||'',reason:req.reason||'',contact:req.contact||'',context:memorySummary()});
       info=await (await fetch(AI_ENDPOINT+'/handoff/info?r='+d.id+'&k='+d.visitorKey)).json();
     }catch(e){ringTone(false);ho.result='failed';hoState('idle','',/busy/.test(String(e.message))?t.hoLimit:t.hoFail);endBtn.textContent=t.close;return;}
     if(!ho.active){ringTone(false);return;}
@@ -388,7 +388,7 @@
         if(st==='busy'){ho.result='busy';hoState('idle',t.hoBusy,(m.note?'“'+m.note+'”\n\n':'')+t.hoSaved(req.contact));}
         if(st==='missed'){ho.result='missed';hoState('idle',t.hoMissed,t.hoSaved(req.contact));}
       },
-      onConnected:()=>{ringTone(false);ho.result='talked';hoState('speaking',t.hoConnected,'');muteBtn.hidden=false;endBtn.textContent=t.end;
+      onConnected:()=>{ringTone(false);ho.result='talked';hoState('speaking',t.hoConnected,t.hoNotes);muteBtn.hidden=false;endBtn.textContent=t.end;
         ho.t0=Date.now();ho.clock=setInterval(hoTick,500);hoTick();},
       onEnded:why=>{
         ringTone(false);clearInterval(ho.clock);

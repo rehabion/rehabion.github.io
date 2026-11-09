@@ -51,6 +51,17 @@ export async function telegram(env, text, link) {
   return r.ok;
 }
 
+export async function telegramText(env, text) {
+  if (!env.TELEGRAM_BOT_TOKEN) return false;
+  const chat = env.TELEGRAM_CHAT_ID || await env.INBOX.get(env.INBOX.idFromName('founder')).telegramChat();
+  if (!chat) return false;
+  const r = await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chat_id: chat, text, disable_web_page_preview: true })
+  });
+  return r.ok;
+}
+
 /* Routes: GET /push/vapid · POST /push/subscribe · GET /push/pending · POST /push/test */
 export async function handlePush(request, env, headers, path) {
   const inbox = env.INBOX.get(env.INBOX.idFromName('founder'));

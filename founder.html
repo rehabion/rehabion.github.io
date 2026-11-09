@@ -11,7 +11,7 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#F5EFE4">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://*.workers.dev wss://*.workers.dev; worker-src 'self'; manifest-src 'self'; media-src 'self' blob:; img-src 'self' data:;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://*.workers.dev wss://*.workers.dev wss://generativelanguage.googleapis.com; worker-src 'self'; manifest-src 'self'; media-src 'self' blob:; img-src 'self' data:;">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Instrument+Sans:wght@400;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
@@ -44,6 +44,10 @@ button:active{transform:translate(2px,2px);box-shadow:1px 2px 0 var(--ink)}
 .hidden{display:none!important}
 .note{width:100%;margin-top:12px;border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;font:inherit;font-size:15px;background:var(--paper)}
 .small{font-size:13px;color:var(--muted);margin-top:18px}
+.notes{font-family:'Caveat',cursive;font-size:22px;color:var(--terra);margin:-6px 0 14px}
+.report{white-space:pre-wrap;text-align:left;font:inherit;font-size:14.5px;line-height:1.55;background:var(--paper);border-radius:16px;padding:14px 16px;margin:0 0 16px;max-height:46vh;overflow:auto}
+body[data-s="danisa"] .ring,body[data-s="debrief"] .ring{background:#F6E2B8}
+body[data-s="danisa"] .ring::before,body[data-s="danisa"] .ring::after,body[data-s="debrief"] .ring::before,body[data-s="debrief"] .ring::after{border-color:#DDA032;animation:pulse 2s ease-out infinite!important;opacity:1!important}
 #app{text-align:left}#app h1{margin:6px 0 8px}
 #app .lead{color:var(--ink-2);font-size:15.5px;line-height:1.6}
 .pin{display:flex;gap:10px;margin:18px 0 6px}.pin input{flex:1;min-width:0;border:1.5px solid var(--ink);border-radius:999px;padding:12px 16px;font:inherit;font-size:18px;letter-spacing:.2em;background:var(--paper)}
@@ -61,16 +65,19 @@ button:active{transform:translate(2px,2px);box-shadow:1px 2px 0 var(--ink)}
 <body data-s="loading">
 <main class="card hidden" id="callCard">
   <div class="brand">rehab<em>ion</em></div>
-  <p class="hand" id="kicker">someone wants to talk to you</p>
+  <p class="hand" id="kicker">Danisa is calling you</p>
   <div class="ring"><span id="initial">?</span></div>
   <h1 id="who">Loading…</h1>
   <div class="about hidden" id="about"><b>About</b><p id="reason"></p><b class="hidden" id="contactLbl">Their contact</b><p id="contact" class="hidden"></p></div>
   <p class="status" id="status"></p>
   <div class="row" id="ringingBtns">
-    <button class="answer" id="answer">Answer</button>
+    <button class="answer" id="answer">Answer Danisa</button>
     <button id="busy">I'm busy</button>
   </div>
   <input class="note hidden" id="note" maxlength="200" placeholder="Optional short note for them (e.g. “I’ll call you at 6pm”)">
+  <p class="notes hidden" id="notes">✍️ Danisa is taking notes</p>
+  <pre class="report hidden" id="report"></pre>
+  <div class="row hidden" id="debriefBtns"><button id="skip">No thanks, I'll read it</button></div>
   <div class="row hidden" id="callBtns">
     <button id="mute">Mute</button>
     <button class="end" id="end">End call</button>
@@ -95,6 +102,7 @@ button:active{transform:translate(2px,2px);box-shadow:1px 2px 0 var(--ink)}
   </section>
 </main>
 <script src="handoff-call.js"></script>
+<script src="live-client.js"></script>
 <script src="founder.js"></script>
 </body>
 </html>

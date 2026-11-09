@@ -3,7 +3,7 @@
    relays the set-up messages; the voice itself flows directly between the two
    browsers, so nobody's phone number is involved. */
 (function(){
-  function start({wsUrl, iceServers, role, stream, onOpen, onStatus, onConnected, onEnded, onMessage}){
+  function start({wsUrl, iceServers, role, stream, onOpen, onStatus, onConnected, onEnded, onMessage, onRemote}){
     const ws=new WebSocket(wsUrl);
     const pc=new RTCPeerConnection({iceServers});
     const audio=new Audio();audio.autoplay=true;
@@ -11,7 +11,7 @@
     const send=m=>{if(ws.readyState===1)ws.send(JSON.stringify(m));};
 
     stream.getTracks().forEach(tr=>pc.addTrack(tr,stream));
-    pc.ontrack=e=>{audio.srcObject=e.streams[0];audio.play().catch(()=>{});};
+    pc.ontrack=e=>{audio.srcObject=e.streams[0];audio.play().catch(()=>{});onRemote&&onRemote(e.streams[0]);};
     pc.onicecandidate=e=>{if(e.candidate)send({t:'ice',c:e.candidate});};
     pc.onconnectionstatechange=()=>{
       if(pc.connectionState==='connected'){send({t:'connected'});onConnected&&onConnected();}
