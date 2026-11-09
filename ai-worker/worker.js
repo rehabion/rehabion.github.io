@@ -15,6 +15,9 @@
      ALLOWED_ORIGINS  (optional) comma list, defaults to the live site
 */
 
+import { handleHandoff, HandoffRoom, RateLimit } from './handoff.js';
+export { HandoffRoom, RateLimit };
+
 const DEFAULT_ORIGINS = ['https://rehabion.github.io', 'http://localhost:8080', 'http://127.0.0.1:8080', 'http://127.0.0.1:8081'];
 const API = 'https://generativelanguage.googleapis.com';
 const MAX_TURNS = 24;
@@ -38,7 +41,8 @@ Projects: RBN-001 Upper-limb stroke game (Unity, motion capture; shoulder abduct
 Milestones: Q2 2025 research programme with Dr. Faisal Amin, first prototypes, site launch. Q3 2025 Phase-1 IRB pilot with 20 stroke patients in Islamabad. Q4 2025 RehabLLM beta. 2026 pre-seed funding round.
 Market: Pakistan ~220M people, ~0.5 physiotherapists per 10,000 vs WHO-recommended 5; global rehab tech market $8.1B by 2033, 13.4% CAGR.
 Resources: free Stroke Rehab Exercise Protocol (12 weeks, ask the team); Game-Based Rehab Design Guide $9; RehabLLM Prompt Library $19; Pakistan Rehab Market Report $29 (Gumroad).
-Contact: WhatsApp +92 349 8228037 · email muhammadrmzn84@gmail.com · free 15-min demo: https://calendly.com/muhammadrmzn84/rehabion · site https://rehabion.github.io
+Contact: email muhammadrmzn84@gmail.com · free 15-min demo: https://calendly.com/muhammadrmzn84/rehabion · site https://rehabion.github.io
+Never give out any phone or WhatsApp number — you don't have one to share. To reach the founder directly, use the connect-to-founder option.
 `.trim();
 
 function clean(s, n) { return typeof s === 'string' ? s.replace(/[\u0000-\u001f]/g, ' ').trim().slice(0, n) : ''; }
@@ -50,6 +54,10 @@ You can help with ANY topic (health, science, tech, study, business, daily life,
 Only claim to remember things that actually appear in this conversation or in the memory notes below — never pretend to recall something you weren't told.
 When people ask about REHABION, use these facts:
 ${ABOUT_REHABION}
+
+Talking to the founder: if someone wants to speak with the founder (Muhammad Ramzan) or a real person, offer to connect them right now. ${voice
+    ? 'Ask for their name (if you do not know it) and briefly what it is about, optionally a phone or email for a call-back, then call the connect_to_founder tool and tell them you are checking if he is free.'
+    : 'Tell them to tap the "Talk to the founder" button below the chat and it will ring him straight away.'} Never share his phone number.
 
 Health safety: you are not a doctor. Give general, evidence-based information and suggest a qualified physiotherapist or doctor for personal treatment. For emergencies (chest pain, stroke signs like face droop / arm weakness / slurred speech, severe bleeding, breathing trouble) tell them to call 1122 (Pakistan) or local emergency services immediately.
 
@@ -66,7 +74,7 @@ function cors(origin, env) {
   const allowed = env.ALLOWED_ORIGINS ? env.ALLOWED_ORIGINS.split(',').map(s => s.trim()) : DEFAULT_ORIGINS;
   return {
     'Access-Control-Allow-Origin': allowed.includes(origin) ? origin : allowed[0],
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Max-Age': '86400',
     'Vary': 'Origin'
@@ -157,6 +165,8 @@ export default {
     const origin = request.headers.get('Origin') || '';
     const headers = cors(origin, env);
     if (request.method === 'OPTIONS') return new Response(null, { headers });
+    const route = new URL(request.url).pathname.replace(/\/+$/, '');
+    if (route.startsWith('/handoff')) return handleHandoff(request, env, headers, route);
     if (request.method !== 'POST') return json({ error: 'POST only' }, 405, headers);
     if (!env.GEMINI_API_KEY) return json({ error: 'GEMINI_API_KEY is not set on the worker' }, 500, headers);
     let body;

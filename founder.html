@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Incoming call — REHABION</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#F5EFE4">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://*.workers.dev wss://*.workers.dev; media-src 'self' blob:; img-src 'self' data:;">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Instrument+Sans:wght@400;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F5EFE4;--card:#FFFCF6;--ink:#1E1B18;--ink-2:#4A433B;--muted:#6E6357;--line:#D9CDB8;--terra:#C2522F;--forest:#2E5946;--blush:#F2CDB8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;background:var(--paper);color:var(--ink);font-family:'Instrument Sans',system-ui,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px;
+  background-image:radial-gradient(ellipse 60% 40% at 50% 20%,rgba(242,205,184,.7),transparent 70%)}
+.card{width:min(440px,100%);background:var(--card);border:1.5px solid var(--ink);border-radius:28px 28px 28px 8px;box-shadow:6px 8px 0 var(--ink);padding:30px 26px;text-align:center}
+.brand{font-family:'Fraunces',serif;font-weight:600;font-size:20px}.brand em{color:var(--terra)}
+.hand{font-family:'Caveat',cursive;font-size:26px;color:var(--terra);margin-top:14px}
+.ring{width:110px;height:110px;margin:22px auto 10px;border-radius:50%;background:var(--blush);display:grid;place-items:center;position:relative}
+.ring::before,.ring::after{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid var(--terra);animation:pulse 2s ease-out infinite}
+.ring::after{animation-delay:1s}
+body[data-s="in-call"] .ring::before,body[data-s="in-call"] .ring::after{border-color:var(--forest)}
+body:not([data-s="ringing"]):not([data-s="accepted"]):not([data-s="in-call"]) .ring::before,
+body:not([data-s="ringing"]):not([data-s="accepted"]):not([data-s="in-call"]) .ring::after{animation:none;opacity:0}
+@keyframes pulse{from{transform:scale(1);opacity:.8}to{transform:scale(1.5);opacity:0}}
+.ring span{font-family:'Fraunces',serif;font-size:44px;font-style:italic;color:var(--terra)}
+h1{font-family:'Fraunces',serif;font-weight:500;font-size:30px;line-height:1.15}
+.about{background:var(--paper);border-radius:16px;padding:14px 16px;margin:18px 0;text-align:left;font-size:15.5px;color:var(--ink-2)}
+.about b{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.about p+b{margin-top:10px}
+.status{min-height:1.4em;color:var(--muted);margin:6px 0 18px}
+.timer{font-variant-numeric:tabular-nums;font-size:15px;color:var(--forest);font-weight:600}
+.row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+button{border:1.5px solid var(--ink);border-radius:999px;padding:13px 22px;font:inherit;font-weight:700;font-size:16px;cursor:pointer;box-shadow:3px 4px 0 var(--ink);background:var(--card);color:var(--ink)}
+button:active{transform:translate(2px,2px);box-shadow:1px 2px 0 var(--ink)}
+.answer{background:var(--forest);color:#fff}.end{background:#B8402A;color:#fff}
+.hidden{display:none!important}
+.note{width:100%;margin-top:12px;border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;font:inherit;font-size:15px;background:var(--paper)}
+.small{font-size:13px;color:var(--muted);margin-top:18px}
+</style>
+</head>
+<body data-s="loading">
+<main class="card">
+  <div class="brand">rehab<em>ion</em></div>
+  <p class="hand" id="kicker">someone wants to talk to you</p>
+  <div class="ring"><span id="initial">?</span></div>
+  <h1 id="who">Loading…</h1>
+  <div class="about hidden" id="about"><b>About</b><p id="reason"></p><b class="hidden" id="contactLbl">Their contact</b><p id="contact" class="hidden"></p></div>
+  <p class="status" id="status"></p>
+  <div class="row" id="ringingBtns">
+    <button class="answer" id="answer">Answer</button>
+    <button id="busy">I'm busy</button>
+  </div>
+  <input class="note hidden" id="note" maxlength="200" placeholder="Optional short note for them (e.g. “I’ll call you at 6pm”)">
+  <div class="row hidden" id="callBtns">
+    <button id="mute">Mute</button>
+    <button class="end" id="end">End call</button>
+  </div>
+  <p class="small">Your phone number is never shared — this call runs through your browser.</p>
+</main>
+<script src="handoff-call.js"></script>
+<script src="founder.js"></script>
+</body>
+</html>
